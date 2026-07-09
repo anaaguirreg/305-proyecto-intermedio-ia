@@ -1,0 +1,234 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "acto_1_panorama",
+  "type": "object",
+  "required": ["metadata", "sub_acto_1_1", "sub_acto_1_2", "sub_acto_1_3", "sub_acto_1_4"],
+  "properties": {
+
+    "metadata": {
+      "type": "object",
+      "required": ["version", "generated_at", "year_range", "n_total", "n_clustered", "act_disclaimer_es", "source_files"],
+      "properties": {
+        "version":           { "type": "string" },
+        "generated_at":      { "type": "string", "format": "date-time" },
+        "year_range":        { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "n_total":           { "type": "integer", "const": 179 },
+        "n_clustered":       { "type": "integer", "const": 177 },
+        "act_disclaimer_es": { "type": "string" },
+        "source_files":      { "type": "object" }
+      }
+    },
+
+    "sub_acto_1_1": {
+      "$comment": "Stat cards — canonical stat_cards array at root. caveat_es documents the 2 excluded Chocó municipalities. Card 1 value = n_clustered (177), not n_total.",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "caveat_es", "stat_cards"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "caveat_es":      { "type": "string" },
+        "stat_cards": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": ["id", "label_es", "value", "display_format", "badge", "sub_value"],
+            "properties": {
+              "id":             { "type": "string", "enum": ["n_municipios", "n_alta_severidad", "icv_promedio_regional"] },
+              "label_es":       { "type": "string" },
+              "value":          { "type": ["number", "integer"] },
+              "display_format": { "type": "string" },
+              "badge":          { "type": ["string", "null"] },
+              "sub_value": {
+                "oneOf": [
+                  { "type": "null" },
+                  {
+                    "type": "object",
+                    "required": ["value", "label_es"],
+                    "properties": {
+                      "value":    { "type": ["number", "null"] },
+                      "label_es": { "type": "string" }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_1_2": {
+      "$comment": "Choropleth — municipality map by ICV-GEN-F score",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "caveat_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "caveat_es":      { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["geo_join_key", "n_features", "n_clustered", "icv_range", "cluster_legend", "features"],
+          "properties": {
+            "geo_join_key": { "type": "string", "const": "cod_municipio" },
+            "n_features":   { "type": "integer", "const": 179 },
+            "n_clustered":  { "type": "integer", "const": 177 },
+            "icv_range": {
+              "type": "object",
+              "required": ["min", "max"],
+              "properties": {
+                "min": { "type": "number" },
+                "max": { "type": "number" }
+              }
+            },
+            "cluster_legend": { "$ref": "#/definitions/cluster_legend" },
+            "features": {
+              "type": "array",
+              "minItems": 179,
+              "maxItems": 179,
+              "items": { "$ref": "#/definitions/choropleth_feature" }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_1_3": {
+      "$comment": "Top-10 ranking — bar chart + companion table sorted by ICV-GEN-F",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["echarts_series", "highlighted_municipalities", "items"],
+          "properties": {
+            "echarts_series": {
+              "type": "object",
+              "required": ["type", "categories", "values", "highlight_flags"],
+              "properties": {
+                "type":            { "type": "string", "const": "bar" },
+                "categories":      { "type": "array", "minItems": 10, "maxItems": 10, "items": { "type": "string" } },
+                "values":          { "type": "array", "minItems": 10, "maxItems": 10, "items": { "type": "number" } },
+                "highlight_flags": { "type": "array", "minItems": 10, "maxItems": 10, "items": { "type": "boolean" } }
+              }
+            },
+            "highlighted_municipalities": {
+              "type": "array",
+              "minItems": 2,
+              "items": { "type": "string" }
+            },
+            "items": {
+              "type": "array",
+              "minItems": 10,
+              "maxItems": 10,
+              "items": { "$ref": "#/definitions/ranking_item" }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_1_4": {
+      "$comment": "Regional ICV-GEN-F timeline — annual average 2018-2025",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["chart_type", "x_axis", "series"],
+          "properties": {
+            "chart_type": { "type": "string", "const": "line" },
+            "x_axis": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": { "type": "integer" }
+            },
+            "series": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["name", "data"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "data": {
+                    "type": "array",
+                    "minItems": 8,
+                    "maxItems": 8,
+                    "items": { "type": ["number", "null"] }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+
+    "cluster_legend": {
+      "type": "object",
+      "required": ["alta_severidad", "moderada_baja", "excluded"],
+      "properties": {
+        "alta_severidad": { "$ref": "#/definitions/cluster_legend_entry" },
+        "moderada_baja":  { "$ref": "#/definitions/cluster_legend_entry" },
+        "excluded":       { "$ref": "#/definitions/cluster_legend_entry" }
+      }
+    },
+
+    "cluster_legend_entry": {
+      "type": "object",
+      "required": ["cluster_id", "color", "label"],
+      "properties": {
+        "cluster_id":  { "type": ["integer", "null"] },
+        "color":       { "type": "string" },
+        "label":       { "type": "string" }
+      }
+    },
+
+    "choropleth_feature": {
+      "type": "object",
+      "required": [
+        "cod_municipio", "municipality", "department",
+        "icv_average", "cluster_id", "cluster_name",
+        "excluded_from_model", "lat", "lon"
+      ],
+      "properties": {
+        "cod_municipio":       { "type": "string", "pattern": "^\\d{5}$" },
+        "municipality":        { "type": "string" },
+        "department":          { "type": "string" },
+        "icv_average":         { "type": "number" },
+        "cluster_id":          { "type": ["integer", "null"] },
+        "cluster_name":        { "type": ["string", "null"] },
+        "excluded_from_model": { "type": "boolean" },
+        "lat":                 { "type": ["number", "null"] },
+        "lon":                 { "type": ["number", "null"] }
+      }
+    },
+
+    "ranking_item": {
+      "type": "object",
+      "required": ["rank", "cod_municipio", "municipality", "department", "icv_average", "cluster_id", "cluster_name", "highlight"],
+      "properties": {
+        "rank":         { "type": "integer", "minimum": 1, "maximum": 10 },
+        "cod_municipio":{ "type": "string", "pattern": "^\\d{5}$" },
+        "municipality": { "type": "string" },
+        "department":   { "type": "string" },
+        "icv_average":  { "type": "number" },
+        "cluster_id":   { "type": ["integer", "null"] },
+        "cluster_name": { "type": ["string", "null"] },
+        "highlight":    { "type": "boolean" }
+      }
+    }
+
+  }
+}

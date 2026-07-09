@@ -1,0 +1,120 @@
+/* Cicatrices Invisibles — Design tokens v1.1 · source: docs/DESIGN-cicatrices-invisibles_1.md */
+:root {
+  /* ━━ Primaria (burgundy) ━━ */
+  --color-primary: #5a1a3a;
+  --color-primary-deep: #3d0f27;
+  --color-primary-dark: #4a1530;
+  --color-primary-mid: #7a2d52;
+  --color-primary-soft: #6e3d58;
+  --color-primary-muted: #9c7388;
+  --color-primary-wash: #e8d5de;
+  --color-primary-ghost: #f3ecef;
+
+  /* ━━ Funcionales ━━ */
+  --color-accent-amber: #c48a30;
+  --color-accent-amber-soft: #f5e6c8;
+  --color-accent-teal: #3d8a7a;
+  --color-accent-teal-soft: #e0f0ec;
+
+  /* ━━ Texto ━━ */
+  --color-ink: #1a1a18;
+  --color-body-strong: #2b2b28;
+  --color-body: #3d3d3a;
+  --color-body-dark: var(--color-body-strong);
+  --color-muted: #6c6a64;
+  --color-muted-soft: #8e8b82;
+  --color-on-primary: #faf9f5;
+  --color-on-dark: #f5f0e8;
+  --color-on-dark-soft: #a09d96;
+
+  /* ━━ Superficies ━━ */
+  --color-canvas: #faf9f5;
+  --color-surface-soft: #f5f0e8;
+  --color-surface-warm: var(--color-surface-soft);
+  --color-surface-card: #efe9de;
+  --color-surface-cream-strong: #e8e0d2;
+  --color-surface-dark: #1a1715;
+  --color-surface-dark-elevated: #262320;
+  --color-surface-dark-soft: #201e1b;
+
+  /* ━━ Bordes ━━ */
+  --color-hairline: #e2dbd0;
+  --color-hairline-soft: #ebe6df;
+  --color-placeholder-border: #cdbfae;
+
+  /* ━━ Semánticos ━━ */
+  --color-success: #3d8a7a;
+  --color-warning: #c48a30;
+  --color-error: #a63030;
+
+  /* ━━ Escala coroplética ━━ */
+  --scale-1: #f5ede5;
+  --scale-2: #e4c4c0;
+  --scale-3: #c4808a;
+  --scale-4: #8a3050;
+  --scale-5: #4a1530;
+  --scale-null: #c8c4bc;
+  --scale-excluded-border: #b0aaa0;
+
+  /* ━━ Departamentos (líneas temporales) ━━ */
+  --dept-valle: #5a1a3a;
+  --dept-cauca: #8a3050;
+  --dept-narino: #b85a6a;
+  --dept-choco: #d4909a;
+
+  /* ━━ Tipografía ━━ */
+  --font-serif: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ━━ Espaciado ━━ */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  --space-2xl: 64px;
+  --space-section: 80px;
+  --space-band: 110px;
+
+  /* ━━ Radios ━━ */
+  --rounded-xs: 4px;
+  --rounded-sm: 6px;
+  --rounded-md: 8px;
+  --rounded-lg: 12px;
+  --rounded-xl: 16px;
+  --rounded-pill: 9999px;
+
+  /* ━━ Layout ━━ */
+  --max-width: 1000px;
+
+  /* ━━ Escala tipográfica display (Pass 3.2) ━━ */
+  --display-xl: clamp(56px, 9vw, 104px);
+  --display-lg: clamp(38px, 5vw, 56px);
+  --display-md: clamp(26px, 3vw, 34px);
+
+  /* ━━ Gradiente hero (Pass 3.2, 7 paradas) ━━ */
+  --hero-grad-1: #3d0f27;
+  --hero-grad-2: #5a1a3a;
+  --hero-grad-3: #7a2d52;
+  --hero-grad-4: #a85269;
+  --hero-grad-5: #d29ba6;
+  --hero-grad-6: #f0dfe4;
+  --hero-grad-7: #faf9f5;
+
+  /* ━━ Ramps — coropléticas continuas (Checkpoint B token mini-pass) ━━ */
+  --ramp-brecha-start: #FCECF5;
+  --ramp-brecha-end: #7B1F4B;
+  --ramp-forense-ds4-start: #c4808a;
+  --ramp-forense-ds4-end: #a63030;
+  --ramp-forense-ds3-start: #a86781;
+  --ramp-forense-ds3-end: #3d0f27;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --space-band: 64px;
+  }
+}

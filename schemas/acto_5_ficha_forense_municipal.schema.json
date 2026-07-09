@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "acto_5_ficha_forense_municipal.schema.json",
+  "type": "object",
+  "required": [
+    "metadata",
+    "municipios"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "generated_at",
+        "source_tables",
+        "min_total_casos",
+        "municipios_con_vs",
+        "municipios_con_vif",
+        "municipios_sin_cobertura"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "generated_at": {
+          "type": "string"
+        },
+        "source_tables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "min_total_casos": {
+          "type": "integer"
+        },
+        "municipios_con_vs": {
+          "type": "integer"
+        },
+        "municipios_con_vif": {
+          "type": "integer"
+        },
+        "municipios_sin_cobertura": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "data_source_disclaimer_es": {
+          "type": "string"
+        }
+      }
+    },
+    "municipios": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/municipio_forense"
+      }
+    }
+  },
+  "$defs": {
+    "stat_card": {
+      "type": "object",
+      "required": [
+        "id",
+        "label_es",
+        "value",
+        "display_format",
+        "badge",
+        "sub_value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label_es": {
+          "type": "string"
+        },
+        "value": true,
+        "display_format": {
+          "type": "string"
+        },
+        "badge": true,
+        "sub_value": true
+      }
+    },
+    "perfil_forense": {
+      "type": "object",
+      "required": [
+        "total_casos",
+        "stat_cards",
+        "caveat_es"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "total_casos": {
+          "type": "integer"
+        },
+        "stat_cards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stat_card"
+          },
+          "minItems": 5,
+          "maxItems": 5
+        },
+        "caveat_es": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "municipio_forense": {
+      "type": "object",
+      "required": [
+        "cod_municipio",
+        "nombre_es",
+        "has_violencia_sexual_profile",
+        "has_vif_profile",
+        "violencia_sexual",
+        "violencia_intrafamiliar"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "cod_municipio": {
+          "type": "string"
+        },
+        "nombre_es": {
+          "type": "string"
+        },
+        "has_violencia_sexual_profile": {
+          "type": "boolean"
+        },
+        "has_vif_profile": {
+          "type": "boolean"
+        },
+        "violencia_sexual": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/perfil_forense"
+            }
+          ]
+        },
+        "violencia_intrafamiliar": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/perfil_forense"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

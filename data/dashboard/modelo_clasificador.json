@@ -1,0 +1,48 @@
+{
+  "generated_at": "2026-07-08T23:31:51.618208+00:00",
+  "model_type": "LogisticRegression",
+  "features": [
+    "tasa_vif_nna_f",
+    "tasa_sexual_nna_f",
+    "tasa_vif_adultas_f",
+    "tasa_sexual_adultas_f"
+  ],
+  "features_labels_es": {
+    "tasa_vif_nna_f": "Tasa VIF NNA",
+    "tasa_sexual_nna_f": "Tasa Sexual NNA",
+    "tasa_vif_adultas_f": "Tasa VIF Adultas",
+    "tasa_sexual_adultas_f": "Tasa Sexual Adultas"
+  },
+  "preprocessing": {
+    "log1p": true,
+    "robust_scaler": {
+      "center": [
+        2.812701411368189,
+        4.404484814114458,
+        5.16867194020638,
+        4.251729384761711
+      ],
+      "scale": [
+        2.0941457551128,
+        1.1033100548019554,
+        0.9656403847002624,
+        0.6006647565828658
+      ]
+    }
+  },
+  "coefficients": [
+    2.0043323996042193,
+    2.264000770588692,
+    1.9930240422653434,
+    2.232207096306445
+  ],
+  "intercept": 1.8213202893841596,
+  "decision_threshold": 0.5,
+  "classes": {
+    "0": "Moderada-Baja severidad",
+    "1": "Alta severidad"
+  },
+  "validation_metrics": {
+    "cv_f1_macro": 0.9769047619047619
+  }
+}

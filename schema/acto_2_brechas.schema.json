@@ -1,0 +1,496 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "acto_2_brechas",
+  "type": "object",
+  "required": [
+    "metadata",
+    "sub_acto_2_1", "sub_acto_2_2", "sub_acto_2_3",
+    "sub_acto_2_4", "sub_acto_2_5", "sub_acto_2_6"
+  ],
+  "properties": {
+
+    "metadata": {
+      "type": "object",
+      "required": ["version", "generated_at", "year_range", "n_total", "act_disclaimer_es", "source_files"],
+      "properties": {
+        "version":           { "type": "string" },
+        "generated_at":      { "type": "string", "format": "date-time" },
+        "year_range":        { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "n_total":           { "type": "integer", "const": 179 },
+        "act_disclaimer_es": { "type": "string" },
+        "source_files":      { "type": "object" },
+        "methodology": {
+          "type": "object",
+          "required": ["kpi_ratio", "butterfly_tasas", "butterfly_ratio", "top10_metrica", "gap_cols_excluded"],
+          "properties": {
+            "kpi_ratio":         { "type": "string" },
+            "butterfly_tasas":   { "type": "string" },
+            "butterfly_ratio":   { "type": "string" },
+            "top10_metrica":     { "type": "string" },
+            "gap_cols_excluded": { "type": "string" }
+          }
+        }
+      }
+    },
+
+    "sub_acto_2_1": {
+      "$comment": "Regional KPI — Big Numbers: sum/sum gender ratios at root as stat_cards array. cases_f_total/cases_m_total removed from output; ratio only.",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "stat_cards"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "stat_cards": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": ["id", "label_es", "value", "display_format", "badge", "sub_value"],
+            "properties": {
+              "id":             { "type": "string" },
+              "label_es":       { "type": "string" },
+              "value":          { "type": ["number", "null"] },
+              "display_format": { "type": "string" },
+              "badge":          { "type": ["string", "null"] },
+              "sub_value": {
+                "oneOf": [
+                  { "type": "null" },
+                  {
+                    "type": "object",
+                    "required": ["value", "label_es"],
+                    "properties": {
+                      "value":    { "type": ["number", "null"] },
+                      "label_es": { "type": "string" }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_2_2": {
+      "$comment": "Butterfly charts — F vs M rates per lifecycle tab (NNA / adults) × 8 years",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["vif", "sexual"],
+          "properties": {
+            "vif":    { "$ref": "#/definitions/butterfly_series" },
+            "sexual": { "$ref": "#/definitions/butterfly_series" }
+          }
+        }
+      }
+    },
+
+    "sub_acto_2_3": {
+      "$comment": "Top-10 municipalities by gender gap — Beat 3 territorial ranking",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["echarts_series", "items"],
+          "properties": {
+            "echarts_series": {
+              "type": "object",
+              "required": ["categories", "values"],
+              "properties": {
+                "categories": { "type": "array", "minItems": 10, "maxItems": 10, "items": { "type": "string" } },
+                "values":     { "type": "array", "minItems": 10, "maxItems": 10, "items": { "type": "number" } }
+              }
+            },
+            "items": {
+              "type": "array",
+              "minItems": 10,
+              "maxItems": 10,
+              "items": { "$ref": "#/definitions/gap_item" }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_2_4": {
+      "$comment": "Gap map — 4-department choropleth with embedded GeoJSON (polygon dissolve)",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "caveat_es":      { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["highlighted_department", "gap_range", "departments", "geojson"],
+          "properties": {
+            "highlighted_department": { "type": "string" },
+            "gap_range": {
+              "type": "object",
+              "required": ["min", "max"],
+              "properties": {
+                "min": { "type": "number" },
+                "max": { "type": "number" }
+              }
+            },
+            "departments": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": { "$ref": "#/definitions/dept_gap_entry" }
+            },
+            "geojson": { "$ref": "#/definitions/geojson_feature_collection" }
+          }
+        }
+      }
+    },
+
+    "sub_acto_2_5": {
+      "$comment": "ICV-gap scatter — Beat 5: correlation ICV-GEN-F vs gender gap (177 municipalities; 27150/27493 excluded per D7)",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "caveat_es":      { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["n_points", "points", "reference_lines", "axes", "axis_labels_es", "correlations"],
+          "properties": {
+            "n_points": { "type": "integer", "const": 177 },
+            "points": {
+              "type": "array",
+              "minItems": 177,
+              "maxItems": 177,
+              "items": {
+                "type": "object",
+                "required": ["cod_municipio", "municipality", "department", "icv_average", "gap_average"],
+                "properties": {
+                  "cod_municipio": { "type": "string", "pattern": "^\\d{5}$" },
+                  "municipality":  { "type": "string" },
+                  "department":    { "type": "string" },
+                  "icv_average":   { "type": "number" },
+                  "gap_average":   { "type": ["number", "null"] }
+                }
+              }
+            },
+            "reference_lines": {
+              "type": "object",
+              "required": ["x_median", "y_median"],
+              "properties": {
+                "x_median": { "type": "number" },
+                "y_median": { "type": "number" }
+              }
+            },
+            "axes": {
+              "type": "object",
+              "required": ["x", "y"],
+              "properties": {
+                "x": { "type": "string" },
+                "y": { "type": "string" }
+              }
+            },
+            "axis_labels_es": {
+              "type": "object",
+              "required": ["x_label", "y_label"],
+              "properties": {
+                "x_label": { "type": "string" },
+                "y_label": { "type": "string" }
+              }
+            },
+            "correlations": {
+              "type": "object",
+              "required": ["gap_vif_nna", "gap_vif_adults", "gap_sexual_nna", "gap_sexual_adults"],
+              "properties": {
+                "gap_vif_nna":      { "$ref": "#/definitions/correlation_entry" },
+                "gap_vif_adults":   { "$ref": "#/definitions/correlation_entry" },
+                "gap_sexual_nna":   { "$ref": "#/definitions/correlation_entry" },
+                "gap_sexual_adults":{ "$ref": "#/definitions/correlation_entry" }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_2_6": {
+      "$comment": "Temporal trends (Beat 4 artefact analysis) — annual gap and rate series + diagnostic",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["annual_data", "gap_trends", "male_rate_trends", "artifact_diagnostic", "beat4_diagnostic"],
+          "properties": {
+            "annual_data": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": { "$ref": "#/definitions/annual_data_entry" }
+            },
+            "gap_trends": {
+              "type": "object",
+              "required": ["gap_vif_nna", "gap_vif_adults", "gap_sexual_nna", "gap_sexual_adults"],
+              "properties": {
+                "gap_vif_nna":      { "$ref": "#/definitions/trend_entry" },
+                "gap_vif_adults":   { "$ref": "#/definitions/trend_entry" },
+                "gap_sexual_nna":   { "$ref": "#/definitions/trend_entry" },
+                "gap_sexual_adults":{ "$ref": "#/definitions/trend_entry" }
+              }
+            },
+            "male_rate_trends": {
+              "type": "object",
+              "required": ["rate_vif_nna_m", "rate_vif_adults_m", "rate_sexual_nna_m", "rate_sexual_adults_m"],
+              "properties": {
+                "rate_vif_nna_m":      { "$ref": "#/definitions/trend_entry" },
+                "rate_vif_adults_m":   { "$ref": "#/definitions/trend_entry" },
+                "rate_sexual_nna_m":   { "$ref": "#/definitions/trend_entry" },
+                "rate_sexual_adults_m":{ "$ref": "#/definitions/trend_entry" }
+              }
+            },
+            "artifact_diagnostic": {
+              "type": "object",
+              "required": ["conclusion", "vif_adults_m_slope", "vif_adults_m_is_significant"],
+              "properties": {
+                "conclusion":                { "type": "string" },
+                "vif_adults_m_slope":        { "type": "number" },
+                "vif_adults_m_is_significant": { "type": "boolean" }
+              }
+            },
+            "beat4_diagnostic": {
+              "type": "object",
+              "required": ["focal_gap_visual", "focal_artifact", "sexual_adults", "vif_adults", "narrative_conclusion"],
+              "properties": {
+                "focal_gap_visual":    { "type": "string" },
+                "focal_artifact":      { "type": "string" },
+                "sexual_adults":       { "$ref": "#/definitions/beat4_focal_entry" },
+                "vif_adults":          { "$ref": "#/definitions/beat4_focal_entry" },
+                "narrative_conclusion":{ "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+
+    "kpi_entry": {
+      "$comment": "tipo (Spanish) translated to 'label' — it is a display label for the violence category",
+      "type": "object",
+      "required": ["label", "cases_f_total", "cases_m_total", "aggregate_ratio"],
+      "properties": {
+        "label":            { "type": "string" },
+        "cases_f_total":    { "type": "integer" },
+        "cases_m_total":    { "type": "integer" },
+        "aggregate_ratio":  { "type": ["number", "null"] }
+      }
+    },
+
+    "butterfly_series": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "required": ["year", "nna", "adults"],
+        "properties": {
+          "year":   { "type": "integer" },
+          "nna":    { "$ref": "#/definitions/butterfly_lifecycle" },
+          "adults": { "$ref": "#/definitions/butterfly_lifecycle" }
+        }
+      }
+    },
+
+    "butterfly_lifecycle": {
+      "type": "object",
+      "required": ["rate_f", "rate_m", "ratio", "cases_f", "cases_m"],
+      "properties": {
+        "rate_f":  { "type": "number" },
+        "rate_m":  { "type": "number" },
+        "ratio":   { "type": ["number", "null"] },
+        "cases_f": { "type": "integer" },
+        "cases_m": { "type": "integer" }
+      }
+    },
+
+    "gap_item": {
+      "$comment": "gap_* allow null: municipalities with zero male victims yield an undefined ratio (not zero). See Phase 3.2.1.",
+      "type": "object",
+      "required": [
+        "rank", "cod_municipio", "municipality", "department",
+        "gap_vif_nna", "gap_vif_adults", "gap_sexual_nna", "gap_sexual_adults", "gap_average"
+      ],
+      "properties": {
+        "rank":            { "type": "integer", "minimum": 1, "maximum": 10 },
+        "cod_municipio":   { "type": "string", "pattern": "^\\d{5}$" },
+        "municipality":    { "type": "string" },
+        "department":      { "type": "string" },
+        "gap_vif_nna":      { "type": ["number", "null"] },
+        "gap_vif_adults":   { "type": ["number", "null"] },
+        "gap_sexual_nna":   { "type": ["number", "null"] },
+        "gap_sexual_adults":{ "type": ["number", "null"] },
+        "gap_average":      { "type": ["number", "null"] }
+      }
+    },
+
+    "dept_gap_entry": {
+      "type": "object",
+      "required": [
+        "department", "gap_average", "gap_vif_nna", "gap_vif_adults",
+        "gap_sexual_nna", "gap_sexual_adults", "n_municipalities", "n_in_top10", "is_highlighted"
+      ],
+      "properties": {
+        "department":       { "type": "string" },
+        "gap_average":      { "type": "number" },
+        "gap_vif_nna":      { "type": "number" },
+        "gap_vif_adults":   { "type": "number" },
+        "gap_sexual_nna":   { "type": "number" },
+        "gap_sexual_adults":{ "type": "number" },
+        "n_municipalities": { "type": "integer" },
+        "n_in_top10":       { "type": "integer" },
+        "is_highlighted":   { "type": "boolean" }
+      }
+    },
+
+    "geojson_feature_collection": {
+      "type": "object",
+      "required": ["type", "features"],
+      "properties": {
+        "type": { "type": "string", "const": "FeatureCollection" },
+        "features": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": ["type", "properties", "geometry"],
+            "properties": {
+              "type": { "type": "string" },
+              "properties": {
+                "type": "object",
+                "required": ["department"],
+                "properties": {
+                  "department": { "type": "string" }
+                }
+              },
+              "geometry": { "type": ["object", "null"] }
+            }
+          }
+        }
+      }
+    },
+
+    "correlation_entry": {
+      "type": "object",
+      "required": ["spearman_rho", "p_value", "is_significant"],
+      "properties": {
+        "spearman_rho":  { "type": "number" },
+        "p_value":       { "type": ["number", "null"] },
+        "is_significant":{ "type": "boolean" }
+      }
+    },
+
+    "trend_entry": {
+      "$comment": "pendiente->slope, r2->r2, tendencia->direction (values stay in Spanish: Aumentando/Disminuyendo/Estable), significativa->is_significant",
+      "type": "object",
+      "required": ["slope", "r2", "direction", "is_significant"],
+      "properties": {
+        "slope":        { "type": ["number", "null"] },
+        "r2":           { "type": ["number", "null"] },
+        "direction":    { "type": ["string", "null"], "enum": ["Aumentando", "Disminuyendo", "Estable", null] },
+        "is_significant":{ "type": "boolean" }
+      }
+    },
+
+    "annual_data_entry": {
+      "$comment": "anio->year; brecha_*->gap_*; tasa_*_f->rate_*_f; tasa_*_m->rate_*_m; adultas/adultos->adults",
+      "type": "object",
+      "required": [
+        "year",
+        "gap_vif_nna", "gap_vif_adults", "gap_sexual_nna", "gap_sexual_adults",
+        "rate_vif_nna_f", "rate_vif_adults_f", "rate_sexual_nna_f", "rate_sexual_adults_f",
+        "rate_vif_nna_m", "rate_vif_adults_m", "rate_sexual_nna_m", "rate_sexual_adults_m"
+      ],
+      "properties": {
+        "year":               { "type": "integer" },
+        "gap_vif_nna":        { "type": "number" },
+        "gap_vif_adults":     { "type": "number" },
+        "gap_sexual_nna":     { "type": "number" },
+        "gap_sexual_adults":  { "type": "number" },
+        "rate_vif_nna_f":     { "type": "number" },
+        "rate_vif_adults_f":  { "type": "number" },
+        "rate_sexual_nna_f":  { "type": "number" },
+        "rate_sexual_adults_f":{ "type": "number" },
+        "rate_vif_nna_m":     { "type": "number" },
+        "rate_vif_adults_m":  { "type": "number" },
+        "rate_sexual_nna_m":  { "type": "number" },
+        "rate_sexual_adults_m":{ "type": "number" }
+      }
+    },
+
+    "beat4_focal_entry": {
+      "$comment": "tendencia_brecha->gap_trend; tendencia_tasa_f->female_rate_trend; tendencia_tasa_m->male_rate_trend; lectura->interpretation",
+      "type": "object",
+      "required": ["series", "gap_trend", "female_rate_trend", "male_rate_trend"],
+      "properties": {
+        "series": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": ["year", "gap", "rate_f", "rate_m"],
+            "properties": {
+              "year":   { "type": "integer" },
+              "gap":    { "type": "number" },
+              "rate_f": { "type": "number" },
+              "rate_m": { "type": "number" }
+            }
+          }
+        },
+        "gap_trend": {
+          "type": "object",
+          "required": ["slope", "p_value", "is_significant", "interpretation"],
+          "properties": {
+            "slope":          { "type": "number" },
+            "p_value":        { "type": ["number", "null"] },
+            "is_significant": { "type": "boolean" },
+            "interpretation": { "type": "string" }
+          }
+        },
+        "female_rate_trend": {
+          "$comment": "Female rate trend has no p_value or is_significant in current data",
+          "type": "object",
+          "required": ["slope", "interpretation"],
+          "properties": {
+            "slope":          { "type": "number" },
+            "interpretation": { "type": "string" }
+          }
+        },
+        "male_rate_trend": {
+          "type": "object",
+          "required": ["slope", "p_value", "is_significant", "interpretation"],
+          "properties": {
+            "slope":          { "type": "number" },
+            "p_value":        { "type": ["number", "null"] },
+            "is_significant": { "type": "boolean" },
+            "interpretation": { "type": "string" }
+          }
+        }
+      }
+    }
+
+  }
+}

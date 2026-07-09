@@ -1,0 +1,545 @@
+{
+  "_metadata": {
+    "description": "Configuración del Producto 2 — Tablas de caracterización forense (Carril paralelo DS3 + DS4)",
+    "version": "1.0.0",
+    "project": "Cicatrices Invisibles",
+    "methodology": "CRISP-ML v3.0 — Sección 6",
+    "principle": "DS3 y DS4 nunca entran a la tabla maestra ni al modelo de IA",
+    "firewall_rule": "Carriles paralelos nunca cruzan datos con el carril principal ni entre sí"
+  },
+  "paths": {
+    "cleaned_dir": "data/cleaned",
+    "ds4_output_dir": "data/agregados_forense",
+    "ds3_output_dir": "data/agregados_seforense",
+    "docs_dir": "docs",
+    "config_dir": "config"
+  },
+  "source_files": {
+    "ds4": "forense_limpio.parquet",
+    "ds3": "seforense_limpio.parquet"
+  },
+  "expected_counts": {
+    "_comment": "Conteos post-cleaner para validación de integridad (Sección 10)",
+    "ds4": 15418,
+    "ds3": 18661
+  },
+  "temporal_coverage": {
+    "_comment": "DS3 y DS4 solo cubren hasta 2024 (Sección 2 — Limitación documentada)",
+    "year_range": [
+      2018,
+      2024
+    ],
+    "years_count": 7,
+    "asymmetry_note": "Un año menos que DS1/DS2 (2018-2025). No afecta tabla maestra ni modelo."
+  },
+  "ds4_config": {
+    "_comment": "Sección 6.2 — Tablas derivadas de DS4 (VIF forense)",
+    "dataset_key": "forense",
+    "description": "VIF forense — Medicina Legal. Solo agresores intrafamiliares (18 categorías). Variable específica: factor (9 categorías).",
+    "columns_available": [
+      "anio_hecho",
+      "genero_victima",
+      "ciclo_vital",
+      "grupo_edad",
+      "cod_municipio",
+      "municipio",
+      "departamento",
+      "escenario",
+      "agresor",
+      "sexo_agresor",
+      "factor",
+      "discapacidad",
+      "etnia",
+      "hora_rango",
+      "mes_hecho",
+      "dia_hecho",
+      "dias_incapacidad",
+      "dimension_agresor",
+      "dimension_escenario",
+      "dimension_discapacidad",
+      "dimension_etnia"
+    ],
+    "count_column": "_count",
+    "count_method": "size",
+    "tables": {
+      "ds4_municipio_resumen": {
+        "_comment": "Resumen de VIF forense por municipio para fichas municipales",
+        "granularity": "1 fila × municipio",
+        "destination": "ficha_municipal",
+        "groupby": [
+          "cod_municipio",
+          "municipio",
+          "departamento"
+        ],
+        "aggregations": {
+          "total_casos": {
+            "method": "size"
+          },
+          "pct_femenino": {
+            "column": "genero_victima",
+            "method": "value_counts_pct",
+            "value": "FEMENINO"
+          },
+          "pct_nna_femenino": {
+            "method": "conditional_pct",
+            "conditions": {
+              "genero_victima": "FEMENINO",
+              "grupo_edad": "A MENORES DE EDAD 18 ANOS"
+            }
+          },
+          "pct_adultas_femenino": {
+            "method": "conditional_pct",
+            "conditions": {
+              "genero_victima": "FEMENINO",
+              "grupo_edad": "B MAYORES DE EDAD 18 ANOS"
+            }
+          },
+          "agresor_frecuente_nna_f": {
+            "column": "agresor",
+            "method": "filtered_mode",
+            "filters": {
+              "genero_victima": "FEMENINO",
+              "grupo_edad": "A MENORES DE EDAD 18 ANOS"
+            }
+          },
+          "agresor_frecuente_adultas_f": {
+            "column": "agresor",
+            "method": "filtered_mode",
+            "filters": {
+              "genero_victima": "FEMENINO",
+              "grupo_edad": "B MAYORES DE EDAD 18 ANOS"
+            }
+          },
+          "agresor_frecuente": {
+            "column": "agresor",
+            "method": "mode"
+          },
+          "dimension_agresor_frecuente": {
+            "column": "dimension_agresor",
+            "method": "mode"
+          },
+          "escenario_frecuente": {
+            "column": "escenario",
+            "method": "mode"
+          },
+          "dimension_escenario_frecuente": {
+            "column": "dimension_escenario",
+            "method": "mode"
+          },
+          "factor_mas_frecuente": {
+            "column": "factor",
+            "method": "mode"
+          }
+        },
+        "output_filename": "ds4_municipio_resumen.parquet"
+      },
+      "ds4_agresor": {
+        "_comment": "Continuo multigeneracional VIF forense — agresor granular × ciclo vital, filtrado a víctimas FEMENINO. dimension_agresor como columna atributo derivada.",
+        "granularity": "departamento + agresor + ciclo_vital (FEMENINO)",
+        "destination": "visualizacion_agresor",
+        "pre_filter": {
+          "genero_victima": "FEMENINO"
+        },
+        "groupby": [
+          "departamento",
+          "agresor",
+          "ciclo_vital"
+        ],
+        "aggregations": {
+          "n_casos": {
+            "method": "size"
+          },
+          "pct_total": {
+            "method": "pct_of_group",
+            "group_level": "departamento"
+          }
+        },
+        "attribute_columns": {
+          "dimension_agresor": "agresor"
+        },
+        "output_filename": "ds4_agresor.parquet"
+      },
+      "ds4_escenario": {
+        "_comment": "Distribución de escenarios donde ocurre la VIF (víctimas FEMENINO)",
+        "granularity": "departamento + dimension_escenario (FEMENINO)",
+        "destination": "visualizacion_escenario",
+        "pre_filter": {
+          "genero_victima": "FEMENINO"
+        },
+        "groupby": [
+          "departamento",
+          "dimension_escenario"
+        ],
+        "aggregations": {
+          "n_casos": {
+            "method": "size"
+          },
+          "pct_total": {
+            "method": "pct_of_group",
+            "group_level": "departamento"
+          }
+        },
+        "output_filename": "ds4_escenario.parquet"
+      },
+      "ds4_factor": {
+        "_comment": "Distribución de factores desencadenantes (variable exclusiva de DS4, víctimas FEMENINO)",
+        "granularity": "departamento + factor (FEMENINO)",
+        "destination": "visualizacion_factor",
+        "pre_filter": {
+          "genero_victima": "FEMENINO"
+        },
+        "groupby": [
+          "departamento",
+          "factor"
+        ],
+        "aggregations": {
+          "n_casos": {
+            "method": "size"
+          },
+          "pct_total": {
+            "method": "pct_of_group",
+            "group_level": "departamento"
+          }
+        },
+        "output_filename": "ds4_factor.parquet"
+      },
+      "ds4_temporalidad": {
+        "_comment": "Heatmap de estacionalidad de la VIF por departamento (víctimas FEMENINO) — departamento como dimensión para filtrado interactivo en frontend",
+        "granularity": "departamento + mes + dia_hecho + hora_rango (FEMENINO)",
+        "destination": "heatmap_temporal",
+        "pre_filter": {
+          "genero_victima": "FEMENINO"
+        },
+        "groupby": [
+          "departamento",
+          "mes_hecho",
+          "dia_hecho",
+          "hora_rango"
+        ],
+        "aggregations": {
+          "n_casos": {
+            "method": "size"
+          }
+        },
+        "output_filename": "ds4_temporalidad.parquet"
+      },
+      "ds4_interseccional": {
+        "_comment": "Análisis de vulnerabilidad múltiple en VIF",
+        "granularity": "ciclo_vital + dimension_etnia + dimension_discapacidad",
+        "destination": "analisis_interseccional",
+        "groupby": [
+          "ciclo_vital",
+          "dimension_etnia",
+          "dimension_discapacidad"
+        ],
+        "aggregations": {
+          "n_casos": {
+            "method": "size"
+          },
+          "pct_femenino": {
+            "column": "genero_victima",
+            "method": "value_counts_pct",
+            "value": "FEMENINO"
+          }
+        },
+        "output_filename": "ds4_interseccional.parquet"
+      }
+    }
+  },
+  "ds3_config": {
+    "_comment": "Sección 6.3 — Tablas derivadas de DS3 (Delito sexual forense)",
+    "dataset_key": "seforense",
+    "description": "Delito sexual forense — Medicina Legal. Agresores familiares + no familiares (58 categorías). Variable específica: circunstancia (49 categorías).",
+    "columns_available": [
+      "anio_hecho",
+      "genero_victima",
+      "ciclo_vital",
+      "grupo_edad",
+      "cod_municipio",
+      "municipio",
+      "departamento",
+      "escenario",
+      "circunstancia",
+      "sexo_agresor",
+      "agresor",
+      "discapacidad",
+      "etnia",
+      "hora_rango",
+      "mes_hecho",
+      "dia_hecho",
+      "dimension_agresor",
+      "dimension_escenario",
+      "dimension_circunstancia",
+      "dimension_discapacidad",
+      "dimension_etnia"
+    ],
+    "count_column": "_count",
+    "count_method": "size",
+    "tables": {
+      "ds3_municipio_resumen": {
+        "_comment": "Resumen de delito sexual forense por municipio para fichas municipales",
+        "granularity": "1 fila × municipio",
+        "destination": "ficha_municipal",
+        "groupby": [
+          "cod_municipio",
+          "municipio",
+          "departamento"
+        ],
+        "aggregations": {
+          "total_casos": {
+            "method": "size"
+          },
+          "pct_femenino": {
+            "column": "genero_victima",
+            "method": "value_counts_pct",
+            "value": "FEMENINO"
+          },
+          "pct_nna_femenino": {
+            "method": "conditional_pct",
+            "conditions": {
+              "genero_victima": "FEMENINO",
+              "grupo_edad": "A MENORES DE EDAD 18 ANOS"
+            }
+          },
+          "pct_adultas_femenino": {
+            "method": "conditional_pct",
+            "conditions": {
+              "genero_victima": "FEMENINO",
+              "grupo_edad": "B MAYORES DE EDAD 18 ANOS"
+            }
+          },
+          "agresor_frecuente_nna_f": {
+            "column": "agresor",
+            "method": "filtered_mode",
+            "filters": {
+              "genero_victima": "FEMENINO",
+              "grupo_edad": "A MENORES DE EDAD 18 ANOS"
+            }
+          },
+          "agresor_frecuente_adultas_f": {
+            "column": "agresor",
+            "method": "filtered_mode",
+            "filters": {
+              "genero_victima": "FEMENINO",
+              "grupo_edad": "B MAYORES DE EDAD 18 ANOS"
+            }
+          },
+          "agresor_frecuente": {
+            "column": "agresor",
+            "method": "mode"
+          },
+          "dimension_agresor_frecuente": {
+            "column": "dimension_agresor",
+            "method": "mode"
+          },
+          "escenario_frecuente": {
+            "column": "escenario",
+            "method": "mode"
+          },
+          "dimension_escenario_frecuente": {
+            "column": "dimension_escenario",
+            "method": "mode"
+          },
+          "circunstancia_frecuente": {
+            "column": "circunstancia",
+            "method": "mode"
+          },
+          "dimension_circunstancia_frecuente": {
+            "column": "dimension_circunstancia",
+            "method": "mode"
+          }
+        },
+        "output_filename": "ds3_municipio_resumen.parquet"
+      },
+      "ds3_agresor": {
+        "_comment": "Continuo multigeneracional delito sexual forense — agresor granular × ciclo vital (incluye no familiares), filtrado a víctimas FEMENINO. dimension_agresor como columna atributo derivada.",
+        "granularity": "departamento + agresor + ciclo_vital (FEMENINO)",
+        "destination": "visualizacion_agresor",
+        "pre_filter": {
+          "genero_victima": "FEMENINO"
+        },
+        "groupby": [
+          "departamento",
+          "agresor",
+          "ciclo_vital"
+        ],
+        "aggregations": {
+          "n_casos": {
+            "method": "size"
+          },
+          "pct_total": {
+            "method": "pct_of_group",
+            "group_level": "departamento"
+          }
+        },
+        "attribute_columns": {
+          "dimension_agresor": "agresor"
+        },
+        "output_filename": "ds3_agresor.parquet"
+      },
+      "ds3_escenario": {
+        "_comment": "Distribución de escenarios donde ocurre la violencia sexual (víctimas FEMENINO)",
+        "granularity": "departamento + dimension_escenario (FEMENINO)",
+        "destination": "visualizacion_escenario",
+        "pre_filter": {
+          "genero_victima": "FEMENINO"
+        },
+        "groupby": [
+          "departamento",
+          "dimension_escenario"
+        ],
+        "aggregations": {
+          "n_casos": {
+            "method": "size"
+          },
+          "pct_total": {
+            "method": "pct_of_group",
+            "group_level": "departamento"
+          }
+        },
+        "output_filename": "ds3_escenario.parquet"
+      },
+      "ds3_circunstancia": {
+        "_comment": "Clasificación de circunstancias del hecho sexual (variable exclusiva de DS3, víctimas FEMENINO)",
+        "granularity": "departamento + dimension_circunstancia (FEMENINO)",
+        "destination": "visualizacion_circunstancia",
+        "pre_filter": {
+          "genero_victima": "FEMENINO"
+        },
+        "groupby": [
+          "departamento",
+          "dimension_circunstancia"
+        ],
+        "aggregations": {
+          "n_casos": {
+            "method": "size"
+          },
+          "pct_total": {
+            "method": "pct_of_group",
+            "group_level": "departamento"
+          }
+        },
+        "output_filename": "ds3_circunstancia.parquet"
+      },
+      "ds3_temporalidad": {
+        "_comment": "Heatmap de estacionalidad de la violencia sexual por departamento (víctimas FEMENINO) — departamento como dimensión para filtrado interactivo en frontend",
+        "granularity": "departamento + mes + dia_hecho + hora_rango (FEMENINO)",
+        "destination": "heatmap_temporal",
+        "pre_filter": {
+          "genero_victima": "FEMENINO"
+        },
+        "groupby": [
+          "departamento",
+          "mes_hecho",
+          "dia_hecho",
+          "hora_rango"
+        ],
+        "aggregations": {
+          "n_casos": {
+            "method": "size"
+          }
+        },
+        "output_filename": "ds3_temporalidad.parquet"
+      },
+      "ds3_interseccional": {
+        "_comment": "Análisis de vulnerabilidad múltiple en violencia sexual",
+        "granularity": "ciclo_vital + dimension_etnia + dimension_discapacidad",
+        "destination": "analisis_interseccional",
+        "groupby": [
+          "ciclo_vital",
+          "dimension_etnia",
+          "dimension_discapacidad"
+        ],
+        "aggregations": {
+          "n_casos": {
+            "method": "size"
+          },
+          "pct_femenino": {
+            "column": "genero_victima",
+            "method": "value_counts_pct",
+            "value": "FEMENINO"
+          }
+        },
+        "output_filename": "ds3_interseccional.parquet"
+      }
+    }
+  },
+  "structural_differences": {
+    "_comment": "Sección 6.4 — Diferencias estructurales clave entre DS3 y DS4",
+    "ds4_specific_variable": "factor",
+    "ds4_agresor_categories": 18,
+    "ds4_dimension_agresor_categories": 6,
+    "ds4_has_dias_incapacidad": true,
+    "ds3_specific_variable": "circunstancia",
+    "ds3_agresor_categories": 58,
+    "ds3_dimension_agresor_categories": 9,
+    "ds3_extra_dimensions": [
+      "CONOCIDO_NO_FAMILIAR",
+      "PAREJA_EX_PAREJA",
+      "ACTOR_ARMADO_INSTITUCIONAL"
+    ],
+    "ds3_has_dias_incapacidad": false,
+    "total_output_tables": 12,
+    "ds4_tables_count": 6,
+    "ds3_tables_count": 6
+  },
+  "output_config": {
+    "compression": "snappy",
+    "index": false,
+    "format": "parquet",
+    "null_label": "SIN_DATO"
+  },
+  "dashboard_mapping": {
+    "_comment": "Mapeo de tablas forenses a módulos del dashboard Streamlit (Sección 8.3)",
+    "modulo_4_caracterizacion": {
+      "perfil_agresor": [
+        "ds4_agresor",
+        "ds3_agresor"
+      ],
+      "escenarios": [
+        "ds4_escenario",
+        "ds3_escenario"
+      ],
+      "factores_circunstancias": [
+        "ds4_factor",
+        "ds3_circunstancia"
+      ],
+      "temporalidad": [
+        "ds4_temporalidad",
+        "ds3_temporalidad"
+      ],
+      "interseccionalidad": [
+        "ds4_interseccional",
+        "ds3_interseccional"
+      ]
+    },
+    "modulo_5_ficha_municipal": {
+      "resumen_cuantitativo": "maestro_concurso.parquet",
+      "resumen_cualitativo_vif": "ds4_municipio_resumen",
+      "resumen_cualitativo_sexual": "ds3_municipio_resumen"
+    }
+  },
+
+  "forense_local": {
+    "min_total_casos": 30
+  },
+
+  "acto_5_ficha_forense_municipal": {
+    "output_filename": "acto_5_ficha_forense_municipal.json",
+    "violencia_sexual_stat_cards": [
+      {"id": "agresor_frecuente_nna",    "label_es": "Agresor frecuente NNA",             "source_field": "agresor_frecuente_nna_f",    "display_format": "text"},
+      {"id": "agresor_frecuente_adultas","label_es": "Agresor frecuente adultas",         "source_field": "agresor_frecuente_adultas_f","display_format": "text"},
+      {"id": "escenario_frecuente",      "label_es": "Escenario más frecuente",           "source_field": "escenario_frecuente",        "display_format": "text"},
+      {"id": "circunstancia_frecuente",  "label_es": "Circunstancia más frecuente",       "source_field": "circunstancia_frecuente",    "display_format": "text"},
+      {"id": "distribucion_por_ciclo",   "label_es": "% casos femeninos por ciclo vital", "source_field_nna": "pct_nna_femenino", "source_field_adultas": "pct_adultas_femenino", "display_format": "pct_split"}
+    ],
+    "violencia_intrafamiliar_stat_cards": [
+      {"id": "agresor_frecuente_nna",    "label_es": "Agresor frecuente NNA",             "source_field": "agresor_frecuente_nna_f",    "display_format": "text"},
+      {"id": "agresor_frecuente_adultas","label_es": "Agresor frecuente adultas",         "source_field": "agresor_frecuente_adultas_f","display_format": "text"},
+      {"id": "escenario_frecuente",      "label_es": "Escenario más frecuente",           "source_field": "escenario_frecuente",        "display_format": "text"},
+      {"id": "factor_mas_frecuente",     "label_es": "Factor más frecuente",              "source_field": "factor_mas_frecuente",       "display_format": "text"},
+      {"id": "distribucion_por_ciclo",   "label_es": "% casos femeninos por ciclo vital", "source_field_nna": "pct_nna_femenino", "source_field_adultas": "pct_adultas_femenino", "display_format": "pct_split"}
+    ],
+    "caveat_bajo_umbral_es": "PROVISIONAL: Perfil no mostrado por debajo del umbral mínimo de {min_total_casos} casos peritados registrados para este municipio en el periodo 2018–2025."
+  }
+}

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!-- sub_acto_4_4 — Factor VIF vs Circunstancia sexual (DS4 / DS3 forense).
+     Componente: renderDualTreemap — dos instancias ECharts treemap lado a lado.
+     Izquierda: ds4_factor.regional → factor precipitante en VIF (18 categorías)
+     Derecha:   ds3_circumstance.regional → circunstancia en violencia sexual
+     Tiles dimensionados por n (área proporcional a casos); etiqueta: categoría + pct%.
+     JSON:   data/dashboard/acto_4_forense.json → sub_acto_4_4
+     Config: config/forense_exporter_config.json → copy_es.sub_acto_4_4
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_4_4.html -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Factor VIF vs Circunstancia sexual (sub_acto_4_4)</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans); padding: 1rem 1.25rem;
+      background: var(--color-canvas); color: var(--color-ink);
+    }
+    h2   { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; max-width: 1100px; }
+    .anchor-text {
+      font-size: 0.88rem; color: var(--color-muted); line-height: 1.55;
+      max-width: 1100px; margin-bottom: 0.9rem;
+    }
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber); background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem; font-size: 0.85rem; color: var(--color-accent-amber);
+      line-height: 1.5; max-width: 1100px; margin-bottom: 0.75rem;
+    }
+
+    /* Side-by-side layout */
+    .treemap-row { display: flex; gap: 1.25rem; max-width: 1100px; }
+    .treemap-block { flex: 1 1 0; min-width: 0; }
+    .treemap-title {
+      font-size: 0.82rem; font-weight: 700; color: var(--color-body);
+      margin-bottom: 0.35rem; padding: 0.3rem 0.6rem;
+      border-left: 3px solid var(--color-hairline); background: var(--color-canvas);
+      min-height: 2.4rem; display: flex; align-items: center;
+    }
+    .chart-el { width: 100%; height: 400px; }
+    .chart-meta { font-size: 0.75rem; color: var(--color-muted); margin-top: 0.3rem; padding-left: 0.3rem; }
+
+    details  { max-width: 1100px; margin-top: 0.8rem; font-size: 0.8rem; }
+    summary  { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul       { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.85; }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <div id="anchor-wrapper"></div>
+
+  <div class="treemap-row">
+    <!-- DS4 factor (VIF forense) -->
+    <div class="treemap-block">
+      <div class="treemap-title" id="title-ds4"></div>
+      <div class="chart-el" id="chart-ds4"></div>
+      <div class="chart-meta" id="meta-ds4"></div>
+    </div>
+    <!-- DS3 circunstancia (sexual forense) -->
+    <div class="treemap-block">
+      <div class="treemap-title" id="title-ds3"></div>
+      <div class="chart-el" id="chart-ds3"></div>
+      <div class="chart-meta" id="meta-ds3"></div>
+    </div>
+  </div>
+
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script>
+    /**
+     * renderDualTreemap
+     *
+     * Two ECharts treemap instances side-by-side.
+     * Left:  ds4_factor.regional     — factor precipitante de VIF (18 categories)
+     * Right: ds3_circumstance.regional — circunstancia de violencia sexual
+     *
+     * Tile area proportional to n (casos).
+     * Label: category name + pct%.
+     * Color: monochromatic palette (deep-to-light) per dataset.
+     *
+     * Data shape: [{category, n, pct}, ...] already sorted pct desc.
+     */
+
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const FORENSE_URL = './data/acto_4_forense.json';
+    const CFG_URL     = './config/forense_exporter_config.json';
+
+    const PROV = 'PROVISIONAL: ';
+    function stripProv(s) { return s && s.startsWith(PROV) ? s.slice(PROV.length) : (s || ''); }
+
+    function renderAnchor(text) {
+      const el = document.createElement(text.startsWith(PROV) ? 'div' : 'p');
+      el.className = text.startsWith(PROV) ? 'provisional-box' : 'anchor-text';
+      el.textContent = stripProv(text);
+      document.getElementById('anchor-wrapper').appendChild(el);
+    }
+
+    function buildTreemapOption(items, colorRange) {
+      const total = items.reduce((s, d) => s + d.n, 0);
+      const data  = items.map(d => ({
+        name:  d.category.replace(/_/g, ' '),
+        value: d.n,
+        _pct:  d.pct,
+        label: {
+          // ECharts treemap: formatter receives params with .name and .data
+          show: true,
+          formatter: p => `${p.name}\n${p.data._pct}%`,
+          fontSize: 11,
+          color: CSS.canvas,
+          textShadowBlur: 3,
+          textShadowColor: 'rgba(0,0,0,0.5)',
+        },
+      }));
+
+      return {
+        backgroundColor: CSS.canvas,
+        tooltip: {
+          trigger: 'item',
+          formatter: p => {
+            const n = p.value;
+            const pct = p.data._pct;
+            return `<strong>${p.name}</strong><br>${n.toLocaleString('es')} casos (${pct}%)`;
+          },
+        },
+        series: [{
+          type: 'treemap',
+          data: data,
+          width: '100%', height: '100%',
+          top: 0, left: 0,
+          squareRatio: 1,
+          nodeClick: false,
+          roam: false,
+          breadcrumb: { show: false },
+          label: {
+            show: true,
+            formatter: p => `${p.name}\n${p.data._pct}%`,
+            fontSize: 11,
+            color: CSS.canvas,
+          },
+          upperLabel: { show: false },
+          itemStyle: {
+            gapWidth: 2,
+            borderColor: CSS.canvas,
+            borderWidth: 1,
+          },
+          levels: [
+            {
+              colorSaturation: [0.35, 0.75],
+              itemStyle: { gapWidth: 2, borderWidth: 1, borderColor: CSS.canvas },
+              color: colorRange,
+              colorMappingBy: 'value',
+            },
+          ],
+          emphasis: {
+            label: { show: true, fontSize: 12, fontWeight: 'bold' },
+            itemStyle: { borderColor: CSS.canvas, borderWidth: 2 },
+          },
+        }],
+      };
+    }
+
+    async function main() {
+      const [payload, fullCfg] = await Promise.all([
+        fetch(FORENSE_URL).then(r => { if (!r.ok) throw new Error(`${FORENSE_URL}: HTTP ${r.status}`); return r.json(); }),
+        fetch(CFG_URL).then(r => r.json()).catch(() => ({})),
+      ]);
+
+      const sub     = payload.sub_acto_4_4;
+      const copyCfg = fullCfg?.copy_es?.sub_acto_4_4 ?? {};
+
+      renderAnchor(sub.anchor_text_es);
+
+      // Panel titles: prefer data JSON titles_es (already finalized), fall back to config
+      const titlesData = sub.titles_es ?? {};
+      const titlesConf = { ds4: copyCfg.ds4_title, ds3: copyCfg.ds3_title };
+      document.getElementById('title-ds4').textContent = titlesData.ds4 || titlesConf.ds4 || 'DS4 — Factor (VIF forense)';
+      const ds3Title = titlesData.ds3 || titlesConf.ds3;
+      const ds3TitleEl = document.getElementById('title-ds3');
+      if (ds3Title) {
+        ds3TitleEl.textContent = ds3Title;
+      } else {
+        ds3TitleEl.remove();
+      }
+
+      const ds4Items = sub.ds4_factor.regional;
+      const ds3Items = sub.ds3_circumstance.regional;
+      const ds4Total = ds4Items.reduce((s, d) => s + d.n, 0);
+      const ds3Total = ds3Items.reduce((s, d) => s + d.n, 0);
+
+      // DS4: red palette (deep red for highest-value tiles)
+      const chartDS4 = echarts.init(document.getElementById('chart-ds4'));
+      chartDS4.setOption(buildTreemapOption(ds4Items, ['#c4808a', '#a63030']));
+
+      // DS3: blue palette
+      const chartDS3 = echarts.init(document.getElementById('chart-ds3'));
+      chartDS3.setOption(buildTreemapOption(ds3Items, ['#a86781', '#3d0f27']));
+
+      document.getElementById('meta-ds4').textContent =
+        `n = ${ds4Total.toLocaleString('es')} casos forenses DS4 — vista regional`;
+      document.getElementById('meta-ds3').textContent =
+        `n = ${ds3Total.toLocaleString('es')} casos forenses DS3 — vista regional`;
+
+      window.addEventListener('resize', () => { chartDS4.resize(); chartDS3.resize(); });
+
+      /* Diagnostics */
+      const ul = document.getElementById('diag-list');
+      const rows = [
+        `ds4_factor.regional items: ${ds4Items.length} (esperado: 8)`,
+        `ds3_circumstance.regional items: ${ds3Items.length} (esperado: 8)`,
+        `ds4 top categoría: ${ds4Items[0]?.category} (esperado: INTOLERANCIA MACHISMO)`,
+        `ds4 top pct: ${ds4Items[0]?.pct}% (esperado: 65.4)`,
+        `ds3 top categoría: ${ds3Items[0]?.category} (esperado: ABUSO_SEXUAL)`,
+        `ds3 top pct: ${ds3Items[0]?.pct}% (esperado: 80.7)`,
+        `ds4 total n calculado: ${ds4Total.toLocaleString('es')}`,
+        `ds3 total n calculado: ${ds3Total.toLocaleString('es')}`,
+        `titles_es.ds4: ${sub.titles_es?.ds4 ? 'presente' : 'fallback a config'}`,
+      ];
+      rows.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+    }
+
+    main().catch(err => {
+      console.error(err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

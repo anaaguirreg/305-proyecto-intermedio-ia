@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- sub_acto_2_5 — Scatter ICV-GEN-F vs brecha de género (177 municipios).
+     Nuevo componente (renderScatterBrechas) — ver docs/phase_3b_step3_phase2_pass2_verification.md
+     para el diagnóstico del gap de contrato vs renderScatter177.
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_2_5.html
+     fetch() bloqueado bajo file:// por restricción CORS de mismo origen. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Scatter ICV vs Brecha (sub_acto_2_5)</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body    { font-family: var(--font-sans); padding: 1rem 1.25rem; background: var(--color-canvas); color: var(--color-ink); }
+    h2      { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; max-width: 960px; }
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber);
+      background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      color: var(--color-accent-amber);
+      line-height: 1.5;
+      max-width: 960px;
+      margin-bottom: 0.75rem;
+    }
+    .anchor-text {
+      font-size: 0.88rem;
+      color: var(--color-muted);
+      line-height: 1.5;
+      max-width: 960px;
+      margin-bottom: 0.75rem;
+    }
+    #chart      { width: 100%; max-width: 960px; height: 520px; }
+    .caveat-note {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      font-style: italic;
+      line-height: 1.5;
+      max-width: 960px;
+      border-top: 1px solid var(--color-hairline);
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    details { max-width: 960px; margin-top: 0.8rem; font-size: 0.8rem; }
+    summary { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul      { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.85; }
+    .warn   { color: var(--color-accent-amber); }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <h2 id="title"></h2>
+  <div id="anchor-wrapper"></div>
+  <div id="chart"></div>
+  <p id="caveat" class="caveat-note" hidden></p>
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script>
+    /**
+     * renderScatterBrechas — scatter ICV-GEN-F × brecha de género para sub_acto_2_5.
+     *
+     * Schema de puntos: { cod_municipio, municipality, department, icv_average, gap_average }
+     * gap_average es nullable para municipios sin víctimas masculinas registradas.
+     * Dos líneas de referencia: x_median (ICV) y y_median (brecha).
+     *
+     * Nota de diseño: renderScatter177 (sub_acto_3_2) no es reutilizable aquí sin cambios
+     * de código — su schema de puntos requiere vif_f_total_rate, sexual_f_total_rate, quadrant,
+     * scatter_style y quadrant_colors, ninguno de los cuales existe en sub_acto_2_5.data.
+     * Ver docs/phase_3b_step3_phase2_pass2_verification.md §Halt-report.
+     */
+
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const BRECHAS_URL = './data/acto_2_brechas.json';
+
+    // Single point color: neutral slate-blue (no quadrant categorization in 2_5)
+    const POINT_COLOR   = '#3d8a7a';
+    const NULL_GAP_COLOR = CSS.scaleNull;
+
+    /* ── Shared anchor-text renderer ─────────────────────────────────────── */
+    function renderAnchor(text) {
+      const wrapper = document.getElementById('anchor-wrapper');
+      const PROV = 'PROVISIONAL: ';
+      const isProv = text.startsWith(PROV);
+      const el = document.createElement(isProv ? 'div' : 'p');
+      el.className = isProv ? 'provisional-box' : 'anchor-text';
+      el.textContent = isProv ? text.slice(PROV.length) : text;
+      wrapper.appendChild(el);
+    }
+
+    /* ── Diagnostic panel ─────────────────────────────────────────────────── */
+    function buildDiagnostico(data) {
+      const ul = document.getElementById('diag-list');
+      const nullGapCount = data.points.filter(p => p.gap_average == null).length;
+      const rows = [
+        `Puntos renderizados: ${data.n_points} (esperado: 177)`,
+        `Puntos con gap_average nulo: ${nullGapCount} (renderizados en gris)`,
+        `x_median (ICV): ${data.reference_lines.x_median}`,
+        `y_median (brecha): ${data.reference_lines.y_median}`,
+        `Eje X: ${data.axes.x}`,
+        `Eje Y: ${data.axes.y}`,
+      ];
+      if (data.n_points !== 177) {
+        const li = document.createElement('li');
+        li.className = 'warn';
+        li.textContent = `⚠ n_points esperado 177, encontrado ${data.n_points}`;
+        ul.appendChild(li);
+      }
+      for (const text of rows) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        ul.appendChild(li);
+      }
+    }
+
+    /* ── Main ─────────────────────────────────────────────────────────────── */
+    async function main() {
+      const payload = await fetch(BRECHAS_URL).then(r => {
+        if (!r.ok) throw new Error(`${BRECHAS_URL}: HTTP ${r.status}`);
+        return r.json();
+      });
+
+      const sub  = payload.sub_acto_2_5;
+      const data = sub.data;
+
+      document.getElementById('title').textContent = sub.title_es;
+      renderAnchor(sub.anchor_text_es);
+
+      const caveatEl = document.getElementById('caveat');
+      if (sub.caveat_es) {
+        caveatEl.textContent = sub.caveat_es;
+        caveatEl.hidden = false;
+      }
+
+      // Build per-point series data
+      const seriesData = data.points.map(p => ({
+        name:  p.municipality,
+        value: [p.icv_average, p.gap_average],  // gap_average may be null
+        itemStyle: {
+          color:   p.gap_average != null ? POINT_COLOR : NULL_GAP_COLOR,
+          opacity: p.gap_average != null ? 0.75 : 0.5,
+        },
+        _meta: p,
+      }));
+
+      const chart = echarts.init(document.getElementById('chart'));
+      chart.setOption({
+        backgroundColor: CSS.canvas,
+        grid: { left: '10%', right: '4%', top: '5%', bottom: '14%', containLabel: true },
+        tooltip: {
+          trigger: 'item',
+          confine: true,
+          formatter: params => {
+            if (!params.data || !params.data._meta) return '';
+            const p   = params.data._meta;
+            const gap = p.gap_average != null
+              ? `${p.gap_average.toFixed(2)}× (F/M)`
+              : 'no calculable (sin víctimas masculinas)';
+            return (
+              `<strong>${p.municipality}</strong> — ${p.department}<br>` +
+              `Código DANE: ${p.cod_municipio}<br>` +
+              `ICV-GEN-F promedio: ${p.icv_average.toFixed(2)}<br>` +
+              `Brecha promedio: ${gap}`
+            );
+          },
+        },
+        xAxis: {
+          type:         'value',
+          name:         data.axis_labels_es.x_label.replace(/^PROVISIONAL: /, ''),
+          nameLocation: 'middle',
+          nameGap:      35,
+          nameTextStyle: { fontSize: 12, color: CSS.muted },
+          splitLine:    { lineStyle: { color: CSS.hairline } },
+        },
+        yAxis: {
+          type:         'value',
+          name:         data.axis_labels_es.y_label.replace(/^PROVISIONAL: /, ''),
+          nameLocation: 'middle',
+          nameGap:      55,
+          nameTextStyle: { fontSize: 12, color: CSS.muted },
+          splitLine:    { lineStyle: { color: CSS.hairline } },
+        },
+        series: [{
+          type:      'scatter',
+          animation: false,
+          symbolSize: 7,
+          data:      seriesData,
+          markLine: {
+            silent: true,
+            symbol: ['none', 'none'],
+            lineStyle: { type: 'dashed', color: CSS.muted, width: 1.5 },
+            label:     { show: false },
+            data: [
+              { yAxis: data.reference_lines.y_median },
+              { xAxis: data.reference_lines.x_median },
+            ],
+          },
+        }],
+      });
+
+      window.addEventListener('resize', () => chart.resize());
+      buildDiagnostico(data);
+    }
+
+    main().catch(err => {
+      console.error('Error en renderizado:', err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

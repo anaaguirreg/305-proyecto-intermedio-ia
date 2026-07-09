@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<!-- Paso 2 — choropleth smoke render: sub_acto_1_2 (ICV-GEN-F por municipio).
+     Servir desde raiz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_1_2.html
+     fetch() bloqueado bajo file:// por restriccion CORS de mismo origen. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — ICV-GEN-F Coroplético</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body      { font-family: var(--font-sans); padding: 1rem 1.25rem; background: var(--color-canvas); color: var(--color-ink); }
+    #ancla    { font-size: 0.88rem; color: var(--color-muted); line-height: 1.5;
+                max-width: 860px; margin-bottom: 0.6rem; }
+    #map      { width: 100%; height: 600px; border: 1px solid var(--color-hairline); background: var(--color-hairline); }
+    details   { max-width: 860px; margin-top: 0.75rem; font-size: 0.8rem; }
+    summary   { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul        { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.7; }
+    .warn     { color: var(--color-accent-amber); }
+    #error-msg{ color: var(--color-error); margin-top: 1rem; font-size: 0.9rem; }
+
+    /* Segmented toggle */
+    #toggle-bar { max-width: 860px; margin-bottom: 0.5rem; display: flex; }
+    .toggle-btn { padding: 0.3rem 0.9rem; font-size: 0.82rem; cursor: pointer;
+                  border: 1px solid var(--color-ink); background: transparent; color: var(--color-ink);
+                  flex: 1; line-height: 1.4; }
+    .toggle-btn:first-child { border-radius: 4px 0 0 4px; }
+    .toggle-btn:last-child  { border-radius: 0 4px 4px 0; border-left: none; }
+    .toggle-btn.active      { background: var(--color-ink); color: var(--color-canvas); }
+    .toggle-btn:disabled    { opacity: 0.4; cursor: not-allowed; }
+
+    /* Legend (injected by Leaflet control) */
+    .icv-legend { background: var(--color-canvas); padding: 0.5rem 0.75rem; border-radius: 4px;
+                  box-shadow: 0 1px 5px rgba(0,0,0,0.25); font-size: 0.75rem; line-height: 1.8; }
+    .icv-legend strong { display: block; margin-bottom: 0.2rem; }
+    .swatch { display: inline-block; width: 14px; height: 14px;
+              vertical-align: middle; margin-right: 5px; border: 1px solid var(--color-hairline); }
+    .swatch-excluded { display: inline-block; width: 14px; height: 14px;
+                       vertical-align: middle; margin-right: 5px;
+                       border: 2px dashed var(--color-body); background: transparent; }
+    /* Circle marker symbol in legend: gray fill, dark stroke */
+    .swatch-circle { display: inline-block; width: 10px; height: 10px;
+                     border-radius: 50%; vertical-align: middle; margin-right: 5px;
+                     background: var(--scale-null); border: 1.5px solid var(--color-ink); }
+  </style>
+</head>
+<body>
+  <p id="ancla"></p>
+  <div id="toggle-bar">
+    <button id="btn-icv"     class="toggle-btn active">ICV continuo</button>
+    <button id="btn-cluster" class="toggle-btn">Tipología (clusters)</button>
+  </div>
+  <div id="map"></div>
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale1:       getCssVar('--scale-1'),            // #f5ede5
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scale5:       getCssVar('--scale-5'),            // #4a1530
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    /* ── Rutas ─────────────────────────────────────────────────────────────── */
+    const GEOJSON_URL      = './config/pacifico_municipios.geojson';
+    const PANORAMA_URL     = './data/acto_1_panorama.json';
+    const CABECERA_URL     = './config/municipios_pacifico.json';
+    const EXPORTER_CFG_URL = './config/master_exporter_config.json';
+
+    /* ── Paleta YlOrRd 5 clases (ColorBrewer) ──────────────────────────────
+       Sequential, apta para daltonicos, intuitiva para severidad creciente.
+       Fuente: var(--scale-1..5) en variables.css — nunca literal en JS.      */
+    const PALETTE = [CSS.scale1, CSS.scale2, CSS.scale3, CSS.scale4, CSS.scale5];
+    const N_BINS  = 5;
+
+    /* ── Cuantiles ─────────────────────────────────────────────────────────── */
+    function computeBreaks(sorted) {
+      const breaks = [];
+      for (let i = 1; i < N_BINS; i++) {
+        breaks.push(sorted[Math.floor((i / N_BINS) * sorted.length)]);
+      }
+      return breaks; // 4 cotas superiores; el bin 5 captura todo lo que quede
+    }
+
+    function getColor(icv, breaks) {
+      for (let i = 0; i < breaks.length; i++) {
+        if (icv <= breaks[i]) return PALETTE[i];
+      }
+      return PALETTE[N_BINS - 1];
+    }
+
+    /* ── Estilo ICV (polígonos) ────────────────────────────────────────────── */
+    function makeStyle(rec, breaks) {
+      if (!rec) {
+        return { fillColor: CSS.scaleNull, fillOpacity: 0.45,
+                 color: CSS.canvas, weight: 0.5 };
+      }
+      const style = {
+        fillColor:   getColor(rec.icv_average, breaks),
+        fillOpacity: 0.82,
+        color:       CSS.ink,
+        weight:      0.8,
+        opacity:     0.35,
+        dashArray:   null,
+      };
+      if (rec.excluded_from_model) {
+        style.color     = CSS.body;
+        style.weight    = 2;
+        style.dashArray = '4,4';
+      }
+      return style;
+    }
+
+    /* ── Estilo Cluster (polígonos) ─────────────────────────────────────────
+       En modo cluster los excluidos quedan con relleno gris (CLUSTER_STYLE null)
+       Y borde punteado — ambos tratamientos se aplican simultáneamente.        */
+    function makeClusterStyle(rec, clusterStyle) {
+      const clusterId = rec ? rec.cluster_id : null;
+      const entry     = clusterStyle.get(clusterId);
+      const style = {
+        fillColor:   entry ? entry.color : CSS.scaleNull,
+        fillOpacity: 0.82,
+        color:       CSS.canvas,
+        weight:      0.5,
+        dashArray:   null,
+      };
+      if (rec && rec.excluded_from_model) {
+        style.color     = CSS.body;
+        style.weight    = 2;
+        style.dashArray = '4,4';
+      }
+      return style;
+    }
+
+    /* ── Contenido de leyenda ───────────────────────────────────────────────
+       Llamada una vez al inicializar (ICV) y luego en cada cambio de modo.     */
+    function setLegendContent(div, mode, breaks, clusterStyle) {
+      if (mode === 'icv') {
+        const lo = [0, ...breaks];
+        const hi = [...breaks, 52.18];
+        div.innerHTML = '<strong>ICV-GEN-F</strong>';
+        for (let i = 0; i < N_BINS; i++) {
+          div.innerHTML +=
+            `<br><span class="swatch" style="background:${PALETTE[i]}"></span>` +
+            `${lo[i].toFixed(2)} – ${hi[i].toFixed(2)}`;
+        }
+        div.innerHTML +=
+          `<br><span class="swatch" style="background:#c8c4bc"></span>Sin datos` +
+          `<br><span class="swatch-excluded"></span>Excluido del modelo` +
+          `<br><span class="swatch-circle"></span>Sin límite administrativo separado`;
+      } else {
+        const alta    = clusterStyle.get(1);
+        const modBaja = clusterStyle.get(0);
+        const excl    = clusterStyle.get(null);
+        div.innerHTML = '<strong>Tipología K-Means</strong>';
+        div.innerHTML +=
+          `<br><span class="swatch" style="background:${alta.color}"></span>${alta.label}` +
+          `<br><span class="swatch" style="background:${modBaja.color}"></span>${modBaja.label}` +
+          `<br><span class="swatch" style="background:${excl.color}"></span>${excl.label}` +
+          `<br><span class="swatch-excluded"></span>Excluido del modelo` +
+          `<br><span class="swatch-circle"></span>Sin límite administrativo separado`;
+      }
+    }
+
+    /* ── Popup ─────────────────────────────────────────────────────────────── */
+    // cluster_name en el JSON contiene prefijos emoji (🔴, 🟠) pendientes de limpieza
+    // en el backend; usamos cluster_id + config legend como fuente canónica.
+    function makePopup(geoProp, rec, clusterStyle) {
+      const nombre = rec ? rec.municipality : geoProp.municipio;
+      const depto  = rec ? rec.department   : geoProp.departamento;
+      const cod    = geoProp.cod_municipio;
+      const icv    = rec ? rec.icv_average.toFixed(2) : 'Sin datos';
+
+      let html = `<strong>${nombre}</strong><br>
+                  ${depto}<br>
+                  Código: ${cod}<br>
+                  ICV-GEN-F: ${icv}`;
+      if (rec && rec.excluded_from_model) {
+        html += `<br><em>Excluido del modelo K-Means</em>`;
+      }
+      if (clusterStyle && rec) {
+        const entry = clusterStyle.get(rec.cluster_id);
+        html += `<br>Tipología: ${entry ? entry.label : '—'}`;
+      }
+      return html;
+    }
+
+    /* ── Detección de polígonos compartidos ─────────────────────────────────
+       Regla: dentro de cada grupo de geometría idéntica, el cod_municipio menor
+       conserva el polígono; el o los mayores se renderizan como marcador circular
+       en su cabecera. El código menor corresponde al municipio "padre" según la
+       historia DIVIPOLA (la entidad original antes de la escisión administrativa). */
+    function detectTwins(features) {
+      const keyToFeats = new Map();
+      for (const feat of features) {
+        // Clave: coordenadas serializadas (identidad exacta de geometría, sin hash criptográfico)
+        const key = JSON.stringify(feat.geometry.coordinates);
+        if (!keyToFeats.has(key)) keyToFeats.set(key, []);
+        keyToFeats.get(key).push(feat);
+      }
+
+      const TWIN_CODES = new Set();
+      let sharedPairCount = 0;
+
+      for (const [, feats] of keyToFeats) {
+        if (feats.length < 2) continue;
+        sharedPairCount++;
+        // Ordenar ascendente por cod_municipio: el menor gana el polígono
+        const sorted = feats.slice().sort((a, b) =>
+          a.properties.cod_municipio.localeCompare(b.properties.cod_municipio)
+        );
+        // Todos excepto el primero se marcan como gemelos
+        for (const f of sorted.slice(1)) {
+          TWIN_CODES.add(f.properties.cod_municipio);
+        }
+      }
+
+      return { TWIN_CODES, sharedPairCount };
+    }
+
+    /* ── Diagnóstico ───────────────────────────────────────────────────────── */
+    function buildDiagnostico({ rendered, geoSinJson, jsonSinGeo, excludedCount,
+                                sharedPairCount, twinList }) {
+      const ul = document.getElementById('diag-list');
+      const flatItems = [
+        { text: `Municipios renderizados con datos: ${rendered}` },
+        { text: `GeoJSON sin correspondencia en JSON (color neutro): ${geoSinJson}` },
+        { text: `Entradas JSON sin geometría GeoJSON: ${jsonSinGeo}` },
+        { text: `Excluidos del modelo K-Means (borde punteado): ${excludedCount} (esperado: 2)` },
+        { text: `Pares con polígono compartido detectados: ${sharedPairCount} (esperado: 6)` },
+        { text: `Copy review pendiente: anchor_text_es declara escala 0-100, rango observado es 0.00-52.18`,
+          warn: true },
+      ];
+      for (const { text, warn } of flatItems) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        if (warn) li.className = 'warn';
+        ul.appendChild(li);
+      }
+
+      // Línea de gemelos con sublista de códigos
+      const twinLi = document.createElement('li');
+      twinLi.textContent =
+        `Municipios renderizados como marcador en cabecera: ${twinList.length} (esperado: 6)`;
+      if (twinList.length > 0) {
+        const subUl = document.createElement('ul');
+        for (const { cod, nombre } of twinList) {
+          const li = document.createElement('li');
+          li.textContent = `${cod} – ${nombre}`;
+          subUl.appendChild(li);
+        }
+        twinLi.appendChild(subUl);
+      }
+      ul.appendChild(twinLi);
+    }
+
+    /* ── Main ──────────────────────────────────────────────────────────────── */
+    async function main() {
+
+      /* 1. Fetch — GeoJSON / panorama / cabecera son fatales; config no lo es. */
+      const [geoResult, panoramaResult, cabeceraResult, configResult] =
+        await Promise.allSettled([
+          fetch(GEOJSON_URL).then(r => {
+            if (!r.ok) throw new Error(`${GEOJSON_URL}: HTTP ${r.status}`);
+            return r.json();
+          }),
+          fetch(PANORAMA_URL).then(r => {
+            if (!r.ok) throw new Error(`${PANORAMA_URL}: HTTP ${r.status}`);
+            return r.json();
+          }),
+          fetch(CABECERA_URL).then(r => {
+            if (!r.ok) throw new Error(`${CABECERA_URL}: HTTP ${r.status}`);
+            return r.json();
+          }),
+          fetch(EXPORTER_CFG_URL).then(r => {
+            if (!r.ok) throw new Error(`${EXPORTER_CFG_URL}: HTTP ${r.status}`);
+            return r.json();
+          }),
+        ]);
+
+      if (geoResult.status     === 'rejected') throw geoResult.reason;
+      if (panoramaResult.status === 'rejected') throw panoramaResult.reason;
+      if (cabeceraResult.status === 'rejected') throw cabeceraResult.reason;
+
+      const geoData      = geoResult.value;
+      const panorama     = panoramaResult.value;
+      const cabeceraData = cabeceraResult.value;
+
+      /* 2. Construir CLUSTER_STYLE desde config (no fatal si falla) */
+      let CLUSTER_STYLE           = null;
+      let clusterToggleAvailable  = false;
+
+      if (configResult.status === 'rejected') {
+        console.error('No se pudo cargar master_exporter_config.json:', configResult.reason,
+          '— el toggle de tipología queda desactivado.');
+      } else {
+        const cl = configResult.value.cluster_legend;
+        if (cl && cl.alta_severidad && cl.moderada_baja && cl.excluded) {
+          CLUSTER_STYLE = new Map([
+            [1,    { color: cl.alta_severidad.color, label: cl.alta_severidad.label }],
+            [0,    { color: cl.moderada_baja.color,  label: cl.moderada_baja.label  }],
+            [null, { color: cl.excluded.color,       label: cl.excluded.label       }],
+          ]);
+          clusterToggleAvailable = true;
+        } else {
+          console.error(
+            'cluster_legend en master_exporter_config.json carece de las claves requeridas ' +
+            '(alta_severidad, moderada_baja, excluded) — el toggle de tipología queda desactivado.'
+          );
+        }
+      }
+
+      const btnCluster = document.getElementById('btn-cluster');
+      if (!clusterToggleAvailable) btnCluster.disabled = true;
+
+      /* 3. Datos panorama */
+      const sub = panorama.sub_acto_1_2;
+      document.getElementById('ancla').textContent = sub.anchor_text_es;
+
+      // Lookup: cod_municipio → registro JSON
+      const dataMap = new Map(sub.data.features.map(f => [f.cod_municipio, f]));
+
+      // Cuantiles sobre todos los valores ICV observados
+      const sorted = sub.data.features.map(f => f.icv_average).sort((a, b) => a - b);
+      const breaks = computeBreaks(sorted);
+
+      // Cabecera lookup: cod_municipio → {nombre, departamento, lat, lon}
+      const cabecera = cabeceraData.municipios;
+
+      /* 4. Detectar gemelos */
+      const { TWIN_CODES, sharedPairCount } = detectTwins(geoData.features);
+
+      if (sharedPairCount === 0) {
+        throw new Error(
+          'Deteccion de poligonos compartidos encontro 0 pares. ' +
+          'El GeoJSON puede haber sido regenerado de forma distinta a la esperada — detener renderizado.'
+        );
+      }
+      if (sharedPairCount > 6) {
+        console.warn(
+          `Advertencia: se detectaron ${sharedPairCount} pares de poligonos compartidos ` +
+          `(esperado: 6). El GeoJSON puede haber cambiado.`
+        );
+      }
+
+      /* 5. Mapa Leaflet */
+      const leafletMap = L.map('map').setView([3.5, -76.5], 7);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+      }).addTo(leafletMap);
+
+      /* 6. Capa GeoJSON — excluye gemelos, acumula referencias para restyle */
+      let rendered   = 0;
+      let geoSinJson = 0;
+
+      const polygonLayers = []; // [{ layer, rec }]
+
+      const filteredGeo = {
+        type: 'FeatureCollection',
+        features: geoData.features.filter(
+          f => !TWIN_CODES.has(f.properties.cod_municipio)
+        ),
+      };
+
+      L.geoJSON(filteredGeo, {
+        style: feature => {
+          const rec = dataMap.get(feature.properties.cod_municipio);
+          return makeStyle(rec, breaks);
+        },
+        onEachFeature: (feature, layer) => {
+          const rec = dataMap.get(feature.properties.cod_municipio);
+          if (rec) rendered++; else geoSinJson++;
+          polygonLayers.push({ layer, rec });
+          layer.bindPopup(makePopup(feature.properties, rec, CLUSTER_STYLE));
+        },
+      }).addTo(leafletMap);
+
+      /* 7. Marcadores circulares para gemelos — acumula referencias para restyle */
+      const twinFeatures = geoData.features.filter(
+        f => TWIN_CODES.has(f.properties.cod_municipio)
+      );
+      const twinMarkers = []; // [{ marker, rec }]
+      const twinList    = [];
+
+      for (const feat of twinFeatures) {
+        const cod = feat.properties.cod_municipio;
+        const rec = dataMap.get(cod);
+        const cab = cabecera[cod];
+
+        if (!cab) {
+          console.warn(
+            `Municipio gemelo ${cod} (${feat.properties.municipio}) no encontrado en ` +
+            `municipios_pacifico.json — no se renderiza.`
+          );
+          continue;
+        }
+
+        const fillColor  = rec ? getColor(rec.icv_average, breaks) : CSS.scaleNull;
+        const isExcluded = rec && rec.excluded_from_model;
+
+        const markerOptions = {
+          radius:      6,
+          fillColor,
+          fillOpacity: 0.95,
+          color:       CSS.ink,
+          weight:      1.5,
+        };
+        // 27493 Nuevo Belén de Bajirá: excluido del modelo y gemelo → trazo punteado
+        if (isExcluded) {
+          markerOptions.dashArray = '4,4';
+        }
+
+        const marker = L.circleMarker([cab.lat, cab.lon], markerOptions);
+
+        let popupHtml = makePopup(feat.properties, rec, CLUSTER_STYLE);
+        popupHtml +=
+          `<br><em>Sin límite administrativo separado en geoBoundaries` +
+          ` — se muestra en su cabecera municipal.</em>`;
+        marker.bindPopup(popupHtml);
+        marker.addTo(leafletMap);
+
+        if (rec) rendered++; else geoSinJson++;
+        twinMarkers.push({ marker, rec });
+        twinList.push({ cod, nombre: feat.properties.municipio });
+      }
+
+      twinList.sort((a, b) => a.cod.localeCompare(b.cod));
+
+      /* 8. Diagnóstico */
+      const geoKeys       = new Set(geoData.features.map(f => f.properties.cod_municipio));
+      const jsonSinGeo    = sub.data.features.filter(f => !geoKeys.has(f.cod_municipio)).length;
+      const excludedCount = sub.data.features.filter(f => f.excluded_from_model).length;
+
+      buildDiagnostico({ rendered, geoSinJson, jsonSinGeo, excludedCount,
+                         sharedPairCount, twinList });
+
+      /* 9. Leyenda — captura el div para actualización sin recrear el control */
+      let legendDiv;
+      const legendCtrl = L.control({ position: 'bottomright' });
+      legendCtrl.onAdd = () => {
+        legendDiv = L.DomUtil.create('div', 'icv-legend');
+        setLegendContent(legendDiv, 'icv', breaks, CLUSTER_STYLE);
+        return legendDiv;
+      };
+      legendCtrl.addTo(leafletMap); // onAdd se invoca aquí de forma síncrona
+
+      /* 10. Toggle — restyle sin destruir capas */
+      let currentMode = 'icv';
+
+      function applyMode(mode) {
+        if (mode === currentMode) return;
+        currentMode = mode;
+
+        for (const { layer, rec } of polygonLayers) {
+          layer.setStyle(
+            mode === 'icv'
+              ? makeStyle(rec, breaks)
+              : makeClusterStyle(rec, CLUSTER_STYLE)
+          );
+        }
+
+        for (const { marker, rec } of twinMarkers) {
+          const fillColor = mode === 'icv'
+            ? (rec ? getColor(rec.icv_average, breaks) : CSS.scaleNull)
+            : (CLUSTER_STYLE.get(rec ? rec.cluster_id : null)?.color ?? CSS.scaleNull);
+          marker.setStyle({ fillColor });
+        }
+
+        setLegendContent(legendDiv, mode, breaks, CLUSTER_STYLE);
+
+        document.getElementById('btn-icv').classList.toggle('active', mode === 'icv');
+        document.getElementById('btn-cluster').classList.toggle('active', mode === 'cluster');
+      }
+
+      document.getElementById('btn-icv').addEventListener('click', () => applyMode('icv'));
+      if (clusterToggleAvailable) {
+        btnCluster.addEventListener('click', () => applyMode('cluster'));
+      }
+    }
+
+    main().catch(err => {
+      console.error('Error en renderizado:', err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Atlas interactivo de violencia de género en el Pacífico colombiano. Índice ICV-GEN-F por municipio, 2018–2025.">
+  <title>Cicatrices Invisibles · Atlas de violencia de género en el Pacífico</title>
+
+  <!-- CSP: style-src needs 'unsafe-inline' because Leaflet positions tiles/
+       panes via inline style transforms and acto_*.js sizes chart/map
+       containers via style.cssText — both are load-bearing for rendering,
+       not attacker-reachable (no user input feeds these strings). Everything
+       else stays without 'unsafe-inline'/'unsafe-eval'. frame-ancestors and
+       report-uri are omitted: browsers ignore them in a <meta> CSP; enforce
+       those via an HTTP header at the hosting layer if the target supports
+       custom headers (GitHub Pages does not). -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.tile.openstreetmap.org; connect-src 'self' https://unpkg.com https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self';">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cicatrices Invisibles · Atlas de violencia de género en el Pacífico">
+  <meta property="og:description" content="Atlas interactivo de violencia de género en el Pacífico colombiano. Índice ICV-GEN-F por municipio, 2018–2025.">
+  <meta property="og:image" content="./assets/og-image.png">
+
+  <!-- Google Fonts. No SRI here: this endpoint returns different CSS bytes
+       per User-Agent (different @font-face src formats), so a fixed hash
+       would break the stylesheet for a subset of browsers. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <!-- Chart/map libraries -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha384-sHL9NAb7lN7rfvG5lfHpm643Xkcjzp4jFvuavGOndn6pjVqS6ny56CAt3nsEVT4H" crossorigin="anonymous">
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       S0 · NAVIGATION
+  ══════════════════════════════════════════════ -->
+  <header>
+    <nav class="site-nav" aria-label="Navegación principal">
+      <a href="#" class="nav-logo">Cicatrices Invisibles</a>
+      <ul class="nav-links">
+        <li><a href="#acto-1">Territorio</a></li>
+        <li><a href="#acto-2">Brecha de género</a></li>
+        <li><a href="#acto-3">Dos violencias</a></li>
+        <li><a href="#acto-4">Forense</a></li>
+        <li><a href="#acto-5">Tu municipio</a></li>
+        <li><a href="#acerca">Acerca de</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════════
+         S1 · HERO
+    ══════════════════════════════════════════════ -->
+    <section class="band band--hero" aria-label="Presentación">
+      <div class="wrap">
+        <span class="hero-badge">Pacífico colombiano · 2018–2025</span>
+        <h1 class="hero-title">Cicatrices Invisibles</h1>
+        <p class="hero-subtitle">Región Pacífico Colombiano</p>
+        <p class="hero-authors">Un proyecto de Ana Maria Aguirre y Jhonathan Rivera</p>
+        <p class="lede">
+          Hay historias que se transmiten de madres a hijas, y la violencia de género es una de ellas.
+          Este proyecto nace para conectar las cifras que el Estado Colombiano tiene por separado,
+          revelando una realidad clara: cuidar a las niñas hoy es una forma de asegurar el bienestar
+          de las mujeres del mañana.
+        </p>
+        <a href="#contexto" class="hero-cta">Explorar el atlas <span class="scroll-cue">↓</span></a>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         S2 · CONTEXTO
+    ══════════════════════════════════════════════ -->
+    <section id="contexto" class="band band--canvas" aria-label="Contexto regional">
+      <div class="wrap context-grid">
+        <p class="prose">
+          <strong>Detrás de los ríos y la selva del Pacífico, hay cicatrices que no dejan de doler.</strong> En
+          departamentos como Chocó, Cauca, Nariño y Valle de Cauca, la violencia familiar y sexual
+          apaga la tranquilidad de niñas y mujeres. Esta región concentra algunos de los municipios
+          con <strong>mayor vulnerabilidad estructural del país</strong>, presencia de grupos armados, alta proporción
+          de población étnica, déficit histórico de presencia estatal y condiciones de pobreza que
+          amplifican los factores de riesgo para la violencia de género.
+        </p>
+        <figure class="context-art">
+          <img src="./assets/hero-illustration.png" alt="">
+        </figure>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         S3 · ACTO 1 — EL TERRITORIO
+    ══════════════════════════════════════════════ -->
+    <section id="acto-1" class="band band--soft" aria-labelledby="heading-acto-1">
+      <div class="wrap">
+
+        <div class="act-head">
+          <p class="act-eyebrow"> 01</p>
+          <h2 id="heading-acto-1" class="act-title">El Territorio</h2>
+          <p class="dek">¿Dónde, en la Región Pacífico, la violencia de género golpea más fuerte?</p>
+        </div>
+
+        <p class="prose">
+          Solemos ver la agresión a niñas y a mujeres como problemas distintos, pero en el territorio
+          son parte de una misma historia. Para llenar ese vacío y medir este ciclo que se hereda,
+          diseñamos el <strong>ICV-GEN-F</strong>, un índice que une sus realidades para que las
+          instituciones puedan actuar a tiempo.
+        </p>
+
+        <details id="icv-gen-f" class="disclosure">
+          <summary>¿Qué es el ICV-GEN-F?</summary>
+          <div id="acto-1-intro-narrativa">
+            <div id="mount-icv-explainer">
+              <div class="explainer">
+                <p class="prose"><strong>El Índice Compuesto de Violencia de Género – Femenino (ICV-GEN-F)</strong> es una medida que construimos específicamente para este proyecto. Resume en un solo número, entre 0 y 100, qué tan severa es la violencia contra mujeres y niñas en cada municipio de la Región Pacífico.</p>
+                <p class="prose"><strong>¿Por qué hace falta un índice nuevo?</strong> Porque la violencia de género no es un evento aislado. Es un patrón que se repite a lo largo de la vida de una mujer: empieza en la infancia y persiste en la adultez. Una niña agredida en su hogar hoy es, con frecuencia, la mujer agredida mañana — en el mismo municipio, a veces por el mismo entorno. Lo llamamos <em>continuo multigeneracional</em>.</p>
+                <p class="prose"><strong>¿Qué mide exactamente?</strong> El índice combina cuatro tasas — los cuatro rostros del continuo — calculadas por cada 100.000 habitantes femeninas:</p>
+                <ul>
+                  <li>Violencia intrafamiliar contra <strong>niñas y adolescentes</strong> (peso 30%)</li>
+                  <li>Violencia sexual contra <strong>niñas y adolescentes</strong> (peso 30%)</li>
+                  <li>Violencia intrafamiliar contra <strong>mujeres adultas</strong> (peso 25%)</li>
+                  <li>Violencia sexual contra <strong>mujeres adultas</strong> (peso 15%)</li>
+                </ul>
+                <p class="prose">El 60% del peso lo lleva la violencia contra niñas y adolescentes. Es una decisión metodológica. La violencia contra menores es la más invisibilizada, y la que marca el resto de la vida. Si el indicador no la jerarquiza, está midiendo otra cosa.</p>
+                <p class="prose"><strong>¿Qué no es?</strong> No es una predicción. No es una sentencia sobre los municipios. Es una foto: una manera transparente de comparar dónde el patrón es más severo, para que la política pública pueda priorizar.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+        <p class="prose">
+          Para calcular el ICV-GEN-F, analizamos datos de datos.gov.co sobre reportes de violencia intrafamiliar y delitos sexuales de la Policía Nacional desde 2018 hasta 2025 para la región.
+        </p>
+
+        <h3>Municipios de la Región Pacífico</h3>
+        <div class="stat-row viz-placeholder viz-placeholder--stats" id="acto-1-stat-cards" data-subacto="sub_acto_1_1" data-label="acto-1-stat-cards"></div>
+
+        <div class="viz viz--full viz-placeholder viz-placeholder--map" id="acto-1-map" data-subacto="sub_acto_1_2" data-label="acto-1-map"></div>
+        <p class="viz-caption">ICV-GEN-F por municipio y clasificados en dos grupos de severidad Alta y Moderada/baja</p>
+
+        <div class="two-read two-read--58-42">
+          <div>
+            <p class="prose"><strong>La Paradoja del Litoral Pacifico: ¿Por qué Chocó y la Costa se ven "Moderados"?</strong></p>
+            <p class="prose">
+              Chocó profundo (medio y bajo San Juan, la costa pacífica chocoana) y las zonas costeras
+              de Cauca y Nariño aparecen clasificados en el grupo de <strong>Moderada/Baja</strong>.
+            </p>
+            <p class="prose">
+              En el Pacífico rural, una mujer debe superar barreras para poder hacer un reporte de
+              violencia contra ella, barreras geográficas y económicas. En gran parte del Chocó y el
+              Pacífico rural, los grupos armados ilegales ejercen el control social y territorial,
+              acudir a la Policía a denunciar violencia intrafamiliar o sexual es visto por estos
+              grupos como una "traición" o como llevar al Estado al territorio, y tambien la
+              desertificación institucional.
+            </p>
+          </div>
+          <figure class="silhouette-art">
+            <img src="./assets/pacifico-silhouette.gif" alt="Silueta de la Región Pacífico colombiana">
+            <figcaption class="viz-caption viz-caption--soft">Región Pacífico Colombiana</figcaption>
+          </figure>
+        </div>
+
+        <div class="viz viz--full viz-placeholder viz-placeholder--full" id="acto-1-top10" data-subacto="sub_acto_1_3" data-label="acto-1-top10"></div>
+
+        <div class="evo-grid">
+          <div>
+            <p class="prose prose--question">Y como se ve el índice a través de los años en las región pacifico?</p>
+            <p class="prose">
+              A pesar de las pequeñas variaciones año a año, el nivel base de la violencia sigue
+              siendo <strong>constante</strong>, no vemos una tendencia clara de descenso. La violencia persiste a
+              través de los años.
+            </p>
+          </div>
+          <div class="viz viz-placeholder viz-placeholder--aside" id="acto-1-evolucion" data-subacto="sub_acto_1_4" data-label="acto-1-evolucion"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <p class="transition">Pero, ¿por qué solo hablamos de mujeres?</p>
+
+    <!-- ══════════════════════════════════════════════
+         S4 · ACTO 2 — LA FRACTURA DE GÉNERO
+    ══════════════════════════════════════════════ -->
+    <section id="acto-2" class="band band--canvas" aria-labelledby="heading-acto-2">
+      <div class="wrap">
+
+        <div class="act-head">
+          <p class="act-eyebrow">02</p>
+          <h2 id="heading-acto-2" class="act-title">La fractura de género</h2>
+          <p class="dek">¿Es realmente esto un problema de género, o es una violencia que afecta a todos por igual?</p>
+        </div>
+
+        <div class="stat-row viz-placeholder viz-placeholder--stats" id="acto-2-stat-cards" data-subacto="sub_acto_2_1" data-label="acto-2-stat-cards"></div>
+
+        <h3>Anatomía de la brecha</h3>
+        <div class="viz viz--full viz-placeholder viz-placeholder--full" id="acto-2-butterfly" data-subacto="sub_acto_2_2" data-label="acto-2-butterfly"></div>
+
+        <h3>Geografía de la inequidad</h3>
+        <div class="stack-full">
+          <div class="viz viz--full viz-placeholder viz-placeholder--map" id="acto-2-map" data-subacto="sub_acto_2_4" data-label="acto-2-map"></div>
+          <div class="viz viz--full viz-placeholder viz-placeholder--full" id="acto-2-top10" data-subacto="sub_acto_2_3" data-label="acto-2-top10"></div>
+        </div>
+
+        <h3>El giro analítico</h3>
+        <div class="viz viz--full viz-placeholder viz-placeholder--full" id="acto-2-lines" data-subacto="sub_acto_2_6" data-label="acto-2-lines"></div>
+
+        <div class="viz-aside">
+          <div class="viz viz-placeholder viz-placeholder--aside" id="acto-2-scatter" data-subacto="sub_acto_2_5" data-label="acto-2-scatter"></div>
+          <div>
+            <h4>Correlación ICV-GEN-F ↔ brecha</h4>
+            <div class="prose" data-mount="acto-2-scatter-text"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <p class="transition">Pero hablar de violencia de género, es decir poco, ahora veamos los dos tipos de violencia</p>
+
+    <!-- ══════════════════════════════════════════════
+         S5 · ACTO 3 — DOS VIOLENCIAS
+    ══════════════════════════════════════════════ -->
+    <section id="acto-3" class="band band--soft" aria-labelledby="heading-acto-3">
+      <div class="wrap">
+
+        <div class="act-head">
+          <p class="act-eyebrow">03</p>
+          <h2 id="heading-acto-3" class="act-title">Dos violencias, y la mitad ocurre en la infancia</h2>
+          <p class="dek">¿Qué tipos de violencia coexisten en estos municipios, y cuál es la más grave?</p>
+        </div>
+
+        <div class="viz viz--full viz-placeholder viz-placeholder--full" id="acto-3-scatter" data-subacto="sub_acto_3_2" data-label="acto-3-scatter"></div>
+        <p class="prose stacked-readtext stacked-readtext--first">
+          Municipos como <strong>Policarpa, Nariño</strong> presenta una coexistencia alta de los dos tipos de
+          violencia; municipios como <strong>Caloto, Cauca</strong> predomina la violencia intrafamiliar, mientras que en <strong>Argelia,
+          Cauca</strong>, predomina la Violencia Sexual. En el bajo perfil declarado, están la mayoría de los
+          municipios rurales y fluviales de los que hablábamos antes (gran parte del Chocó), no es que no
+          haya violencia, es que el <strong>Estado no se ha enterado</strong>.
+        </p>
+
+        <div class="viz-aside viz-aside--stack">
+          <div class="viz viz-placeholder viz-placeholder--aside" id="acto-3-tasas-nna-adultas" data-subacto="sub_acto_3_3" data-label="acto-3-tasas-nna-adultas"></div>
+          <div>
+            <p class="prose stacked-readtext stacked-readtext--first">
+              La violencia sexual aumenta más en las niñas y adolescentes; la violencia intrafamiliar, en mujeres adultas.
+            </p>
+            <p class="prose stacked-readtext">
+              Puede existir un subregistro de violencia sexual en mujeres adultas, ya que es una de las
+              deudas más dolorosas del sistema de justicia (revictimización institucional, entre
+              otros factores). Que los datos de la Policía nos muestren más Violencia Intrafamiliar (VIF) que
+              Violencia Sexual no significa que la segunda ocurra menos; significa que la VIF es más
+              "visible" y, socialmente, un poco menos castigada al denunciar. La violencia sexual toca
+              las fibras más íntimas, tabúes y vergonzosas de la sociedad, lo que levanta un muro de
+              silencio casi impenetrable para una mujer adulta.
+            </p>
+          </div>
+        </div>
+
+        <h3>Taxonomía del delito sexual</h3>
+        <div class="stat-row viz-placeholder viz-placeholder--stats" id="acto-3-stat-cards" data-subacto="sub_acto_3_1" data-label="acto-3-stat-cards"></div>
+
+        <div id="acto-3-barras-linea" class="stack-full">
+          <div class="viz viz-placeholder viz-placeholder--full" data-subacto="sub_acto_3_4" data-label="sub_acto_3_4"></div>
+          <div class="viz viz-placeholder viz-placeholder--full" data-subacto="sub_acto_3_5" data-label="sub_acto_3_5"></div>
+        </div>
+
+        <p class="prose cicatriz-heading">El nacimiento de una cicatriz invisible</p>
+        <p class="prose">De cada dos denuncias que entran por violación o abuso sexual, una es de una niña.</p>
+        <p class="prose">
+          Más de la mitad de las víctimas de violencia sexual en todo el Pacífico son niñas que aún no
+          han cumplido los 14 años. No estamos hablando de adultas en una discoteca o de situaciones
+          complejas de la calle; estamos hablando de la infancia truncada.
+        </p>
+        <p class="prose prose--italic">
+          Cuando esa niña cumple 18 años, el abuso quizás para, pero la herida se queda por dentro.
+          Esa niña crece con el miedo metido en los huesos, creyendo que su cuerpo no le pertenece y
+          que la violencia es el único idioma que existe
+        </p>
+
+      </div>
+    </section>
+
+    <p class="transition">Sabemos dónde, contra quién, qué tipo de violencia. Y ahora: ¿Cómo ocurre? ¿Quien agrede?</p>
+
+    <!-- ══════════════════════════════════════════════
+         S6 · ACTO 4 — LA ANATOMÍA FORENSE (two bands)
+    ══════════════════════════════════════════════ -->
+    <div id="acto-4">
+
+      <!-- Band 6a — soft -->
+      <section class="band band--canvas" aria-labelledby="heading-acto-4">
+        <div class="wrap">
+
+          <div class="act-head">
+            <p class="act-eyebrow">04</p>
+            <h2 id="heading-acto-4" class="act-title">La anatomía forense</h2>
+            <p class="dek">¿Cómo ocurre la violencia? ¿Quién la comete, dónde, cuándo y por qué?</p>
+          </div>
+
+          <h3>Universo de casos peritados</h3>
+          <div class="caveat-card">
+            <strong>Nota</strong>: Los datos forenses describen la población de casos peritados por Medicina Legal en
+            2018–2024, disponibles en datos.gov.co. No representan la totalidad de la violencia
+            ocurrida, sólo aquella que llegó al sistema forense. La cobertura institucional varía por
+            municipio. Las cifras de este acto son descriptivas del universo peritado
+          </div>
+
+          <div class="stat-row viz-placeholder viz-placeholder--stats" id="acto-4-stat-cards" data-subacto="sub_acto_4_1" data-label="acto-4-stat-cards"></div>
+
+        </div>
+      </section>
+
+      <!-- Band 6b — dark elevated -->
+      <section class="band band--dark">
+        <div class="wrap">
+
+          <h3>El agresor</h3>
+          <p class="dek">¿Quién la comete?</p>
+          <div class="viz-panel">
+            <div class="viz viz--full viz-placeholder viz-placeholder--full" id="acto-4-sankey" data-subacto="sub_acto_4_3" data-label="acto-4-sankey"></div>
+          </div>
+
+
+          <p class="prose stacked-readtext stacked-readtext--first">
+            El agresor cambia con la edad de la víctima. En la violencia sexual, en la primera infancia es el cuidador; en la adolescencia, el padrastro; en la adultez, la pareja o expareja. La violencia no cambia: cambia quién la ejerce.
+          </p>
+          <p class="prose stacked-readtext">
+            En la violencia intrafamiliar, a la mujer del Pacífico primero la violenta el padre o el padrastro, luego la golpea el hermano, después abusa de ella la pareja y, al final de sus días, la maltrata el hijo. Es una cultura donde los hombres de la familia se van pasando la antorcha del maltrato de generación en generación.
+          </p>
+          <p class="prose stacked-readtext">
+            De acuerdo con los registros de Medicina Legal, «otros familiares» en VIF corresponde a la pareja. De acuerdo con los datos, parece que las parejas no generan violencia porque casi no aparecen. Pero se trata de un posible subregistro en los casos que llegan hasta peritaje: el compañero es el fantasma del mapa; no aparece porque es a quien más miedo se le tiene. Denunciar al hombre con el que duermes y que trae la comida es firmar una sentencia de más violencia. El silencio de las mujeres adultas es, en realidad, una estrategia para sobrevivir.
+          </p>
+
+          <h3>El hogar como escenario</h3>
+          <p class="dek">¿Cuándo y Dónde?</p>
+          <div class="viz-aside viz-aside--stack">
+            <div class="viz-panel">
+              <div class="viz viz-placeholder viz-placeholder--aside" id="acto-4-heatmap" data-subacto="sub_acto_4_2" data-label="acto-4-heatmap"></div>
+            </div>
+            <div>
+              <p class="prose stacked-readtext stacked-readtext--first">
+                En la región Pacífico, la VIF sucede con más frecuencia los días domingo, cuando la familia está reunida; la violencia sexual ocurre más frecuentemente en días de semana, destacándose el día martes, y octubre como el mes con más abusos.
+              </p>
+              <p class="prose stacked-readtext">
+                El hogar y el entorno cercano son las zonas de mayor peligro para las mujeres del Pacífico colombiano.
+              </p>
+              <p class="prose prose--muted-small stacked-readtext">
+                Nota aclaratoria: El departamento del Chocó cuenta con muy pocos registros oficiales debido a que el acceso a Medicina Legal es sumamente limitado. La presencia de las instituciones del Estado en este territorio es fragmentada, centralizada y precaria. En consecuencia, este bajo volumen de datos no refleja la ausencia de violencia, sino un subregistro estructural provocado por el abandono institucional que condena a las víctimas al silencio.
+              </p>
+            </div>
+          </div>
+
+          <h3>El factor y la circunstancia</h3>
+          <p class="dek">¿Porqué?</p>
+          <div class="viz-panel">
+            <div class="viz viz--full viz-placeholder viz-placeholder--full" id="acto-4-factor" data-subacto="sub_acto_4_4" data-label="acto-4-factor"></div>
+          </div>
+
+          <h3>Interseccionalidad</h3>
+          <div class="viz-panel">
+            <div class="viz viz--full viz-placeholder viz-placeholder--full" id="acto-4-interseccion" data-subacto="sub_acto_4_5" data-label="acto-4-interseccion"></div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+         S7 · ACTO 5 — TU MUNICIPIO
+    ══════════════════════════════════════════════ -->
+    <section id="acto-5" class="band band--soft" aria-labelledby="heading-acto-5">
+      <div class="wrap">
+
+        <div class="act-head">
+          <p class="act-eyebrow">05</p>
+          <h2 id="heading-acto-5" class="act-title">Tu municipio</h2>
+          <p class="dek">¿Y aquí, en mi municipio, qué pasa?</p>
+        </div>
+
+        <p class="prose acto5-lede">
+          Consulta la ficha de cada municipio de la Región Pacífico y, al final, la recomendación del modelo de prevención para el territorio.
+        </p>
+
+        <div class="viz viz--full viz-placeholder viz-placeholder--full" id="acto-5-ficha-municipal" data-label="acto-5-ficha-municipal"></div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════
+         S8 · ACERCA DE
+    ══════════════════════════════════════════════ -->
+    <section id="acerca" class="band band--canvas" aria-labelledby="heading-acerca">
+      <div class="wrap">
+        <h2 id="heading-acerca" class="section-heading">Acerca de este proyecto</h2>
+
+        <p class="prose">
+          «Cicatrices Invisibles» nace para conectar las cifras que el Estado colombiano mantiene por
+          separado y hacer visible un ciclo de violencia que se hereda de niñas a mujeres en la Región
+          Pacífico Colombiano. Este proyecto surge de la urgencia ética y metodológica de comprender
+          que las violencias basadas en género no son eventos aislados, sino un continuo
+          multigeneracional: un patrón sistemático que empieza en la infancia profunda y persiste
+          hasta la vejez. Una niña agredida en su hogar hoy es, con frecuencia, la mujer vulnerada
+          mañana, muchas veces en el mismo municipio y por su propio entorno.
+        </p>
+        <p class="prose">
+          Para medir esta realidad, creamos el Índice Compuesto de Violencia de Género Femenino
+          (ICV-GEN-F). Este indicador resume en un solo número (de 0 a 100) qué tan severa es la
+          violencia intrafamiliar y sexual en cada uno de los 179 municipios analizados.
+        </p>
+        <p class="prose">
+          <strong>¿A quién beneficia?</strong> De forma directa, a Comisarías de Familia, ICBF Regional
+          Pacífico, las Gobernaciones de Valle del Cauca, Cauca, Nariño y Chocó, y los equipos de
+          política pública de género de las alcaldías. De forma indirecta, a las niñas, adolescentes y
+          mujeres de los municipios críticos, cuyo riesgo hoy es invisible en los sistemas oficiales de
+          información.
+        </p>
+
+        <h3 id="datos">Datos</h3>
+        <ul class="acerca-datos-list">
+          <li><a href="https://www.datos.gov.co/d/vuyt-mqpw" target="_blank" rel="noopener noreferrer">Reporte Delito Violencia Intrafamiliar Policía Nacional</a></li>
+          <li><a href="https://www.datos.gov.co/d/fpe5-yrmw" target="_blank" rel="noopener noreferrer">Reporte Delitos sexuales Policía Nacional</a></li>
+          <li><a href="https://www.datos.gov.co/Justicia-y-Derecho/Violencia-intrafamiliar-Colombia-a-os-2015-a-2024-/ers2-kerr/about_data" target="_blank" rel="noopener noreferrer">Violencia intrafamiliar. Colombia, años 2015 a 2024. Cifras definitivas Medicina Legal</a></li>
+          <li><a href="https://www.datos.gov.co/Justicia-y-Derecho/Ex-menes-m-dico-legales-por-presunto-delito-sexual/hyqu-diue/about_data" target="_blank" rel="noopener noreferrer">Exámenes médico legales por presunto delito sexual. Colombia, años 2015 a 2024. Cifras definitivas</a></li>
+        </ul>
+
+        <h3>Equipo</h3>
+        <div class="equipo-grid">
+          <div class="equipo-card">
+            <div class="equipo-name">Ana Maria Aguirre</div>
+            <div class="equipo-role">PhD en Ingeniería</div>
+            <div class="equipo-detail">Ingeniería de Datos BI, Developer</div>
+          </div>
+          <div class="equipo-card">
+            <div class="equipo-name">Jhonathan Rivera</div>
+            <div class="equipo-role">PhD en Ingeniería</div>
+            <div class="equipo-detail">Data Scientist, Ingeniero de Datos</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-brand-name">Cicatrices Invisibles</span>
+        <span class="footer-brand-authors">Ana Aguirre · Jhonathan Rivera</span>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-title">Proyecto</div>
+          <ul>
+            <li><a href="#acerca">Acerca de</a></li>
+            <li><a href="#icv-gen-f">ICV-GEN-F</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Datos</div>
+          <ul>
+            <li><a href="#datos">Fuentes</a></li>
+            <!-- Repositorio: repo URL pending, not yet on GitHub -->
+            <li class="footer-static">Repositorio</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Equipo</div>
+          <ul>
+            <!-- LinkedIn pending Ana's confirmation -->
+            <li class="footer-static">Ana María Aguirre</li>
+            <!-- LinkedIn pending Ana's confirmation -->
+            <li class="footer-static">Jhonathan Rivera</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Legal</div>
+          <ul>
+            <li><a href="https://creativecommons.org/licenses/by-sa/4.0/legalcode" target="_blank" rel="noopener noreferrer">Licencia de datos</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-credits">
+        Datos: datos.gov.co · Policía Nacional de Colombia · Instituto Nacional de Medicina Legal y Ciencias Forenses
+      </div>
+    </div>
+  </footer>
+
+  <!-- Chart/map libraries -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha384-cxOPjt7s7Iz04uaHJceBmS+qpjv2JkIHNVcuOrM+YHwZOmJGBXI00mdUXEq65HTH" crossorigin="anonymous" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js" integrity="sha384-F07Cpw5v8spSU0H113F33m2NQQ/o6GqPTnTjf45ssG4Q6q58ZwhxBiQtIaqvnSpR" crossorigin="anonymous" defer></script>
+
+  <!-- Chart mounting (Checkpoint A: Actos 1–3; Checkpoint B: Actos 4–5) -->
+  <script src="./js/render_helpers.js" defer></script>
+  <script src="./js/acto_1.js" defer></script>
+  <script src="./js/acto_2.js" defer></script>
+  <script src="./js/acto_3.js" defer></script>
+  <script src="./js/acto_4.js" defer></script>
+  <script src="./js/acto_5.js" defer></script>
+
+</body>
+</html>

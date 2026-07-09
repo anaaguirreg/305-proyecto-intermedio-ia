@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- sub_acto_3_4 — Taxonomía del delito sexual (barra horizontal + markArea menores).
+     Componente: renderBarWithMarkArea — ECharts horizontal bar, color por is_minor,
+     markArea agrupando categorías de menores, anotación de % total menores.
+     JSON: data/dashboard/acto_3_tipologia.json → sub_acto_3_4
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_3_4.html -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Taxonomía delito sexual (sub_acto_3_4)</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-bar-minor:   var(--color-primary-mid);
+      --color-bar-base:    var(--color-accent-teal);
+      --color-mark-fill:   rgba(123, 31, 75, 0.07);
+      --color-mark-border: rgba(123, 31, 75, 0.25);
+    }
+    body        { font-family: var(--font-sans); padding: 1rem 1.25rem; background: var(--color-canvas); color: var(--color-ink); }
+    h2          { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; max-width: 900px; }
+    .anchor-text { font-size: 0.88rem; color: var(--color-muted); line-height: 1.55; max-width: 900px; margin-bottom: 0.9rem; }
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber); background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem; font-size: 0.85rem; color: var(--color-accent-amber);
+      line-height: 1.5; max-width: 900px; margin-bottom: 0.75rem;
+    }
+    .minor-stat {
+      font-size: 0.82rem; color: var(--color-primary-mid); font-weight: 600;
+      margin-bottom: 0.6rem; padding-left: 0.6rem;
+      border-left: 3px solid var(--color-primary-mid);
+    }
+    #chart     { width: 100%; max-width: 900px; height: 340px; }
+    details    { max-width: 900px; margin-top: 0.8rem; font-size: 0.8rem; }
+    summary    { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul         { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.85; }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <h2 id="title"></h2>
+  <div id="anchor-wrapper"></div>
+  <p class="minor-stat" id="minor-stat" hidden></p>
+  <div id="chart"></div>
+
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script>
+    /**
+     * renderBarWithMarkArea — horizontal bar of crime taxonomy for sexual violence.
+     *
+     * JSON shape: data.global = [{crime_dimension, label, count, pct, is_minor}]
+     *   Already sorted pct descending. is_minor=true flags 3 minor-related categories.
+     *
+     * Chart:
+     *   - yAxis: category (labels), inverse=true so largest is at visual top
+     *   - xAxis: pct (0–55 %)
+     *   - Bar color: is_minor ? --color-bar-minor : --color-bar-base
+     *   - markArea: shaded background per minor-category band
+     *   - Computed minor-pct stat shown above chart
+     */
+
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const TIPOLOGIA_URL = './data/acto_3_tipologia.json';
+
+    const COLOR_MINOR = getComputedStyle(document.documentElement)
+      .getPropertyValue('--color-bar-minor').trim();
+    const COLOR_BASE  = getComputedStyle(document.documentElement)
+      .getPropertyValue('--color-bar-base').trim();
+    const MARK_FILL   = getComputedStyle(document.documentElement)
+      .getPropertyValue('--color-mark-fill').trim();
+
+    /* ── Anchor text renderer ────────────────────────────────────────────── */
+    function renderAnchor(text) {
+      if (!text) return;
+      const PROV = 'PROVISIONAL: ';
+      const isProv = text.startsWith(PROV);
+      const el = document.createElement(isProv ? 'div' : 'p');
+      el.className = isProv ? 'provisional-box' : 'anchor-text';
+      el.textContent = isProv ? text.slice(PROV.length) : text;
+      document.getElementById('anchor-wrapper').appendChild(el);
+    }
+
+    /* ── Build markArea data for non-contiguous minor bands ─────────────── */
+    function buildMarkAreaData(items) {
+      // Group consecutive runs of minor items; build one markArea entry per run.
+      const bands = [];
+      let runStart = null;
+
+      for (let i = 0; i <= items.length; i++) {
+        const isMinor = i < items.length && items[i].is_minor;
+        if (isMinor && runStart === null) {
+          runStart = i;
+        } else if (!isMinor && runStart !== null) {
+          // Close the run
+          bands.push([
+            { yAxis: items[runStart].label },
+            { yAxis: items[i - 1].label   },
+          ]);
+          runStart = null;
+        }
+      }
+      return bands;
+    }
+
+    /* ── Main ────────────────────────────────────────────────────────────── */
+    async function main() {
+      const payload = await fetch(TIPOLOGIA_URL).then(r => {
+        if (!r.ok) throw new Error(`${TIPOLOGIA_URL}: HTTP ${r.status}`);
+        return r.json();
+      });
+
+      const sub   = payload.sub_acto_3_4;
+      const items = sub.data.global;   // already sorted pct desc
+
+      document.getElementById('title').textContent = sub.title_es;
+      renderAnchor(sub.anchor_text_es);
+
+      const labels     = items.map(d => d.label);
+      const pcts       = items.map(d => d.pct);
+      const barColors  = items.map(d => d.is_minor ? COLOR_MINOR : COLOR_BASE);
+      const seriesData = pcts.map((v, i) => ({ value: v, itemStyle: { color: barColors[i] } }));
+
+      // Compute total minor pct
+      const pctMinor = items.filter(d => d.is_minor).reduce((s, d) => s + d.pct, 0);
+      const nMinor   = items.filter(d => d.is_minor).reduce((s, d) => s + d.count, 0);
+      const minorStatEl = document.getElementById('minor-stat');
+      minorStatEl.textContent =
+        `${pctMinor.toFixed(2)}% (${nMinor.toLocaleString('es')} casos) son delitos ` +
+        `explícitamente contra menores de edad`;
+      minorStatEl.hidden = false;
+
+      const markAreaData = buildMarkAreaData(items);
+
+      const chart = echarts.init(document.getElementById('chart'));
+      chart.setOption({
+        backgroundColor: CSS.canvas,
+        grid: { left: 240, right: 70, top: 20, bottom: 44 },
+        xAxis: {
+          type: 'value',
+          name: '% del total',
+          nameLocation: 'middle',
+          nameGap: 28,
+          nameTextStyle: { fontSize: 11, color: CSS.muted },
+          axisLabel: { formatter: v => v + '%', fontSize: 10 },
+          splitLine: { lineStyle: { color: CSS.hairline } },
+          max: Math.ceil(Math.max(...pcts) / 5) * 5 + 2,
+        },
+        yAxis: {
+          type: 'category',
+          data: labels,
+          inverse: true,
+          axisLabel: { width: 228, overflow: 'truncate', fontSize: 11 },
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'shadow' },
+          formatter: params => {
+            const idx  = params[0].dataIndex;
+            const item = items[idx];
+            return `<strong>${item.label}</strong><br>` +
+              `${item.pct.toFixed(2)}% — ${item.count.toLocaleString('es')} casos` +
+              (item.is_minor ? '<br><em>Delito contra menores</em>' : '');
+          },
+        },
+        series: [{
+          type: 'bar',
+          data: seriesData,
+          label: {
+            show: true,
+            position: 'right',
+            formatter: p => p.value.toFixed(1) + '%',
+            fontSize: 10,
+            color: CSS.body,
+          },
+          markArea: {
+            silent: true,
+            itemStyle: {
+              color:       MARK_FILL,
+              borderColor: 'rgba(123,31,75,0.2)',
+              borderWidth: 1,
+            },
+            label: { show: false },
+            data: markAreaData,
+          },
+        }],
+      });
+
+      window.addEventListener('resize', () => chart.resize());
+
+      /* Diagnostics */
+      const ul = document.getElementById('diag-list');
+      const nCats    = items.length;
+      const nMinorCt = items.filter(d => d.is_minor).length;
+      const rows = [
+        `Categorías renderizadas: ${nCats} (esperado: 7)`,
+        `Categorías de menores (is_minor=true): ${nMinorCt} (esperado: 3)`,
+        `% menores calculado: ${pctMinor.toFixed(2)}%`,
+        `Categoría [0] (mayor %): ${items[0]?.label ?? '—'} (esperado: Abuso sexual a menor…)`,
+        `Bandas markArea: ${markAreaData.length}`,
+      ];
+      rows.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+    }
+
+    main().catch(err => {
+      console.error(err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

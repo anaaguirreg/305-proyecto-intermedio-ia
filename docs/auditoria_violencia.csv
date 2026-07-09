@@ -1,0 +1,12 @@
+section,metric,value
+nulls,total_columns_with_nulls,2
+nulls,all_null_issues,"{'genero_victima': {'count': 256, 'pct': 0.38}, 'grupo_etario': {'count': 127, 'pct': 0.19}}"
+nulls,priority_alert_issues,{}
+duplicates,exact_mirror_duplicates,21
+duplicates,duplicate_sample,"[{'departamento': 'CAUCA', 'municipio': 'POPAYAN', 'cod_municipio': '19001', 'armas_medios': 'SIN EMPLEO DE ARMAS', 'fecha_hecho': Timestamp('2025-05-26 00:00:00'), 'genero_victima': 'FEMENINO', 'grupo_etario': 'ADULTOS', 'cantidad': 1, 'anio_hecho': 2025, 'mes_hecho': 'MAYO', 'dia_hecho': 'LUNES'}, {'departamento': 'CAUCA', 'municipio': 'POPAYAN', 'cod_municipio': '19001', 'armas_medios': 'SIN EMPLEO DE ARMAS', 'fecha_hecho': Timestamp('2022-07-15 00:00:00'), 'genero_victima': 'FEMENINO', 'grupo_etario': 'ADULTOS', 'cantidad': 1, 'anio_hecho': 2022, 'mes_hecho': 'JULIO', 'dia_hecho': 'VIERNES'}, {'departamento': 'VALLE DEL CAUCA', 'municipio': 'CALI', 'cod_municipio': '76001', 'armas_medios': 'SIN EMPLEO DE ARMAS', 'fecha_hecho': Timestamp('2022-08-23 00:00:00'), 'genero_victima': 'FEMENINO', 'grupo_etario': 'ADULTOS', 'cantidad': 1, 'anio_hecho': 2022, 'mes_hecho': 'AGOSTO', 'dia_hecho': 'MARTES'}]"
+schema,missing_from_type_rules,"['TOTAL Hombres', 'TOTAL Mujeres', 'TOTAL Total', 'agresor', 'area_geo', 'ciclo_vital', 'circunstancia', 'dias_incapacidad', 'dimension_agresor', 'dimension_circunstancia', 'dimension_discapacidad', 'dimension_escenario', 'dimension_etnia', 'discapacidad', 'escenario', 'etnia', 'factor', 'grupo_edad', 'hora_rango', 'pob_f_0_17', 'pob_f_18_mas', 'pob_f_total', 'pob_h_0_17', 'pob_h_18_mas', 'pob_h_total', 'sexo_agresor', 'tipo_delito', 'total_h', 'total_m']"
+schema,extra_columns_not_in_rules,[]
+schema,type_mismatches,[]
+domain,domain_violations,{}
+temporal,temporal_issues,{}
+numeric,numeric_sanity_issues,"{'cantidad_outliers': {'count': 3213, 'bounds': [np.float64(-2.0), np.float64(5.0)]}}"

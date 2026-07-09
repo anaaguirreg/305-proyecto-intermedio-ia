@@ -1,0 +1,1093 @@
+{
+  "metadata": {
+    "region": "PACIFICO_COLOMBIANO",
+    "source": "DANE_DIVIPOLA",
+    "version": "2024",
+    "description": "Referencia geográfica para mapas coropléticos (une por cod_municipio con GeoJSON)",
+    "uso": "choropleth",
+    "total_municipios": 179,
+    "departamentos": [
+      "CAUCA",
+      "CHOCO",
+      "NARIÑO",
+      "VALLE DEL CAUCA"
+    ],
+    "last_updated": "2026-06-24T10:40:59.005879"
+  },
+  "municipios": {
+    "19001": {
+      "nombre": "POPAYAN",
+      "departamento": "CAUCA",
+      "lat": 2.4717,
+      "lon": -76.59194
+    },
+    "19022": {
+      "nombre": "ALMAGUER",
+      "departamento": "CAUCA",
+      "lat": 1.91244,
+      "lon": -76.83495
+    },
+    "19050": {
+      "nombre": "ARGELIA",
+      "departamento": "CAUCA",
+      "lat": 2.32934,
+      "lon": -77.26315
+    },
+    "19075": {
+      "nombre": "BALBOA",
+      "departamento": "CAUCA",
+      "lat": 2.08473,
+      "lon": -77.20881
+    },
+    "19100": {
+      "nombre": "BOLIVAR",
+      "departamento": "CAUCA",
+      "lat": 1.85395,
+      "lon": -76.96337
+    },
+    "19110": {
+      "nombre": "BUENOS AIRES",
+      "departamento": "CAUCA",
+      "lat": 3.04592,
+      "lon": -76.67901
+    },
+    "19130": {
+      "nombre": "CAJIBIO",
+      "departamento": "CAUCA",
+      "lat": 2.64321,
+      "lon": -76.70139
+    },
+    "19137": {
+      "nombre": "CALDONO",
+      "departamento": "CAUCA",
+      "lat": 2.81033,
+      "lon": -76.46452
+    },
+    "19142": {
+      "nombre": "CALOTO",
+      "departamento": "CAUCA",
+      "lat": 3.04593,
+      "lon": -76.36638
+    },
+    "19212": {
+      "nombre": "CORINTO",
+      "departamento": "CAUCA",
+      "lat": 3.13675,
+      "lon": -76.20965
+    },
+    "19256": {
+      "nombre": "EL TAMBO",
+      "departamento": "CAUCA",
+      "lat": 2.53449,
+      "lon": -77.00511
+    },
+    "19290": {
+      "nombre": "FLORENCIA",
+      "departamento": "CAUCA",
+      "lat": 1.6834958290231044,
+      "lon": -77.07319586017782
+    },
+    "19300": {
+      "nombre": "GUACHENE",
+      "departamento": "CAUCA",
+      "lat": 3.14439,
+      "lon": -76.39235
+    },
+    "19318": {
+      "nombre": "GUAPI",
+      "departamento": "CAUCA",
+      "lat": 2.41327,
+      "lon": -77.69048
+    },
+    "19355": {
+      "nombre": "INZA",
+      "departamento": "CAUCA",
+      "lat": 2.49906,
+      "lon": -76.13763
+    },
+    "19364": {
+      "nombre": "JAMBALO",
+      "departamento": "CAUCA",
+      "lat": 2.84981,
+      "lon": -76.31125
+    },
+    "19392": {
+      "nombre": "LA SIERRA",
+      "departamento": "CAUCA",
+      "lat": 2.18747,
+      "lon": -76.78228
+    },
+    "19397": {
+      "nombre": "LA VEGA",
+      "departamento": "CAUCA",
+      "lat": 2.001735,
+      "lon": -76.778767
+    },
+    "19418": {
+      "nombre": "LOPEZ DE MICAY",
+      "departamento": "CAUCA",
+      "lat": 3.00154,
+      "lon": -77.21841
+    },
+    "19450": {
+      "nombre": "MERCADERES",
+      "departamento": "CAUCA",
+      "lat": 1.79383,
+      "lon": -77.1806
+    },
+    "19455": {
+      "nombre": "MIRANDA",
+      "departamento": "CAUCA",
+      "lat": 3.22824,
+      "lon": -76.21671
+    },
+    "19473": {
+      "nombre": "MORALES",
+      "departamento": "CAUCA",
+      "lat": 2.7570846024330504,
+      "lon": -76.63045230139552
+    },
+    "19513": {
+      "nombre": "PADILLA",
+      "departamento": "CAUCA",
+      "lat": 3.19473,
+      "lon": -76.33624
+    },
+    "19517": {
+      "nombre": "PAEZ",
+      "departamento": "CAUCA",
+      "lat": 2.4796591532358154,
+      "lon": -75.84764978474509
+    },
+    "19532": {
+      "nombre": "PATIA",
+      "departamento": "CAUCA",
+      "lat": 2.14817,
+      "lon": -77.05793
+    },
+    "19533": {
+      "nombre": "PIAMONTE",
+      "departamento": "CAUCA",
+      "lat": 1.1189660371001802,
+      "lon": -76.32590034399753
+    },
+    "19548": {
+      "nombre": "PIENDAMO  TUNIA",
+      "departamento": "CAUCA",
+      "lat": 2.71446,
+      "lon": -76.56472
+    },
+    "19573": {
+      "nombre": "PUERTO TEJADA",
+      "departamento": "CAUCA",
+      "lat": 3.26673,
+      "lon": -76.41846
+    },
+    "19585": {
+      "nombre": "PURACE",
+      "departamento": "CAUCA",
+      "lat": 2.28178,
+      "lon": -76.37116
+    },
+    "19622": {
+      "nombre": "ROSAS",
+      "departamento": "CAUCA",
+      "lat": 2.25088,
+      "lon": -76.75293
+    },
+    "19693": {
+      "nombre": "SAN SEBASTIAN",
+      "departamento": "CAUCA",
+      "lat": 1.85626,
+      "lon": -76.71652
+    },
+    "19698": {
+      "nombre": "SANTANDER DE QUILICHAO",
+      "departamento": "CAUCA",
+      "lat": 2.98447,
+      "lon": -76.49873
+    },
+    "19701": {
+      "nombre": "SANTA ROSA",
+      "departamento": "CAUCA",
+      "lat": 1.7004849356153118,
+      "lon": -76.57342388473813
+    },
+    "19743": {
+      "nombre": "SILVIA",
+      "departamento": "CAUCA",
+      "lat": 2.65129,
+      "lon": -76.35057
+    },
+    "19760": {
+      "nombre": "SOTARA PAISPAMBA",
+      "departamento": "CAUCA",
+      "lat": 2.23182,
+      "lon": -76.61147
+    },
+    "19780": {
+      "nombre": "SUAREZ",
+      "departamento": "CAUCA",
+      "lat": 2.93687,
+      "lon": -76.74582
+    },
+    "19785": {
+      "nombre": "SUCRE",
+      "departamento": "CAUCA",
+      "lat": 2.05774,
+      "lon": -76.90994
+    },
+    "19807": {
+      "nombre": "TIMBIO",
+      "departamento": "CAUCA",
+      "lat": 2.36963,
+      "lon": -76.71052
+    },
+    "19809": {
+      "nombre": "TIMBIQUI",
+      "departamento": "CAUCA",
+      "lat": 2.7746573105909964,
+      "lon": -77.66807803237757
+    },
+    "19821": {
+      "nombre": "TORIBIO",
+      "departamento": "CAUCA",
+      "lat": 2.97577,
+      "lon": -76.20332
+    },
+    "19824": {
+      "nombre": "TOTORO",
+      "departamento": "CAUCA",
+      "lat": 2.5045,
+      "lon": -76.39047
+    },
+    "19845": {
+      "nombre": "VILLA RICA",
+      "departamento": "CAUCA",
+      "lat": 3.18064,
+      "lon": -76.46444
+    },
+    "27001": {
+      "nombre": "QUIBDO",
+      "departamento": "CHOCO",
+      "lat": 5.93895,
+      "lon": -76.66368
+    },
+    "27006": {
+      "nombre": "ACANDI",
+      "departamento": "CHOCO",
+      "lat": 8.43419,
+      "lon": -77.28967
+    },
+    "27025": {
+      "nombre": "ALTO BAUDO",
+      "departamento": "CHOCO",
+      "lat": 5.63674,
+      "lon": -77.08422
+    },
+    "27050": {
+      "nombre": "ATRATO",
+      "departamento": "CHOCO",
+      "lat": 5.56064,
+      "lon": -76.60612
+    },
+    "27073": {
+      "nombre": "BAGADO",
+      "departamento": "CHOCO",
+      "lat": 5.50312,
+      "lon": -76.19797
+    },
+    "27075": {
+      "nombre": "BAHIA SOLANO",
+      "departamento": "CHOCO",
+      "lat": 6.29015,
+      "lon": -77.35383
+    },
+    "27077": {
+      "nombre": "BAJO BAUDO",
+      "departamento": "CHOCO",
+      "lat": 5.01184,
+      "lon": -77.21767
+    },
+    "27099": {
+      "nombre": "BOJAYA",
+      "departamento": "CHOCO",
+      "lat": 6.47467,
+      "lon": -77.09933
+    },
+    "27135": {
+      "nombre": "EL CANTON DEL SAN PABLO",
+      "departamento": "CHOCO",
+      "lat": 5.35966,
+      "lon": -76.77256
+    },
+    "27150": {
+      "nombre": "CARMEN DEL DARIEN",
+      "departamento": "CHOCO",
+      "lat": 7.03365,
+      "lon": -76.97423
+    },
+    "27160": {
+      "nombre": "CERTEGUI",
+      "departamento": "CHOCO",
+      "lat": 5.38983,
+      "lon": -76.52264
+    },
+    "27205": {
+      "nombre": "CONDOTO",
+      "departamento": "CHOCO",
+      "lat": 5.07372,
+      "lon": -76.52751
+    },
+    "27245": {
+      "nombre": "EL CARMEN DE ATRATO",
+      "departamento": "CHOCO",
+      "lat": 5.81094,
+      "lon": -76.19189
+    },
+    "27250": {
+      "nombre": "EL LITORAL DEL SAN JUAN",
+      "departamento": "CHOCO",
+      "lat": 4.24716,
+      "lon": -76.9626
+    },
+    "27361": {
+      "nombre": "ISTMINA",
+      "departamento": "CHOCO",
+      "lat": 4.73984,
+      "lon": -76.86916
+    },
+    "27372": {
+      "nombre": "JURADO",
+      "departamento": "CHOCO",
+      "lat": 7.10334,
+      "lon": -77.67974
+    },
+    "27413": {
+      "nombre": "LLORO",
+      "departamento": "CHOCO",
+      "lat": 5.5851,
+      "lon": -76.38544
+    },
+    "27425": {
+      "nombre": "MEDIO ATRATO",
+      "departamento": "CHOCO",
+      "lat": 6.03388,
+      "lon": -76.67347
+    },
+    "27430": {
+      "nombre": "MEDIO BAUDO",
+      "departamento": "CHOCO",
+      "lat": 5.11039,
+      "lon": -76.99593
+    },
+    "27450": {
+      "nombre": "MEDIO SAN JUAN",
+      "departamento": "CHOCO",
+      "lat": 4.81525,
+      "lon": -76.80409
+    },
+    "27491": {
+      "nombre": "NOVITA",
+      "departamento": "CHOCO",
+      "lat": 4.85339,
+      "lon": -76.61824
+    },
+    "27493": {
+      "nombre": "NUEVO BELEN DE BAJIRA",
+      "departamento": "CHOCO",
+      "lat": 7.082,
+      "lon": -76.967
+    },
+    "27495": {
+      "nombre": "NUQUI",
+      "departamento": "CHOCO",
+      "lat": 5.69006,
+      "lon": -77.29298
+    },
+    "27580": {
+      "nombre": "RIO IRO",
+      "departamento": "CHOCO",
+      "lat": 5.17267,
+      "lon": -76.48446
+    },
+    "27600": {
+      "nombre": "RIO QUITO",
+      "departamento": "CHOCO",
+      "lat": 5.56753,
+      "lon": -76.81157
+    },
+    "27615": {
+      "nombre": "RIOSUCIO",
+      "departamento": "CHOCO",
+      "lat": 7.437941750916095,
+      "lon": -77.11361475877221
+    },
+    "27660": {
+      "nombre": "SAN JOSE DEL PALMAR",
+      "departamento": "CHOCO",
+      "lat": 4.95874,
+      "lon": -76.28002
+    },
+    "27745": {
+      "nombre": "SIPI",
+      "departamento": "CHOCO",
+      "lat": 4.59442,
+      "lon": -76.54194
+    },
+    "27787": {
+      "nombre": "TADO",
+      "departamento": "CHOCO",
+      "lat": 5.2661,
+      "lon": -76.3311
+    },
+    "27800": {
+      "nombre": "UNGUIA",
+      "departamento": "CHOCO",
+      "lat": 8.11728,
+      "lon": -77.10373
+    },
+    "27810": {
+      "nombre": "UNION PANAMERICANA",
+      "departamento": "CHOCO",
+      "lat": 5.28528,
+      "lon": -76.6454
+    },
+    "52001": {
+      "nombre": "PASTO",
+      "departamento": "NARIÑO",
+      "lat": 1.08361,
+      "lon": -77.2061
+    },
+    "52019": {
+      "nombre": "ALBAN",
+      "departamento": "NARIÑO",
+      "lat": 1.4737103337802815,
+      "lon": -77.08120375188157
+    },
+    "52022": {
+      "nombre": "ALDANA",
+      "departamento": "NARIÑO",
+      "lat": 0.91343,
+      "lon": -77.69539
+    },
+    "52036": {
+      "nombre": "ANCUYA",
+      "departamento": "NARIÑO",
+      "lat": 1.24525,
+      "lon": -77.53116
+    },
+    "52051": {
+      "nombre": "ARBOLEDA",
+      "departamento": "NARIÑO",
+      "lat": 1.48005,
+      "lon": -77.12985
+    },
+    "52079": {
+      "nombre": "BARBACOAS",
+      "departamento": "NARIÑO",
+      "lat": 1.6733939300366985,
+      "lon": -78.13744265588439
+    },
+    "52083": {
+      "nombre": "BELEN",
+      "departamento": "NARIÑO",
+      "lat": 1.5956983678790244,
+      "lon": -77.01640253844745
+    },
+    "52110": {
+      "nombre": "BUESACO",
+      "departamento": "NARIÑO",
+      "lat": 1.31522,
+      "lon": -77.11637
+    },
+    "52203": {
+      "nombre": "COLON",
+      "departamento": "NARIÑO",
+      "lat": 1.63633,
+      "lon": -77.04732
+    },
+    "52207": {
+      "nombre": "CONSACA",
+      "departamento": "NARIÑO",
+      "lat": 1.20907,
+      "lon": -77.44064
+    },
+    "52210": {
+      "nombre": "CONTADERO",
+      "departamento": "NARIÑO",
+      "lat": 0.93267,
+      "lon": -77.52809
+    },
+    "52215": {
+      "nombre": "CORDOBA",
+      "departamento": "NARIÑO",
+      "lat": 0.8552248189544404,
+      "lon": -77.51835149925932
+    },
+    "52224": {
+      "nombre": "CUASPUD CARLOSAMA",
+      "departamento": "NARIÑO",
+      "lat": 0.87543,
+      "lon": -77.73592
+    },
+    "52227": {
+      "nombre": "CUMBAL",
+      "departamento": "NARIÑO",
+      "lat": 0.94422,
+      "lon": -77.95958
+    },
+    "52233": {
+      "nombre": "CUMBITARA",
+      "departamento": "NARIÑO",
+      "lat": 1.72559,
+      "lon": -77.59282
+    },
+    "52240": {
+      "nombre": "CHACHAGUI",
+      "departamento": "NARIÑO",
+      "lat": 1.3865,
+      "lon": -77.26969
+    },
+    "52250": {
+      "nombre": "EL CHARCO",
+      "departamento": "NARIÑO",
+      "lat": 2.480618682084645,
+      "lon": -78.10791504268815
+    },
+    "52254": {
+      "nombre": "EL PENOL",
+      "departamento": "NARIÑO",
+      "lat": 1.51228,
+      "lon": -77.43051
+    },
+    "52256": {
+      "nombre": "EL ROSARIO",
+      "departamento": "NARIÑO",
+      "lat": 1.84509,
+      "lon": -77.43826
+    },
+    "52258": {
+      "nombre": "EL TABLON DE GOMEZ",
+      "departamento": "NARIÑO",
+      "lat": 1.40943,
+      "lon": -76.98527
+    },
+    "52260": {
+      "nombre": "EL TAMBO",
+      "departamento": "NARIÑO",
+      "lat": 1.43026,
+      "lon": -77.38312
+    },
+    "52287": {
+      "nombre": "FUNES",
+      "departamento": "NARIÑO",
+      "lat": 0.91422,
+      "lon": -77.32843
+    },
+    "52317": {
+      "nombre": "GUACHUCAL",
+      "departamento": "NARIÑO",
+      "lat": 0.97504,
+      "lon": -77.73759
+    },
+    "52320": {
+      "nombre": "GUAITARILLA",
+      "departamento": "NARIÑO",
+      "lat": 1.15137,
+      "lon": -77.53011
+    },
+    "52323": {
+      "nombre": "GUALMATAN",
+      "departamento": "NARIÑO",
+      "lat": 0.92864,
+      "lon": -77.58262
+    },
+    "52352": {
+      "nombre": "ILES",
+      "departamento": "NARIÑO",
+      "lat": 0.98053,
+      "lon": -77.51866
+    },
+    "52354": {
+      "nombre": "IMUES",
+      "departamento": "NARIÑO",
+      "lat": 1.07288,
+      "lon": -77.50151
+    },
+    "52356": {
+      "nombre": "IPIALES",
+      "departamento": "NARIÑO",
+      "lat": 0.8287535989713497,
+      "lon": -77.64035810479157
+    },
+    "52378": {
+      "nombre": "LA CRUZ",
+      "departamento": "NARIÑO",
+      "lat": 1.58418,
+      "lon": -76.92335
+    },
+    "52381": {
+      "nombre": "LA FLORIDA",
+      "departamento": "NARIÑO",
+      "lat": 1.33393,
+      "lon": -77.38823
+    },
+    "52385": {
+      "nombre": "LA LLANADA",
+      "departamento": "NARIÑO",
+      "lat": 1.55401,
+      "lon": -77.70317
+    },
+    "52390": {
+      "nombre": "LA TOLA",
+      "departamento": "NARIÑO",
+      "lat": 2.41931,
+      "lon": -78.20991
+    },
+    "52399": {
+      "nombre": "LA UNION",
+      "departamento": "NARIÑO",
+      "lat": 1.6197,
+      "lon": -77.14285
+    },
+    "52405": {
+      "nombre": "LEIVA",
+      "departamento": "NARIÑO",
+      "lat": 1.93898,
+      "lon": -77.31194
+    },
+    "52411": {
+      "nombre": "LINARES",
+      "departamento": "NARIÑO",
+      "lat": 1.39517,
+      "lon": -77.52094
+    },
+    "52418": {
+      "nombre": "LOS ANDES",
+      "departamento": "NARIÑO",
+      "lat": 1.6726,
+      "lon": -77.71054
+    },
+    "52427": {
+      "nombre": "MAGUI",
+      "departamento": "NARIÑO",
+      "lat": 1.90686,
+      "lon": -78.04474
+    },
+    "52435": {
+      "nombre": "MALLAMA",
+      "departamento": "NARIÑO",
+      "lat": 1.15595,
+      "lon": -77.84664
+    },
+    "52473": {
+      "nombre": "MOSQUERA",
+      "departamento": "NARIÑO",
+      "lat": 2.509428342507801,
+      "lon": -78.45089284834073
+    },
+    "52480": {
+      "nombre": "NARIÑO",
+      "departamento": "NARIÑO",
+      "lat": 1.2890335113757159,
+      "lon": -77.36026861120237
+    },
+    "52490": {
+      "nombre": "OLAYA HERRERA",
+      "departamento": "NARIÑO",
+      "lat": 2.28989,
+      "lon": -78.29472
+    },
+    "52506": {
+      "nombre": "OSPINA",
+      "departamento": "NARIÑO",
+      "lat": 1.02982,
+      "lon": -77.55235
+    },
+    "52520": {
+      "nombre": "FRANCISCO PIZARRO",
+      "departamento": "NARIÑO",
+      "lat": 2.08853,
+      "lon": -78.59193
+    },
+    "52540": {
+      "nombre": "POLICARPA",
+      "departamento": "NARIÑO",
+      "lat": 1.73535,
+      "lon": -77.48134
+    },
+    "52560": {
+      "nombre": "POTOSI",
+      "departamento": "NARIÑO",
+      "lat": 0.72268,
+      "lon": -77.42481
+    },
+    "52565": {
+      "nombre": "PROVIDENCIA",
+      "departamento": "NARIÑO",
+      "lat": 1.23286,
+      "lon": -77.59844
+    },
+    "52573": {
+      "nombre": "PUERRES",
+      "departamento": "NARIÑO",
+      "lat": 0.82652,
+      "lon": -77.32225
+    },
+    "52585": {
+      "nombre": "PUPIALES",
+      "departamento": "NARIÑO",
+      "lat": 0.91677,
+      "lon": -77.63337
+    },
+    "52612": {
+      "nombre": "RICAURTE",
+      "departamento": "NARIÑO",
+      "lat": 1.212596660579095,
+      "lon": -77.99448433259188
+    },
+    "52621": {
+      "nombre": "ROBERTO PAYAN",
+      "departamento": "NARIÑO",
+      "lat": 1.89758,
+      "lon": -78.38112
+    },
+    "52678": {
+      "nombre": "SAMANIEGO",
+      "departamento": "NARIÑO",
+      "lat": 1.43056,
+      "lon": -77.6918
+    },
+    "52683": {
+      "nombre": "SANDONA",
+      "departamento": "NARIÑO",
+      "lat": 1.28811,
+      "lon": -77.4567
+    },
+    "52685": {
+      "nombre": "SAN BERNARDO",
+      "departamento": "NARIÑO",
+      "lat": 1.5149709538821554,
+      "lon": -77.0466580540551
+    },
+    "52687": {
+      "nombre": "SAN LORENZO",
+      "departamento": "NARIÑO",
+      "lat": 1.54214,
+      "lon": -77.21873
+    },
+    "52693": {
+      "nombre": "SAN PABLO",
+      "departamento": "NARIÑO",
+      "lat": 1.669443774613568,
+      "lon": -77.0139488564125
+    },
+    "52694": {
+      "nombre": "SAN PEDRO DE CARTAGO",
+      "departamento": "NARIÑO",
+      "lat": 1.53682,
+      "lon": -77.1014
+    },
+    "52696": {
+      "nombre": "SANTA BARBARA",
+      "departamento": "NARIÑO",
+      "lat": 2.4502679094187356,
+      "lon": -77.98074255631626
+    },
+    "52699": {
+      "nombre": "SANTACRUZ",
+      "departamento": "NARIÑO",
+      "lat": 1.28518,
+      "lon": -77.74457
+    },
+    "52720": {
+      "nombre": "SAPUYES",
+      "departamento": "NARIÑO",
+      "lat": 1.03619,
+      "lon": -77.68045
+    },
+    "52786": {
+      "nombre": "TAMINANGO",
+      "departamento": "NARIÑO",
+      "lat": 1.59166,
+      "lon": -77.32525
+    },
+    "52788": {
+      "nombre": "TANGUA",
+      "departamento": "NARIÑO",
+      "lat": 1.06408,
+      "lon": -77.35063
+    },
+    "52835": {
+      "nombre": "SAN ANDRES DE TUMACO",
+      "departamento": "NARIÑO",
+      "lat": 1.7874334882749436,
+      "lon": -78.78501151295293
+    },
+    "52838": {
+      "nombre": "TUQUERRES",
+      "departamento": "NARIÑO",
+      "lat": 1.089000424398012,
+      "lon": -77.61879126728262
+    },
+    "52885": {
+      "nombre": "YACUANQUER",
+      "departamento": "NARIÑO",
+      "lat": 1.12555,
+      "lon": -77.42468
+    },
+    "76001": {
+      "nombre": "CALI",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.39904,
+      "lon": -76.57649
+    },
+    "76020": {
+      "nombre": "ALCALA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.6789,
+      "lon": -75.78298
+    },
+    "76036": {
+      "nombre": "ANDALUCIA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.14485,
+      "lon": -76.1647
+    },
+    "76041": {
+      "nombre": "ANSERMANUEVO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.79593,
+      "lon": -76.02963
+    },
+    "76054": {
+      "nombre": "ARGELIA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.70429,
+      "lon": -76.14165
+    },
+    "76100": {
+      "nombre": "BOLIVAR",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.36368,
+      "lon": -76.36486
+    },
+    "76109": {
+      "nombre": "BUENAVENTURA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.61149,
+      "lon": -77.08588
+    },
+    "76111": {
+      "nombre": "GUADALAJARA DE BUGA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.85525,
+      "lon": -76.10514
+    },
+    "76113": {
+      "nombre": "BUGALAGRANDE",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.19685,
+      "lon": -76.08961
+    },
+    "76122": {
+      "nombre": "CAICEDONIA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.309,
+      "lon": -75.83673
+    },
+    "76126": {
+      "nombre": "CALIMA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.94439,
+      "lon": -76.62778
+    },
+    "76130": {
+      "nombre": "CANDELARIA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.408472511929937,
+      "lon": -76.34866567299966
+    },
+    "76147": {
+      "nombre": "CARTAGO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.70685,
+      "lon": -75.91791
+    },
+    "76233": {
+      "nombre": "DAGUA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.64982,
+      "lon": -76.72039
+    },
+    "76243": {
+      "nombre": "EL AGUILA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.91756,
+      "lon": -76.06601
+    },
+    "76246": {
+      "nombre": "EL CAIRO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.75606,
+      "lon": -76.21503
+    },
+    "76248": {
+      "nombre": "EL CERRITO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.67599,
+      "lon": -76.20916
+    },
+    "76250": {
+      "nombre": "EL DOVIO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.53998,
+      "lon": -76.28763
+    },
+    "76275": {
+      "nombre": "FLORIDA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.3041,
+      "lon": -76.16477
+    },
+    "76306": {
+      "nombre": "GINEBRA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.7441,
+      "lon": -76.19082
+    },
+    "76318": {
+      "nombre": "GUACARI",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.78378,
+      "lon": -76.29449
+    },
+    "76364": {
+      "nombre": "JAMUNDI",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.2139,
+      "lon": -76.6276
+    },
+    "76377": {
+      "nombre": "LA CUMBRE",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.6943,
+      "lon": -76.5899
+    },
+    "76400": {
+      "nombre": "LA UNION",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.53793,
+      "lon": -76.1033
+    },
+    "76403": {
+      "nombre": "LA VICTORIA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.524661037994595,
+      "lon": -76.0366283600329
+    },
+    "76497": {
+      "nombre": "OBANDO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.59759,
+      "lon": -75.9492
+    },
+    "76520": {
+      "nombre": "PALMIRA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.55839,
+      "lon": -76.2278
+    },
+    "76563": {
+      "nombre": "PRADERA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.42064,
+      "lon": -76.17842
+    },
+    "76606": {
+      "nombre": "RESTREPO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.8223200131253905,
+      "lon": -76.52373163129324
+    },
+    "76616": {
+      "nombre": "RIOFRIO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.1095,
+      "lon": -76.37105
+    },
+    "76622": {
+      "nombre": "ROLDANILLO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.44357,
+      "lon": -76.16824
+    },
+    "76670": {
+      "nombre": "SAN PEDRO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.9925910107012026,
+      "lon": -76.22990373737325
+    },
+    "76736": {
+      "nombre": "SEVILLA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.19341,
+      "lon": -75.88818
+    },
+    "76823": {
+      "nombre": "TORO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.63842,
+      "lon": -76.08106
+    },
+    "76828": {
+      "nombre": "TRUJILLO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.23327,
+      "lon": -76.34293
+    },
+    "76834": {
+      "nombre": "TULUA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.02841,
+      "lon": -76.0325
+    },
+    "76845": {
+      "nombre": "ULLOA",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.70772,
+      "lon": -75.77836
+    },
+    "76863": {
+      "nombre": "VERSALLES",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.62259,
+      "lon": -76.2179
+    },
+    "76869": {
+      "nombre": "VIJES",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.74366,
+      "lon": -76.47065
+    },
+    "76890": {
+      "nombre": "YOTOCO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.90413,
+      "lon": -76.3908
+    },
+    "76892": {
+      "nombre": "YUMBO",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 3.59591,
+      "lon": -76.51099
+    },
+    "76895": {
+      "nombre": "ZARZAL",
+      "departamento": "VALLE DEL CAUCA",
+      "lat": 4.3536,
+      "lon": -76.05065
+    }
+  }
+}

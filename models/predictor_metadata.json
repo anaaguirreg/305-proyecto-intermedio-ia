@@ -1,0 +1,19 @@
+{
+  "model": "LogisticRegression",
+  "cv_f1_macro": 0.9769047619047619,
+  "features": [
+    "tasa_vif_nna_f",
+    "tasa_sexual_nna_f",
+    "tasa_vif_adultas_f",
+    "tasa_sexual_adultas_f"
+  ],
+  "n_municipios": 177,
+  "cluster_distribution": {
+    "🔴 Alta severidad": 107,
+    "🟠 Moderada/Baja": 70
+  },
+  "k_final": 2,
+  "validation_strategy": "StratifiedKFold(n_splits=5, shuffle=True, random_state=42)",
+  "class_weight_handling": "balanced (donde soporta el algoritmo)",
+  "tie_breaker": "interpretabilidad"
+}

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<!-- sub_acto_4_5 — Hallazgo interseccional: discapacidad + etnia en datos forenses.
+     Componentes: renderStatCard extendido con variant="finding" (tarjeta grande,
+     número destacado) y variant="ethnicity" (acento morado suave, sin n_base).
+     Gráfico: ECharts 100% stacked horizontal bar — ethnicity_marginals (DS3 vs DS4).
+     JSON: data/dashboard/acto_4_forense.json → sub_acto_4_5
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_4_5.html -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Hallazgo interseccional (sub_acto_4_5)</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      font-size: 15px; color: var(--color-ink); background: var(--color-canvas);
+      padding: 1.5rem 1.25rem 3rem; max-width: 900px; margin: 0 auto;
+    }
+    h2          { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .anchor-text { font-size: 0.88rem; color: var(--color-muted); line-height: 1.55; margin-bottom: 1rem; }
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber); background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem; font-size: 0.85rem; color: var(--color-accent-amber);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── Standard stat card (Phase 3.A backward-compat) ─────────────────── */
+    .card-grid { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 1rem; }
+
+    .stat-card {
+      position: relative; background: var(--color-canvas);
+      border: 1px solid var(--color-hairline); border-radius: 6px;
+      padding: 20px 18px 16px; min-width: 170px;
+      flex: 1 1 170px; max-width: 280px;
+    }
+    .stat-card .card-badge {
+      position: absolute; top: 8px; right: 10px;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+      padding: 2px 7px; border-radius: 10px;
+      background: var(--color-hairline); color: var(--color-muted);
+    }
+    .stat-card .card-value {
+      font-size: 2.2rem; font-weight: 700; line-height: 1.1;
+      margin-bottom: 6px; color: var(--color-ink);
+    }
+    .stat-card .card-label { font-size: 12px; color: var(--color-muted); line-height: 1.4; }
+    .stat-card .card-subvalue {
+      margin-top: 8px; font-size: 11px; color: var(--color-muted);
+      border-top: 1px solid var(--color-hairline); padding-top: 7px;
+    }
+
+    /* ── Finding variant (variant="finding") — larger, prominent ─────────── */
+    .stat-card--finding {
+      flex: 1 1 320px; max-width: 420px; min-height: 0;
+      border-left: 4px solid var(--color-primary-mid);
+      padding: 24px 22px 20px;
+    }
+    .stat-card--finding .card-badge {
+      font-size: 11px; padding: 3px 9px;
+    }
+    .stat-card--finding .card-value {
+      font-size: 3.6rem; font-weight: 800; color: var(--color-primary-mid);
+      letter-spacing: -0.02em;
+    }
+    .stat-card--finding .card-label {
+      font-size: 13px; color: var(--color-muted); margin-top: 4px;
+    }
+    .stat-card--finding .card-subvalue {
+      font-size: 12px; color: var(--color-muted);
+    }
+    .stat-card--finding .card-n-base {
+      font-size: 11px; color: var(--color-muted); margin-top: 6px;
+    }
+
+    /* ── Ethnicity variant (variant="ethnicity") — subtle purple accent ───── */
+    .stat-card--ethnicity {
+      border-left: 3px solid var(--color-primary-muted);
+    }
+
+    /* ── Low-N note ──────────────────────────────────────────────────────── */
+    .low-n-note {
+      font-size: 11px; color: var(--color-muted); font-style: italic;
+      margin: 4px 0 16px 0;
+    }
+
+    /* ── Shared caveat (below the two cards, not per-card) ──────────────── */
+    .shared-caveat {
+      margin-top: 1.2rem; font-size: 0.82rem; color: var(--color-muted);
+      font-style: italic; line-height: 1.5;
+      border-left: 2px solid var(--color-hairline); padding-left: 0.8rem;
+    }
+
+    /* ── Diagnostics ─────────────────────────────────────────────────────── */
+    details  { margin-top: 1rem; font-size: 0.8rem; }
+    summary  { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul       { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.85; }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <h2 id="title"></h2>
+  <div id="anchor-wrapper"></div>
+  <div class="card-grid" id="ethnicity-cards"></div>
+  <div id="ethnicity-chart" style="width: 100%; height: 220px; margin: 20px 0;"></div>
+  <p id="low-n-note" class="low-n-note" hidden></p>
+  <div id="anchor-disability-wrapper"></div>
+  <div class="card-grid" id="card-grid"></div>
+  <p class="shared-caveat" id="shared-caveat" hidden></p>
+
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script>
+    /**
+     * renderStatCard(card, variant)
+     *
+     * Backward-compatible extension of the Phase 3.A stat card component.
+     * When variant is omitted (or null/undefined), renders the original
+     * compact card layout — identical to Phase 3.A test_render_phase_3a_stat_cards.html.
+     *
+     * variant="finding":
+     *   - Larger card (flex: 1 1 320px) with left accent border in #7a2d52
+     *   - Prominent value in large (3.6rem) brand color
+     *   - card-n-base sub-line showing n_base for methodological transparency
+     *   - label below value, not above
+     *
+     * variant="ethnicity":
+     *   - Standard compact card with subtle purple left border (#9c7388)
+     *   - No n_base sub-line
+     *
+     * Callers: for 4_5, three ethnicity cards + two finding cards + shared caveat.
+     */
+
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const FORENSE_URL = './data/acto_4_forense.json';
+
+    /* ── Value formatter (same as Phase 3.A) ─────────────────────────────── */
+    function formatValue(value, format) {
+      if (format === 'text') return String(value);
+      const num = Number(value);
+      const ES = 'es';
+      switch (format) {
+        case 'integer':
+          return num.toLocaleString(ES, { useGrouping: false, maximumFractionDigits: 0 });
+        case 'integer_thousands':
+          return num.toLocaleString(ES, { useGrouping: true, maximumFractionDigits: 0 });
+        case 'percent_1d':
+          return num.toLocaleString(ES, { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' %';
+        case 'decimal_2d':
+          return num.toLocaleString(ES, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        default:
+          return String(value);
+      }
+    }
+
+    /* ── Single stat card component ──────────────────────────────────────── */
+    function renderStatCard(card, variant) {
+      const el = document.createElement('div');
+      if (variant === 'finding') {
+        el.className = 'stat-card stat-card--finding';
+      } else if (variant === 'ethnicity') {
+        el.className = 'stat-card stat-card--ethnicity';
+      } else {
+        el.className = 'stat-card';
+      }
+
+      if (card.badge) {
+        const badge = document.createElement('span');
+        badge.className = 'card-badge';
+        badge.textContent = card.badge;
+        el.appendChild(badge);
+      }
+
+      const valEl = document.createElement('div');
+      valEl.className = 'card-value';
+      valEl.textContent = formatValue(card.value, card.display_format);
+      el.appendChild(valEl);
+
+      const labelEl = document.createElement('div');
+      labelEl.className = 'card-label';
+      labelEl.textContent = card.label_es;
+      el.appendChild(labelEl);
+
+      if (card.sub_value != null) {
+        const sv = card.sub_value;
+        const svEl = document.createElement('div');
+        svEl.className = 'card-subvalue';
+        if (sv.value !== null) {
+          svEl.textContent = formatValue(sv.value, 'percent_1d') + ' — ' + sv.label_es;
+        } else {
+          svEl.textContent = sv.label_es;
+        }
+        el.appendChild(svEl);
+      }
+
+      // Finding-variant extra: n_base sub-line
+      if (variant === 'finding' && card.n_base != null) {
+        const nbEl = document.createElement('div');
+        nbEl.className = 'card-n-base';
+        nbEl.textContent = 'n = ' + card.n_base.toLocaleString('es') + ' casos peritados';
+        el.appendChild(nbEl);
+      }
+
+      return el;
+    }
+
+    /* ── PROVISIONAL prefix stripper ─────────────────────────────────────── */
+    function stripProvisional(text) {
+      const PROV_EMDASH = 'PROVISIONAL — ';
+      const PROV_COLON  = 'PROVISIONAL: ';
+      if (text.startsWith(PROV_EMDASH)) return { isProv: true,  body: text.slice(PROV_EMDASH.length) };
+      if (text.startsWith(PROV_COLON))  return { isProv: true,  body: text.slice(PROV_COLON.length)  };
+      return { isProv: false, body: text };
+    }
+
+    /* ── Anchor text renderer ────────────────────────────────────────────── */
+    function renderAnchor(text, containerId) {
+      const target = containerId || 'anchor-wrapper';
+      const { isProv, body } = stripProvisional(text);
+      const el = document.createElement(isProv ? 'div' : 'p');
+      el.className = isProv ? 'provisional-box' : 'anchor-text';
+      el.textContent = body;
+      document.getElementById(target).appendChild(el);
+    }
+
+    /* ── Ethnicity 100% stacked bar (ECharts) ────────────────────────────── */
+    const CAT_ORDER = [
+      'SIN_PERTENENCIA_ETNICA', 'AFRO_NARP', 'NO_REGISTRADO', 'INDIGENA', 'GITANO'
+    ];
+    const CAT_LABELS = {
+      SIN_PERTENENCIA_ETNICA: 'Sin pertenencia declarada',
+      AFRO_NARP:              'Afro-NARP',
+      NO_REGISTRADO:          'No registrado',
+      INDIGENA:               'Indígena',
+      GITANO:                 'Gitano/Rrom',
+    };
+    const ETH_COLORS = {
+      SIN_PERTENENCIA_ETNICA: CSS.scaleNull,
+      AFRO_NARP:              CSS.primaryMid,
+      NO_REGISTRADO:          CSS.scale2,
+      INDIGENA:               CSS.scale3,
+      GITANO:                 CSS.scale4,
+    };
+
+    function initEthnicityChart(marginalsDs3, marginalsDs4) {
+      const chartEl = document.getElementById('ethnicity-chart');
+      const chart = echarts.init(chartEl);
+
+      function byEtnia(rows) {
+        const m = {};
+        rows.forEach(r => { m[r.dimension_etnia] = r; });
+        return m;
+      }
+      const mapDs3 = byEtnia(marginalsDs3);
+      const mapDs4 = byEtnia(marginalsDs4);
+
+      const lowN = new Set();
+      [...marginalsDs3, ...marginalsDs4].forEach(r => {
+        if (r.low_n_flag) lowN.add(r.dimension_etnia);
+      });
+
+      const yAxis = ['VIF (DS4)', 'Delito sexual (DS3)'];
+
+      const series = CAT_ORDER.map(cat => {
+        const labelText = CAT_LABELS[cat] + (lowN.has(cat) ? ' *' : '');
+        const ds3Row = mapDs3[cat] || { pct_of_female_cases: 0, n_cases_f: 0 };
+        const ds4Row = mapDs4[cat] || { pct_of_female_cases: 0, n_cases_f: 0 };
+        return {
+          name:  labelText,
+          type:  'bar',
+          stack: 'total',
+          itemStyle: { color: ETH_COLORS[cat] },
+          data: [
+            {
+              value:     ds4Row.pct_of_female_cases,
+              itemStyle: { color: ETH_COLORS[cat] },
+              nCasesF:   ds4Row.n_cases_f,
+            },
+            {
+              value:     ds3Row.pct_of_female_cases,
+              itemStyle: { color: ETH_COLORS[cat] },
+              nCasesF:   ds3Row.n_cases_f,
+            },
+          ],
+        };
+      });
+
+      const option = {
+        animation: false,
+        tooltip: {
+          trigger: 'item',
+          formatter: function(params) {
+            const pct = params.value;
+            const nCasesF = params.data && params.data.nCasesF != null ? params.data.nCasesF : null;
+            const pctStr = pct != null
+              ? pct.toLocaleString('es', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' %'
+              : '—';
+            const nStr = nCasesF != null ? 'n = ' + nCasesF.toLocaleString('es') : '';
+            return params.seriesName + '<br/>' + params.name + ': <b>' + pctStr + '</b>'
+              + (nStr ? '<br/>' + nStr : '');
+          },
+        },
+        legend: {
+          top: 0,
+          left: 'left',
+          itemWidth: 12,
+          itemHeight: 12,
+          textStyle: { fontSize: 11 },
+        },
+        grid: { top: 60, left: '14%', right: '4%', bottom: 10, containLabel: true },
+        xAxis: {
+          type:      'value',
+          min:       0,
+          max:       100,
+          axisLabel: { formatter: '{value}%', fontSize: 11 },
+        },
+        yAxis: {
+          type:      'category',
+          data:      yAxis,
+          axisLabel: { fontSize: 11 },
+        },
+        series,
+      };
+
+      chart.setOption(option);
+      window.addEventListener('resize', () => chart.resize());
+    }
+
+    /* ── Main ────────────────────────────────────────────────────────────── */
+    async function main() {
+      const payload = await fetch(FORENSE_URL).then(r => {
+        if (!r.ok) throw new Error(`${FORENSE_URL}: HTTP ${r.status}`);
+        return r.json();
+      });
+
+      const sub = payload.sub_acto_4_5;
+
+      document.getElementById('title').textContent = sub.title_es;
+      renderAnchor(sub.anchor_text_es);
+
+      // Ethnicity stat cards (3 cards, DS3 values)
+      const ethGrid = document.getElementById('ethnicity-cards');
+      [
+        {
+          badge:          'DS3 — Sexual',
+          value:          sub.ds3_stats.pct_afro_narp_f,
+          display_format: 'percent_1d',
+          label_es:       'Afro-NARP (víctimas femeninas, sexual forense)',
+          sub_value:      null,
+          n_base:         null,
+        },
+        {
+          badge:          'DS3 — Sexual',
+          value:          sub.ds3_stats.pct_indigena_f,
+          display_format: 'percent_1d',
+          label_es:       'Indígena (víctimas femeninas, sexual forense)',
+          sub_value:      null,
+          n_base:         null,
+        },
+        {
+          badge:          'DS3 — Sexual',
+          value:          sub.ds3_stats.pct_sin_pertenencia_f,
+          display_format: 'percent_1d',
+          label_es:       'Sin pertenencia étnica declarada (víctimas femeninas, sexual forense)',
+          sub_value:      null,
+          n_base:         null,
+        },
+      ].forEach(card => ethGrid.appendChild(renderStatCard(card, 'ethnicity')));
+
+      // Ethnicity stacked bar
+      initEthnicityChart(sub.ethnicity_marginals.ds3, sub.ethnicity_marginals.ds4);
+
+      // Low-N note
+      if (sub.low_n_note_es) {
+        const noteEl = document.getElementById('low-n-note');
+        noteEl.textContent = stripProvisional(sub.low_n_note_es).body;
+        noteEl.hidden = false;
+      }
+
+      // Anchor disability
+      renderAnchor(sub.anchor_disability_es, 'anchor-disability-wrapper');
+
+      const grid = document.getElementById('card-grid');
+
+      // DS4 finding card (VIF forensic disability rate)
+      const cardDS4 = {
+        badge:          'DS4 — VIF',
+        value:          sub.ds4_stats.pct_disability_f,
+        display_format: 'percent_1d',
+        label_es:       'Con condición de discapacidad registrada (VIF forense)',
+        sub_value:      null,
+        n_base:         sub.ds4_stats.n_base_f,
+      };
+      grid.appendChild(renderStatCard(cardDS4, 'finding'));
+
+      // DS3 finding card (Sexual forensic disability rate)
+      const cardDS3 = {
+        badge:          'DS3 — Sexual',
+        value:          sub.ds3_stats.pct_disability_f,
+        display_format: 'percent_1d',
+        label_es:       'Con condición de discapacidad registrada (sexual forense)',
+        sub_value:      null,
+        n_base:         sub.ds3_stats.n_base_f,
+      };
+      grid.appendChild(renderStatCard(cardDS3, 'finding'));
+
+      // Shared caveat — rendered ONCE below both cards
+      const caveatEl = document.getElementById('shared-caveat');
+      if (sub.caveat_es) {
+        caveatEl.textContent = sub.caveat_es;
+        caveatEl.hidden = false;
+      }
+
+      /* Diagnostics */
+      const ul = document.getElementById('diag-list');
+      const gitanoDs3 = (sub.ethnicity_marginals.ds3.find(r => r.dimension_etnia === 'GITANO') || {}).low_n_flag;
+      const gitanoDs4 = (sub.ethnicity_marginals.ds4.find(r => r.dimension_etnia === 'GITANO') || {}).low_n_flag;
+      const rows = [
+        `DS4 pct_disability_f: ${sub.ds4_stats.pct_disability_f}% (esperado: 0.6)`,
+        `DS3 pct_disability_f: ${sub.ds3_stats.pct_disability_f}% (esperado: 1.2)`,
+        `DS4 n_base_f: ${sub.ds4_stats.n_base_f.toLocaleString('es')} (esperado: 9.637)`,
+        `DS3 n_base_f: ${sub.ds3_stats.n_base_f.toLocaleString('es')} (esperado: 16.467)`,
+        `DS3 pct_afro_narp_f: ${sub.ds3_stats.pct_afro_narp_f}% (esperado: 16.2)`,
+        `DS3 pct_indigena_f: ${sub.ds3_stats.pct_indigena_f}% (esperado: 4.1)`,
+        `DS3 pct_sin_pertenencia_f: ${sub.ds3_stats.pct_sin_pertenencia_f}% (esperado: 75.2)`,
+        `ethnicity_marginals.ds3 length: ${sub.ethnicity_marginals.ds3.length} (esperado: 5)`,
+        `ethnicity_marginals.ds4 length: ${sub.ethnicity_marginals.ds4.length} (esperado: 5)`,
+        `GITANO low_n_flag DS3: ${gitanoDs3} (esperado: true)`,
+        `GITANO low_n_flag DS4: ${gitanoDs4} (esperado: true)`,
+        `anchor_disability_es presente: ${sub.anchor_disability_es ? 'sí' : 'no'}`,
+        `low_n_note_es presente: ${sub.low_n_note_es ? 'sí' : 'no'}`,
+        `ECharts cargado: ${typeof echarts !== 'undefined'} (esperado: true)`,
+      ];
+      rows.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+    }
+
+    main().catch(err => {
+      console.error(err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

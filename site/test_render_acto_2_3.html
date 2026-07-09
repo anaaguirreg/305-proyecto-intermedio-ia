@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!-- Paso 2b — ECharts smoke render: sub_acto_2_3 (Top 10 municipios por brecha de género).
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_2_3.html
+     fetch() bloqueado bajo file:// por restricción CORS de mismo origen. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Brecha de género Top 10</title>
+  <!-- ECharts 6.0.0 via jsDelivr. Elegido sobre unpkg por mejor cobertura de CDN
+       en América Latina y menor latencia típica desde Colombia. -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body       { font-family: var(--font-sans); padding: 1rem 1.25rem;
+                 background: var(--color-canvas); color: var(--color-ink); }
+    h2         { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+    #ancla     { font-size: 0.88rem; color: var(--color-muted); line-height: 1.55;
+                 max-width: 860px; margin-bottom: 0.9rem; }
+    #chart     { width: 100%; max-width: 860px; height: 380px; }
+    details    { max-width: 860px; margin-top: 0.8rem; font-size: 0.8rem; }
+    summary    { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul         { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.85; }
+    .tabla-wrap { max-width: 860px; margin-top: 1.25rem; overflow-x: auto; }
+    table      { border-collapse: collapse; width: 100%; font-size: 0.83rem; }
+    th, td     { padding: 0.35rem 0.75rem; border: 1px solid var(--color-hairline); text-align: left; }
+    th         { background: var(--color-hairline); font-weight: 600; }
+    tr.alt td  { background: var(--color-canvas); }
+    tr.top1 td { font-weight: 600; }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <h2 id="titulo"></h2>
+  <p id="ancla"></p>
+  <div id="chart"></div>
+
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+
+  <div class="tabla-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Rango</th>
+          <th>Municipio</th>
+          <th>Departamento</th>
+          <th>Brecha promedio</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-body"></tbody>
+    </table>
+  </div>
+
+  <p id="error-msg" hidden></p>
+
+  <script>
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    /* ── Ruta ──────────────────────────────────────────────────────────────── */
+    const BRECHAS_URL = './data/acto_2_brechas.json';
+
+    /* ── Colores ────────────────────────────────────────────────────────────
+       BAR_COLOR CSS.primaryMid: magenta profundo — encoding de inequidad/severidad.
+       Color único (no ramp) porque todos los 10 registros comparten la misma
+       variable, no una escala de magnitud diferenciada.
+       EL TAMBO usa borde más oscuro (#3d0f27) en lugar de relleno distinto,
+       para señalar el primer rango sin introducir un segundo canal de color.   */
+    const BAR_COLOR        = CSS.primaryMid;
+    const HIGHLIGHT_BORDER = CSS.primaryDeep;
+
+    /* ── Referencia compartida para el formatter del tooltip ────────────────── */
+    let ITEMS_REF = [];
+
+    /* ── Helpers ────────────────────────────────────────────────────────────── */
+    const fmt = v => (v == null ? 'no calculable' : v.toFixed(2) + '×');
+
+    function tooltipFormatter(params) {
+      const it = ITEMS_REF[params[0].dataIndex];
+      return [
+        `<strong>${it.municipality}</strong> — ${it.department}`,
+        `Código DANE ${it.cod_municipio} · Rango ${it.rank}`,
+        `Brecha promedio: ${fmt(it.gap_average)}`,
+        `<em>Desglose por dimensión</em>`,
+        `VIF NNA: ${fmt(it.gap_vif_nna)}`,
+        `VIF Adultas: ${fmt(it.gap_vif_adults)}`,
+        `Sexual NNA: ${fmt(it.gap_sexual_nna)}`,
+        `Sexual Adultas: ${fmt(it.gap_sexual_adults)}`,
+      ].join('<br>');
+    }
+
+    /* ── Serie ECharts ──────────────────────────────────────────────────────── */
+    function buildSeriesData(categories, values) {
+      return values.map((v, i) => {
+        // Guarda contra gap_average nulo: no ocurre en este sub_acto
+        // (confirmado en inspección Phase 0), pero se renderiza con
+        // placeholder neutro por si el exporter cambia en el futuro.
+        if (v == null) {
+          console.warn(
+            `gap_average null en posición ${i} (${categories[i]}) — renderizado como "no calculable"`,
+          );
+          return {
+            value: 0,
+            itemStyle: { color: CSS.scaleNull },
+            label: { show: true, formatter: () => 'no calculable', color: CSS.muted },
+          };
+        }
+
+        // EL TAMBO siempre está en index 0 (rank 1, confirmado en Phase 0).
+        if (i === 0) {
+          return {
+            value: v,
+            itemStyle: { color: BAR_COLOR, borderColor: HIGHLIGHT_BORDER, borderWidth: 2 },
+          };
+        }
+
+        return v; // número plano — hereda BAR_COLOR del nivel de serie
+      });
+    }
+
+    /* ── Opción ECharts ─────────────────────────────────────────────────────── */
+    function buildOption(categories, seriesData) {
+      return {
+        backgroundColor: CSS.canvas,
+        grid: { left: 230, right: 95, top: 16, bottom: 50 },
+        xAxis: {
+          type: 'value',
+          name: 'Brecha promedio (f/m)',
+          nameLocation: 'middle',
+          nameGap: 32,
+          axisLabel: { formatter: v => v.toFixed(1) + '×' },
+          splitLine: { lineStyle: { color: CSS.hairline } },
+        },
+        /* yAxis.inverse: true — el array categories ya está ordenado
+           descendente (EL TAMBO primero). ECharts renderiza los ejes de
+           categoría de abajo hacia arriba por defecto, lo que colocaría
+           EL TAMBO (index 0) en la parte INFERIOR — contrario al objetivo
+           visual de un ranking. inverse: true invierte el orden visual y
+           coloca el index 0 en la parte SUPERIOR sin modificar el array
+           de datos ni violar la restricción de "sin lógica de negocio en JS". */
+        yAxis: {
+          type: 'category',
+          data: categories,
+          inverse: true,
+          axisLabel: { width: 215, overflow: 'truncate', fontSize: 12 },
+        },
+        series: [{
+          type: 'bar',
+          data: seriesData,
+          color: BAR_COLOR,
+          label: {
+            show: true,
+            position: 'right',
+            formatter: p => fmt(p.value),
+            fontSize: 11,
+            color: CSS.body,
+          },
+        }],
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'shadow' },
+          formatter: tooltipFormatter,
+        },
+      };
+    }
+
+    /* ── Diagnóstico de carga ───────────────────────────────────────────────── */
+    function buildDiagnostico(items, fullPayload) {
+      const elTamboRank = items.findIndex(it => it.cod_municipio === '19256') + 1;
+
+      const quibdoIdx  = items.findIndex(it => it.cod_municipio === '27001');
+      const quibdoLine = quibdoIdx >= 0
+        ? `Rango ${quibdoIdx + 1} — ${items[quibdoIdx].municipality} (CHOCO)`
+        : 'No presente en el Top 10';
+
+      // Recuento de gap_average nulos en el archivo completo (informativo)
+      let nullGapTotal = 0;
+      const walkNullGap = obj => {
+        if (Array.isArray(obj)) { obj.forEach(walkNullGap); }
+        else if (obj && typeof obj === 'object') {
+          for (const [k, v] of Object.entries(obj)) {
+            if (k === 'gap_average' && v === null) nullGapTotal++;
+            else walkNullGap(v);
+          }
+        }
+      };
+      walkNullGap(fullPayload);
+
+      const rows = [
+        `Filas renderizadas: ${items.length}`,
+        `Posición EL TAMBO (19256): ${elTamboRank} (esperado: 1)`,
+        `Posición Quibdó (27001): ${quibdoLine}`,
+        `gap_average nulos en el archivo completo: ${nullGapTotal} — todos en sub_acto_2_5 (municipios con divisiones por cero)`,
+        `gap_vif_nna o gap_sexual_nna nulos en este sub_acto: 2 (ARGELIA, SILVIA) — solo afectan desglose del tooltip, no el gráfico`,
+      ];
+
+      const ul = document.getElementById('diag-list');
+      for (const text of rows) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        ul.appendChild(li);
+      }
+    }
+
+    /* ── Tabla HTML ─────────────────────────────────────────────────────────── */
+    function buildTable(items) {
+      const tbody = document.getElementById('tabla-body');
+      items.forEach((it, i) => {
+        const tr = document.createElement('tr');
+        if (it.cod_municipio === '19256') tr.className = 'top1';
+        else if (i % 2 === 1) tr.className = 'alt';
+        tr.innerHTML = `<td>${it.rank}</td>
+                        <td>${it.municipality}</td>
+                        <td>${it.department}</td>
+                        <td>${fmt(it.gap_average)}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    /* ── Main ───────────────────────────────────────────────────────────────── */
+    async function main() {
+      const payload = await fetch(BRECHAS_URL).then(r => {
+        if (!r.ok) throw new Error(`${BRECHAS_URL}: HTTP ${r.status}`);
+        return r.json();
+      });
+
+      const sub = payload.sub_acto_2_3;
+      const { echarts_series, items } = sub.data;
+      ITEMS_REF = items;
+
+      const tituloEl = document.getElementById('titulo');
+      if (sub.title_es) {
+        tituloEl.textContent = sub.title_es;
+      } else {
+        tituloEl.remove();
+      }
+      document.getElementById('ancla').textContent  = sub.anchor_text_es;
+
+      const seriesData = buildSeriesData(echarts_series.categories, echarts_series.values);
+      const chart      = echarts.init(document.getElementById('chart'));
+      chart.setOption(buildOption(echarts_series.categories, seriesData));
+
+      buildDiagnostico(items, payload);
+      buildTable(items);
+    }
+
+    main().catch(err => {
+      console.error('Error en renderizado:', err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

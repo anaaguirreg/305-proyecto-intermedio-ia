@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<!-- sub_acto_1_3 — Top 10 municipios por ICV-GEN-F (bar ranking con highlights).
+     Extensión de renderBarRanking (test_render_acto_2_3.html):
+       + valueField = 'icv_average' (en lugar de 'gap_average')
+       + highlightConfig: lee highlight_flags del echarts_series e items[].highlight
+       + CSS var --color-bar-highlight para barras en top 2
+     test_render_acto_2_3.html queda sin cambios.
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_1_3.html
+     fetch() bloqueado bajo file:// por restricción CORS de mismo origen. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Top 10 ICV-GEN-F (sub_acto_1_3)</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Highlight bar color for elevated-ICV municipalities. Placeholder —
+         visual identity pass is deferred. Matches brecha theme saturation. */
+      --color-bar-highlight: var(--color-primary-mid);
+    }
+
+    body       { font-family: var(--font-sans); padding: 1rem 1.25rem;
+                 background: var(--color-canvas); color: var(--color-ink); }
+    h2         { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber);
+      background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      color: var(--color-accent-amber);
+      line-height: 1.5;
+      max-width: 860px;
+      margin-bottom: 0.75rem;
+    }
+    .anchor-text {
+      font-size: 0.88rem;
+      color: var(--color-muted);
+      line-height: 1.55;
+      max-width: 860px;
+      margin-bottom: 0.9rem;
+    }
+    #chart     { width: 100%; max-width: 860px; height: 380px; }
+    details    { max-width: 860px; margin-top: 0.8rem; font-size: 0.8rem; }
+    summary    { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul         { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.85; }
+    .warn      { color: var(--color-accent-amber); }
+    .tabla-wrap { max-width: 860px; margin-top: 1.25rem; overflow-x: auto; }
+    table      { border-collapse: collapse; width: 100%; font-size: 0.83rem; }
+    th, td     { padding: 0.35rem 0.75rem; border: 1px solid var(--color-hairline); text-align: left; }
+    th         { background: var(--color-hairline); font-weight: 600; }
+    tr.alt td  { background: var(--color-canvas); }
+    tr.highlighted td { font-weight: 600; }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <h2 id="titulo"></h2>
+  <div id="anchor-wrapper"></div>
+  <div id="chart"></div>
+
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+
+  <div class="tabla-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Rango</th>
+          <th>Municipio</th>
+          <th>Departamento</th>
+          <th>ICV-GEN-F promedio</th>
+          <th>Tipología</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-body"></tbody>
+    </table>
+  </div>
+
+  <p id="error-msg" hidden></p>
+
+  <script>
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const PANORAMA_URL = './data/acto_1_panorama.json';
+
+    // Base bar color (non-highlighted municipalities)
+    const BAR_COLOR = '#3d8a7a';
+
+    // Highlight color read from CSS var — keeps color out of JS business logic
+    const HIGHLIGHT_COLOR = getComputedStyle(document.documentElement)
+      .getPropertyValue('--color-bar-highlight').trim();
+
+    // Tooltip reference (set in main before formatter closure)
+    let ITEMS_REF = [];
+
+    /* ── Shared anchor-text renderer ─────────────────────────────────────── */
+    function renderAnchor(text) {
+      const wrapper = document.getElementById('anchor-wrapper');
+      const PROV = 'PROVISIONAL: ';
+      const isProv = text.startsWith(PROV);
+      const el = document.createElement(isProv ? 'div' : 'p');
+      el.className = isProv ? 'provisional-box' : 'anchor-text';
+      el.textContent = isProv ? text.slice(PROV.length) : text;
+      wrapper.appendChild(el);
+    }
+
+    /* ── Tooltip formatter ────────────────────────────────────────────────── */
+    function tooltipFormatter(params) {
+      const it = ITEMS_REF[params[0].dataIndex];
+      // Strip emoji from cluster_name for clean display
+      const clusterLabel = it.cluster_name
+        ? it.cluster_name.replace(/^\p{Emoji}\s*/u, '')
+        : '—';
+      return [
+        `<strong>${it.municipality}</strong> — ${it.department}`,
+        `Código DANE ${it.cod_municipio} · Rango ${it.rank}`,
+        `ICV-GEN-F promedio: ${it.icv_average.toFixed(2)}`,
+        `Tipología: ${clusterLabel}`,
+      ].join('<br>');
+    }
+
+    /* ── Series data — applies highlight color from CSS var ──────────────── */
+    function buildSeriesData(values, highlightFlags) {
+      return values.map((v, i) => {
+        if (v == null) {
+          return { value: 0, itemStyle: { color: CSS.scaleNull },
+                   label: { show: true, formatter: () => 'sin dato', color: CSS.muted } };
+        }
+        if (highlightFlags && highlightFlags[i]) {
+          return { value: v, itemStyle: { color: HIGHLIGHT_COLOR } };
+        }
+        return v; // number — inherits BAR_COLOR from series level
+      });
+    }
+
+    /* ── ECharts option ───────────────────────────────────────────────────── */
+    function buildOption(categories, seriesData) {
+      return {
+        backgroundColor: CSS.canvas,
+        grid: { left: 230, right: 95, top: 16, bottom: 50 },
+        xAxis: {
+          type: 'value',
+          name: 'ICV-GEN-F promedio',
+          nameLocation: 'middle',
+          nameGap: 32,
+          axisLabel: { formatter: v => v.toFixed(1) },
+          splitLine: { lineStyle: { color: CSS.hairline } },
+        },
+        /* yAxis.inverse: true — same rationale as sub_acto_2_3:
+           categories sorted ascending, rank-1 (PASTO) is at index 9.
+           Without inverse it renders at the bottom; inverse puts it at top. */
+        yAxis: {
+          type: 'category',
+          data: categories,
+          inverse: true,
+          axisLabel: { width: 215, overflow: 'truncate', fontSize: 12 },
+        },
+        series: [{
+          type: 'bar',
+          data: seriesData,
+          color: BAR_COLOR,
+          label: {
+            show: true,
+            position: 'right',
+            formatter: p => (p.value != null ? p.value.toFixed(2) : '—'),
+            fontSize: 11,
+            color: CSS.body,
+          },
+        }],
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'shadow' },
+          formatter: tooltipFormatter,
+        },
+      };
+    }
+
+    /* ── Diagnostic panel ─────────────────────────────────────────────────── */
+    function buildDiagnostico(data) {
+      const ul = document.getElementById('diag-list');
+      const pastoRank  = data.items.findIndex(it => it.cod_municipio === '52001') + 1;
+      const popayaRank = data.items.findIndex(it => it.cod_municipio === '19001') + 1;
+      const hlCount    = data.items.filter(it => it.highlight).length;
+      const rows = [
+        `Filas renderizadas: ${data.items.length}`,
+        `Municipios destacados (highlight=true): ${hlCount} (esperado: ${data.highlighted_municipalities.length})`,
+        `Posición PASTO (52001): ${pastoRank || '—'} (esperado: 1)`,
+        `Posición POPAYÁN (19001): ${popayaRank || '—'} (esperado: 2)`,
+        `Color highlight leído de --color-bar-highlight: ${HIGHLIGHT_COLOR || '(vacío — CSS var no resuelta)'}`,
+      ];
+      for (const text of rows) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        ul.appendChild(li);
+      }
+      if (!HIGHLIGHT_COLOR) {
+        const li = document.createElement('li');
+        li.className = 'warn';
+        li.textContent = '⚠ --color-bar-highlight no resuelta — las barras destacadas usarán color heredado.';
+        ul.appendChild(li);
+      }
+    }
+
+    /* ── HTML table ───────────────────────────────────────────────────────── */
+    function buildTable(items) {
+      const tbody = document.getElementById('tabla-body');
+      items.forEach((it, i) => {
+        const tr = document.createElement('tr');
+        if (it.highlight)   tr.className = 'highlighted';
+        else if (i % 2 === 1) tr.className = 'alt';
+        const clusterLabel = it.cluster_name
+          ? it.cluster_name.replace(/^\p{Emoji}\s*/u, '')
+          : '—';
+        tr.innerHTML =
+          `<td>${it.rank}</td>` +
+          `<td>${it.municipality}</td>` +
+          `<td>${it.department}</td>` +
+          `<td>${it.icv_average.toFixed(2)}</td>` +
+          `<td>${clusterLabel}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    /* ── Main ─────────────────────────────────────────────────────────────── */
+    async function main() {
+      const panorama = await fetch(PANORAMA_URL).then(r => {
+        if (!r.ok) throw new Error(`${PANORAMA_URL}: HTTP ${r.status}`);
+        return r.json();
+      });
+
+      const sub  = panorama.sub_acto_1_3;
+      const data = sub.data;
+      const { echarts_series, items } = data;
+      ITEMS_REF = items;
+
+      document.getElementById('titulo').textContent = sub.title_es;
+      renderAnchor(sub.anchor_text_es);
+
+      const seriesData = buildSeriesData(
+        echarts_series.values,
+        echarts_series.highlight_flags,
+      );
+      const chart = echarts.init(document.getElementById('chart'));
+      chart.setOption(buildOption(echarts_series.categories, seriesData));
+      window.addEventListener('resize', () => chart.resize());
+
+      buildDiagnostico(data);
+      buildTable(items);
+    }
+
+    main().catch(err => {
+      console.error('Error en renderizado:', err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

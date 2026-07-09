@@ -1,0 +1,483 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "Reglas de ingesta y limpieza para los 5 datasets"
+  },
+  "file_loading": {
+    "csv": {
+      "low_memory": false,
+      "dtype_backend": "numpy_nullable"
+    },
+    "excel": {
+      "engine": "openpyxl"
+    },
+    "parquet": {
+      "engine": "pyarrow"
+    }
+  },
+  "datasets": {
+    "violencia": {
+      "filename": "ds1_violencia.csv",
+      "type": "csv",
+      "required_columns": ["DEPARTAMENTO", "MUNICIPIO", "CODIGO DANE", "FECHA HECHO", "GENERO", "GRUPO ETARIO", "CANTIDAD"]
+    },
+    "sexuales": {
+      "filename": "ds2_sexuales.csv",
+      "type": "csv",
+      "required_columns": ["DEPARTAMENTO", "MUNICIPIO", "CODIGO DANE", "FECHA HECHO", "GENERO", "GRUPO ETARIO", "CANTIDAD", "delito"]
+    },
+    "poblacion": {
+      "filename": "dane_poblacion.xlsx",
+      "type": "excel",
+      "sheet_index": 2,
+      "skip_rows": 7,
+      "header_mode": [0, 1],
+      "load_as_strings": true,
+      "age_column_pattern": "(MUJERES|HOMBRES)\\s+\\d+",
+      "required_columns": ["MPIO", "AÑO", "ÁREA GEOGRÁFICA"]
+    },
+    "forense": {
+      "filename": "ds4_forense.csv",
+      "type": "csv",
+      "required_columns": ["Código Dane Municipio", "Sexo de la victima", "Grupo Mayor Menor de Edad"]
+    },
+    "seforense": {
+      "filename": "ds3_sexuales_forense.csv",
+      "type": "csv",
+      "required_columns": ["Código Dane Municipio", "sexo de la victima", "Departamento del hecho DANE", "año del hecho"]
+    }
+  },
+  "column_aliases": {
+    "fecha_hecho": ["FECHA HECHO", "FECHA_HECHO", "FECHAHECHO", "FECHA DEL HECHO", "FECHA"],
+    "anio_hecho": ["AÑO", "AÑO_HECHO", "PERIODO", "VIGENCIA", "ANO", "ANIO", "Año del hecho", "AÑO DEL HECHO", "Año"],
+    "mes_hecho": ["Mes del hecho", "MES_HECHO", "MES", "Mes", "MES DEL HECHO", "Mes del hecho DANE"],
+    "dia_hecho": ["Dia del hecho", "DIA_HECHO", "DIA", "Día", "DIA DEL HECHO", "Día del hecho DANE"],
+    "cod_municipio": ["CODIGO DANE", "CODIGO_DANE", "CODIGODANE", "MPIO", "DANE", "MUNICIPIO_COD", "COD_DANE", "Código Dane Municipio", "CODIGO MUNICIPIO"],
+    "departamento": ["DEPARTAMENTO", "DPNOM", "DPTO", "DEPTO", "DEPTONOM", "NOM_DPTO", "CODDPTO", "Departamento del hecho DANE", "DEPARTAMENTO DEL HECHO"],
+    "genero_victima": ["GENERO", "GENERO_VICTIMA", "SEXO", "SEXO_VICTIMA", "Sexo de la victima", "Sexo de la víctima", "SEXO DE LA VICTIMA"],
+    "grupo_etario": ["GRUPO ETARIO", "GRUPO_ETARIO", "GRUPOETARIO", "RANGO_EDAD", "GRUPOEDAD", "Grupo etario"],
+    "cantidad": ["CANTIDAD", "NUMERO_CASOS", "TOTAL_VICTIMAS", "VICTIMAS", "CANTIDAD DE VICTIMAS"],
+    "municipio": ["MUNICIPIO", "NOM_MUN", "MUNICIPIO_NOMBRE", "Municipio del hecho DANE", "NOMBRE MUNICIPIO", "DPMP"],
+    "tipo_delito": ["delito", "DELITO", "TIPO_DELITO", "NOMBRE_DELITO", "DELITO ESPECIFICO"],
+    "area_geo": ["ÁREA GEOGRÁFICA", "AREA_GEOGRAFICA", "AREA GEOGRAFICA", "ZONA", "AREA GEOGRAFICA"],
+    "armas_medios": ["ARMAS MEDIOS", "ARMAS_MEDIOS", "ARMASMEDIOS", "ARMAS Y MEDIOS"],
+    "ciclo_vital": ["Ciclo Vital", "CICLO VITAL"],
+    "grupo_edad": ["Grupo Mayor Menor de Edad", "GRUPO MAYOR MENOR DE EDAD"],
+    "escenario": ["Escenario del Hecho", "ESCENARIO DEL HECHO"],
+    "agresor": ["Presunto Agresor Detallado", "PRESUNTO AGRESOR DETALLADO"],
+    "sexo_agresor": ["Sexo del Agresor", "SEXO DEL AGRESOR", "sexo_agresor", "Agresor Sexo"],
+    "factor": ["Factor Desencadenante de la Agresión", "FACTOR DESENCADENANTE DE LA AGRESIÓN"],
+    "discapacidad": ["Tipo de Discapacidad", "TIPO DE DISCAPACIDAD"],
+    "etnia": ["Pertenencia Étnica", "PERTENENCIA ÉTNICA"],
+    "hora_rango": ["Rango de Hora del Hecho X 3 Horas", "RANGO DE HORA DEL HECHO X 3 HORAS"],
+    "dias_incapacidad": ["Días de Incapacidad Medicolegal", "DIAS DE INCAPACIDAD MEDICOLEGAL"],
+    "circunstancia": ["circunstancia del hecho", "CIRCUNSTANCIA DEL HECHO", "Circunstancia del Hecho", "Circunstancia del Hecho Detallada", "CIRCUNSTANCIA DEL HECHO DETALLADA"],
+    "total_h": ["TOTAL Hombres", "TOTAL HOMBRES"],
+    "total_f": ["TOTAL Mujeres", "TOTAL MUJERES"]
+  },
+  "value_aliases": {
+    "CAUCA": ["CAUCA", "ELCAUCA", "DEPTOCAUCA", "cauca", "Cauca"],
+    "CHOCO": ["CHOCO", "ELCHOCO", "DEPTOCHOCO", "choco", "Chocó"],
+    "NARIÑO": ["NARIÑO", "DEPTONARIÑO", "narino", "Nariño"],
+    "VALLE DEL CAUCA": ["VALLE", "VALLEDELCAUCA", "VCAUCA", "VALLE DEL CAUCA", "valle", "vcauca"],
+    "CALI": ["CALI", "CALI CT", "CALICT"],
+    "POPAYAN": ["POPAYAN", "POPAYAN CT", "POPAYANCT"],
+    "PASTO": ["PASTO", "PASTO CT", "PASTOCT"],
+    "QUIBDO": ["QUIBDO", "QUIBDO CT", "QUIBDOCT"],
+    "FEMENINO": ["FEMENINO", "MUJER", "F", "Femenino", "mujer", "Mujer", "femenino", "Varón", "VARON"],
+    "MASCULINO": ["MASCULINO", "HOMBRE", "M", "Masculino", "hombre", "Hombre", "masculino", "Varón", "VARON"],
+    "TOTAL": ["Total", "TOTAL", "total", "TOT"],
+    "URBANA": ["URBANA", "Urbana", "urbana", "U", "CENTRO", "CABECERA", "CABECERA MUNICIPAL"],
+    "RURAL": ["RURAL", "Rural", "rural", "R", "VEREDA", "COMUNA", "CENTROS POBLADOS Y RURAL DISPERSO"],
+    "NO_REGISTRADO": ["NO_REGISTRADO", "NO REPORTADO", "N/A", "SIN INFORMACION", "NA", "NULL", "NO SABE / NO INFORMA", "No Sabe / No Informa"],
+    "NO_APLICA": ["No aplica", "NO APLICA"],
+    "TRANSFORMISTA": ["TRANSFORMISTA", "Transformista"],
+    "TRANSEXUAL": ["TRANSEXUAL", "Transexual"],
+    "TRANSGENERO": ["TRANSGÉNERO", "TRANSGENERO", "Transgénero"],
+    "TRAVESTI": ["TRAVESTI", "Travesti"],
+    "ABUELO": ["ABUELO A", "ABUELOA", "ABUELO(A)", "abuelo(a)"],
+    "CUNADO": ["CUNADO A", "CUNADOA", "CUNADO(A)", "cuñado(a)"],
+    "HERMANO": ["HERMANO A", "HERMANOA", "HERMANO(A)", "hermano(a)"],
+    "HIJO": ["HIJO A", "HIJOA", "HIJO(A)", "hijo(a)"],
+    "NIETO": ["NIETO A", "NIETOA", "NIETO(A)", "nieto(a)"],
+    "PRIMO": ["PRIMO A", "PRIMOA", "PRIMO(A)", "primo(a)"],
+    "SOBRINO": ["SOBRINO A", "SOBRINOA", "SOBRINO(A)", "sobrino(a)"],
+    "SUEGRO": ["SUEGRO A", "SUEGROA", "SUEGRO(A)", "suegro(a)"],
+    "TIO": ["TIO A", "TIOA", "TIO(A)", "tío(a)"],
+    "PADRE": ["PADRE", "PADREA", "PADRE(A)"],
+    "MADRE": ["MADRE", "MADREA", "MADRE(A)"],
+    "CONYUGE": ["CONYUGE", "CONYUGUE", "CÓNYUGE", "cónyuge", "esposo", "esposa"],
+    "ENCARGADO_CUIDADO": ["ENCARGADO DEL CUIDADO", "ENCARGADODELCUIDADO"],
+    "OTROS_FAMILIARES": ["OTROS FAMILIARES CIVILES O CONSANGUINEOS", "OTROSFAMILIARESCIVILESOCONSANGUINEOS"],
+    "OTRAS": ["OTRAS RAZONES"],
+    "AMIGO": ["AMIGO A", "AMIGOA", "AMIGO(A)", "amigo(a)"],
+    "NOVIO": ["NOVIO A", "NOVIOA", "NOVIO(A)", "novio(a)"],
+    "EX NOVIO": ["EX NOVIO A", "EX NOVIOA", "EXNOVIO A", "EXNOVIOA", "EX  NOVIO A"],
+    "PROFESOR": ["PROFESOR A", "PROFESORA", "PROFESOR(A)", "profesor(a)"],
+    "COMPANERO PERMANENTE": ["COMPANERO PERMANENTE", "COMPANEROA PERMANENTE", "COMPANERO A PERMANENTE", "COMPANERO(A) PERMANENTE", "compañero(a) permanente", "COMPANERO A  PERMANENTE"],
+    "EX COMPANERO PERMANENTE": ["EX COMPANERO PERMANENTE", "EX COMPANERO A PERMANENTE", "EXCOMPANERO A PERMANENTE", "EX COMPANEROA PERMANENTE", "EX  COMPANERO A PERMANENTE"],
+    "CONOCIDO": ["CONOCIDO"],
+    "ESPOSO": ["ESPOSO A"],
+    "CONOCIDO SIN NINGUN TRATO": ["CONOCIDO SIN NINGUN TRATO", "CONOCIDO SIN TRATO"],
+    "COMPANERO DE ESTUDIO": ["COMPANERO A DE ESTUDIO", "COMPANEROA DE ESTUDIO"],
+    "COMPANERO DE TRABAJO": ["COMPANEROA DE TRABAJO", "COMPANERO A DE TRABAJO"],
+    "COMPANERO DE CELDA": ["COMPANERO A DE CELDA", "COMPANEROA DE CELDA"],
+    "CALLE_AUTOPISTA_AVENIDA_DENTRO_DE_LA_CIUDAD": ["CALLE AUTOPISTA AVENIDA DENTRO DE LA CIUDAD", "CALLE AUTOPISTAAVENIDADENTRO DE LA CIUDAD"],
+    "CARRETERA_FUERA_DE_LA_CIUDAD": ["CARRETERA FUERA DE LA CIUDAD"],
+    "CENTRO_DE_ATENCION_MEDICA": ["CENTRO DE ATENCION MEDICA HOSPITAL CLINICA CONSULTORIO ETC", "CENTRO DE ATENCION MEDICA HOSPITALCLINICACONSULTORIOETC"],
+    "CENTROS_DE_RECLUSION": ["CENTROS DE RECLUSION"],
+    "CENTROS_EDUCATIVOS": ["CENTROS EDUCATIVOS"],
+    "ESPACIOS_TERRESTRES_AL_AIRE_LIBRE": ["ESPACIOS TERRESTRES AL AIRE LIBRE BOSQUE POTRERO MONTANA PLAYA ETC", "ESPACIOS TERRESTRES AL AIRE LIBRE BOSQUEPOTREROMONTANAPLAYAETC"],
+    "ESPACIOS_ACUATICOS_AL_AIRE_LIBRE": ["ESPACIOS ACUATICOS AL AIRE LIBRE MAR RIO ARROYO HUMEDAL LAGO ETC", "ESPACIOS ACUATICOS AL AIRE LIBRE MARRIOARROYOHUMEDALLAGOETC"],
+    "ESTABLECIMIENTO_COMERCIAL": ["ESTABLECIMIENTO COMERCIAL TIENDA CENTRO COMERCIAL ALMACEN", "ESTABLECIMIENTO COMERCIAL TIENDA CENTRO COMERCIAL ALMACEN PLAZA DE MERCADO", "ESTABLECIMIENTO COMERCIAL TIENDACENTRO COMERCIALALMACENPLAZA DE MERCADO", "ESTABLECIMIENTO COMERCIAL PLAZA DE MERCADO GALERIA"],
+    "ESTABLECIMIENTO_INDUSTRIAL": ["ESTABLECIMIENTO INDUSTRIAL FABRICA PLANTA YO OBRAS EN CONSTRUCCION", "ESTABLECIMIENTO INDUSTRIAL FABRICAPLANTA YO OBRAS EN CONSTRUCCION"],
+    "RESTAURANTES_Y_ASADEROS": ["ESTABLECIMIENTOS DE EXPENDIO DE COMIDAS RESTAURANTES ASADEROS SALSAMENTARIAS ETC", "ESTABLECIMIENTOS DE EXPENDIO DE COMIDAS RESTAURANTESASADEROSSALSAMENTARIASETC"],
+    "ADMINISTRACION_PUBLICA": ["ESTABLECIMIENTOS DEDICADOS A LA ADMINISTRACION PUBLICA CORTES JUZGADOS MINISTERIOS ETC", "ESTABLECIMIENTOS DEDICADOS A LA ADMINISTRACION PUBLICA CORTESJUZGADOSMINISTERIOSETC"],
+    "LUGARES_CULTURALES": ["LUGARES DE ACTIVIDADES CULTURALES CINES TEATROS MUSEOS BIBLIOTECAS ETC", "LUGARES DE ACTIVIDADES CULTURALES CINESTEATROSMUSEOSBIBLIOTECASETC"],
+    "LUGARES_CUIDADO_PERSONAS": ["LUGARES DE CUIDADO DE PERSONAS HOSPICIOS ORFELINATOS HOGARES GERIATRICOS ETC", "LUGARES DE CUIDADO DE PERSONAS HOSPICIOSORFELINATOSHOGARES GERIATRICOSETC"],
+    "LUGARES_HOSPEDAJE": ["LUGARES DE HOSPEDAJE HOTELES CAMPAMENTOS Y OTROS TIPOS DE HOSPEDAJE NO PERMANENTE MOTELES ETC", "LUGARES DE HOSPEDAJE HOTELESCAMPAMENTOS Y OTROS TIPOS DE HOSPEDAJE NO PERMANENTEMOTELESETC"],
+    "LUGARES_EXPENDIO_ALCOHOL": ["LUGARES DE ESPARCIMIENTO CON EXPENDIO DE ALCOHOL"],
+    "OFICINAS_EDIFICIOS": ["OFICINAS YO EDIFICIOS DE OFICINAS", "OFICINASYOEDIFICIOSDEOFICINAS"],
+    "PARQUEADEROS": ["PARQUEADEROS ESTACIONAMIENTOS", "PARQUEADEROSESTACIONAMIENTOS"],
+    "SITIO_DE_CULTO": ["SITIO DE CULTO CAPILLA IGLESIA TEMPLO ETC", "SITIO DE CULTO CAPILLAIGLESIATEMPLOETC"],
+    "VIA_PUBLICA": ["VIA PUBLICA"],
+    "VIVIENDA": ["VIVIENDA"],
+    "VEHICULO_PARTICULAR": ["VEHICULO DE SERVICIO PARTICULAR", "VEHICULO SERVICIO PARTICULAR"],
+    "VEHICULO_TRANSPORTE": ["VEHICULO DE TRANSPORTE"],
+    "TERMINALES_PASAJEROS": ["TERMINALES DE PASAJEROS"],
+    "TALLER": ["TALLER"],
+    "TERRENO_BALDIO": ["TERRENO BALDIO"],
+    "ZONAS_AGROPECUARIAS": ["ZONAS DE ACTIVIDADES AGROPECUARIAS"],
+    "AREAS_DEPORTIVAS_RECREATIVAS": ["AREAS DEPORTIVAS YO RECREATIVAS"],
+    "ESTACIONES_SERVICIO": ["ESTACIONES DE SERVICIO BOMBAS DE GASOLINA"],
+    "GUARNICIONES_MILITARES": ["GUARNICIONES MILITARES YO DE POLICIA"],
+    "ESTABLECIMIENTOS_FINANCIEROS": ["ESTABLECIMIENTOS FINANCIEROS Y RELACIONADOS BANCOS FIDUCIARIAS ETC"],
+    "PISCINA_JACUZZI": ["PISCINA Y JACUZZI ESTABLECIMIENTOS TURISTICOS RECREATIVOS DEPORTIVOS"],
+    "OTROS": ["OTROS", "TRANSGENERO", "NO BINARIO", "INTERSEXUAL"],
+    "1_30_DIAS": ["1 A 30", "1 a 30", "DE 1 A 30", "de 1 a 30", "DE1A30", "1-30"],
+    "31_90_DIAS": ["31 A 90", "31 a 90", "DE 31 A 90", "de 31 a 90", "31-90", "DE31A90"],
+    "MAS_90_DIAS": ["MAS DE 90", "Mas de 90", "más de 90", ">90", "DE 90 EN ADELANTE"],
+    "SIN_INCAPACIDAD": ["CERO DIAS", "CERO DIAS Y SIN INFORMACION", "SIN DIAS DE INCAPACIDAD", "NINGUNA INCAPACIDAD", "0 DIAS"]
+  },
+  "type_rules": {
+    "fecha_hecho": "datetime64[ns]",
+    "cod_municipio": "string",
+    "departamento": "category",
+    "genero_victima": "category",
+    "grupo_etario": "category",
+    "cantidad": "Int32",
+    "municipio": "category",
+    "tipo_delito": "category",
+    "area_geo": "category",
+    "armas_medios": "category",
+    "pob_f_0_17": "Int32",
+    "pob_f_18_mas": "Int32",
+    "pob_h_0_17": "Int32",
+    "pob_h_18_mas": "Int32",
+    "pob_f_total": "Int32",
+    "pob_h_total": "Int32",
+    "TOTAL Mujeres": "Int32",
+    "TOTAL Hombres": "Int32",
+    "TOTAL Total": "Int32",
+    "anio_hecho": "Int32",
+    "mes_hecho": "category",
+    "dia_hecho": "category",
+    "ciclo_vital": "category",
+    "grupo_edad": "category",
+    "escenario": "category",
+    "agresor": "category",
+    "sexo_agresor": "category",
+    "factor": "category",
+    "discapacidad": "category",
+    "etnia": "category",
+    "hora_rango": "category",
+    "dias_incapacidad": "category",
+    "circunstancia": "category",
+    "dimension_discapacidad": "category",
+    "dimension_etnia": "category",
+    "dimension_escenario": "category",
+    "dimension_agresor": "category",
+    "dimension_circunstancia": "category",
+    "total_h": "Int32",
+    "total_m": "Int32"
+  },
+  "format_rules": {
+    "cod_municipio": {
+      "keep_digits_only": true,
+      "target_length": 5,
+      "pad_with": "0"
+    }
+  },
+  "age_aggregation": {
+    "regex_pattern": "(MUJERES|HOMBRES).*\\d+",
+    "target_columns": {
+      "pob_f_0_17": {
+        "gender_keyword": "MUJERES",
+        "min_age": 0,
+        "max_age": 17
+      },
+      "pob_f_18_mas": {
+        "gender_keyword": "MUJERES",
+        "min_age": 18,
+        "max_age": 101
+      },
+      "pob_h_0_17": {
+        "gender_keyword": "HOMBRES",
+        "min_age": 0,
+        "max_age": 17
+      },
+      "pob_h_18_mas": {
+        "gender_keyword": "HOMBRES",
+        "min_age": 18,
+        "max_age": 101
+      }
+    },
+    "sanity_check": {
+      "tolerance_pct": 0.001,
+      "f_base_col": "TOTAL Mujeres",
+      "h_base_col": "TOTAL Hombres"
+    }
+  },
+  "quarantine_config": {
+    "critical_columns_for_filter": ["fecha_hecho", "cod_municipio", "departamento"],
+    "output_dir": "docs",
+    "filename_pattern": "quarantine_{dataset}_{column}_null.csv"
+  },
+  "cleaning_config": {
+    "critical_columns": {
+      "cantidad": ["CANTIDAD", "NUMERO_CASOS", "TOTAL_VICTIMAS"],
+      "genero_victima": ["GENERO", "SEXO", "GENERO_VICTIMA"],
+      "grupo_etario": ["GRUPO_ETARIO", "RANGO_EDAD", "GRUPOEDAD"],
+      "tipo_delito": ["DELITO", "delito", "TIPO_DELITO", "NOMBRE_DELITO"]
+    },
+    "imputation_rules": {
+      "cantidad": {
+        "null_value": 0,
+        "negative_to_zero": true
+      },
+      "genero_victima": {
+        "null_value": "NO_REGISTRADO"
+      },
+      "grupo_etario": {
+        "null_value": "NO_REGISTRADO"
+      }
+    },
+    "deduplication_rules": {
+      "drop_exact_mirror_duplicates": true,
+      "quarantine_filename_pattern": "cuarentena_duplicados_{dataset}.csv"
+    }
+  },
+  "taxonomy_config": [
+    {
+      "dataset": "sexuales",
+      "source_col": "tipo_delito",
+      "target_col": "dimension_delito",
+      "patterns": {
+        "VIOLENCIA_SEXUAL_DIRECTA": "ACCESO CARNAL VIOLENTO|ACTO SEXUAL VIOLENTO|PERSONA PUESTA EN INCAPACIDAD DE RESISTIR",
+        "ABUSO_SEXUAL_MENOR_14": "MENOR DE 14 AÑOS|ACCESO CARNAL ABUSIVO CON MENOR|ACTOS SEXUALES CON MENOR",
+        "ABUSO_INCAPAZ_RESISTIR": "INCAPAZ DE RESISTIR|ACCESO CARNAL ABUSIVO CON INCAPAZ",
+        "ACOSO_SEXUAL": "ACOSO SEXUAL",
+        "EXPLOTACION_SEXUAL_COMERCIAL": "INDUCCIÓN A LA PROSTITUCIÓN|CONSTREÑIMIENTO A LA PROSTITUCIÓN|PROXENETISMO",
+        "EXPLOTACION_SEXUAL_COMERCIAL_MENOR": "PROXENETISMO CON MENOR|ESTÍMULO A LA PROSTITUCIÓN DE MENORES|DEMANDA DE EXPLOTACION SEXUAL.*MENOR",
+        "EXPLOTACION_SEXUAL_DIGITAL_MENORES": "PORNOGRAFÍA CON MENORES|UTILIZACIÓN.*MEDIOS.*MENORES",
+        "OTROS": "OMISIÓN DE DENUNCIA"
+      }
+    },
+    {
+      "dataset": "forense",
+      "source_col": "agresor",
+      "target_col": "dimension_agresor",
+      "patterns": {
+        "FAMILIA_NUCLEAR": "PADRE|MADRE|HERMANO|HIJO",
+        "FAMILIA_ENSAMBLADA": "PADRASTRO|MADRASTRA|HERMANASTRO",
+        "FAMILIA_EXTENDIDA": "TIO|PRIMO|ABUELO|SOBRINO|NIETO|OTROS_FAMILIARES",
+        "FAMILIA_POLITICA": "CUNADO|SUEGRO|YERNO|NUERA",
+        "FIGURAS_CUSTODIA": "ENCARGADO_CUIDADO|PERSONAL DE CUSTODIO|PROFESOR",
+        "NO_REGISTRADO": "NO_REGISTRADO"
+      }
+    },
+    {
+      "dataset": "forense",
+      "source_col": "discapacidad",
+      "target_col": "dimension_discapacidad",
+      "patterns": {
+        "CON_CONDICION_DISCAPACIDAD": "MENTAL|DISCAPACIDAD MULTIPLE|SIQUICA|AUDITIVA|INTELECTUAL|FISICA|VISUAL|PSICOSOCIAL",
+        "SIN_DISCAPACIDAD": "NINGUNA",
+        "NO_REGISTRADO": "NO_REGISTRADO"
+      }
+    },
+    {
+      "dataset": "forense",
+      "source_col": "etnia",
+      "target_col": "dimension_etnia",
+      "patterns": {
+        "AFRO_NARP": "NEGROAFRODESCENDIENTE|RAIZAL|PALENQUERO",
+        "INDIGENA": "INDIGENA",
+        "SIN_PERTENENCIA_ETNICA": "SIN PERTENENCIA ETNICA",
+        "GITANO": "ROM GITANO",
+        "NO_REGISTRADO": "NO_REGISTRADO"
+      }
+    },
+    {
+      "dataset": "forense",
+      "source_col": "escenario",
+      "target_col": "dimension_escenario",
+      "patterns": {
+        "HOGAR": "VIVIENDA",
+        "ESPACIO_PUBLICO": "CALLE_AUTOPISTA_AVENIDA_DENTRO_DE_LA_CIUDAD|VIA_PUBLICA|CARRETERA_FUERA_DE_LA_CIUDAD|TERRENO_BALDIO|PARQUEADEROS|TERMINALES_PASAJEROS",
+        "ESPACIO_ABIERTO_RURAL": "ESPACIOS_TERRESTRES_AL_AIRE_LIBRE|ZONAS_AGROPECUARIAS|AREAS_DEPORTIVAS_RECREATIVAS|ESPACIOS_ACUATICOS_AL_AIRE_LIBRE|PISCINA_JACUZZI",
+        "ESTABLECIMIENTO_COMERCIAL_OCIO": "ESTABLECIMIENTO_COMERCIAL|LUGARES_EXPENDIO_ALCOHOL|RESTAURANTES_Y_ASADEROS|LUGARES_HOSPEDAJE|ESTABLECIMIENTO_INDUSTRIAL|ESTACIONES_SERVICIO|TALLER|ESTABLECIMIENTOS_FINANCIEROS",
+        "INSTITUCIONAL_EDUCATIVO": "CENTROS_EDUCATIVOS|CENTRO_DE_ATENCION_MEDICA|LUGARES_CUIDADO_PERSONAS|OFICINAS_EDIFICIOS|ADMINISTRACION_PUBLICA|SITIO_DE_CULTO|LUGARES_CULTURALES",
+        "RECLUSORIO_MILITAR": "CENTROS_DE_RECLUSION|GUARNICIONES_MILITARES",
+        "VEHICULO": "VEHICULO_PARTICULAR|VEHICULO_TRANSPORTE",
+        "NO_REGISTRADO": "NO_REGISTRADO",
+        "OTROS": "OTROS"
+      }
+    },
+    {
+      "dataset": "seforense",
+      "source_col": "agresor",
+      "target_col": "dimension_agresor",
+      "patterns": {
+        "FAMILIA_NUCLEAR": "PADRE|MADRE|HERMANO",
+        "FAMILIA_ENSAMBLADA": "PADRASTRO|MADRASTRA|HERMANASTRO",
+        "FAMILIA_EXTENDIDA": "TIO|PRIMO|ABUELO|OTROS_FAMILIARES",
+        "FAMILIA_POLITICA": "CUNADO|SUEGRO|YERNO|NUERA",
+        "FIGURAS_CUSTODIA": "ENCARGADO_CUIDADO|PROFESOR",
+        "CONOCIDO_NO_FAMILIAR": "AMIGO|VECINO|CONOCIDO_SIN_NINGUN_TRATO|CONOCIDO|COMPANERO DE ESTUDIO|COMPANERO DE TRABAJO|COMPANERO DE CELDA|EMPLEADOR|OTRO",
+        "PAREJA_EX_PAREJA": "NOVIO|COMPANERO PERMANENTE|ESPOSO|EX COMPANERO PERMANENTE|EX NOVIO",
+        "AGRESOR_DESCONOCIDO": "AGRESOR_DESCONOCIDO",
+        "ACTOR_ARMADO_INSTITUCIONAL": "BANDAS_CRIMINALES|DELINCUENCIA_COMUN|POLICIA",
+        "NO_REGISTRADO": "NO_REGISTRADO"
+      }
+    },
+    {
+      "dataset": "seforense",
+      "source_col": "discapacidad",
+      "target_col": "dimension_discapacidad",
+      "patterns": {
+        "CON_CONDICION_DISCAPACIDAD": "MENTAL|DISCAPACIDAD MULTIPLE|SIQUICA|AUDITIVA|INTELECTUAL|FISICA|VISUAL|PSICOSOCIAL",
+        "SIN_DISCAPACIDAD": "NINGUNA",
+        "NO_REGISTRADO": "NO_REGISTRADO"
+      }
+    },
+    {
+      "dataset": "seforense",
+      "source_col": "etnia",
+      "target_col": "dimension_etnia",
+      "patterns": {
+        "AFRO_NARP": "NEGROAFRODESCENDIENTE|RAIZAL|PALENQUERO",
+        "INDIGENA": "INDIGENA",
+        "SIN_PERTENENCIA_ETNICA": "SIN PERTENENCIA ETNICA",
+        "GITANO": "ROM GITANO",
+        "NO_REGISTRADO": "NO_REGISTRADO"
+      }
+    },
+    {
+      "dataset": "seforense",
+      "source_col": "escenario",
+      "target_col": "dimension_escenario",
+      "patterns": {
+        "HOGAR": "VIVIENDA",
+        "ESPACIO_PUBLICO": "CALLE_AUTOPISTA_AVENIDA_DENTRO_DE_LA_CIUDAD|VIA_PUBLICA|CARRETERA_FUERA_DE_LA_CIUDAD|TERRENO_BALDIO|PARQUEADEROS|TERMINALES_PASAJEROS",
+        "ESPACIO_ABIERTO_RURAL": "ESPACIOS_TERRESTRES_AL_AIRE_LIBRE|ZONAS_AGROPECUARIAS|AREAS_DEPORTIVAS_RECREATIVAS|ESPACIOS_ACUATICOS_AL_AIRE_LIBRE|PISCINA_JACUZZI",
+        "ESTABLECIMIENTO_COMERCIAL_OCIO": "ESTABLECIMIENTO_COMERCIAL|LUGARES_EXPENDIO_ALCOHOL|RESTAURANTES_Y_ASADEROS|LUGARES_HOSPEDAJE|ESTABLECIMIENTO_INDUSTRIAL|ESTACIONES_SERVICIO|TALLER|ESTABLECIMIENTOS_FINANCIEROS",
+        "INSTITUCIONAL_EDUCATIVO": "CENTROS_EDUCATIVOS|CENTRO_DE_ATENCION_MEDICA|LUGARES_CUIDADO_PERSONAS|OFICINAS_EDIFICIOS|ADMINISTRACION_PUBLICA|SITIO_DE_CULTO|LUGARES_CULTURALES",
+        "RECLUSORIO_MILITAR": "CENTROS_DE_RECLUSION|GUARNICIONES_MILITARES",
+        "VEHICULO": "VEHICULO_PARTICULAR|VEHICULO_TRANSPORTE",
+        "NO_REGISTRADO": "NO_REGISTRADO",
+        "OTROS": "OTROS"
+      }
+    },
+    {
+      "dataset": "seforense",
+      "source_col": "circunstancia",
+      "target_col": "dimension_circunstancia",
+      "patterns": {
+        "ABUSO_SEXUAL": "ABUSO SEXUAL|ABUSO DENTRO DE ESTABLECIMIENTO PRESTADOR DE SERVICIOS DE SALUD",
+        "VIOLENCIA_SEXUAL_CONTACTO": "ASALTO SEXUAL|ACCESO CARNAL VIOLENTO|AGRESION O ATAQUE SEXUAL|ACCESO CARNAL VIOLENTO/ACTO SEXUAL VIOLENTO CON PERSONA PROTEGIDA",
+        "ACOSO_HOSTIGAMIENTO": "ACOSO SEXUAL|AMENAZA O INTIMIDACION|OBLIGAR A PRESENCIAR ACTOS SEXUALES|OBLIGAR A REALIZAR ACTOS SEXUALES",
+        "EXPLOTACION_SEXUAL": "PORNOGRAFIA|PRESUNTA EXPLOTACION SEXUAL DE NNA|PRESUNTA EXPLOTACION SEXUAL|EXPLOTACION SEXUAL Y COMERCIAL|PRESUNTA TRATA DE PERSONAS CON FINES DE EXPLOTACION SEXUAL|PRESUNTA ESCLAVITUD SEXUAL O PROSTITUCION FORZADA|CONTACTO ENGANOSO VIA INTERNET",
+        "CONTEXTO_PAREJA_FAMILIAR": "VIOLENCIA DE PAREJA|CONFLICTO DE PAREJA|VIOLENCIA A NNA|VIOLENCIA ENTRE OTROS FAMILIARES|MACHISMO|CELOS",
+        "CONTEXTO_SUSTANCIAS": "EMBRIAGUEZ ALCOHOLICA Y NO ALCOHOLICA",
+        "OTROS": "INTOLERANCIA|HURTO|RETENCION ILEGAL|ABUSO DE AUTORIDAD|VIOLENCIA SOCIOPOLITICA",
+        "NO_REGISTRADO": "NO_REGISTRADO"
+      }
+    }
+  ],
+  "temporal_derivation": {
+    "violencia": {
+      "fecha_hecho": ["anio_hecho", "mes_hecho", "dia_hecho"]
+    },
+    "sexuales": {
+      "fecha_hecho": ["anio_hecho", "mes_hecho", "dia_hecho"]
+    }
+  },
+  "normalization_config": {
+    "targets": ["departamento", "genero_victima", "area_geo", "ciclo_vital", "grupo_edad", "escenario", "agresor", "sexo_agresor", "factor", "discapacidad", "etnia", "hora_rango", "municipio", "mes_hecho", "dia_hecho", "dias_incapacidad", "circunstancia"],
+    "case_transform": "upper",
+    "remove_accents": true,
+    "allowed_chars_key": "allowed_chars_normalization",
+    "value_mapping_key": "value_aliases"
+  },
+  "regex_patterns": {
+    "trailing_dot_zero": "\\.0$",
+    "allowed_chars_normalization": "[^a-z0-9_ ]"
+  },
+  "segmentation_config": {
+    "output": {
+      "dir_key": "segmented_dir",
+      "filename_pattern": "{dataset}_{year_start}_{year_end}.parquet",
+      "compression": "snappy",
+      "index": false
+    }
+  },
+  "auditor_config": {
+    "priority_alert_columns": ["fecha_hecho", "departamento", "cantidad"],
+    "numeric_rules": {
+      "min_value": 0,
+      "outlier_iqr_multiplier": 3.0
+    },
+    "domain_rules": {
+      "departamento": ["CAUCA", "CHOCO", "NARIÑO", "VALLE DEL CAUCA"],
+      "genero_victima": ["FEMENINO", "MASCULINO", "NO_REGISTRADO", "NO_APLICA", "TRANSFORMISTA", "TRANSEXUAL", "TRANSGENERO", "TRAVESTI"],
+      "area_geo": ["URBANA", "RURAL", "NO_REGISTRADO", "TOTAL"]
+    },
+    "output": {
+      "report_dir_key": "docs_dir",
+      "report_filename": "auditoria_{dataset}.csv"
+    }
+  },
+  "forense_config": {
+    "output_dir": "data/agregados_forense",
+    "variables_to_keep": ["cod_municipio", "municipio", "departamento", "anio_hecho", "genero_victima", "ciclo_vital", "grupo_edad", "escenario", "agresor", "factor", "discapacidad", "etnia", "hora_rango", "mes_hecho", "dia_hecho", "dias_incapacidad", "dimension_agresor", "dimension_escenario", "dimension_discapacidad", "dimension_etnia"],
+    "aggregation_rules": {
+      "municipio_resumen": ["cod_municipio", "municipio", "departamento"],
+      "agresor_dist": ["departamento", "dimension_agresor", "ciclo_vital"],
+      "escenario_dist": ["departamento", "dimension_escenario"],
+      "temporalidad": ["mes_hecho", "dia_hecho", "hora_rango"],
+      "interseccionalidad": ["ciclo_vital", "dimension_etnia", "dimension_discapacidad"]
+    }
+  },
+  "seforense_config": {
+    "output_dir": "data/agregados_seforense",
+    "variables_to_keep": ["cod_municipio", "municipio", "departamento", "anio_hecho", "genero_victima", "ciclo_vital", "grupo_edad", "escenario", "circunstancia", "sexo_agresor", "agresor", "discapacidad", "etnia", "hora_rango", "mes_hecho", "dia_hecho", "dimension_agresor", "dimension_escenario", "dimension_circunstancia", "dimension_discapacidad", "dimension_etnia"],
+    "aggregation_rules": {
+      "municipio_resumen": ["cod_municipio", "municipio", "departamento"],
+      "circunstancia_dist": ["departamento", "dimension_circunstancia"],
+      "agresor_dist": ["departamento", "dimension_agresor", "sexo_agresor"],
+      "temporalidad": ["mes_hecho", "dia_hecho", "hora_rango"]
+    }
+  },
+  "column_selection": {
+    "violencia": ["departamento", "municipio", "cod_municipio", "fecha_hecho", "anio_hecho", "mes_hecho", "dia_hecho", "genero_victima", "grupo_etario", "cantidad"],
+    "sexuales": ["departamento", "municipio", "cod_municipio", "fecha_hecho", "anio_hecho", "mes_hecho", "dia_hecho", "genero_victima", "grupo_etario", "cantidad", "dimension_delito"],
+    "forense": ["anio_hecho", "genero_victima", "ciclo_vital", "grupo_edad", "cod_municipio", "municipio", "departamento", "escenario", "agresor", "sexo_agresor", "factor", "discapacidad", "etnia", "hora_rango", "mes_hecho", "dia_hecho", "dias_incapacidad", "dimension_agresor", "dimension_escenario", "dimension_discapacidad", "dimension_etnia"],
+    "poblacion": ["departamento","cod_municipio", "anio_hecho", "area_geo", "municipio", "pob_f_0_17", "pob_f_18_mas", "pob_h_0_17", "pob_h_18_mas", "total_h", "total_f"],
+    "seforense": ["anio_hecho", "genero_victima", "grupo_edad", "ciclo_vital", "discapacidad", "etnia", "mes_hecho", "dia_hecho", "hora_rango", "cod_municipio", "municipio", "departamento", "escenario", "circunstancia", "sexo_agresor", "agresor", "dimension_agresor", "dimension_escenario", "dimension_circunstancia", "dimension_discapacidad", "dimension_etnia"]
+  },
+  "temporal_names_config": {
+    "meses": ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO", "SEPTIEMBRE", "OCTUBRE", "NOVIEMBRE", "DICIEMBRE"],
+    "dias_semana": ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES", "SABADO", "DOMINGO"]
+  }
+}

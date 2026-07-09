@@ -1,0 +1,280 @@
+{
+  "metadata": {
+    "descripcion": "Análisis de brechas de género en violencia contra mujeres y niñas",
+    "periodo": "2018-2025",
+    "total_municipios": 179,
+    "total_filas": 1432,
+    "metodo_calculo_top10": "mediana (más robusto que media)"
+  },
+  "estadisticas_descriptivas": {
+    "brecha_vif_nna": {
+      "total_filas": 1432,
+      "valores_validos": 372,
+      "porcentaje_validos": 26.0,
+      "media": 1.67,
+      "mediana": 1.34,
+      "min": 0.0,
+      "max": 12.36,
+      "std": 1.54,
+      "interpretacion": "Mayor afectación femenina"
+    },
+    "brecha_vif_adultas": {
+      "total_filas": 1432,
+      "valores_validos": 1019,
+      "porcentaje_validos": 71.2,
+      "media": 4.97,
+      "mediana": 3.89,
+      "min": 0.0,
+      "max": 36.86,
+      "std": 4.17,
+      "interpretacion": "Mayor afectación femenina"
+    },
+    "brecha_sexual_nna": {
+      "total_filas": 1432,
+      "valores_validos": 416,
+      "porcentaje_validos": 29.1,
+      "media": 4.86,
+      "mediana": 4.29,
+      "min": 0.0,
+      "max": 34.71,
+      "std": 4.24,
+      "interpretacion": "Mayor afectación femenina"
+    },
+    "brecha_sexual_adultas": {
+      "total_filas": 1432,
+      "valores_validos": 608,
+      "porcentaje_validos": 42.5,
+      "media": 5.08,
+      "mediana": 4.29,
+      "min": 0.0,
+      "max": 28.85,
+      "std": 3.92,
+      "interpretacion": "Mayor afectación femenina"
+    }
+  },
+  "top10_municipios": [
+    {
+      "cod_municipio": "19256",
+      "municipio": "EL TAMBO",
+      "departamento": "CAUCA",
+      "brecha_vif_nna": 2.728678139784681,
+      "brecha_vif_adultas": 11.044918717235783,
+      "brecha_sexual_nna": 10.209306647583231,
+      "brecha_sexual_adultas": 10.537085002862534,
+      "brecha_promedio": 10.373195825222883
+    },
+    {
+      "cod_municipio": "19821",
+      "municipio": "TORIBIO",
+      "departamento": "CAUCA",
+      "brecha_vif_nna": 1.031507154320244,
+      "brecha_vif_adultas": 10.999386022877111,
+      "brecha_sexual_nna": 16.459006113810943,
+      "brecha_sexual_adultas": 7.231759324586614,
+      "brecha_promedio": 9.115572673731862
+    },
+    {
+      "cod_municipio": "19473",
+      "municipio": "MORALES",
+      "departamento": "CAUCA",
+      "brecha_vif_nna": 1.2750437004168345,
+      "brecha_vif_adultas": 9.132875039081826,
+      "brecha_sexual_nna": 6.444394601286639,
+      "brecha_sexual_adultas": 10.573467164930928,
+      "brecha_promedio": 7.788634820184233
+    },
+    {
+      "cod_municipio": "19698",
+      "municipio": "SANTANDER DE QUILICHAO",
+      "departamento": "CAUCA",
+      "brecha_vif_nna": 3.5261850907691996,
+      "brecha_vif_adultas": 5.100838326943867,
+      "brecha_sexual_nna": 11.644875512477578,
+      "brecha_sexual_adultas": 10.330190616477323,
+      "brecha_promedio": 7.715514471710595
+    },
+    {
+      "cod_municipio": "19130",
+      "municipio": "CAJIBIO",
+      "departamento": "CAUCA",
+      "brecha_vif_nna": 2.678599546368246,
+      "brecha_vif_adultas": 7.439146476290476,
+      "brecha_sexual_nna": 7.501467050661355,
+      "brecha_sexual_adultas": 13.800859203674925,
+      "brecha_promedio": 7.470306763475916
+    },
+    {
+      "cod_municipio": "19050",
+      "municipio": "ARGELIA",
+      "departamento": "CAUCA",
+      "brecha_vif_nna": null,
+      "brecha_vif_adultas": 9.892570279241607,
+      "brecha_sexual_nna": 7.039832642410041,
+      "brecha_sexual_adultas": 5.2045321567679546,
+      "brecha_promedio": 7.039832642410041
+    },
+    {
+      "cod_municipio": "19743",
+      "municipio": "SILVIA",
+      "departamento": "CAUCA",
+      "brecha_vif_nna": 1.0252869023786166,
+      "brecha_vif_adultas": 6.91245467069984,
+      "brecha_sexual_nna": null,
+      "brecha_sexual_adultas": 7.7450260263113195,
+      "brecha_promedio": 6.91245467069984
+    },
+    {
+      "cod_municipio": "19137",
+      "municipio": "CALDONO",
+      "departamento": "CAUCA",
+      "brecha_vif_nna": 0.12992076468368757,
+      "brecha_vif_adultas": 7.91761467458545,
+      "brecha_sexual_nna": 6.4633181606088606,
+      "brecha_sexual_adultas": 7.298596367552213,
+      "brecha_promedio": 6.880957264080537
+    },
+    {
+      "cod_municipio": "27001",
+      "municipio": "QUIBDO",
+      "departamento": "CHOCO",
+      "brecha_vif_nna": 3.647760092867135,
+      "brecha_vif_adultas": 4.268955621967083,
+      "brecha_sexual_nna": 11.632966117061805,
+      "brecha_sexual_adultas": 9.038767430576888,
+      "brecha_promedio": 6.653861526271985
+    },
+    {
+      "cod_municipio": "52399",
+      "municipio": "LA UNION",
+      "departamento": "NARIÑO",
+      "brecha_vif_nna": 3.3100469050667756,
+      "brecha_vif_adultas": 7.502423749764917,
+      "brecha_sexual_nna": 5.517590023164316,
+      "brecha_sexual_adultas": 10.324825565786341,
+      "brecha_promedio": 6.510006886464616
+    }
+  ],
+  "evolucion_temporal": {
+    "datos_anuales": [
+      {
+        "anio_hecho": 2018,
+        "brecha_vif_nna": 1.668836091003831,
+        "brecha_vif_adultas": 6.932112369441076,
+        "brecha_sexual_nna": 6.313237379507364,
+        "brecha_sexual_adultas": 7.18724437174874
+      },
+      {
+        "anio_hecho": 2019,
+        "brecha_vif_nna": 2.051604629727236,
+        "brecha_vif_adultas": 5.432727478413,
+        "brecha_sexual_nna": 5.028200447898273,
+        "brecha_sexual_adultas": 5.625037289642642
+      },
+      {
+        "anio_hecho": 2020,
+        "brecha_vif_nna": 1.5766994077682661,
+        "brecha_vif_adultas": 5.901776690857836,
+        "brecha_sexual_nna": 4.896514844928768,
+        "brecha_sexual_adultas": 4.271940172501568
+      },
+      {
+        "anio_hecho": 2021,
+        "brecha_vif_nna": 2.160432942223965,
+        "brecha_vif_adultas": 4.498664549658483,
+        "brecha_sexual_nna": 5.307630009118331,
+        "brecha_sexual_adultas": 4.859276253541014
+      },
+      {
+        "anio_hecho": 2022,
+        "brecha_vif_nna": 1.6364716693216534,
+        "brecha_vif_adultas": 5.008671534720779,
+        "brecha_sexual_nna": 4.708211670191137,
+        "brecha_sexual_adultas": 4.421095159346834
+      },
+      {
+        "anio_hecho": 2023,
+        "brecha_vif_nna": 1.3595204315719227,
+        "brecha_vif_adultas": 3.7589023369200856,
+        "brecha_sexual_nna": 4.340906121400101,
+        "brecha_sexual_adultas": 4.630811116056761
+      },
+      {
+        "anio_hecho": 2024,
+        "brecha_vif_nna": 1.4629044280617574,
+        "brecha_vif_adultas": 4.199610151631081,
+        "brecha_sexual_nna": 4.216609388837621,
+        "brecha_sexual_adultas": 4.99827239540132
+      },
+      {
+        "anio_hecho": 2025,
+        "brecha_vif_nna": 1.469474357818227,
+        "brecha_vif_adultas": 4.514481767254601,
+        "brecha_sexual_nna": 3.6404535639758935,
+        "brecha_sexual_adultas": 4.6516002578877975
+      }
+    ],
+    "tendencias": {
+      "brecha_vif_nna": {
+        "pendiente": -0.0656,
+        "r2": 0.3146,
+        "p_value": 0.1481,
+        "tendencia": "Disminuyendo",
+        "significativa": false
+      },
+      "brecha_vif_adultas": {
+        "pendiente": -0.3453,
+        "r2": 0.6774,
+        "p_value": 0.0121,
+        "tendencia": "Disminuyendo",
+        "significativa": true
+      },
+      "brecha_sexual_nna": {
+        "pendiente": -0.298,
+        "r2": 0.8266,
+        "p_value": 0.0017,
+        "tendencia": "Disminuyendo",
+        "significativa": true
+      },
+      "brecha_sexual_adultas": {
+        "pendiente": -0.241,
+        "r2": 0.3894,
+        "p_value": 0.0982,
+        "tendencia": "Disminuyendo",
+        "significativa": false
+      }
+    }
+  },
+  "correlaciones_icv": {
+    "brecha_vif_nna": {
+      "spearman_rho": 0.4513,
+      "p_value": 0.0,
+      "significativa": true,
+      "interpretacion": "Positiva (mayor severidad → mayor brecha)"
+    },
+    "brecha_vif_adultas": {
+      "spearman_rho": 0.3895,
+      "p_value": 0.0,
+      "significativa": true,
+      "interpretacion": "Positiva (mayor severidad → mayor brecha)"
+    },
+    "brecha_sexual_nna": {
+      "spearman_rho": 0.4943,
+      "p_value": 0.0,
+      "significativa": true,
+      "interpretacion": "Positiva (mayor severidad → mayor brecha)"
+    },
+    "brecha_sexual_adultas": {
+      "spearman_rho": 0.481,
+      "p_value": 0.0,
+      "significativa": true,
+      "interpretacion": "Positiva (mayor severidad → mayor brecha)"
+    }
+  },
+  "hallazgos_clave": {
+    "brecha_mas_alta": "brecha_sexual_adultas",
+    "brecha_mas_baja": "brecha_vif_nna",
+    "municipio_mayor_brecha": "EL TAMBO",
+    "correlacion_fuerte": false,
+    "tendencia_significativa": true
+  }
+}

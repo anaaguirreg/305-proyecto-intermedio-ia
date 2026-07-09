@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-06-17T13:10:50.576882",
+  "icv_summary": {
+    "mean": 2.49444499335545,
+    "std": 5.096806605564889,
+    "min": 0.0,
+    "max": 91.165781201849,
+    "outliers_count": 442
+  },
+  "top_correlation": {
+    "variable": "tasa_vif_adultas_f",
+    "value": null
+  },
+  "temporal_trend": {
+    "slope": -0.040277715576758646,
+    "p_value": 0.16898650864181194,
+    "direction": "📉 Descendente"
+  },
+  "recommendation": "Regresión parsimoniosa"
+}

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!-- sub_acto_3_5 — Línea temporal tasa_sexual_nna_f por departamento (4 series).
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_3_5.html
+     fetch() bloqueado bajo file:// por restricción CORS de mismo origen. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Línea sexual NNA por departamento (sub_acto_3_5)</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-dept-cauca:  var(--dept-cauca);
+      --color-dept-choco:  var(--dept-choco);
+      --color-dept-narino: var(--dept-narino);
+      --color-dept-valle:  var(--dept-valle);
+    }
+
+    body    { font-family: var(--font-sans); padding: 1rem 1.25rem; background: var(--color-canvas); color: var(--color-ink); }
+    h2      { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; max-width: 960px; }
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber);
+      background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      color: var(--color-accent-amber);
+      line-height: 1.5;
+      max-width: 960px;
+      margin-bottom: 0.75rem;
+    }
+    .anchor-text {
+      font-size: 0.88rem;
+      color: var(--color-muted);
+      line-height: 1.5;
+      max-width: 960px;
+      margin-bottom: 0.75rem;
+    }
+    #chart  { width: 100%; max-width: 960px; height: 420px; }
+    details { max-width: 960px; margin-top: 0.8rem; font-size: 0.8rem; }
+    summary { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul      { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.85; }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <h2 id="title"></h2>
+  <div id="anchor-wrapper"></div>
+  <div id="chart"></div>
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script>
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const TIPOLOGIA_URL = './data/acto_3_tipologia.json';
+
+    // Display convention: department name (exact string from JSON) → CSS variable name.
+    // Key strings match sub_acto_3_5.data.series[i].department.
+    const DEPT_CSS_VAR = {
+      'CAUCA':           '--color-dept-cauca',
+      'CHOCO':           '--color-dept-choco',
+      'NARIÑO':         '--color-dept-narino',
+      'VALLE DEL CAUCA': '--color-dept-valle',
+    };
+
+    function deptColor(dept) {
+      const varName = DEPT_CSS_VAR[dept];
+      if (!varName) return null;
+      return getComputedStyle(document.documentElement)
+               .getPropertyValue(varName).trim() || null;
+    }
+
+    /* ── Shared anchor-text renderer (PROVISIONAL prefix → amber box) ─────── */
+    function renderAnchor(text) {
+      const wrapper = document.getElementById('anchor-wrapper');
+      const PROV = 'PROVISIONAL: ';
+      const isProv = text.startsWith(PROV);
+      const el = document.createElement(isProv ? 'div' : 'p');
+      el.className = isProv ? 'provisional-box' : 'anchor-text';
+      el.textContent = isProv ? text.slice(PROV.length) : text;
+      wrapper.appendChild(el);
+    }
+
+    /* ── Diagnostic panel ──────────────────────────────────────────────────── */
+    function buildDiagnostico(data, colorMap) {
+      const ul = document.getElementById('diag-list');
+      const nonNull = v => v != null;
+      const rows = [
+        `chart_type: "${data.chart_type}" (esperado: "line")`,
+        `Series: ${data.series.length} (esperado: 4)`,
+        `Puntos por serie: ${data.x_axis.length} (${data.x_axis[0]}–${data.x_axis[data.x_axis.length - 1]})`,
+        `Métrica: ${data.metric} · Etiqueta: ${data.metric_label}`,
+        ...data.series.map(s => {
+          const vals = s.data.filter(nonNull);
+          const col  = colorMap.get(s.department) ?? '(sin mapeo)';
+          return `${s.department}: color=${col} · max=${Math.max(...vals).toFixed(1)} · min=${Math.min(...vals).toFixed(1)}`;
+        }),
+      ];
+      for (const text of rows) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        ul.appendChild(li);
+      }
+    }
+
+    /* ── Main ──────────────────────────────────────────────────────────────── */
+    async function main() {
+      const tipologia = await fetch(TIPOLOGIA_URL).then(r => {
+        if (!r.ok) throw new Error(`${TIPOLOGIA_URL}: HTTP ${r.status}`);
+        return r.json();
+      });
+
+      const sub  = tipologia.sub_acto_3_5;
+      const data = sub.data;
+
+      document.getElementById('title').textContent = sub.title_es;
+      renderAnchor(sub.anchor_text_es);
+
+      if (data.chart_type !== 'line') {
+        console.warn(`chart_type inesperado: "${data.chart_type}" (esperado "line")`);
+      }
+
+      // Resolve CSS-var colors for each department; warn on missing mapping
+      const colorMap = new Map();
+      for (const s of data.series) {
+        const col = deptColor(s.department);
+        colorMap.set(s.department, col);
+        if (!col) console.warn(`Sin color CSS var para departamento: "${s.department}"`);
+      }
+
+      const echartsSeriesData = data.series.map(s => {
+        const color = colorMap.get(s.department) ?? undefined;
+        return {
+          type:       'line',
+          name:       s.department,
+          data:       s.data,
+          smooth:     false,
+          symbol:     'circle',
+          symbolSize: 5,
+          lineStyle:  { width: 2.5, color },
+          itemStyle:  { color },
+        };
+      });
+
+      const chart = echarts.init(document.getElementById('chart'));
+      chart.setOption({
+        backgroundColor: CSS.canvas,
+        grid: { left: '8%', right: '4%', top: '14%', bottom: '12%', containLabel: true },
+        legend: {
+          data:      data.series.map(s => s.department),
+          top:       '2%',
+          textStyle: { fontSize: 11 },
+        },
+        tooltip: {
+          trigger: 'axis',
+          formatter: params => {
+            let html = `<strong>${params[0].axisValue}</strong>`;
+            for (const p of params) {
+              const val = p.value != null ? p.value.toFixed(1) : 'sin dato';
+              html += `<br><span style="display:inline-block;width:10px;height:10px;` +
+                      `border-radius:50%;background:${p.color};margin-right:4px"></span>` +
+                      `${p.seriesName}: ${val}`;
+            }
+            return html;
+          },
+        },
+        xAxis: {
+          type:      'category',
+          data:      data.x_axis,
+          axisLabel: { formatter: v => String(v) },
+          splitLine: { show: false },
+        },
+        yAxis: {
+          type:         'value',
+          name:         data.metric_label,
+          nameLocation: 'middle',
+          nameGap:      55,
+          nameTextStyle: { fontSize: 11, color: CSS.muted },
+          splitLine:    { lineStyle: { color: CSS.hairline } },
+        },
+        series: echartsSeriesData,
+      });
+
+      window.addEventListener('resize', () => chart.resize());
+      buildDiagnostico(data, colorMap);
+    }
+
+    main().catch(err => {
+      console.error('Error en renderizado:', err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

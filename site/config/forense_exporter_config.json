@@ -1,0 +1,387 @@
+{
+  "_comment": "ForenseExporter config — all business rules and Spanish copy here; nothing in .py",
+  "paths": {
+    "ds3_municipio_resumen": "data/agregados_seforense/ds3_municipio_resumen.parquet",
+    "ds3_escenario": "data/agregados_seforense/ds3_escenario.parquet",
+    "ds3_temporalidad": "data/agregados_seforense/ds3_temporalidad.parquet",
+    "ds3_agresor": "data/agregados_seforense/ds3_agresor.parquet",
+    "ds3_circunstancia": "data/agregados_seforense/ds3_circunstancia.parquet",
+    "ds3_interseccional": "data/agregados_seforense/ds3_interseccional.parquet",
+    "ds4_municipio_resumen": "data/agregados_forense/ds4_municipio_resumen.parquet",
+    "ds4_escenario": "data/agregados_forense/ds4_escenario.parquet",
+    "ds4_temporalidad": "data/agregados_forense/ds4_temporalidad.parquet",
+    "ds4_agresor": "data/agregados_forense/ds4_agresor.parquet",
+    "ds4_factor": "data/agregados_forense/ds4_factor.parquet",
+    "ds4_interseccional": "data/agregados_forense/ds4_interseccional.parquet",
+    "seforense_limpio": "data/cleaned/seforense_limpio.parquet",
+    "forense_limpio": "data/cleaned/forense_limpio.parquet",
+    "schema": "schema/acto_4_forense.schema.json"
+  },
+  "thresholds": {
+    "flow_top_pct": 80,
+    "min_aggressor_cases": 80,
+    "sankey_min_dept_cases": 500,
+    "heatmap_min_dept_cases": 200
+  },
+  "acto_4_visualization": {
+    "sub_acto_4_3": {
+      "column_titles": {
+        "col1": "Ciclo de vida",
+        "col2": "Dimensión del agresor",
+        "col3": "Agresor identificado"
+      },
+      "ds3_colors": {
+        "col1": {
+          "00 A 05 PRIMERA INFANCIA": "#FDE7E9",
+          "06 A 11 INFANCIA": "#F8B4C0",
+          "12 A 17 ADOLESCENCIA": "#E97C97",
+          "18 A 28 JUVENTUD": "#B85578",
+          "29 A 59 ADULTEZ": "#7B1F4B",
+          "MAS DE 60 ADULTO MAYOR": "#4A0E2A"
+        },
+        "col2_default": "#C77DFF",
+        "col2_overrides": {
+          "CONOCIDO_NO_FAMILIAR": "#9D4EDD",
+          "FAMILIA_NUCLEAR": "#7B1F4B",
+          "FAMILIA_ENSAMBLADA": "#B85578",
+          "FAMILIA_EXTENDIDA": "#C77DFF",
+          "PAREJA_EX_PAREJA": "#E97C97",
+          "FIGURAS_CUSTODIA": "#5A189A",
+          "NO_REGISTRADO": "#A3A3A3"
+        },
+        "col3_default": "#C77DFF",
+        "col3_no_registrado": "#A3A3A3"
+      },
+      "ds4_colors": {
+        "col1": {
+          "00 A 05 PRIMERA INFANCIA": "#FDE7E9",
+          "06 A 11 INFANCIA": "#F8B4C0",
+          "12 A 17 ADOLESCENCIA": "#E97C97",
+          "18 A 28 JUVENTUD": "#B85578",
+          "29 A 59 ADULTEZ": "#7B1F4B",
+          "MAS DE 60 ADULTO MAYOR": "#4A0E2A"
+        },
+        "col2_default": "#3A5BA0",
+        "col2_overrides": {
+          "FAMILIA_NUCLEAR": "#1E3A8A",
+          "FAMILIA_EXTENDIDA": "#3A5BA0",
+          "FAMILIA_POLITICA": "#6B83C7"
+        },
+        "col3_default": "#3A5BA0",
+        "col3_no_registrado": "#A3A3A3"
+      },
+      "link_opacity": 0.45
+    },
+    "sub_acto_4_5": {
+      "ethnicity_stacked_bar": {
+        "type": "bar_horizontal_stacked_100pct",
+        "data_key": "ethnicity_marginals",
+        "series_labels_es": {
+          "ds3": "Delito sexual (DS3)",
+          "ds4": "VIF (DS4)"
+        },
+        "category_order": [
+          "SIN_PERTENENCIA_ETNICA",
+          "AFRO_NARP",
+          "NO_REGISTRADO",
+          "INDIGENA",
+          "GITANO"
+        ],
+        "category_labels_es": {
+          "SIN_PERTENENCIA_ETNICA": "Sin pertenencia declarada",
+          "AFRO_NARP": "Afro-NARP",
+          "NO_REGISTRADO": "No registrado",
+          "INDIGENA": "Indígena",
+          "GITANO": "Gitano/Rrom"
+        },
+        "palette_key": "forense_ethnicity",
+        "value_field": "pct_of_female_cases",
+        "low_n_marker": "*"
+      }
+    }
+  },
+  "factor_consolidation_ds4": {
+    "ALCOHOL_SUSTANCIAS": [
+      "CONSUMO DE ALCOHOL YO SUSTANCIAS PSICOACTIVAS",
+      "ALCOHOLISMO  DROGADICCION"
+    ]
+  },
+  "aggressor_others_rule_ds3": {
+    "OTROS_CONOCIDOS": [
+      "CONOCIDO_NO_FAMILIAR",
+      "ACTOR_ARMADO_INSTITUCIONAL",
+      "PAREJA_EX_PAREJA"
+    ],
+    "OTROS_FAMILIARES": [
+      "FAMILIA_NUCLEAR",
+      "FAMILIA_ENSAMBLADA",
+      "FAMILIA_EXTENDIDA",
+      "FAMILIA_POLITICA",
+      "FIGURAS_CUSTODIA"
+    ]
+  },
+  "aggressor_others_rule_ds4": {
+    "OTROS_FAMILIARES": [
+      "FAMILIA_NUCLEAR",
+      "FAMILIA_ENSAMBLADA",
+      "FAMILIA_EXTENDIDA",
+      "FAMILIA_POLITICA",
+      "FIGURAS_CUSTODIA",
+      "NO_REGISTRADO"
+    ]
+  },
+  "department_order": [
+    "regional",
+    "VALLE_DEL_CAUCA",
+    "CAUCA",
+    "NARIÑO",
+    "CHOCO"
+  ],
+  "nna_ciclos": [
+    "00 A 05 PRIMERA INFANCIA",
+    "06 A 11 INFANCIA",
+    "12 A 17 ADOLESCENCIA"
+  ],
+  "aggregation_default": "regional",
+  "axis_days": [
+    "LUNES",
+    "MARTES",
+    "MIERCOLES",
+    "JUEVES",
+    "VIERNES",
+    "SABADO",
+    "DOMINGO"
+  ],
+  "axis_months": [
+    "ENERO",
+    "FEBRERO",
+    "MARZO",
+    "ABRIL",
+    "MAYO",
+    "JUNIO",
+    "JULIO",
+    "AGOSTO",
+    "SEPTIEMBRE",
+    "OCTUBRE",
+    "NOVIEMBRE",
+    "DICIEMBRE"
+  ],
+  "axis_hours": [
+    "0000 A 0259",
+    "0300 A 0559",
+    "0600 A 0859",
+    "0900 A 1159",
+    "1200 A 1459",
+    "1500 A 1759",
+    "1800 A 2059",
+    "2100 A 2359"
+  ],
+  "hora_rango_exclude": "NO_REGISTRADO",
+  "acto_4_kpis": {
+    "sub_acto_4_1": {
+      "stat_cards": [
+        {
+          "id": "total_cases",
+          "label_es": "Total casos peritados",
+          "display_format": "integer_thousands",
+          "badge": "BOTH",
+          "sub_value": null
+        },
+        {
+          "id": "ds3_cases",
+          "label_es": "Casos violencia sexual (seforense)",
+          "display_format": "integer_thousands",
+          "badge": "DS3",
+          "sub_value": null
+        },
+        {
+          "id": "ds4_cases",
+          "label_es": "Casos violencia física VIF (forense)",
+          "display_format": "integer_thousands",
+          "badge": "DS4",
+          "sub_value": null
+        },
+        {
+          "id": "pct_nna",
+          "label_es": "Víctimas NNA (0–17 años)",
+          "display_format": "percent_1d",
+          "badge": "BOTH",
+          "sub_value": null
+        },
+        {
+          "id": "top_dept_ds3",
+          "label_es": "Departamento líder (sexual)",
+          "display_format": "text",
+          "badge": "DS3",
+          "sub_value": null
+        },
+        {
+          "id": "top_dept_ds4",
+          "label_es": "Departamento líder (VIF física)",
+          "display_format": "text",
+          "badge": "DS4",
+          "sub_value": null
+        }
+      ]
+    },
+    "sub_acto_4_5": {
+      "disability_cards": [
+        {
+          "label_es": "VIF con discapacidad declarada",
+          "value_key": "ds4_stats.pct_disability_f",
+          "unit": "%",
+          "source_badge": "DS4"
+        },
+        {
+          "label_es": "Sexual con discapacidad declarada",
+          "value_key": "ds3_stats.pct_disability_f",
+          "unit": "%",
+          "source_badge": "DS3"
+        }
+      ],
+      "ethnicity_cards": [
+        {
+          "label_es": "Víctimas Afro-NARP",
+          "value_key": "ds3_stats.pct_afro_narp_f",
+          "unit": "%",
+          "source_badge": "DS3"
+        },
+        {
+          "label_es": "Víctimas Indígenas",
+          "value_key": "ds3_stats.pct_indigena_f",
+          "unit": "%",
+          "source_badge": "DS3"
+        },
+        {
+          "label_es": "Sin pertenencia declarada",
+          "value_key": "ds3_stats.pct_sin_pertenencia_f",
+          "unit": "%",
+          "source_badge": "DS3"
+        }
+      ]
+    }
+  },
+  "copy_es": {
+    "act_disclaimer": "Los datos forenses describen la población de casos peritados por Medicina Legal 2018–2024 en cuatro departamentos del Pacífico colombiano. No representan la totalidad de hechos ocurridos. El subregistro estructural es especialmente alto en zonas de difícil acceso.",
+    "sub_acto_4_1": {
+      "title": "El universo peritado",
+      "anchor": "34.079 casos peritados por Medicina Legal entre 2018 y 2024 en Cauca, Chocó, Nariño y Valle del Cauca. Más de la mitad de las víctimas son niñas, niños y adolescentes."
+    },
+    "sub_acto_4_2": {
+      "title": "El hogar como escenario",
+      "anchor": "En más del 77% de los casos peritados, el hecho ocurrió en el hogar. El espacio que debería ser refugio es el escenario más frecuente de la violencia.",
+      "axis_labels_es": {
+        "day_label": "Día de la semana",
+        "month_label": "Mes",
+        "value_label": "Número de casos",
+        "scenario_label": "Escenario del hecho",
+        "pct_label": "% del total del dataset"
+      },
+      "panel_titles_es": {
+        "heatmap_vif": "PROVISIONAL: Violencia intrafamiliar por día y mes",
+        "heatmap_sexual": "PROVISIONAL: Violencia sexual por día y mes",
+        "escenario": "PROVISIONAL: Escenario del hecho — VIF vs Sexual"
+      },
+      "selector_labels_es": {
+        "label": "Departamento",
+        "regional": "Regional"
+      },
+      "caveat_choco_es": {
+        "heatmap_vif": "PROVISIONAL: n=213 casos, insuficiente para conclusiones robustas sobre patrones temporales. El bajo volumen puede reflejar subregistro de acceso a medicina legal en zonas rurales del departamento.",
+        "heatmap_sexual": "PROVISIONAL: NO_REGISTRADO alcanza 43% en hora y 8% en escenario — indicador de barreras de reporte.",
+        "escenario": "PROVISIONAL: 7.95% de los casos DS3 en Chocó tienen escenario NO_REGISTRADO, el mayor de la región. Los porcentajes reflejan solo los casos con escenario documentado."
+      }
+    },
+    "sub_acto_4_3": {
+      "title": "Dos violencias, dos universos de agresores",
+      "anchor": "Dos violencias, dos universos de agresores. La violencia sexual viene del conocido — padrastro, amigo, vecino. La violencia física intrafamiliar viene del propio núcleo — hijo, hermano, padre. La edad de la víctima define quién la agrede; el tipo de violencia define desde dónde."
+    },
+    "sub_acto_4_4": {
+      "title": "El factor declarado y la circunstancia",
+      "anchor": "El peritaje forense registra el factor precipitante de la violencia física y la circunstancia de la violencia sexual. En el 65% de los casos de VIF, el factor declarado es la intolerancia y el machismo.",
+      "ds4_title": "¿Qué declara el peritaje como factor de la violencia física (VIF)?",
+      "ds3_title": "¿Bajo qué circunstancia ocurrió la violencia sexual?"
+    },
+    "sub_acto_4_5": {
+      "title": "Lo que el peritaje no captura",
+      "anchor_text": "En una región donde Chocó es mayoritariamente afrocolombiano y Cauca alberga territorios ancestrales Nasa y Misak, Medicina Legal registra que solo el {pct_afro}% de las mujeres peritadas por delito sexual se identifica como Afro-NARP y el {pct_ind}% como Indígena. El resto — {pct_sin}% — figura como 'sin pertenencia declarada'. No es que la violencia no toque a estas comunidades: es que el sistema forense no las reconoce.",
+      "anchor_disability": "El {pct_disc_ds4}% de las víctimas femeninas de VIF y el {pct_disc_ds3}% de las de delito sexual peritadas tienen condición de discapacidad registrada. Piso mínimo, no realidad.",
+      "caveat": "El subregistro étnico en Medicina Legal es estructural: la variable 'pertenencia étnica' depende del autorreconocimiento en el momento del peritaje, sin protocolo diferencial. Chocó tiene la cobertura forense más baja de la región (n=312 casos VIF en 7 años); no leer estos porcentajes como composición étnica real, sino como evidencia del silencio institucional.",
+      "low_n_note": "Categorías marcadas con * tienen menos de 30 casos femeninos; se muestran por transparencia pero no permiten inferencia."
+    }
+  },
+  "forense_local": {
+    "min_total_casos": 30
+  },
+  "acto_5_ficha_forense_municipal": {
+    "output_filename": "acto_5_ficha_forense_municipal.json",
+    "violencia_sexual_stat_cards": [
+      {
+        "id": "agresor_frecuente_nna",
+        "label_es": "Agresor frecuente NNA",
+        "source_field": "agresor_frecuente_nna_f",
+        "display_format": "text"
+      },
+      {
+        "id": "agresor_frecuente_adultas",
+        "label_es": "Agresor frecuente adultas",
+        "source_field": "agresor_frecuente_adultas_f",
+        "display_format": "text"
+      },
+      {
+        "id": "escenario_frecuente",
+        "label_es": "Escenario más frecuente",
+        "source_field": "escenario_frecuente",
+        "display_format": "text"
+      },
+      {
+        "id": "circunstancia_frecuente",
+        "label_es": "Circunstancia más frecuente",
+        "source_field": "circunstancia_frecuente",
+        "display_format": "text"
+      },
+      {
+        "id": "distribucion_por_ciclo",
+        "label_es": "% casos femeninos por ciclo vital",
+        "source_field_nna": "pct_nna_femenino",
+        "source_field_adultas": "pct_adultas_femenino",
+        "display_format": "pct_split"
+      }
+    ],
+    "violencia_intrafamiliar_stat_cards": [
+      {
+        "id": "agresor_frecuente_nna",
+        "label_es": "Agresor frecuente NNA",
+        "source_field": "agresor_frecuente_nna_f",
+        "display_format": "text"
+      },
+      {
+        "id": "agresor_frecuente_adultas",
+        "label_es": "Agresor frecuente adultas",
+        "source_field": "agresor_frecuente_adultas_f",
+        "display_format": "text"
+      },
+      {
+        "id": "escenario_frecuente",
+        "label_es": "Escenario más frecuente",
+        "source_field": "escenario_frecuente",
+        "display_format": "text"
+      },
+      {
+        "id": "factor_mas_frecuente",
+        "label_es": "Factor más frecuente",
+        "source_field": "factor_mas_frecuente",
+        "display_format": "text"
+      },
+      {
+        "id": "distribucion_por_ciclo",
+        "label_es": "% casos femeninos por ciclo vital",
+        "source_field_nna": "pct_nna_femenino",
+        "source_field_adultas": "pct_adultas_femenino",
+        "display_format": "pct_split"
+      }
+    ],
+    "caveat_bajo_umbral_es": "PROVISIONAL: Perfil no mostrado por debajo del umbral mínimo de {min_total_casos} casos peritados registrados para este municipio en el periodo 2018–2025.",
+    "data_source_disclaimer_es": "Basado en casos peritados por Medicina Legal (2018–2024)."
+  }
+}

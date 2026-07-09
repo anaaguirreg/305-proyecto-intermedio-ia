@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!-- sub_acto_4_3 — Sankey del agresor: dos violencias, dos universos.
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_4_3.html
+     fetch() bloqueado bajo file:// por restricción CORS de mismo origen. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Sankey del agresor (sub_acto_4_3)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body    { font-family: var(--font-sans); padding: 1rem 1.25rem; background: var(--color-canvas);
+              color: var(--color-ink); }
+    h2      { font-size: 1.15rem; margin-bottom: 0.5rem; max-width: 1400px; }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.9rem; }
+
+    /* Anchor paragraph */
+    #anchor-text {
+      font-size: 0.88rem; color: var(--color-muted); line-height: 1.55;
+      max-width: 1400px; margin-bottom: 0.6rem;
+    }
+
+    /* Act-level disclaimer (Medicina Legal caveat) */
+    #disclaimer-bar {
+      border-left: 3px solid var(--color-muted-soft);
+      background: var(--color-canvas);
+      padding: 0.4rem 0.65rem;
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      line-height: 1.45;
+      max-width: 1400px;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Two-column Sankey layout */
+    #sankey-row {
+      display: flex;
+      gap: 1rem;
+      max-width: 1400px;
+      margin-bottom: 0.75rem;
+      align-items: flex-start;
+    }
+    .sankey-col { flex: 1 1 0; min-width: 0; }
+
+    /* Dataset header row */
+    .ds-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .ds-name   { font-size: 0.9rem; font-weight: 600; color: var(--color-ink); }
+    .ds-badge  { font-size: 0.7rem; padding: 0.1rem 0.4rem;
+                 border-radius: 3px; font-weight: 500; }
+    .badge-ds3 { background: var(--color-primary-wash); color: var(--color-primary); }
+    .badge-ds4 { background: var(--color-primary-ghost); color: var(--color-primary-deep); }
+
+    /* Approximate column-title labels above each chart */
+    .col-labels {
+      display: flex;
+      justify-content: space-around;
+      font-size: 0.7rem;
+      color: var(--color-muted);
+      font-style: italic;
+      margin-bottom: 2px;
+      padding: 0 4px;
+    }
+
+    /* Chart containers */
+    .sankey-chart {
+      width: 100%;
+      height: 640px;
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline);
+    }
+
+    /* Meta line below each chart */
+    .sankey-meta {
+      font-size: 0.73rem;
+      color: var(--color-muted);
+      line-height: 1.45;
+      margin-top: 0.3rem;
+    }
+    .meta-warn { color: var(--color-accent-amber); font-style: italic; }
+
+    /* Diagnostic panel */
+    details { max-width: 1400px; margin-top: 0.75rem; font-size: 0.8rem; }
+    summary { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul      { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.7; }
+    .warn   { color: var(--color-accent-amber); }
+  </style>
+</head>
+<body>
+  <h2 id="title"></h2>
+  <p id="anchor-text"></p>
+  <div id="disclaimer-bar" hidden></div>
+
+  <div id="sankey-row">
+    <!-- DS3: violencia sexual (seforense) -->
+    <div class="sankey-col">
+      <div class="ds-header">
+        <span class="ds-name" id="ds3-name"></span>
+        <span class="ds-badge badge-ds3">DS3 · seforense</span>
+      </div>
+      <div class="col-labels" id="col-labels-ds3">
+        <span></span><span></span><span></span>
+      </div>
+      <div id="chart-ds3" class="sankey-chart"></div>
+      <div class="sankey-meta" id="meta-ds3"></div>
+    </div>
+
+    <!-- DS4: violencia física intrafamiliar (forense) -->
+    <div class="sankey-col">
+      <div class="ds-header">
+        <span class="ds-name" id="ds4-name"></span>
+        <span class="ds-badge badge-ds4">DS4 · forense</span>
+      </div>
+      <div class="col-labels" id="col-labels-ds4">
+        <span></span><span></span><span></span>
+      </div>
+      <div id="chart-ds4" class="sankey-chart"></div>
+      <div class="sankey-meta" id="meta-ds4"></div>
+    </div>
+  </div>
+
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <script>
+    /**
+     * sub_acto_4_3 — Sankey del agresor: dos violencias, dos universos de agresores.
+     *
+     * Decisiones de diseño:
+     *   - Estrategia B: dos instancias ECharts independientes (DS3 izq / DS4 der).
+     *     La asimetría en col2 (7 nodos DS3 vs 3 nodos DS4) es el argumento visual.
+     *   - node.id como name en ECharts (formato "{col}__{label}") para garantizar
+     *     unicidad: "NO_REGISTRADO" aparece en col2 y col3 de DS3 con ids distintos.
+     *   - label.formatter strips the prefix "N__" para mostrar solo el label limpio.
+     *   - pct_within_ciclo suprimido en tooltip para enlaces col2→col3 (siempre 0.0
+     *     en el JSON — el porcentaje solo tiene sentido desde ciclo_vital, col1).
+     *   - Colores: col1 compartido (ramp rose neutral por edad), col2/col3 divergen
+     *     por dataset (magenta DS3, índigo DS4). Todo leído de visualization block.
+     *   - Link lineStyle.color: 'source' — hereda color del nodo origen.
+     *
+     * Patrones compartidos con sub_acto_3_2 y sub_acto_1_2:
+     *   - addLi() helper para diagnóstico.
+     *   - Error catch en main() con #error-msg.
+     *   - resize handler para ambas instancias.
+     */
+
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const FORENSE_URL = './data/acto_4_forense.json';
+
+    // Dataset labels derived from stat_card labels — not hardcoded business logic
+    // but canonical Spanish names used throughout the project for DS3 and DS4.
+    const DS_LABELS = {
+      ds3: 'Violencia sexual',
+      ds4: 'Violencia física intrafamiliar',
+    };
+
+    /* ── Color resolution ──────────────────────────────────────────────────── */
+
+    function getNodeColor(node, dsColors) {
+      const { column, label } = node;
+      if (column === 1) {
+        return dsColors.col1[label] ?? CSS.hairline;
+      }
+      if (column === 2) {
+        return dsColors.col2_overrides[label] ?? dsColors.col2_default;
+      }
+      // column === 3
+      return label === 'NO_REGISTRADO'
+        ? dsColors.col3_no_registrado
+        : dsColors.col3_default;
+    }
+
+    /* ── Coverage helper ───────────────────────────────────────────────────── */
+
+    function computeFlowSum(scope) {
+      return scope.links
+        .filter(lk => lk.source.startsWith('1__'))
+        .reduce((s, lk) => s + lk.value, 0);
+    }
+
+    /* ── ECharts option builder ────────────────────────────────────────────── */
+
+    function buildOption(scope, dsKey, viz) {
+      const dsColors = viz[`${dsKey}_colors`];
+
+      // Lookup maps — closed over by the tooltip formatter below.
+      const nodeMap = new Map(scope.nodes.map(n => [n.id, n]));
+      const linkPctMap = new Map(
+        scope.links.map(lk => [`${lk.source}|${lk.target}`, lk.pct_within_ciclo])
+      );
+
+      const nodes = scope.nodes.map(n => ({
+        name:      n.id,
+        itemStyle: { color: getNodeColor(n, dsColors) },
+      }));
+
+      const links = scope.links.map(lk => ({
+        source: lk.source,
+        target: lk.target,
+        value:  lk.value,
+      }));
+
+      return {
+        tooltip: {
+          trigger: 'item',
+          confine: true,
+          formatter: params => {
+            const d = params.data;
+            if (!d) return '';
+
+            // Distinguish node vs edge by presence of source/target keys
+            if ('source' in d && 'target' in d) {
+              // Link/edge
+              const srcInfo = nodeMap.get(d.source);
+              const tgtInfo = nodeMap.get(d.target);
+              const srcLabel = srcInfo?.label ?? d.source.replace(/^\d+__/, '');
+              const tgtLabel = tgtInfo?.label ?? d.target.replace(/^\d+__/, '');
+              const isCol2Src = d.source.startsWith('2__');
+              let html =
+                `${srcLabel} → ${tgtLabel}<br>` +
+                `Casos: ${d.value.toLocaleString('es')}`;
+              // pct_within_ciclo is 0.0 for all col2→col3 links — suppress.
+              if (!isCol2Src) {
+                const pct = linkPctMap.get(`${d.source}|${d.target}`) ?? 0;
+                if (pct > 0) {
+                  html += `<br>${pct.toFixed(1)}% de víctimas de este ciclo vital`;
+                }
+              }
+              return html;
+            }
+
+            // Node
+            const info = nodeMap.get(d.name);
+            const label = info?.label ?? (d.name ?? '').replace(/^\d+__/, '');
+            const n = info?.n_cases;
+            return `<strong>${label}</strong><br>Casos: ${n != null ? n.toLocaleString('es') : '—'}`;
+          },
+        },
+        series: [{
+          type:      'sankey',
+          animation: false,
+          emphasis:  { focus: 'adjacency' },
+          nodeWidth: 16,
+          nodeGap:   8,
+          orient:    'horizontal',
+          left:      '1%',
+          right:     '22%',
+          top:       '2%',
+          bottom:    '2%',
+          lineStyle: {
+            color:   'source',
+            opacity: viz.link_opacity,
+          },
+          label: {
+            fontSize:  10,
+            color:     CSS.ink,
+            formatter: params => {
+              const info = nodeMap.get(params.name);
+              return info?.label ?? params.name.replace(/^\d+__/, '');
+            },
+          },
+          data:  nodes,
+          links: links,
+        }],
+      };
+    }
+
+    /* ── Helpers ───────────────────────────────────────────────────────────── */
+
+    function addLi(parent, text, warn = false) {
+      const li = document.createElement('li');
+      li.textContent = text;
+      if (warn) li.className = 'warn';
+      parent.appendChild(li);
+      return li;
+    }
+
+    function setColLabels(rowId, titles) {
+      const row = document.getElementById(rowId);
+      const spans = row.querySelectorAll('span');
+      ['col1', 'col2', 'col3'].forEach((key, i) => {
+        spans[i].textContent = titles[key] ?? '';
+      });
+    }
+
+    /* ── Diagnostic panel ──────────────────────────────────────────────────── */
+
+    function buildDiagnostico(sub, meta) {
+      const ul = document.getElementById('diag-list');
+      const viz = sub.visualization;
+      const thr = sub.thresholds;
+
+      const reg3 = sub.ds3.regional;
+      const reg4 = sub.ds4.regional;
+      const flow3 = computeFlowSum(reg3);
+      const flow4 = computeFlowSum(reg4);
+
+      // 1. DS3 shape
+      addLi(ul,
+        `DS3 regional: ${reg3.nodes.length} nodos, ${reg3.links.length} enlaces. ` +
+        `n_total declarado: ${reg3.n_total.toLocaleString('es')}.`
+      );
+
+      // 2. DS4 shape
+      addLi(ul,
+        `DS4 regional: ${reg4.nodes.length} nodos, ${reg4.links.length} enlaces. ` +
+        `n_total declarado: ${reg4.n_total.toLocaleString('es')}.`
+      );
+
+      // 3. Coverage
+      addLi(ul,
+        `DS3 cobertura en Sankey: ${flow3.toLocaleString('es')} casos ` +
+        `(${(flow3 / reg3.n_total * 100).toFixed(1)}% del universo con agresor registrado). ` +
+        `Umbral aplicado: top ${thr.flow_top_pct}%, mínimo ${thr.min_aggressor_cases} casos/nodo.`
+      );
+      addLi(ul,
+        `DS4 cobertura en Sankey: ${flow4.toLocaleString('es')} casos ` +
+        `(${(flow4 / reg4.n_total * 100).toFixed(1)}% del universo con agresor registrado).`
+      );
+
+      // 4. pct_within_ciclo note
+      const col23LinksDS3 = reg3.links.filter(lk => lk.source.startsWith('2__'));
+      const allZero = col23LinksDS3.every(lk => lk.pct_within_ciclo === 0);
+      addLi(ul,
+        `pct_within_ciclo en enlaces col2→col3: siempre 0.0 en DS3 (${col23LinksDS3.length} enlaces) — ` +
+        `suprimido en tooltip. Solo válido en col1→col2 (fuente = ciclo vital).`,
+        allZero
+      );
+
+      // 5. CHOCO DS4 threshold warning
+      const chocoDsCount = sub.ds4.CHOCO?.n_total ?? null;
+      if (chocoDsCount !== null) {
+        addLi(ul,
+          `CHOCO DS4: n_total=${chocoDsCount} < umbral departamental ${thr.sankey_min_dept_cases} casos. ` +
+          `Vista departamental omitida en este render (solo regional en Paso 2).`,
+          chocoDsCount < thr.sankey_min_dept_cases
+        );
+      }
+
+      // 6. Node integrity
+      const nodeIds3 = new Set(reg3.nodes.map(n => n.id));
+      const brokenRefs3 = reg3.links.filter(
+        lk => !nodeIds3.has(lk.source) || !nodeIds3.has(lk.target)
+      );
+      addLi(ul,
+        `DS3 integridad de referencias: ${brokenRefs3.length === 0 ? 'OK — cero referencias rotas' : brokenRefs3.length + ' REFERENCIAS ROTAS'}`,
+        brokenRefs3.length > 0
+      );
+
+      // 7. Color coverage check
+      const uncoveredDs3 = reg3.nodes.filter(n => {
+        const c = getNodeColor(n, viz.ds3_colors);
+        return !c || c === CSS.hairline;
+      });
+      const uncoveredDs4 = reg4.nodes.filter(n => {
+        const c = getNodeColor(n, viz.ds4_colors);
+        return !c || c === CSS.hairline;
+      });
+      addLi(ul,
+        `Nodos con color de fallback (#e2dbd0): DS3=${uncoveredDs3.length}, DS4=${uncoveredDs4.length}.` +
+        (uncoveredDs3.length + uncoveredDs4.length > 0
+          ? ' Nombres: ' + [...uncoveredDs3, ...uncoveredDs4].map(n => n.label).join(', ')
+          : ''),
+        uncoveredDs3.length + uncoveredDs4.length > 0
+      );
+
+      // 8. Metadata sentinel
+      addLi(ul,
+        `Sentinelas metadata: n_total=${meta.n_total.toLocaleString('es')} ` +
+        `(DS3=${meta.n_ds3.toLocaleString('es')}, DS4=${meta.n_ds4.toLocaleString('es')}). ` +
+        `Período: ${meta.year_range[0]}–${meta.year_range[1]}.`
+      );
+    }
+
+    /* ── Main ──────────────────────────────────────────────────────────────── */
+
+    async function main() {
+      const acto4 = await fetch(FORENSE_URL).then(r => {
+        if (!r.ok) throw new Error(`${FORENSE_URL}: HTTP ${r.status}`);
+        return r.json();
+      });
+
+      const sub  = acto4.sub_acto_4_3;
+      const meta = acto4.metadata;
+      const viz  = sub.visualization;
+
+      // Page header
+      document.getElementById('title').textContent = sub.title_es;
+      document.getElementById('anchor-text').textContent = sub.anchor_text_es;
+
+      // Act-level disclaimer (Medicina Legal caveat)
+      if (meta.act_disclaimer_es) {
+        const bar = document.getElementById('disclaimer-bar');
+        bar.textContent = meta.act_disclaimer_es;
+        bar.hidden = false;
+      }
+
+      // Column labels (approximate horizontal positioning via flex justify-around)
+      setColLabels('col-labels-ds3', viz.column_titles);
+      setColLabels('col-labels-ds4', viz.column_titles);
+
+      // Dataset panel titles (derived from stat_card labels)
+      document.getElementById('ds3-name').textContent = DS_LABELS.ds3;
+      document.getElementById('ds4-name').textContent = DS_LABELS.ds4;
+
+      // Build and mount both Sankey charts
+      const chartDs3 = echarts.init(document.getElementById('chart-ds3'));
+      const chartDs4 = echarts.init(document.getElementById('chart-ds4'));
+
+      chartDs3.setOption(buildOption(sub.ds3.regional, 'ds3', viz));
+      chartDs4.setOption(buildOption(sub.ds4.regional, 'ds4', viz));
+
+      window.addEventListener('resize', () => {
+        chartDs3.resize();
+        chartDs4.resize();
+      });
+
+      // Coverage meta below each chart
+      const flow3 = computeFlowSum(sub.ds3.regional);
+      const flow4 = computeFlowSum(sub.ds4.regional);
+      const pct3  = (flow3 / sub.ds3.regional.n_total * 100).toFixed(1);
+      const pct4  = (flow4 / sub.ds4.regional.n_total * 100).toFixed(1);
+
+      document.getElementById('meta-ds3').innerHTML =
+        `${flow3.toLocaleString('es')} casos renderizados ` +
+        `(${pct3}% del universo con agresor registrado · n_filtrable=${sub.ds3.regional.n_total.toLocaleString('es')}).`;
+
+      document.getElementById('meta-ds4').innerHTML =
+        `${flow4.toLocaleString('es')} casos renderizados ` +
+        `(${pct4}% del universo con agresor registrado · n_filtrable=${sub.ds4.regional.n_total.toLocaleString('es')}).`;
+
+      // Diagnostic panel
+      buildDiagnostico(sub, meta);
+    }
+
+    main().catch(err => {
+      console.error('Error en renderizado:', err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

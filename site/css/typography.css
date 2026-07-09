@@ -1,0 +1,79 @@
+@import url('./variables.css');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-body);
+  background-color: var(--color-canvas);
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--color-ink);
+  line-height: 1.25;
+  margin-top: 0;
+}
+
+h1 { font-size: 1.875rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.0625rem; }
+h5 { font-size: 0.9375rem; }
+h6 { font-size: 0.875rem; }
+
+p {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+small {
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* Pull-quote / anchor text */
+.ancla {
+  border-left: 3px solid var(--color-primary-mid);
+  background: var(--color-primary-ghost);
+  padding: 0.6rem 0.9rem;
+  color: var(--color-primary-deep);
+  font-style: italic;
+  line-height: 1.65;
+  font-size: 0.88rem;
+  margin: 1rem 0;
+}
+
+/* Provisional / caveat box */
+.provisional-note,
+.nota-provisional {
+  border-left: 3px solid var(--color-accent-amber);
+  background: var(--color-accent-amber-soft);
+  padding: 0.5rem 0.875rem;
+  font-size: 0.8125rem;
+  color: var(--color-body-dark);
+  border-radius: 0 var(--rounded-xs) var(--rounded-xs) 0;
+  margin: 1rem 0;
+}
+
+/* Muted / secondary text helpers */
+.text-muted      { color: var(--color-muted); }
+.text-muted-soft { color: var(--color-muted-soft); }
+.text-primary    { color: var(--color-primary); }
+.text-primary-deep { color: var(--color-primary-deep); }
+.text-error      { color: var(--color-error); }
+
+/* Diagnostic list (test harness only) */
+#diagnostic { font-size: 0.8rem; color: var(--color-muted); }

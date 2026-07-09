@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!-- sub_acto_2_6 — Diagnóstico de brecha y artefacto masculino.
+     Componente: renderDiagnosticDualPanel — dos paneles verticales.
+     Panel 1 (focal_gap_visual = sexual_adults): brecha en baja + tasas F y M ambas descendentes.
+     Panel 2 (focal_artifact  = vif_adults):    brecha en baja ARTEFACTO — tasas M suben +4.2/año.
+     Pull-quote entre paneles desde beat4_diagnostic.narrative_conclusion.
+     JSON:   data/dashboard/acto_2_brechas.json → sub_acto_2_6
+     Config: config/master_exporter_config.json → acto_2_visualization.sub_acto_2_6
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_2_6.html -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Diagnóstico brecha/artefacto (sub_acto_2_6)</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-female: var(--color-primary);
+      --color-male:   var(--color-primary);
+      --color-gap:    var(--color-muted);
+    }
+    body { font-family: var(--font-sans); padding: 1rem 1.25rem; background: var(--color-canvas); color: var(--color-ink); }
+    h2   { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; max-width: 980px; }
+    .anchor-text { font-size: 0.88rem; color: var(--color-muted); line-height: 1.55; max-width: 980px; margin-bottom: 0.9rem; }
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber); background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem; font-size: 0.85rem; color: var(--color-accent-amber);
+      line-height: 1.5; max-width: 980px; margin-bottom: 0.75rem;
+    }
+
+    /* Panel container */
+    .panel { max-width: 980px; margin-bottom: 1.25rem; }
+    .panel-title {
+      font-size: 0.88rem; font-weight: 700; color: var(--color-body);
+      padding: 0.3rem 0.7rem; margin-bottom: 0.6rem;
+      border-left: 3px solid var(--color-hairline); background: var(--color-canvas);
+    }
+    .panel-charts { display: flex; gap: 1rem; }
+    .panel-chart-block { flex: 1 1 0; min-width: 0; }
+    .panel-chart-label {
+      font-size: 0.75rem; color: var(--color-muted); text-align: center;
+      margin-bottom: 0.2rem; font-style: italic;
+    }
+    .chart-el { width: 100%; height: 220px; }
+
+    /* Pull-quote between panels */
+    .pull-quote {
+      max-width: 900px; margin: 0 0 1.25rem;
+      padding: 0.8rem 1.1rem;
+      border-left: 4px solid var(--color-primary-mid); background: var(--color-primary-ghost);
+      font-size: 0.88rem; color: var(--color-primary-deep); line-height: 1.65; font-style: italic;
+    }
+
+    details  { max-width: 980px; margin-top: 0.8rem; font-size: 0.8rem; }
+    summary  { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul       { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.85; }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <h2 id="title"></h2>
+  <div id="anchor-wrapper"></div>
+
+  <!-- Panel 1: focal gap visual (sexual_adults) -->
+  <div class="panel">
+    <div class="panel-title" id="panel1-title"></div>
+    <div class="panel-charts">
+      <div class="panel-chart-block">
+        <div class="panel-chart-label">Razón de brecha F/M por año</div>
+        <div class="chart-el" id="chart-gap1"></div>
+      </div>
+      <div class="panel-chart-block">
+        <div class="panel-chart-label">Tasas F y M por 100.000 hab.</div>
+        <div class="chart-el" id="chart-rates1"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pull-quote between panels -->
+  <blockquote class="pull-quote" id="pull-quote" hidden></blockquote>
+
+  <!-- Panel 2: focal artifact (vif_adults) -->
+  <div class="panel">
+    <div class="panel-title" id="panel2-title"></div>
+    <div class="panel-charts">
+      <div class="panel-chart-block">
+        <div class="panel-chart-label">Razón de brecha F/M por año</div>
+        <div class="chart-el" id="chart-gap2"></div>
+      </div>
+      <div class="panel-chart-block">
+        <div class="panel-chart-label">Tasas F y M por 100.000 hab.</div>
+        <div class="chart-el" id="chart-rates2"></div>
+      </div>
+    </div>
+  </div>
+
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script>
+    /**
+     * renderDiagnosticDualPanel
+     *
+     * Renders two vertically-stacked diagnostic panels from beat4_diagnostic.
+     * Each panel shows:
+     *   - LEFT:  line sparkline of gap (razón F/M) over 8 years
+     *   - RIGHT: area chart of rate_f and rate_m over 8 years
+     *
+     * Panel 1 = focal_gap_visual (sexual_adults): both rates descend, gap fell non-significantly
+     * Panel 2 = focal_artifact  (vif_adults):     M rate rises +4.2/yr (p=0.014) → gap fall is artefact
+     *
+     * Pull-quote between panels: beat4_diagnostic.narrative_conclusion
+     */
+
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const BRECHAS_URL = './data/acto_2_brechas.json';
+    const CFG_URL     = './config/master_exporter_config.json';
+
+    const COLOR_F   = getCssVar('--color-female');
+    const COLOR_M   = getCssVar('--color-male');
+    const COLOR_GAP = getCssVar('--color-gap');
+
+    function renderAnchor(text) {
+      const PROV = 'PROVISIONAL: ';
+      const isProv = text.startsWith(PROV);
+      const el = document.createElement(isProv ? 'div' : 'p');
+      el.className = isProv ? 'provisional-box' : 'anchor-text';
+      el.textContent = isProv ? text.slice(PROV.length) : text;
+      document.getElementById('anchor-wrapper').appendChild(el);
+    }
+
+    function buildGapOption(series, cfg) {
+      const years = series.map(d => String(d.year));
+      const gaps  = series.map(d => +(d.gap.toFixed(2)));
+      const lbl   = cfg?.legend_labels_es?.gap || 'Razón F/M';
+      const yLbl  = cfg?.axis_labels_es?.y_gap || 'Razón F/M';
+      const xLbl  = cfg?.axis_labels_es?.x     || 'Año';
+      return {
+        backgroundColor: CSS.canvas,
+        grid: { left: 52, right: 14, top: 38, bottom: 44 },
+        legend: { data: [{ name: lbl, icon: 'circle' }], top: 5, textStyle: { fontSize: 10 } },
+        xAxis: {
+          type: 'category', data: years,
+          axisLabel: { fontSize: 10 },
+          name: xLbl, nameLocation: 'middle', nameGap: 28,
+          nameTextStyle: { fontSize: 10, color: CSS.muted },
+        },
+        yAxis: {
+          type: 'value',
+          name: yLbl, nameLocation: 'middle', nameGap: 36,
+          nameTextStyle: { fontSize: 10, color: CSS.muted },
+          axisLabel: { fontSize: 10 },
+          splitLine: { lineStyle: { color: CSS.hairline } },
+          min: v => Math.floor(v.min * 0.85),
+        },
+        tooltip: {
+          trigger: 'axis',
+          formatter: p => `<strong>${p[0].name}</strong><br>${lbl}: ${p[0].value.toFixed(2)}×`,
+        },
+        series: [{
+          name: lbl, type: 'line', data: gaps,
+          symbol: 'circle', symbolSize: 6,
+          lineStyle: { color: COLOR_GAP, width: 2 },
+          itemStyle: { color: COLOR_GAP },
+          label: {
+            show: true, position: 'top', fontSize: 9, color: COLOR_GAP,
+            formatter: p => p.value.toFixed(2),
+          },
+        }],
+      };
+    }
+
+    function buildRatesOption(series, cfg) {
+      const years  = series.map(d => String(d.year));
+      const ratesF = series.map(d => +(d.rate_f.toFixed(1)));
+      const ratesM = series.map(d => +(d.rate_m.toFixed(1)));
+      const lblF   = cfg?.legend_labels_es?.rate_f || 'Tasa femenina';
+      const lblM   = cfg?.legend_labels_es?.rate_m || 'Tasa masculina';
+      const yLbl   = cfg?.axis_labels_es?.y_rate   || 'Tasa por 100.000 hab.';
+      const xLbl   = cfg?.axis_labels_es?.x        || 'Año';
+      return {
+        backgroundColor: CSS.canvas,
+        grid: { left: 60, right: 14, top: 38, bottom: 44 },
+        legend: {
+          data: [{ name: lblF, icon: 'circle' }, { name: lblM, icon: 'circle' }],
+          top: 5, textStyle: { fontSize: 10 },
+        },
+        xAxis: {
+          type: 'category', data: years,
+          axisLabel: { fontSize: 10 },
+          name: xLbl, nameLocation: 'middle', nameGap: 28,
+          nameTextStyle: { fontSize: 10, color: CSS.muted },
+        },
+        yAxis: {
+          type: 'value',
+          name: yLbl, nameLocation: 'middle', nameGap: 44,
+          nameTextStyle: { fontSize: 10, color: CSS.muted },
+          axisLabel: { fontSize: 10 },
+          splitLine: { lineStyle: { color: CSS.hairline } },
+          min: 0,
+        },
+        tooltip: {
+          trigger: 'axis',
+          formatter: params => {
+            const yr = params[0].name;
+            return `<strong>${yr}</strong><br>` +
+              params.map(p => `${p.seriesName}: ${(+p.value).toFixed(1)}`).join('<br>');
+          },
+        },
+        series: [
+          {
+            name: lblF, type: 'line', data: ratesF,
+            symbol: 'circle', symbolSize: 4,
+            lineStyle: { color: COLOR_F, width: 2 },
+            itemStyle: { color: COLOR_F },
+            areaStyle: { color: COLOR_F, opacity: 0.12 },
+          },
+          {
+            name: lblM, type: 'line', data: ratesM,
+            symbol: 'circle', symbolSize: 4,
+            lineStyle: { color: COLOR_M, width: 2, opacity: 0.5 },
+            itemStyle: { color: COLOR_M, opacity: 0.5 },
+            areaStyle: { color: COLOR_M, opacity: 0.15 },
+          },
+        ],
+      };
+    }
+
+    async function main() {
+      const [payload, fullCfg] = await Promise.all([
+        fetch(BRECHAS_URL).then(r => { if (!r.ok) throw new Error(`${BRECHAS_URL}: HTTP ${r.status}`); return r.json(); }),
+        fetch(CFG_URL).then(r => r.json()).catch(() => ({})),
+      ]);
+
+      const sub     = payload.sub_acto_2_6;
+      const data    = sub.data;
+      const bd      = data.beat4_diagnostic;
+      const dispCfg = fullCfg?.acto_2_visualization?.sub_acto_2_6 ?? {};
+
+      document.getElementById('title').textContent = sub.title_es;
+      renderAnchor(sub.anchor_text_es);
+
+      const panelLabels = dispCfg.panel_labels_es ?? {};
+
+      // Panel 1 — focal gap visual (sexual_adults)
+      const focalKey = bd.focal_gap_visual;   // "sexual_adults"
+      const focalData = bd[focalKey];
+      document.getElementById('panel1-title').textContent =
+        panelLabels.focal_gap_visual || `${focalKey} — brecha y tasas`;
+
+      const chartGap1   = echarts.init(document.getElementById('chart-gap1'));
+      const chartRates1 = echarts.init(document.getElementById('chart-rates1'));
+      chartGap1.setOption(buildGapOption(focalData.series, dispCfg));
+      chartRates1.setOption(buildRatesOption(focalData.series, dispCfg));
+
+      // Pull-quote (narrative_conclusion)
+      const pq = document.getElementById('pull-quote');
+      if (bd.narrative_conclusion) {
+        pq.textContent = bd.narrative_conclusion;
+        pq.hidden = false;
+      }
+
+      // Panel 2 — focal artifact (vif_adults)
+      const artifactKey  = bd.focal_artifact;  // "vif_adults"
+      const artifactData = bd[artifactKey];
+      document.getElementById('panel2-title').textContent =
+        panelLabels.focal_artifact || `${artifactKey} — brecha y tasas (artefacto)`;
+
+      const chartGap2   = echarts.init(document.getElementById('chart-gap2'));
+      const chartRates2 = echarts.init(document.getElementById('chart-rates2'));
+      chartGap2.setOption(buildGapOption(artifactData.series, dispCfg));
+      chartRates2.setOption(buildRatesOption(artifactData.series, dispCfg));
+
+      window.addEventListener('resize', () => {
+        [chartGap1, chartRates1, chartGap2, chartRates2].forEach(c => c.resize());
+      });
+
+      /* Diagnostics */
+      const ul = document.getElementById('diag-list');
+      const rows = [
+        `focal_gap_visual: ${focalKey} (esperado: sexual_adults)`,
+        `focal_artifact: ${artifactKey} (esperado: vif_adults)`,
+        `sexual_adults series: ${focalData.series.length} años (esperado: 8)`,
+        `vif_adults series: ${artifactData.series.length} años (esperado: 8)`,
+        `sexual_adults gap 2018: ${focalData.series[0]?.gap} (esperado: 7.19)`,
+        `vif_adults male_rate_trend slope: ${artifactData.male_rate_trend?.slope} (esperado: 4.2222)`,
+        `narrative_conclusion presente: ${bd.narrative_conclusion ? 'sí' : 'no'}`,
+        `Config panel_labels cargados: ${Object.keys(panelLabels).length > 0 ? 'sí' : 'no (fallback)'}`,
+      ];
+      rows.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+    }
+
+    main().catch(err => {
+      console.error(err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,4952 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "generated_at": "2026-07-08T23:31:51.306795+00:00",
+    "year_range": [
+      2018,
+      2024
+    ],
+    "n_total": 34079,
+    "n_ds3": 18661,
+    "n_ds4": 15418,
+    "act_disclaimer_es": "Los datos forenses describen la población de casos peritados por Medicina Legal 2018–2024 en cuatro departamentos del Pacífico colombiano. No representan la totalidad de hechos ocurridos. El subregistro estructural es especialmente alto en zonas de difícil acceso."
+  },
+  "sub_acto_4_1": {
+    "title_es": "El universo peritado",
+    "anchor_text_es": "34.079 casos peritados por Medicina Legal entre 2018 y 2024 en Cauca, Chocó, Nariño y Valle del Cauca. Más de la mitad de las víctimas son niñas, niños y adolescentes.",
+    "stat_cards": [
+      {
+        "id": "total_cases",
+        "label_es": "Total casos peritados",
+        "value": 34079,
+        "display_format": "integer_thousands",
+        "badge": "BOTH",
+        "sub_value": null
+      },
+      {
+        "id": "ds3_cases",
+        "label_es": "Casos violencia sexual (seforense)",
+        "value": 18661,
+        "display_format": "integer_thousands",
+        "badge": "DS3",
+        "sub_value": null
+      },
+      {
+        "id": "ds4_cases",
+        "label_es": "Casos violencia física VIF (forense)",
+        "value": 15418,
+        "display_format": "integer_thousands",
+        "badge": "DS4",
+        "sub_value": null
+      },
+      {
+        "id": "pct_nna",
+        "label_es": "Víctimas NNA (0–17 años)",
+        "value": 53.3,
+        "display_format": "percent_1d",
+        "badge": "BOTH",
+        "sub_value": null
+      },
+      {
+        "id": "top_dept_ds3",
+        "label_es": "Departamento líder (sexual)",
+        "value": "Valle Del Cauca (70.1%)",
+        "display_format": "text",
+        "badge": "DS3",
+        "sub_value": null
+      },
+      {
+        "id": "top_dept_ds4",
+        "label_es": "Departamento líder (VIF física)",
+        "value": "Valle Del Cauca (62.6%)",
+        "display_format": "text",
+        "badge": "DS4",
+        "sub_value": null
+      }
+    ]
+  },
+  "sub_acto_4_2": {
+    "title_es": "El hogar como escenario",
+    "anchor_text_es": "En más del 77% de los casos peritados, el hecho ocurrió en el hogar. El espacio que debería ser refugio es el escenario más frecuente de la violencia.",
+    "aggregation_default": "regional",
+    "departments_available": [
+      "regional",
+      "CAUCA",
+      "CHOCO",
+      "NARIÑO",
+      "VALLE DEL CAUCA"
+    ],
+    "heatmap_vif": {
+      "dataset_id": "ds4_vif",
+      "axis_days": [
+        "LUNES",
+        "MARTES",
+        "MIERCOLES",
+        "JUEVES",
+        "VIERNES",
+        "SABADO",
+        "DOMINGO"
+      ],
+      "axis_months": [
+        "ENERO",
+        "FEBRERO",
+        "MARZO",
+        "ABRIL",
+        "MAYO",
+        "JUNIO",
+        "JULIO",
+        "AGOSTO",
+        "SEPTIEMBRE",
+        "OCTUBRE",
+        "NOVIEMBRE",
+        "DICIEMBRE"
+      ],
+      "by_department": {
+        "regional": {
+          "matrix": [
+            [
+              144,
+              126,
+              121,
+              110,
+              122,
+              135,
+              132,
+              132,
+              130,
+              132,
+              114,
+              129
+            ],
+            [
+              150,
+              123,
+              111,
+              112,
+              123,
+              102,
+              101,
+              112,
+              109,
+              116,
+              88,
+              84
+            ],
+            [
+              128,
+              128,
+              118,
+              91,
+              118,
+              108,
+              105,
+              109,
+              96,
+              97,
+              83,
+              88
+            ],
+            [
+              113,
+              112,
+              111,
+              120,
+              111,
+              98,
+              91,
+              119,
+              85,
+              115,
+              92,
+              77
+            ],
+            [
+              92,
+              117,
+              87,
+              75,
+              99,
+              99,
+              94,
+              94,
+              92,
+              90,
+              86,
+              72
+            ],
+            [
+              109,
+              125,
+              120,
+              109,
+              91,
+              95,
+              102,
+              102,
+              96,
+              112,
+              93,
+              89
+            ],
+            [
+              138,
+              166,
+              208,
+              164,
+              147,
+              148,
+              158,
+              130,
+              216,
+              153,
+              146,
+              152
+            ]
+          ],
+          "total_cases": 9637,
+          "peak": {
+            "day": "DOMINGO",
+            "month": "SEPTIEMBRE",
+            "value": 216
+          },
+          "caveat_es": null
+        },
+        "CAUCA": {
+          "matrix": [
+            [
+              29,
+              30,
+              25,
+              10,
+              27,
+              19,
+              16,
+              34,
+              33,
+              23,
+              23,
+              33
+            ],
+            [
+              28,
+              30,
+              25,
+              19,
+              24,
+              21,
+              15,
+              23,
+              13,
+              22,
+              18,
+              17
+            ],
+            [
+              41,
+              29,
+              24,
+              16,
+              27,
+              22,
+              14,
+              17,
+              16,
+              18,
+              17,
+              14
+            ],
+            [
+              21,
+              22,
+              24,
+              21,
+              20,
+              16,
+              21,
+              16,
+              10,
+              22,
+              15,
+              16
+            ],
+            [
+              11,
+              29,
+              18,
+              18,
+              18,
+              19,
+              13,
+              23,
+              14,
+              16,
+              21,
+              15
+            ],
+            [
+              15,
+              17,
+              20,
+              27,
+              14,
+              12,
+              14,
+              16,
+              14,
+              21,
+              17,
+              15
+            ],
+            [
+              30,
+              42,
+              40,
+              36,
+              24,
+              33,
+              33,
+              20,
+              46,
+              25,
+              25,
+              33
+            ]
+          ],
+          "total_cases": 1840,
+          "peak": {
+            "day": "DOMINGO",
+            "month": "SEPTIEMBRE",
+            "value": 46
+          },
+          "caveat_es": null
+        },
+        "CHOCO": {
+          "matrix": [
+            [
+              2,
+              2,
+              1,
+              3,
+              2,
+              1,
+              1,
+              6,
+              7,
+              2,
+              4,
+              2
+            ],
+            [
+              2,
+              3,
+              2,
+              2,
+              1,
+              1,
+              2,
+              4,
+              4,
+              4,
+              6,
+              2
+            ],
+            [
+              2,
+              4,
+              2,
+              1,
+              4,
+              1,
+              0,
+              4,
+              0,
+              2,
+              5,
+              0
+            ],
+            [
+              4,
+              2,
+              3,
+              1,
+              0,
+              3,
+              2,
+              3,
+              4,
+              1,
+              2,
+              1
+            ],
+            [
+              3,
+              6,
+              2,
+              1,
+              1,
+              2,
+              2,
+              4,
+              0,
+              3,
+              0,
+              2
+            ],
+            [
+              1,
+              2,
+              2,
+              0,
+              0,
+              2,
+              5,
+              0,
+              1,
+              1,
+              3,
+              5
+            ],
+            [
+              4,
+              2,
+              2,
+              2,
+              5,
+              1,
+              5,
+              4,
+              12,
+              3,
+              5,
+              3
+            ]
+          ],
+          "total_cases": 213,
+          "peak": {
+            "day": "DOMINGO",
+            "month": "SEPTIEMBRE",
+            "value": 12
+          },
+          "caveat_es": "PROVISIONAL: n=213 casos, insuficiente para conclusiones robustas sobre patrones temporales. El bajo volumen puede reflejar subregistro de acceso a medicina legal en zonas rurales del departamento."
+        },
+        "NARIÑO": {
+          "matrix": [
+            [
+              22,
+              19,
+              14,
+              18,
+              18,
+              24,
+              20,
+              13,
+              25,
+              18,
+              21,
+              7
+            ],
+            [
+              32,
+              24,
+              21,
+              14,
+              25,
+              5,
+              21,
+              9,
+              27,
+              16,
+              15,
+              12
+            ],
+            [
+              15,
+              21,
+              15,
+              21,
+              24,
+              14,
+              25,
+              27,
+              12,
+              15,
+              8,
+              21
+            ],
+            [
+              16,
+              16,
+              28,
+              15,
+              21,
+              13,
+              12,
+              24,
+              22,
+              20,
+              16,
+              9
+            ],
+            [
+              18,
+              14,
+              16,
+              12,
+              21,
+              16,
+              20,
+              12,
+              16,
+              19,
+              10,
+              14
+            ],
+            [
+              21,
+              24,
+              27,
+              17,
+              10,
+              23,
+              23,
+              22,
+              12,
+              20,
+              11,
+              14
+            ],
+            [
+              19,
+              24,
+              45,
+              29,
+              20,
+              21,
+              25,
+              30,
+              36,
+              19,
+              36,
+              28
+            ]
+          ],
+          "total_cases": 1614,
+          "peak": {
+            "day": "DOMINGO",
+            "month": "MARZO",
+            "value": 45
+          },
+          "caveat_es": null
+        },
+        "VALLE DEL CAUCA": {
+          "matrix": [
+            [
+              91,
+              75,
+              81,
+              79,
+              75,
+              91,
+              95,
+              79,
+              65,
+              89,
+              66,
+              87
+            ],
+            [
+              88,
+              66,
+              63,
+              77,
+              73,
+              75,
+              63,
+              76,
+              65,
+              74,
+              49,
+              53
+            ],
+            [
+              70,
+              74,
+              77,
+              53,
+              63,
+              71,
+              66,
+              61,
+              68,
+              62,
+              53,
+              53
+            ],
+            [
+              72,
+              72,
+              56,
+              83,
+              70,
+              66,
+              56,
+              76,
+              49,
+              72,
+              59,
+              51
+            ],
+            [
+              60,
+              68,
+              51,
+              44,
+              59,
+              62,
+              59,
+              55,
+              62,
+              52,
+              55,
+              41
+            ],
+            [
+              72,
+              82,
+              71,
+              65,
+              67,
+              58,
+              60,
+              64,
+              69,
+              70,
+              62,
+              55
+            ],
+            [
+              85,
+              98,
+              121,
+              97,
+              98,
+              93,
+              95,
+              76,
+              122,
+              106,
+              80,
+              88
+            ]
+          ],
+          "total_cases": 5970,
+          "peak": {
+            "day": "DOMINGO",
+            "month": "SEPTIEMBRE",
+            "value": 122
+          },
+          "caveat_es": null
+        }
+      }
+    },
+    "heatmap_sexual": {
+      "dataset_id": "ds3_sexual",
+      "axis_days": [
+        "LUNES",
+        "MARTES",
+        "MIERCOLES",
+        "JUEVES",
+        "VIERNES",
+        "SABADO",
+        "DOMINGO"
+      ],
+      "axis_months": [
+        "ENERO",
+        "FEBRERO",
+        "MARZO",
+        "ABRIL",
+        "MAYO",
+        "JUNIO",
+        "JULIO",
+        "AGOSTO",
+        "SEPTIEMBRE",
+        "OCTUBRE",
+        "NOVIEMBRE",
+        "DICIEMBRE"
+      ],
+      "by_department": {
+        "regional": {
+          "matrix": [
+            [
+              207,
+              220,
+              221,
+              229,
+              193,
+              174,
+              209,
+              197,
+              249,
+              195,
+              143,
+              180
+            ],
+            [
+              246,
+              229,
+              238,
+              277,
+              228,
+              210,
+              241,
+              268,
+              218,
+              293,
+              251,
+              174
+            ],
+            [
+              250,
+              247,
+              255,
+              204,
+              218,
+              208,
+              231,
+              202,
+              204,
+              230,
+              199,
+              144
+            ],
+            [
+              253,
+              249,
+              272,
+              214,
+              215,
+              231,
+              206,
+              248,
+              254,
+              240,
+              217,
+              171
+            ],
+            [
+              248,
+              256,
+              242,
+              186,
+              212,
+              243,
+              226,
+              268,
+              240,
+              233,
+              234,
+              193
+            ],
+            [
+              134,
+              139,
+              134,
+              111,
+              125,
+              115,
+              135,
+              153,
+              119,
+              129,
+              113,
+              99
+            ],
+            [
+              123,
+              110,
+              127,
+              116,
+              151,
+              131,
+              118,
+              148,
+              136,
+              138,
+              122,
+              108
+            ]
+          ],
+          "total_cases": 16467,
+          "peak": {
+            "day": "MARTES",
+            "month": "OCTUBRE",
+            "value": 293
+          },
+          "caveat_es": null
+        },
+        "CAUCA": {
+          "matrix": [
+            [
+              46,
+              40,
+              33,
+              38,
+              42,
+              39,
+              41,
+              44,
+              54,
+              24,
+              31,
+              42
+            ],
+            [
+              41,
+              42,
+              34,
+              40,
+              27,
+              35,
+              30,
+              47,
+              33,
+              65,
+              55,
+              23
+            ],
+            [
+              53,
+              51,
+              44,
+              34,
+              41,
+              40,
+              45,
+              37,
+              38,
+              54,
+              38,
+              24
+            ],
+            [
+              37,
+              42,
+              53,
+              40,
+              43,
+              39,
+              37,
+              48,
+              46,
+              52,
+              46,
+              23
+            ],
+            [
+              51,
+              48,
+              51,
+              32,
+              38,
+              42,
+              42,
+              44,
+              44,
+              33,
+              48,
+              33
+            ],
+            [
+              26,
+              29,
+              27,
+              22,
+              16,
+              20,
+              20,
+              24,
+              19,
+              17,
+              23,
+              22
+            ],
+            [
+              21,
+              15,
+              24,
+              12,
+              26,
+              24,
+              25,
+              23,
+              33,
+              18,
+              24,
+              19
+            ]
+          ],
+          "total_cases": 2986,
+          "peak": {
+            "day": "MARTES",
+            "month": "OCTUBRE",
+            "value": 65
+          },
+          "caveat_es": null
+        },
+        "CHOCO": {
+          "matrix": [
+            [
+              18,
+              15,
+              19,
+              14,
+              16,
+              19,
+              14,
+              14,
+              15,
+              12,
+              7,
+              13
+            ],
+            [
+              22,
+              20,
+              18,
+              19,
+              17,
+              9,
+              31,
+              27,
+              9,
+              16,
+              10,
+              14
+            ],
+            [
+              15,
+              19,
+              19,
+              15,
+              11,
+              16,
+              29,
+              14,
+              17,
+              12,
+              12,
+              10
+            ],
+            [
+              21,
+              17,
+              23,
+              20,
+              13,
+              11,
+              16,
+              13,
+              22,
+              21,
+              22,
+              5
+            ],
+            [
+              20,
+              14,
+              20,
+              10,
+              19,
+              14,
+              14,
+              19,
+              12,
+              13,
+              15,
+              6
+            ],
+            [
+              9,
+              8,
+              10,
+              14,
+              8,
+              14,
+              12,
+              11,
+              5,
+              10,
+              5,
+              9
+            ],
+            [
+              11,
+              7,
+              5,
+              10,
+              13,
+              15,
+              5,
+              21,
+              11,
+              12,
+              6,
+              7
+            ]
+          ],
+          "total_cases": 1195,
+          "peak": {
+            "day": "MARTES",
+            "month": "JULIO",
+            "value": 31
+          },
+          "caveat_es": "PROVISIONAL: NO_REGISTRADO alcanza 43% en hora y 8% en escenario — indicador de barreras de reporte."
+        },
+        "NARIÑO": {
+          "matrix": [
+            [
+              17,
+              15,
+              10,
+              18,
+              14,
+              8,
+              14,
+              11,
+              11,
+              14,
+              9,
+              9
+            ],
+            [
+              16,
+              8,
+              12,
+              7,
+              14,
+              7,
+              7,
+              7,
+              9,
+              11,
+              17,
+              11
+            ],
+            [
+              12,
+              17,
+              14,
+              15,
+              13,
+              11,
+              12,
+              13,
+              11,
+              13,
+              10,
+              2
+            ],
+            [
+              18,
+              14,
+              15,
+              17,
+              12,
+              13,
+              12,
+              16,
+              18,
+              9,
+              10,
+              13
+            ],
+            [
+              16,
+              17,
+              11,
+              13,
+              14,
+              11,
+              8,
+              13,
+              6,
+              4,
+              14,
+              17
+            ],
+            [
+              10,
+              3,
+              9,
+              2,
+              6,
+              5,
+              6,
+              6,
+              5,
+              7,
+              6,
+              6
+            ],
+            [
+              3,
+              12,
+              7,
+              14,
+              10,
+              2,
+              7,
+              10,
+              14,
+              16,
+              8,
+              4
+            ]
+          ],
+          "total_cases": 908,
+          "peak": {
+            "day": "JUEVES",
+            "month": "ENERO",
+            "value": 18
+          },
+          "caveat_es": null
+        },
+        "VALLE DEL CAUCA": {
+          "matrix": [
+            [
+              126,
+              150,
+              159,
+              159,
+              121,
+              108,
+              140,
+              128,
+              169,
+              145,
+              96,
+              116
+            ],
+            [
+              167,
+              159,
+              174,
+              211,
+              170,
+              159,
+              173,
+              187,
+              167,
+              201,
+              169,
+              126
+            ],
+            [
+              170,
+              160,
+              178,
+              140,
+              153,
+              141,
+              145,
+              138,
+              138,
+              151,
+              139,
+              108
+            ],
+            [
+              177,
+              176,
+              181,
+              137,
+              147,
+              168,
+              141,
+              171,
+              168,
+              158,
+              139,
+              130
+            ],
+            [
+              161,
+              177,
+              160,
+              131,
+              141,
+              176,
+              162,
+              192,
+              178,
+              183,
+              157,
+              137
+            ],
+            [
+              89,
+              99,
+              88,
+              73,
+              95,
+              76,
+              97,
+              112,
+              90,
+              95,
+              79,
+              62
+            ],
+            [
+              88,
+              76,
+              91,
+              80,
+              102,
+              90,
+              81,
+              94,
+              78,
+              92,
+              84,
+              78
+            ]
+          ],
+          "total_cases": 11378,
+          "peak": {
+            "day": "MARTES",
+            "month": "ABRIL",
+            "value": 211
+          },
+          "caveat_es": null
+        }
+      }
+    },
+    "escenario": {
+      "chart_type": "stacked_bar_horizontal",
+      "dataset_labels": {
+        "vif": "VIF (DS4)",
+        "sexual": "Sexual (DS3)"
+      },
+      "by_department": {
+        "regional": {
+          "categories": [
+            "HOGAR",
+            "ESPACIO_PUBLICO",
+            "INSTITUCIONAL_EDUCATIVO",
+            "NO_REGISTRADO",
+            "ESTABLECIMIENTO_COMERCIAL_OCIO",
+            "ESPACIO_ABIERTO_RURAL",
+            "VEHICULO",
+            "OTROS",
+            "RECLUSORIO_MILITAR"
+          ],
+          "vif_pct": [
+            80.7,
+            15.0,
+            1.0,
+            0.3,
+            1.9,
+            0.5,
+            0.1,
+            0.4,
+            0.0
+          ],
+          "sexual_pct": [
+            77.3,
+            8.1,
+            3.7,
+            4.0,
+            3.0,
+            2.8,
+            0.6,
+            0.2,
+            0.2
+          ],
+          "vif_n": [
+            7777,
+            1447,
+            98,
+            26,
+            187,
+            52,
+            14,
+            35,
+            1
+          ],
+          "sexual_n": [
+            12722,
+            1340,
+            605,
+            666,
+            496,
+            456,
+            107,
+            39,
+            36
+          ],
+          "total_vif": 9637,
+          "total_sexual": 16467,
+          "caveat_es": null
+        },
+        "CAUCA": {
+          "categories": [
+            "HOGAR",
+            "ESPACIO_PUBLICO",
+            "ESTABLECIMIENTO_COMERCIAL_OCIO",
+            "ESPACIO_ABIERTO_RURAL",
+            "INSTITUCIONAL_EDUCATIVO",
+            "NO_REGISTRADO",
+            "VEHICULO",
+            "OTROS",
+            "RECLUSORIO_MILITAR"
+          ],
+          "vif_pct": [
+            80.3,
+            14.2,
+            2.6,
+            1.1,
+            1.1,
+            0.2,
+            0.2,
+            0.3,
+            0.0
+          ],
+          "sexual_pct": [
+            76.6,
+            7.7,
+            3.5,
+            3.8,
+            3.7,
+            3.5,
+            0.5,
+            0.4,
+            0.2
+          ],
+          "vif_n": [
+            1477,
+            262,
+            48,
+            21,
+            21,
+            3,
+            3,
+            5,
+            0
+          ],
+          "sexual_n": [
+            2287,
+            229,
+            106,
+            114,
+            111,
+            104,
+            16,
+            13,
+            6
+          ],
+          "total_vif": 1840,
+          "total_sexual": 2986,
+          "caveat_es": null
+        },
+        "CHOCO": {
+          "categories": [
+            "HOGAR",
+            "ESPACIO_PUBLICO",
+            "NO_REGISTRADO",
+            "ESPACIO_ABIERTO_RURAL",
+            "ESTABLECIMIENTO_COMERCIAL_OCIO",
+            "INSTITUCIONAL_EDUCATIVO",
+            "RECLUSORIO_MILITAR",
+            "VEHICULO",
+            "OTROS"
+          ],
+          "vif_pct": [
+            80.8,
+            14.6,
+            1.4,
+            0.5,
+            2.3,
+            0.5,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "sexual_pct": [
+            73.2,
+            8.1,
+            7.9,
+            5.7,
+            2.2,
+            2.3,
+            0.3,
+            0.2,
+            0.1
+          ],
+          "vif_n": [
+            172,
+            31,
+            3,
+            1,
+            5,
+            1,
+            0,
+            0,
+            0
+          ],
+          "sexual_n": [
+            875,
+            97,
+            95,
+            68,
+            26,
+            28,
+            3,
+            2,
+            1
+          ],
+          "total_vif": 213,
+          "total_sexual": 1195,
+          "caveat_es": "PROVISIONAL: 7.95% de los casos DS3 en Chocó tienen escenario NO_REGISTRADO, el mayor de la región. Los porcentajes reflejan solo los casos con escenario documentado."
+        },
+        "NARIÑO": {
+          "categories": [
+            "HOGAR",
+            "ESPACIO_PUBLICO",
+            "ESTABLECIMIENTO_COMERCIAL_OCIO",
+            "ESPACIO_ABIERTO_RURAL",
+            "INSTITUCIONAL_EDUCATIVO",
+            "NO_REGISTRADO",
+            "VEHICULO",
+            "OTROS",
+            "RECLUSORIO_MILITAR"
+          ],
+          "vif_pct": [
+            74.7,
+            20.3,
+            2.4,
+            0.9,
+            0.8,
+            0.3,
+            0.2,
+            0.5,
+            0.0
+          ],
+          "sexual_pct": [
+            68.9,
+            12.8,
+            6.4,
+            4.6,
+            3.4,
+            1.8,
+            1.3,
+            0.3,
+            0.4
+          ],
+          "vif_n": [
+            1206,
+            327,
+            38,
+            14,
+            13,
+            5,
+            3,
+            8,
+            0
+          ],
+          "sexual_n": [
+            626,
+            116,
+            58,
+            42,
+            31,
+            16,
+            12,
+            3,
+            4
+          ],
+          "total_vif": 1614,
+          "total_sexual": 908,
+          "caveat_es": null
+        },
+        "VALLE DEL CAUCA": {
+          "categories": [
+            "HOGAR",
+            "ESPACIO_PUBLICO",
+            "INSTITUCIONAL_EDUCATIVO",
+            "NO_REGISTRADO",
+            "ESTABLECIMIENTO_COMERCIAL_OCIO",
+            "ESPACIO_ABIERTO_RURAL",
+            "VEHICULO",
+            "OTROS",
+            "RECLUSORIO_MILITAR"
+          ],
+          "vif_pct": [
+            82.4,
+            13.9,
+            1.1,
+            0.3,
+            1.6,
+            0.3,
+            0.1,
+            0.4,
+            0.0
+          ],
+          "sexual_pct": [
+            78.5,
+            7.9,
+            3.8,
+            4.0,
+            2.7,
+            2.0,
+            0.7,
+            0.2,
+            0.2
+          ],
+          "vif_n": [
+            4922,
+            827,
+            63,
+            15,
+            96,
+            16,
+            8,
+            22,
+            1
+          ],
+          "sexual_n": [
+            8934,
+            898,
+            435,
+            451,
+            306,
+            232,
+            77,
+            22,
+            23
+          ],
+          "total_vif": 5970,
+          "total_sexual": 11378,
+          "caveat_es": null
+        }
+      }
+    }
+  },
+  "sub_acto_4_3": {
+    "title_es": "Dos violencias, dos universos de agresores",
+    "anchor_text_es": "Dos violencias, dos universos de agresores. La violencia sexual viene del conocido — padrastro, amigo, vecino. La violencia física intrafamiliar viene del propio núcleo — hijo, hermano, padre. La edad de la víctima define quién la agrede; el tipo de violencia define desde dónde.",
+    "thresholds": {
+      "flow_top_pct": 80,
+      "min_aggressor_cases": 80,
+      "sankey_min_dept_cases": 500
+    },
+    "ds3": {
+      "regional": {
+        "n_total": 16467,
+        "caveat": null,
+        "nodes": [
+          {
+            "id": "1__00 A 05 PRIMERA INFANCIA",
+            "label": "00 A 05 PRIMERA INFANCIA",
+            "column": 1,
+            "n_cases": 1304
+          },
+          {
+            "id": "1__06 A 11 INFANCIA",
+            "label": "06 A 11 INFANCIA",
+            "column": 1,
+            "n_cases": 3780
+          },
+          {
+            "id": "1__12 A 17 ADOLESCENCIA",
+            "label": "12 A 17 ADOLESCENCIA",
+            "column": 1,
+            "n_cases": 6077
+          },
+          {
+            "id": "1__18 A 28 JUVENTUD",
+            "label": "18 A 28 JUVENTUD",
+            "column": 1,
+            "n_cases": 1283
+          },
+          {
+            "id": "1__29 A 59 ADULTEZ",
+            "label": "29 A 59 ADULTEZ",
+            "column": 1,
+            "n_cases": 760
+          },
+          {
+            "id": "2__CONOCIDO_NO_FAMILIAR",
+            "label": "CONOCIDO_NO_FAMILIAR",
+            "column": 2,
+            "n_cases": 5559
+          },
+          {
+            "id": "2__FAMILIA_ENSAMBLADA",
+            "label": "FAMILIA_ENSAMBLADA",
+            "column": 2,
+            "n_cases": 1897
+          },
+          {
+            "id": "2__FAMILIA_EXTENDIDA",
+            "label": "FAMILIA_EXTENDIDA",
+            "column": 2,
+            "n_cases": 2079
+          },
+          {
+            "id": "2__FAMILIA_NUCLEAR",
+            "label": "FAMILIA_NUCLEAR",
+            "column": 2,
+            "n_cases": 1255
+          },
+          {
+            "id": "2__FIGURAS_CUSTODIA",
+            "label": "FIGURAS_CUSTODIA",
+            "column": 2,
+            "n_cases": 113
+          },
+          {
+            "id": "2__NO_REGISTRADO",
+            "label": "NO_REGISTRADO",
+            "column": 2,
+            "n_cases": 1255
+          },
+          {
+            "id": "2__PAREJA_EX_PAREJA",
+            "label": "PAREJA_EX_PAREJA",
+            "column": 2,
+            "n_cases": 1046
+          },
+          {
+            "id": "3__ABUELO",
+            "label": "ABUELO",
+            "column": 3,
+            "n_cases": 497
+          },
+          {
+            "id": "3__AGRESOR DESCONOCIDO",
+            "label": "AGRESOR DESCONOCIDO",
+            "column": 3,
+            "n_cases": 730
+          },
+          {
+            "id": "3__AMIGO",
+            "label": "AMIGO",
+            "column": 3,
+            "n_cases": 1318
+          },
+          {
+            "id": "3__COMPANERO PERMANENTE",
+            "label": "COMPANERO PERMANENTE",
+            "column": 3,
+            "n_cases": 121
+          },
+          {
+            "id": "3__CONOCIDO",
+            "label": "CONOCIDO",
+            "column": 3,
+            "n_cases": 140
+          },
+          {
+            "id": "3__CONOCIDO SIN NINGUN TRATO",
+            "label": "CONOCIDO SIN NINGUN TRATO",
+            "column": 3,
+            "n_cases": 1227
+          },
+          {
+            "id": "3__EX COMPANERO PERMANENTE",
+            "label": "EX COMPANERO PERMANENTE",
+            "column": 3,
+            "n_cases": 411
+          },
+          {
+            "id": "3__NOVIO",
+            "label": "NOVIO",
+            "column": 3,
+            "n_cases": 514
+          },
+          {
+            "id": "3__NO_REGISTRADO",
+            "label": "NO_REGISTRADO",
+            "column": 3,
+            "n_cases": 1255
+          },
+          {
+            "id": "3__OTRO",
+            "label": "OTRO",
+            "column": 3,
+            "n_cases": 258
+          },
+          {
+            "id": "3__OTROS_FAMILIARES",
+            "label": "OTROS_FAMILIARES",
+            "column": 3,
+            "n_cases": 1014
+          },
+          {
+            "id": "3__PADRASTRO",
+            "label": "PADRASTRO",
+            "column": 3,
+            "n_cases": 1897
+          },
+          {
+            "id": "3__PADRE",
+            "label": "PADRE",
+            "column": 3,
+            "n_cases": 1255
+          },
+          {
+            "id": "3__PRIMO",
+            "label": "PRIMO",
+            "column": 3,
+            "n_cases": 604
+          },
+          {
+            "id": "3__PROFESOR",
+            "label": "PROFESOR",
+            "column": 3,
+            "n_cases": 113
+          },
+          {
+            "id": "3__TIO",
+            "label": "TIO",
+            "column": 3,
+            "n_cases": 978
+          },
+          {
+            "id": "3__VECINO",
+            "label": "VECINO",
+            "column": 3,
+            "n_cases": 872
+          }
+        ],
+        "links": [
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 137,
+            "pct_within_ciclo": 10.5
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 151,
+            "pct_within_ciclo": 11.6
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 329,
+            "pct_within_ciclo": 25.2
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 442,
+            "pct_within_ciclo": 33.9
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 245,
+            "pct_within_ciclo": 18.8
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 1578,
+            "pct_within_ciclo": 41.7
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 616,
+            "pct_within_ciclo": 16.3
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 952,
+            "pct_within_ciclo": 25.2
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 353,
+            "pct_within_ciclo": 9.3
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 281,
+            "pct_within_ciclo": 7.4
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 2760,
+            "pct_within_ciclo": 45.4
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 1009,
+            "pct_within_ciclo": 16.6
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 798,
+            "pct_within_ciclo": 13.1
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 460,
+            "pct_within_ciclo": 7.6
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FIGURAS_CUSTODIA",
+            "value": 113,
+            "pct_within_ciclo": 1.9
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 423,
+            "pct_within_ciclo": 7.0
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 514,
+            "pct_within_ciclo": 8.5
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 797,
+            "pct_within_ciclo": 62.1
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 121,
+            "pct_within_ciclo": 9.4
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__NO_REGISTRADO",
+            "value": 193,
+            "pct_within_ciclo": 15.0
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 172,
+            "pct_within_ciclo": 13.4
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 287,
+            "pct_within_ciclo": 37.8
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__NO_REGISTRADO",
+            "value": 113,
+            "pct_within_ciclo": 14.9
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 360,
+            "pct_within_ciclo": 47.4
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__AGRESOR DESCONOCIDO",
+            "value": 730,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__AMIGO",
+            "value": 1318,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__CONOCIDO",
+            "value": 140,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__CONOCIDO SIN NINGUN TRATO",
+            "value": 1227,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__OTRO",
+            "value": 258,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 1014,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__VECINO",
+            "value": 872,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_ENSAMBLADA",
+            "target": "3__PADRASTRO",
+            "value": 1897,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__ABUELO",
+            "value": 497,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__PRIMO",
+            "value": 604,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__TIO",
+            "value": 978,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__PADRE",
+            "value": 1255,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FIGURAS_CUSTODIA",
+            "target": "3__PROFESOR",
+            "value": 113,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__NO_REGISTRADO",
+            "target": "3__NO_REGISTRADO",
+            "value": 1255,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__PAREJA_EX_PAREJA",
+            "target": "3__COMPANERO PERMANENTE",
+            "value": 121,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__PAREJA_EX_PAREJA",
+            "target": "3__EX COMPANERO PERMANENTE",
+            "value": 411,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__PAREJA_EX_PAREJA",
+            "target": "3__NOVIO",
+            "value": 514,
+            "pct_within_ciclo": 0.0
+          }
+        ]
+      },
+      "CAUCA": {
+        "n_total": 2986,
+        "caveat": null,
+        "nodes": [
+          {
+            "id": "1__00 A 05 PRIMERA INFANCIA",
+            "label": "00 A 05 PRIMERA INFANCIA",
+            "column": 1,
+            "n_cases": 76
+          },
+          {
+            "id": "1__06 A 11 INFANCIA",
+            "label": "06 A 11 INFANCIA",
+            "column": 1,
+            "n_cases": 721
+          },
+          {
+            "id": "1__12 A 17 ADOLESCENCIA",
+            "label": "12 A 17 ADOLESCENCIA",
+            "column": 1,
+            "n_cases": 1164
+          },
+          {
+            "id": "1__18 A 28 JUVENTUD",
+            "label": "18 A 28 JUVENTUD",
+            "column": 1,
+            "n_cases": 309
+          },
+          {
+            "id": "1__29 A 59 ADULTEZ",
+            "label": "29 A 59 ADULTEZ",
+            "column": 1,
+            "n_cases": 134
+          },
+          {
+            "id": "2__CONOCIDO_NO_FAMILIAR",
+            "label": "CONOCIDO_NO_FAMILIAR",
+            "column": 2,
+            "n_cases": 1031
+          },
+          {
+            "id": "2__FAMILIA_ENSAMBLADA",
+            "label": "FAMILIA_ENSAMBLADA",
+            "column": 2,
+            "n_cases": 283
+          },
+          {
+            "id": "2__FAMILIA_EXTENDIDA",
+            "label": "FAMILIA_EXTENDIDA",
+            "column": 2,
+            "n_cases": 362
+          },
+          {
+            "id": "2__FAMILIA_NUCLEAR",
+            "label": "FAMILIA_NUCLEAR",
+            "column": 2,
+            "n_cases": 176
+          },
+          {
+            "id": "2__FIGURAS_CUSTODIA",
+            "label": "FIGURAS_CUSTODIA",
+            "column": 2,
+            "n_cases": 34
+          },
+          {
+            "id": "2__NO_REGISTRADO",
+            "label": "NO_REGISTRADO",
+            "column": 2,
+            "n_cases": 232
+          },
+          {
+            "id": "2__PAREJA_EX_PAREJA",
+            "label": "PAREJA_EX_PAREJA",
+            "column": 2,
+            "n_cases": 286
+          },
+          {
+            "id": "3__ABUELO",
+            "label": "ABUELO",
+            "column": 3,
+            "n_cases": 43
+          },
+          {
+            "id": "3__AGRESOR DESCONOCIDO",
+            "label": "AGRESOR DESCONOCIDO",
+            "column": 3,
+            "n_cases": 129
+          },
+          {
+            "id": "3__AMIGO",
+            "label": "AMIGO",
+            "column": 3,
+            "n_cases": 190
+          },
+          {
+            "id": "3__CONOCIDO SIN NINGUN TRATO",
+            "label": "CONOCIDO SIN NINGUN TRATO",
+            "column": 3,
+            "n_cases": 280
+          },
+          {
+            "id": "3__EX COMPANERO PERMANENTE",
+            "label": "EX COMPANERO PERMANENTE",
+            "column": 3,
+            "n_cases": 87
+          },
+          {
+            "id": "3__NOVIO",
+            "label": "NOVIO",
+            "column": 3,
+            "n_cases": 101
+          },
+          {
+            "id": "3__NO_REGISTRADO",
+            "label": "NO_REGISTRADO",
+            "column": 3,
+            "n_cases": 232
+          },
+          {
+            "id": "3__OTROS_CONOCIDOS",
+            "label": "OTROS_CONOCIDOS",
+            "column": 3,
+            "n_cases": 232
+          },
+          {
+            "id": "3__OTROS_FAMILIARES",
+            "label": "OTROS_FAMILIARES",
+            "column": 3,
+            "n_cases": 183
+          },
+          {
+            "id": "3__PADRASTRO",
+            "label": "PADRASTRO",
+            "column": 3,
+            "n_cases": 283
+          },
+          {
+            "id": "3__PADRE",
+            "label": "PADRE",
+            "column": 3,
+            "n_cases": 176
+          },
+          {
+            "id": "3__PRIMO",
+            "label": "PRIMO",
+            "column": 3,
+            "n_cases": 145
+          },
+          {
+            "id": "3__TIO",
+            "label": "TIO",
+            "column": 3,
+            "n_cases": 174
+          },
+          {
+            "id": "3__VECINO",
+            "label": "VECINO",
+            "column": 3,
+            "n_cases": 149
+          }
+        ],
+        "links": [
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 39,
+            "pct_within_ciclo": 51.3
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 37,
+            "pct_within_ciclo": 48.7
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 286,
+            "pct_within_ciclo": 39.7
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 108,
+            "pct_within_ciclo": 15.0
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 206,
+            "pct_within_ciclo": 28.6
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 56,
+            "pct_within_ciclo": 7.8
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 65,
+            "pct_within_ciclo": 9.0
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 493,
+            "pct_within_ciclo": 42.4
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 175,
+            "pct_within_ciclo": 15.0
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 156,
+            "pct_within_ciclo": 13.4
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 81,
+            "pct_within_ciclo": 7.0
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FIGURAS_CUSTODIA",
+            "value": 34,
+            "pct_within_ciclo": 2.9
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 91,
+            "pct_within_ciclo": 7.8
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 134,
+            "pct_within_ciclo": 11.5
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 192,
+            "pct_within_ciclo": 62.1
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__NO_REGISTRADO",
+            "value": 39,
+            "pct_within_ciclo": 12.6
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 78,
+            "pct_within_ciclo": 25.2
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 60,
+            "pct_within_ciclo": 44.8
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 74,
+            "pct_within_ciclo": 55.2
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__AGRESOR DESCONOCIDO",
+            "value": 129,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__AMIGO",
+            "value": 190,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__CONOCIDO SIN NINGUN TRATO",
+            "value": 280,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__OTROS_CONOCIDOS",
+            "value": 134,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 149,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__VECINO",
+            "value": 149,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_ENSAMBLADA",
+            "target": "3__PADRASTRO",
+            "value": 283,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__ABUELO",
+            "value": 43,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__PRIMO",
+            "value": 145,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__TIO",
+            "value": 174,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__PADRE",
+            "value": 176,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FIGURAS_CUSTODIA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 34,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__NO_REGISTRADO",
+            "target": "3__NO_REGISTRADO",
+            "value": 232,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__PAREJA_EX_PAREJA",
+            "target": "3__EX COMPANERO PERMANENTE",
+            "value": 87,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__PAREJA_EX_PAREJA",
+            "target": "3__NOVIO",
+            "value": 101,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__PAREJA_EX_PAREJA",
+            "target": "3__OTROS_CONOCIDOS",
+            "value": 98,
+            "pct_within_ciclo": 0.0
+          }
+        ]
+      },
+      "CHOCO": {
+        "n_total": 1195,
+        "caveat": null,
+        "nodes": [
+          {
+            "id": "1__00 A 05 PRIMERA INFANCIA",
+            "label": "00 A 05 PRIMERA INFANCIA",
+            "column": 1,
+            "n_cases": 95
+          },
+          {
+            "id": "1__06 A 11 INFANCIA",
+            "label": "06 A 11 INFANCIA",
+            "column": 1,
+            "n_cases": 341
+          },
+          {
+            "id": "1__12 A 17 ADOLESCENCIA",
+            "label": "12 A 17 ADOLESCENCIA",
+            "column": 1,
+            "n_cases": 430
+          },
+          {
+            "id": "1__18 A 28 JUVENTUD",
+            "label": "18 A 28 JUVENTUD",
+            "column": 1,
+            "n_cases": 79
+          },
+          {
+            "id": "1__29 A 59 ADULTEZ",
+            "label": "29 A 59 ADULTEZ",
+            "column": 1,
+            "n_cases": 24
+          },
+          {
+            "id": "2__CONOCIDO_NO_FAMILIAR",
+            "label": "CONOCIDO_NO_FAMILIAR",
+            "column": 2,
+            "n_cases": 461
+          },
+          {
+            "id": "2__FAMILIA_ENSAMBLADA",
+            "label": "FAMILIA_ENSAMBLADA",
+            "column": 2,
+            "n_cases": 93
+          },
+          {
+            "id": "2__FAMILIA_EXTENDIDA",
+            "label": "FAMILIA_EXTENDIDA",
+            "column": 2,
+            "n_cases": 118
+          },
+          {
+            "id": "2__FAMILIA_NUCLEAR",
+            "label": "FAMILIA_NUCLEAR",
+            "column": 2,
+            "n_cases": 73
+          },
+          {
+            "id": "2__NO_REGISTRADO",
+            "label": "NO_REGISTRADO",
+            "column": 2,
+            "n_cases": 149
+          },
+          {
+            "id": "2__PAREJA_EX_PAREJA",
+            "label": "PAREJA_EX_PAREJA",
+            "column": 2,
+            "n_cases": 75
+          },
+          {
+            "id": "3__AGRESOR DESCONOCIDO",
+            "label": "AGRESOR DESCONOCIDO",
+            "column": 3,
+            "n_cases": 51
+          },
+          {
+            "id": "3__AMIGO",
+            "label": "AMIGO",
+            "column": 3,
+            "n_cases": 85
+          },
+          {
+            "id": "3__CONOCIDO SIN NINGUN TRATO",
+            "label": "CONOCIDO SIN NINGUN TRATO",
+            "column": 3,
+            "n_cases": 95
+          },
+          {
+            "id": "3__NO_REGISTRADO",
+            "label": "NO_REGISTRADO",
+            "column": 3,
+            "n_cases": 125
+          },
+          {
+            "id": "3__OTROS",
+            "label": "OTROS",
+            "column": 3,
+            "n_cases": 24
+          },
+          {
+            "id": "3__OTROS_CONOCIDOS",
+            "label": "OTROS_CONOCIDOS",
+            "column": 3,
+            "n_cases": 151
+          },
+          {
+            "id": "3__OTROS_FAMILIARES",
+            "label": "OTROS_FAMILIARES",
+            "column": 3,
+            "n_cases": 191
+          },
+          {
+            "id": "3__PADRASTRO",
+            "label": "PADRASTRO",
+            "column": 3,
+            "n_cases": 93
+          },
+          {
+            "id": "3__VECINO",
+            "label": "VECINO",
+            "column": 3,
+            "n_cases": 154
+          }
+        ],
+        "links": [
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 21,
+            "pct_within_ciclo": 22.1
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 20,
+            "pct_within_ciclo": 21.1
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 16,
+            "pct_within_ciclo": 16.8
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 38,
+            "pct_within_ciclo": 40.0
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 167,
+            "pct_within_ciclo": 49.0
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 36,
+            "pct_within_ciclo": 10.6
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 58,
+            "pct_within_ciclo": 17.0
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 28,
+            "pct_within_ciclo": 8.2
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 52,
+            "pct_within_ciclo": 15.2
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 209,
+            "pct_within_ciclo": 48.6
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 57,
+            "pct_within_ciclo": 13.3
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 40,
+            "pct_within_ciclo": 9.3
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 29,
+            "pct_within_ciclo": 6.7
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 35,
+            "pct_within_ciclo": 8.1
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 60,
+            "pct_within_ciclo": 14.0
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 64,
+            "pct_within_ciclo": 81.0
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 15,
+            "pct_within_ciclo": 19.0
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__NO_REGISTRADO",
+            "value": 24,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__AGRESOR DESCONOCIDO",
+            "value": 51,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__AMIGO",
+            "value": 85,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__CONOCIDO SIN NINGUN TRATO",
+            "value": 95,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__OTROS_CONOCIDOS",
+            "value": 76,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__VECINO",
+            "value": 154,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_ENSAMBLADA",
+            "target": "3__PADRASTRO",
+            "value": 93,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 118,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 73,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__NO_REGISTRADO",
+            "target": "3__NO_REGISTRADO",
+            "value": 125,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__NO_REGISTRADO",
+            "target": "3__OTROS",
+            "value": 24,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__PAREJA_EX_PAREJA",
+            "target": "3__OTROS_CONOCIDOS",
+            "value": 75,
+            "pct_within_ciclo": 0.0
+          }
+        ]
+      },
+      "NARIÑO": {
+        "n_total": 908,
+        "caveat": null,
+        "nodes": [
+          {
+            "id": "1__06 A 11 INFANCIA",
+            "label": "06 A 11 INFANCIA",
+            "column": 1,
+            "n_cases": 63
+          },
+          {
+            "id": "1__12 A 17 ADOLESCENCIA",
+            "label": "12 A 17 ADOLESCENCIA",
+            "column": 1,
+            "n_cases": 229
+          },
+          {
+            "id": "1__18 A 28 JUVENTUD",
+            "label": "18 A 28 JUVENTUD",
+            "column": 1,
+            "n_cases": 222
+          },
+          {
+            "id": "1__29 A 59 ADULTEZ",
+            "label": "29 A 59 ADULTEZ",
+            "column": 1,
+            "n_cases": 217
+          },
+          {
+            "id": "2__CONOCIDO_NO_FAMILIAR",
+            "label": "CONOCIDO_NO_FAMILIAR",
+            "column": 2,
+            "n_cases": 325
+          },
+          {
+            "id": "2__FAMILIA_ENSAMBLADA",
+            "label": "FAMILIA_ENSAMBLADA",
+            "column": 2,
+            "n_cases": 28
+          },
+          {
+            "id": "2__FAMILIA_EXTENDIDA",
+            "label": "FAMILIA_EXTENDIDA",
+            "column": 2,
+            "n_cases": 93
+          },
+          {
+            "id": "2__FAMILIA_NUCLEAR",
+            "label": "FAMILIA_NUCLEAR",
+            "column": 2,
+            "n_cases": 25
+          },
+          {
+            "id": "2__NO_REGISTRADO",
+            "label": "NO_REGISTRADO",
+            "column": 2,
+            "n_cases": 65
+          },
+          {
+            "id": "2__PAREJA_EX_PAREJA",
+            "label": "PAREJA_EX_PAREJA",
+            "column": 2,
+            "n_cases": 195
+          },
+          {
+            "id": "3__CONOCIDO SIN NINGUN TRATO",
+            "label": "CONOCIDO SIN NINGUN TRATO",
+            "column": 3,
+            "n_cases": 106
+          },
+          {
+            "id": "3__OTROS",
+            "label": "OTROS",
+            "column": 3,
+            "n_cases": 65
+          },
+          {
+            "id": "3__OTROS_CONOCIDOS",
+            "label": "OTROS_CONOCIDOS",
+            "column": 3,
+            "n_cases": 414
+          },
+          {
+            "id": "3__OTROS_FAMILIARES",
+            "label": "OTROS_FAMILIARES",
+            "column": 3,
+            "n_cases": 146
+          }
+        ],
+        "links": [
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 26,
+            "pct_within_ciclo": 41.3
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 37,
+            "pct_within_ciclo": 58.7
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 104,
+            "pct_within_ciclo": 45.4
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 28,
+            "pct_within_ciclo": 12.2
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 38,
+            "pct_within_ciclo": 16.6
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 25,
+            "pct_within_ciclo": 10.9
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 34,
+            "pct_within_ciclo": 14.8
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 124,
+            "pct_within_ciclo": 55.9
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 18,
+            "pct_within_ciclo": 8.1
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__NO_REGISTRADO",
+            "value": 29,
+            "pct_within_ciclo": 13.1
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 51,
+            "pct_within_ciclo": 23.0
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 71,
+            "pct_within_ciclo": 32.7
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__NO_REGISTRADO",
+            "value": 36,
+            "pct_within_ciclo": 16.6
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 110,
+            "pct_within_ciclo": 50.7
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__CONOCIDO SIN NINGUN TRATO",
+            "value": 106,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__OTROS_CONOCIDOS",
+            "value": 219,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_ENSAMBLADA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 28,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 93,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 25,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__NO_REGISTRADO",
+            "target": "3__OTROS",
+            "value": 65,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__PAREJA_EX_PAREJA",
+            "target": "3__OTROS_CONOCIDOS",
+            "value": 195,
+            "pct_within_ciclo": 0.0
+          }
+        ]
+      },
+      "VALLE_DEL_CAUCA": {
+        "n_total": 11378,
+        "caveat": null,
+        "nodes": [
+          {
+            "id": "1__00 A 05 PRIMERA INFANCIA",
+            "label": "00 A 05 PRIMERA INFANCIA",
+            "column": 1,
+            "n_cases": 1064
+          },
+          {
+            "id": "1__06 A 11 INFANCIA",
+            "label": "06 A 11 INFANCIA",
+            "column": 1,
+            "n_cases": 2652
+          },
+          {
+            "id": "1__12 A 17 ADOLESCENCIA",
+            "label": "12 A 17 ADOLESCENCIA",
+            "column": 1,
+            "n_cases": 4386
+          },
+          {
+            "id": "1__18 A 28 JUVENTUD",
+            "label": "18 A 28 JUVENTUD",
+            "column": 1,
+            "n_cases": 790
+          },
+          {
+            "id": "1__29 A 59 ADULTEZ",
+            "label": "29 A 59 ADULTEZ",
+            "column": 1,
+            "n_cases": 228
+          },
+          {
+            "id": "2__CONOCIDO_NO_FAMILIAR",
+            "label": "CONOCIDO_NO_FAMILIAR",
+            "column": 2,
+            "n_cases": 3864
+          },
+          {
+            "id": "2__FAMILIA_ENSAMBLADA",
+            "label": "FAMILIA_ENSAMBLADA",
+            "column": 2,
+            "n_cases": 1415
+          },
+          {
+            "id": "2__FAMILIA_EXTENDIDA",
+            "label": "FAMILIA_EXTENDIDA",
+            "column": 2,
+            "n_cases": 1467
+          },
+          {
+            "id": "2__FAMILIA_NUCLEAR",
+            "label": "FAMILIA_NUCLEAR",
+            "column": 2,
+            "n_cases": 987
+          },
+          {
+            "id": "2__FIGURAS_CUSTODIA",
+            "label": "FIGURAS_CUSTODIA",
+            "column": 2,
+            "n_cases": 78
+          },
+          {
+            "id": "2__NO_REGISTRADO",
+            "label": "NO_REGISTRADO",
+            "column": 2,
+            "n_cases": 729
+          },
+          {
+            "id": "2__PAREJA_EX_PAREJA",
+            "label": "PAREJA_EX_PAREJA",
+            "column": 2,
+            "n_cases": 580
+          },
+          {
+            "id": "3__ABUELO",
+            "label": "ABUELO",
+            "column": 3,
+            "n_cases": 387
+          },
+          {
+            "id": "3__AGRESOR DESCONOCIDO",
+            "label": "AGRESOR DESCONOCIDO",
+            "column": 3,
+            "n_cases": 468
+          },
+          {
+            "id": "3__AMIGO",
+            "label": "AMIGO",
+            "column": 3,
+            "n_cases": 1006
+          },
+          {
+            "id": "3__COMPANERO DE ESTUDIO",
+            "label": "COMPANERO DE ESTUDIO",
+            "column": 3,
+            "n_cases": 82
+          },
+          {
+            "id": "3__CONOCIDO",
+            "label": "CONOCIDO",
+            "column": 3,
+            "n_cases": 102
+          },
+          {
+            "id": "3__CONOCIDO SIN NINGUN TRATO",
+            "label": "CONOCIDO SIN NINGUN TRATO",
+            "column": 3,
+            "n_cases": 649
+          },
+          {
+            "id": "3__EX COMPANERO PERMANENTE",
+            "label": "EX COMPANERO PERMANENTE",
+            "column": 3,
+            "n_cases": 239
+          },
+          {
+            "id": "3__NOVIO",
+            "label": "NOVIO",
+            "column": 3,
+            "n_cases": 341
+          },
+          {
+            "id": "3__NO_REGISTRADO",
+            "label": "NO_REGISTRADO",
+            "column": 3,
+            "n_cases": 729
+          },
+          {
+            "id": "3__OTRO",
+            "label": "OTRO",
+            "column": 3,
+            "n_cases": 192
+          },
+          {
+            "id": "3__OTROS_FAMILIARES",
+            "label": "OTROS_FAMILIARES",
+            "column": 3,
+            "n_cases": 796
+          },
+          {
+            "id": "3__PADRASTRO",
+            "label": "PADRASTRO",
+            "column": 3,
+            "n_cases": 1415
+          },
+          {
+            "id": "3__PADRE",
+            "label": "PADRE",
+            "column": 3,
+            "n_cases": 987
+          },
+          {
+            "id": "3__PRIMO",
+            "label": "PRIMO",
+            "column": 3,
+            "n_cases": 397
+          },
+          {
+            "id": "3__PROFESOR",
+            "label": "PROFESOR",
+            "column": 3,
+            "n_cases": 78
+          },
+          {
+            "id": "3__TIO",
+            "label": "TIO",
+            "column": 3,
+            "n_cases": 683
+          },
+          {
+            "id": "3__VECINO",
+            "label": "VECINO",
+            "column": 3,
+            "n_cases": 569
+          }
+        ],
+        "links": [
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 117,
+            "pct_within_ciclo": 11.0
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 122,
+            "pct_within_ciclo": 11.5
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 272,
+            "pct_within_ciclo": 25.6
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 385,
+            "pct_within_ciclo": 36.2
+          },
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 168,
+            "pct_within_ciclo": 15.8
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 1120,
+            "pct_within_ciclo": 42.2
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 459,
+            "pct_within_ciclo": 17.3
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 651,
+            "pct_within_ciclo": 24.5
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 267,
+            "pct_within_ciclo": 10.1
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 155,
+            "pct_within_ciclo": 5.8
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 2058,
+            "pct_within_ciclo": 46.9
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 749,
+            "pct_within_ciclo": 17.1
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 544,
+            "pct_within_ciclo": 12.4
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 335,
+            "pct_within_ciclo": 7.6
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FIGURAS_CUSTODIA",
+            "value": 78,
+            "pct_within_ciclo": 1.8
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__NO_REGISTRADO",
+            "value": 281,
+            "pct_within_ciclo": 6.4
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 341,
+            "pct_within_ciclo": 7.8
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 486,
+            "pct_within_ciclo": 61.5
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 85,
+            "pct_within_ciclo": 10.8
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__NO_REGISTRADO",
+            "value": 125,
+            "pct_within_ciclo": 15.8
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 94,
+            "pct_within_ciclo": 11.9
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__CONOCIDO_NO_FAMILIAR",
+            "value": 83,
+            "pct_within_ciclo": 36.4
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__PAREJA_EX_PAREJA",
+            "value": 145,
+            "pct_within_ciclo": 63.6
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__AGRESOR DESCONOCIDO",
+            "value": 468,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__AMIGO",
+            "value": 1006,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__COMPANERO DE ESTUDIO",
+            "value": 82,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__CONOCIDO",
+            "value": 102,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__CONOCIDO SIN NINGUN TRATO",
+            "value": 649,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__OTRO",
+            "value": 192,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 796,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__CONOCIDO_NO_FAMILIAR",
+            "target": "3__VECINO",
+            "value": 569,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_ENSAMBLADA",
+            "target": "3__PADRASTRO",
+            "value": 1415,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__ABUELO",
+            "value": 387,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__PRIMO",
+            "value": 397,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__TIO",
+            "value": 683,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__PADRE",
+            "value": 987,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FIGURAS_CUSTODIA",
+            "target": "3__PROFESOR",
+            "value": 78,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__NO_REGISTRADO",
+            "target": "3__NO_REGISTRADO",
+            "value": 729,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__PAREJA_EX_PAREJA",
+            "target": "3__EX COMPANERO PERMANENTE",
+            "value": 239,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__PAREJA_EX_PAREJA",
+            "target": "3__NOVIO",
+            "value": 341,
+            "pct_within_ciclo": 0.0
+          }
+        ]
+      }
+    },
+    "ds4": {
+      "regional": {
+        "n_total": 9637,
+        "caveat": null,
+        "nodes": [
+          {
+            "id": "1__06 A 11 INFANCIA",
+            "label": "06 A 11 INFANCIA",
+            "column": 1,
+            "n_cases": 372
+          },
+          {
+            "id": "1__12 A 17 ADOLESCENCIA",
+            "label": "12 A 17 ADOLESCENCIA",
+            "column": 1,
+            "n_cases": 556
+          },
+          {
+            "id": "1__18 A 28 JUVENTUD",
+            "label": "18 A 28 JUVENTUD",
+            "column": 1,
+            "n_cases": 1710
+          },
+          {
+            "id": "1__29 A 59 ADULTEZ",
+            "label": "29 A 59 ADULTEZ",
+            "column": 1,
+            "n_cases": 4119
+          },
+          {
+            "id": "1__MAS DE 60 ADULTO MAYOR",
+            "label": "MAS DE 60 ADULTO MAYOR",
+            "column": 1,
+            "n_cases": 975
+          },
+          {
+            "id": "2__FAMILIA_EXTENDIDA",
+            "label": "FAMILIA_EXTENDIDA",
+            "column": 2,
+            "n_cases": 1907
+          },
+          {
+            "id": "2__FAMILIA_NUCLEAR",
+            "label": "FAMILIA_NUCLEAR",
+            "column": 2,
+            "n_cases": 4775
+          },
+          {
+            "id": "2__FAMILIA_POLITICA",
+            "label": "FAMILIA_POLITICA",
+            "column": 2,
+            "n_cases": 1050
+          },
+          {
+            "id": "3__CUNADO",
+            "label": "CUNADO",
+            "column": 3,
+            "n_cases": 853
+          },
+          {
+            "id": "3__HERMANO",
+            "label": "HERMANO",
+            "column": 3,
+            "n_cases": 1870
+          },
+          {
+            "id": "3__HIJO",
+            "label": "HIJO",
+            "column": 3,
+            "n_cases": 1733
+          },
+          {
+            "id": "3__MADRE",
+            "label": "MADRE",
+            "column": 3,
+            "n_cases": 346
+          },
+          {
+            "id": "3__NIETO",
+            "label": "NIETO",
+            "column": 3,
+            "n_cases": 170
+          },
+          {
+            "id": "3__OTROS_FAMILIARES",
+            "label": "OTROS_FAMILIARES",
+            "column": 3,
+            "n_cases": 516
+          },
+          {
+            "id": "3__PADRE",
+            "label": "PADRE",
+            "column": 3,
+            "n_cases": 826
+          },
+          {
+            "id": "3__PRIMO",
+            "label": "PRIMO",
+            "column": 3,
+            "n_cases": 486
+          },
+          {
+            "id": "3__SOBRINO",
+            "label": "SOBRINO",
+            "column": 3,
+            "n_cases": 343
+          },
+          {
+            "id": "3__TIO",
+            "label": "TIO",
+            "column": 3,
+            "n_cases": 392
+          },
+          {
+            "id": "3__YERNO",
+            "label": "YERNO",
+            "column": 3,
+            "n_cases": 197
+          }
+        ],
+        "links": [
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 372,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 556,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 660,
+            "pct_within_ciclo": 38.6
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 735,
+            "pct_within_ciclo": 43.0
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_POLITICA",
+            "value": 315,
+            "pct_within_ciclo": 18.4
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 1077,
+            "pct_within_ciclo": 26.1
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 2307,
+            "pct_within_ciclo": 56.0
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_POLITICA",
+            "value": 735,
+            "pct_within_ciclo": 17.8
+          },
+          {
+            "source": "1__MAS DE 60 ADULTO MAYOR",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 170,
+            "pct_within_ciclo": 17.4
+          },
+          {
+            "source": "1__MAS DE 60 ADULTO MAYOR",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 805,
+            "pct_within_ciclo": 82.6
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__NIETO",
+            "value": 170,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 516,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__PRIMO",
+            "value": 486,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__SOBRINO",
+            "value": 343,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__TIO",
+            "value": 392,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__HERMANO",
+            "value": 1870,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__HIJO",
+            "value": 1733,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__MADRE",
+            "value": 346,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__PADRE",
+            "value": 826,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_POLITICA",
+            "target": "3__CUNADO",
+            "value": 853,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_POLITICA",
+            "target": "3__YERNO",
+            "value": 197,
+            "pct_within_ciclo": 0.0
+          }
+        ]
+      },
+      "CAUCA": {
+        "n_total": 1840,
+        "caveat": null,
+        "nodes": [
+          {
+            "id": "1__12 A 17 ADOLESCENCIA",
+            "label": "12 A 17 ADOLESCENCIA",
+            "column": 1,
+            "n_cases": 111
+          },
+          {
+            "id": "1__18 A 28 JUVENTUD",
+            "label": "18 A 28 JUVENTUD",
+            "column": 1,
+            "n_cases": 342
+          },
+          {
+            "id": "1__29 A 59 ADULTEZ",
+            "label": "29 A 59 ADULTEZ",
+            "column": 1,
+            "n_cases": 827
+          },
+          {
+            "id": "1__MAS DE 60 ADULTO MAYOR",
+            "label": "MAS DE 60 ADULTO MAYOR",
+            "column": 1,
+            "n_cases": 197
+          },
+          {
+            "id": "2__FAMILIA_EXTENDIDA",
+            "label": "FAMILIA_EXTENDIDA",
+            "column": 2,
+            "n_cases": 330
+          },
+          {
+            "id": "2__FAMILIA_NUCLEAR",
+            "label": "FAMILIA_NUCLEAR",
+            "column": 2,
+            "n_cases": 903
+          },
+          {
+            "id": "2__FAMILIA_POLITICA",
+            "label": "FAMILIA_POLITICA",
+            "column": 2,
+            "n_cases": 244
+          },
+          {
+            "id": "3__CUNADO",
+            "label": "CUNADO",
+            "column": 3,
+            "n_cases": 181
+          },
+          {
+            "id": "3__HERMANO",
+            "label": "HERMANO",
+            "column": 3,
+            "n_cases": 380
+          },
+          {
+            "id": "3__HIJO",
+            "label": "HIJO",
+            "column": 3,
+            "n_cases": 378
+          },
+          {
+            "id": "3__MADRE",
+            "label": "MADRE",
+            "column": 3,
+            "n_cases": 32
+          },
+          {
+            "id": "3__OTROS_FAMILIARES",
+            "label": "OTROS_FAMILIARES",
+            "column": 3,
+            "n_cases": 180
+          },
+          {
+            "id": "3__PADRE",
+            "label": "PADRE",
+            "column": 3,
+            "n_cases": 113
+          },
+          {
+            "id": "3__PRIMO",
+            "label": "PRIMO",
+            "column": 3,
+            "n_cases": 101
+          },
+          {
+            "id": "3__SOBRINO",
+            "label": "SOBRINO",
+            "column": 3,
+            "n_cases": 65
+          },
+          {
+            "id": "3__TIO",
+            "label": "TIO",
+            "column": 3,
+            "n_cases": 47
+          }
+        ],
+        "links": [
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 111,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 135,
+            "pct_within_ciclo": 39.5
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 141,
+            "pct_within_ciclo": 41.2
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_POLITICA",
+            "value": 66,
+            "pct_within_ciclo": 19.3
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 160,
+            "pct_within_ciclo": 19.3
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 489,
+            "pct_within_ciclo": 59.1
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_POLITICA",
+            "value": 178,
+            "pct_within_ciclo": 21.5
+          },
+          {
+            "source": "1__MAS DE 60 ADULTO MAYOR",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 35,
+            "pct_within_ciclo": 17.8
+          },
+          {
+            "source": "1__MAS DE 60 ADULTO MAYOR",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 162,
+            "pct_within_ciclo": 82.2
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 117,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__PRIMO",
+            "value": 101,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__SOBRINO",
+            "value": 65,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__TIO",
+            "value": 47,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__HERMANO",
+            "value": 380,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__HIJO",
+            "value": 378,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__MADRE",
+            "value": 32,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__PADRE",
+            "value": 113,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_POLITICA",
+            "target": "3__CUNADO",
+            "value": 181,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_POLITICA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 63,
+            "pct_within_ciclo": 0.0
+          }
+        ]
+      },
+      "CHOCO": {
+        "n_total": 213,
+        "caveat": "Volumen bajo (213 casos) — interpretación limitada.",
+        "nodes": [
+          {
+            "id": "1__00 A 05 PRIMERA INFANCIA",
+            "label": "00 A 05 PRIMERA INFANCIA",
+            "column": 1,
+            "n_cases": 11
+          },
+          {
+            "id": "1__06 A 11 INFANCIA",
+            "label": "06 A 11 INFANCIA",
+            "column": 1,
+            "n_cases": 12
+          },
+          {
+            "id": "1__12 A 17 ADOLESCENCIA",
+            "label": "12 A 17 ADOLESCENCIA",
+            "column": 1,
+            "n_cases": 26
+          },
+          {
+            "id": "1__18 A 28 JUVENTUD",
+            "label": "18 A 28 JUVENTUD",
+            "column": 1,
+            "n_cases": 45
+          },
+          {
+            "id": "1__29 A 59 ADULTEZ",
+            "label": "29 A 59 ADULTEZ",
+            "column": 1,
+            "n_cases": 74
+          },
+          {
+            "id": "1__MAS DE 60 ADULTO MAYOR",
+            "label": "MAS DE 60 ADULTO MAYOR",
+            "column": 1,
+            "n_cases": 8
+          },
+          {
+            "id": "2__FAMILIA_ENSAMBLADA",
+            "label": "FAMILIA_ENSAMBLADA",
+            "column": 2,
+            "n_cases": 7
+          },
+          {
+            "id": "2__FAMILIA_EXTENDIDA",
+            "label": "FAMILIA_EXTENDIDA",
+            "column": 2,
+            "n_cases": 31
+          },
+          {
+            "id": "2__FAMILIA_NUCLEAR",
+            "label": "FAMILIA_NUCLEAR",
+            "column": 2,
+            "n_cases": 128
+          },
+          {
+            "id": "2__FAMILIA_POLITICA",
+            "label": "FAMILIA_POLITICA",
+            "column": 2,
+            "n_cases": 10
+          },
+          {
+            "id": "3__OTROS_FAMILIARES",
+            "label": "OTROS_FAMILIARES",
+            "column": 3,
+            "n_cases": 176
+          }
+        ],
+        "links": [
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 11,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 12,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_ENSAMBLADA",
+            "value": 7,
+            "pct_within_ciclo": 26.9
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 19,
+            "pct_within_ciclo": 73.1
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 15,
+            "pct_within_ciclo": 33.3
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 30,
+            "pct_within_ciclo": 66.7
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 16,
+            "pct_within_ciclo": 21.6
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 48,
+            "pct_within_ciclo": 64.9
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_POLITICA",
+            "value": 10,
+            "pct_within_ciclo": 13.5
+          },
+          {
+            "source": "1__MAS DE 60 ADULTO MAYOR",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 8,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "2__FAMILIA_ENSAMBLADA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 7,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 31,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 128,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_POLITICA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 10,
+            "pct_within_ciclo": 0.0
+          }
+        ]
+      },
+      "NARIÑO": {
+        "n_total": 1614,
+        "caveat": null,
+        "nodes": [
+          {
+            "id": "1__12 A 17 ADOLESCENCIA",
+            "label": "12 A 17 ADOLESCENCIA",
+            "column": 1,
+            "n_cases": 52
+          },
+          {
+            "id": "1__18 A 28 JUVENTUD",
+            "label": "18 A 28 JUVENTUD",
+            "column": 1,
+            "n_cases": 329
+          },
+          {
+            "id": "1__29 A 59 ADULTEZ",
+            "label": "29 A 59 ADULTEZ",
+            "column": 1,
+            "n_cases": 794
+          },
+          {
+            "id": "1__MAS DE 60 ADULTO MAYOR",
+            "label": "MAS DE 60 ADULTO MAYOR",
+            "column": 1,
+            "n_cases": 139
+          },
+          {
+            "id": "2__FAMILIA_EXTENDIDA",
+            "label": "FAMILIA_EXTENDIDA",
+            "column": 2,
+            "n_cases": 364
+          },
+          {
+            "id": "2__FAMILIA_NUCLEAR",
+            "label": "FAMILIA_NUCLEAR",
+            "column": 2,
+            "n_cases": 704
+          },
+          {
+            "id": "2__FAMILIA_POLITICA",
+            "label": "FAMILIA_POLITICA",
+            "column": 2,
+            "n_cases": 246
+          },
+          {
+            "id": "3__CUNADO",
+            "label": "CUNADO",
+            "column": 3,
+            "n_cases": 182
+          },
+          {
+            "id": "3__HERMANO",
+            "label": "HERMANO",
+            "column": 3,
+            "n_cases": 348
+          },
+          {
+            "id": "3__HIJO",
+            "label": "HIJO",
+            "column": 3,
+            "n_cases": 258
+          },
+          {
+            "id": "3__OTROS_FAMILIARES",
+            "label": "OTROS_FAMILIARES",
+            "column": 3,
+            "n_cases": 179
+          },
+          {
+            "id": "3__PADRE",
+            "label": "PADRE",
+            "column": 3,
+            "n_cases": 98
+          },
+          {
+            "id": "3__PRIMO",
+            "label": "PRIMO",
+            "column": 3,
+            "n_cases": 109
+          },
+          {
+            "id": "3__SOBRINO",
+            "label": "SOBRINO",
+            "column": 3,
+            "n_cases": 64
+          },
+          {
+            "id": "3__TIO",
+            "label": "TIO",
+            "column": 3,
+            "n_cases": 76
+          }
+        ],
+        "links": [
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 52,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 127,
+            "pct_within_ciclo": 38.6
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 136,
+            "pct_within_ciclo": 41.3
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_POLITICA",
+            "value": 66,
+            "pct_within_ciclo": 20.1
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 205,
+            "pct_within_ciclo": 25.8
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 409,
+            "pct_within_ciclo": 51.5
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_POLITICA",
+            "value": 180,
+            "pct_within_ciclo": 22.7
+          },
+          {
+            "source": "1__MAS DE 60 ADULTO MAYOR",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 32,
+            "pct_within_ciclo": 23.0
+          },
+          {
+            "source": "1__MAS DE 60 ADULTO MAYOR",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 107,
+            "pct_within_ciclo": 77.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 115,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__PRIMO",
+            "value": 109,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__SOBRINO",
+            "value": 64,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__TIO",
+            "value": 76,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__HERMANO",
+            "value": 348,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__HIJO",
+            "value": 258,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__PADRE",
+            "value": 98,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_POLITICA",
+            "target": "3__CUNADO",
+            "value": 182,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_POLITICA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 64,
+            "pct_within_ciclo": 0.0
+          }
+        ]
+      },
+      "VALLE_DEL_CAUCA": {
+        "n_total": 5970,
+        "caveat": null,
+        "nodes": [
+          {
+            "id": "1__00 A 05 PRIMERA INFANCIA",
+            "label": "00 A 05 PRIMERA INFANCIA",
+            "column": 1,
+            "n_cases": 85
+          },
+          {
+            "id": "1__06 A 11 INFANCIA",
+            "label": "06 A 11 INFANCIA",
+            "column": 1,
+            "n_cases": 271
+          },
+          {
+            "id": "1__12 A 17 ADOLESCENCIA",
+            "label": "12 A 17 ADOLESCENCIA",
+            "column": 1,
+            "n_cases": 354
+          },
+          {
+            "id": "1__18 A 28 JUVENTUD",
+            "label": "18 A 28 JUVENTUD",
+            "column": 1,
+            "n_cases": 995
+          },
+          {
+            "id": "1__29 A 59 ADULTEZ",
+            "label": "29 A 59 ADULTEZ",
+            "column": 1,
+            "n_cases": 2467
+          },
+          {
+            "id": "1__MAS DE 60 ADULTO MAYOR",
+            "label": "MAS DE 60 ADULTO MAYOR",
+            "column": 1,
+            "n_cases": 651
+          },
+          {
+            "id": "2__FAMILIA_EXTENDIDA",
+            "label": "FAMILIA_EXTENDIDA",
+            "column": 2,
+            "n_cases": 1180
+          },
+          {
+            "id": "2__FAMILIA_NUCLEAR",
+            "label": "FAMILIA_NUCLEAR",
+            "column": 2,
+            "n_cases": 3029
+          },
+          {
+            "id": "2__FAMILIA_POLITICA",
+            "label": "FAMILIA_POLITICA",
+            "column": 2,
+            "n_cases": 614
+          },
+          {
+            "id": "3__CUNADO",
+            "label": "CUNADO",
+            "column": 3,
+            "n_cases": 483
+          },
+          {
+            "id": "3__HERMANO",
+            "label": "HERMANO",
+            "column": 3,
+            "n_cases": 1099
+          },
+          {
+            "id": "3__HIJO",
+            "label": "HIJO",
+            "column": 3,
+            "n_cases": 1066
+          },
+          {
+            "id": "3__MADRE",
+            "label": "MADRE",
+            "column": 3,
+            "n_cases": 322
+          },
+          {
+            "id": "3__NIETO",
+            "label": "NIETO",
+            "column": 3,
+            "n_cases": 123
+          },
+          {
+            "id": "3__OTROS_FAMILIARES",
+            "label": "OTROS_FAMILIARES",
+            "column": 3,
+            "n_cases": 353
+          },
+          {
+            "id": "3__PADRE",
+            "label": "PADRE",
+            "column": 3,
+            "n_cases": 542
+          },
+          {
+            "id": "3__PRIMO",
+            "label": "PRIMO",
+            "column": 3,
+            "n_cases": 263
+          },
+          {
+            "id": "3__SOBRINO",
+            "label": "SOBRINO",
+            "column": 3,
+            "n_cases": 208
+          },
+          {
+            "id": "3__TIO",
+            "label": "TIO",
+            "column": 3,
+            "n_cases": 233
+          },
+          {
+            "id": "3__YERNO",
+            "label": "YERNO",
+            "column": 3,
+            "n_cases": 131
+          }
+        ],
+        "links": [
+          {
+            "source": "1__00 A 05 PRIMERA INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 85,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "1__06 A 11 INFANCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 271,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "1__12 A 17 ADOLESCENCIA",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 354,
+            "pct_within_ciclo": 100.0
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 384,
+            "pct_within_ciclo": 38.6
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 429,
+            "pct_within_ciclo": 43.1
+          },
+          {
+            "source": "1__18 A 28 JUVENTUD",
+            "target": "2__FAMILIA_POLITICA",
+            "value": 182,
+            "pct_within_ciclo": 18.3
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 673,
+            "pct_within_ciclo": 27.3
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 1362,
+            "pct_within_ciclo": 55.2
+          },
+          {
+            "source": "1__29 A 59 ADULTEZ",
+            "target": "2__FAMILIA_POLITICA",
+            "value": 432,
+            "pct_within_ciclo": 17.5
+          },
+          {
+            "source": "1__MAS DE 60 ADULTO MAYOR",
+            "target": "2__FAMILIA_EXTENDIDA",
+            "value": 123,
+            "pct_within_ciclo": 18.9
+          },
+          {
+            "source": "1__MAS DE 60 ADULTO MAYOR",
+            "target": "2__FAMILIA_NUCLEAR",
+            "value": 528,
+            "pct_within_ciclo": 81.1
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__NIETO",
+            "value": 123,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__OTROS_FAMILIARES",
+            "value": 353,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__PRIMO",
+            "value": 263,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__SOBRINO",
+            "value": 208,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_EXTENDIDA",
+            "target": "3__TIO",
+            "value": 233,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__HERMANO",
+            "value": 1099,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__HIJO",
+            "value": 1066,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__MADRE",
+            "value": 322,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_NUCLEAR",
+            "target": "3__PADRE",
+            "value": 542,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_POLITICA",
+            "target": "3__CUNADO",
+            "value": 483,
+            "pct_within_ciclo": 0.0
+          },
+          {
+            "source": "2__FAMILIA_POLITICA",
+            "target": "3__YERNO",
+            "value": 131,
+            "pct_within_ciclo": 0.0
+          }
+        ]
+      }
+    },
+    "visualization": {
+      "column_titles": {
+        "col1": "Ciclo de vida",
+        "col2": "Dimensión del agresor",
+        "col3": "Agresor identificado"
+      },
+      "ds3_colors": {
+        "col1": {
+          "00 A 05 PRIMERA INFANCIA": "#FDE7E9",
+          "06 A 11 INFANCIA": "#F8B4C0",
+          "12 A 17 ADOLESCENCIA": "#E97C97",
+          "18 A 28 JUVENTUD": "#B85578",
+          "29 A 59 ADULTEZ": "#7B1F4B",
+          "MAS DE 60 ADULTO MAYOR": "#4A0E2A"
+        },
+        "col2_default": "#C77DFF",
+        "col2_overrides": {
+          "CONOCIDO_NO_FAMILIAR": "#9D4EDD",
+          "FAMILIA_NUCLEAR": "#7B1F4B",
+          "FAMILIA_ENSAMBLADA": "#B85578",
+          "FAMILIA_EXTENDIDA": "#C77DFF",
+          "PAREJA_EX_PAREJA": "#E97C97",
+          "FIGURAS_CUSTODIA": "#5A189A",
+          "NO_REGISTRADO": "#A3A3A3"
+        },
+        "col3_default": "#C77DFF",
+        "col3_no_registrado": "#A3A3A3"
+      },
+      "ds4_colors": {
+        "col1": {
+          "00 A 05 PRIMERA INFANCIA": "#FDE7E9",
+          "06 A 11 INFANCIA": "#F8B4C0",
+          "12 A 17 ADOLESCENCIA": "#E97C97",
+          "18 A 28 JUVENTUD": "#B85578",
+          "29 A 59 ADULTEZ": "#7B1F4B",
+          "MAS DE 60 ADULTO MAYOR": "#4A0E2A"
+        },
+        "col2_default": "#3A5BA0",
+        "col2_overrides": {
+          "FAMILIA_NUCLEAR": "#1E3A8A",
+          "FAMILIA_EXTENDIDA": "#3A5BA0",
+          "FAMILIA_POLITICA": "#6B83C7"
+        },
+        "col3_default": "#3A5BA0",
+        "col3_no_registrado": "#A3A3A3"
+      },
+      "link_opacity": 0.45
+    }
+  },
+  "sub_acto_4_4": {
+    "anchor_text_es": "El peritaje forense registra el factor precipitante de la violencia física y la circunstancia de la violencia sexual. En el 65% de los casos de VIF, el factor declarado es la intolerancia y el machismo.",
+    "titles_es": {
+      "ds4": "¿Qué declara el peritaje como factor de la violencia física (VIF)?",
+      "ds3": "¿Bajo qué circunstancia ocurrió la violencia sexual?"
+    },
+    "ds4_factor": {
+      "CAUCA": [
+        {
+          "category": "INTOLERANCIA MACHISMO",
+          "n": 1012,
+          "pct": 55.0
+        },
+        {
+          "category": "ALCOHOL_SUSTANCIAS",
+          "n": 575,
+          "pct": 31.2
+        },
+        {
+          "category": "OTRAS",
+          "n": 84,
+          "pct": 4.6
+        },
+        {
+          "category": "NO_REGISTRADO",
+          "n": 81,
+          "pct": 4.4
+        },
+        {
+          "category": "CELOS DESCONFIANZA INFIDELIDAD",
+          "n": 39,
+          "pct": 2.1
+        },
+        {
+          "category": "ECONOMICAS",
+          "n": 29,
+          "pct": 1.6
+        },
+        {
+          "category": "ENFERMEDAD FISICA O MENTAL",
+          "n": 12,
+          "pct": 0.7
+        },
+        {
+          "category": "ABANDONO",
+          "n": 8,
+          "pct": 0.4
+        }
+      ],
+      "CHOCO": [
+        {
+          "category": "INTOLERANCIA MACHISMO",
+          "n": 131,
+          "pct": 61.5
+        },
+        {
+          "category": "ALCOHOL_SUSTANCIAS",
+          "n": 41,
+          "pct": 19.2
+        },
+        {
+          "category": "OTRAS",
+          "n": 21,
+          "pct": 9.9
+        },
+        {
+          "category": "NO_REGISTRADO",
+          "n": 16,
+          "pct": 7.5
+        },
+        {
+          "category": "ECONOMICAS",
+          "n": 2,
+          "pct": 0.9
+        },
+        {
+          "category": "ENFERMEDAD FISICA O MENTAL",
+          "n": 2,
+          "pct": 0.9
+        }
+      ],
+      "NARIÑO": [
+        {
+          "category": "INTOLERANCIA MACHISMO",
+          "n": 1082,
+          "pct": 67.0
+        },
+        {
+          "category": "ALCOHOL_SUSTANCIAS",
+          "n": 360,
+          "pct": 22.3
+        },
+        {
+          "category": "ECONOMICAS",
+          "n": 52,
+          "pct": 3.2
+        },
+        {
+          "category": "CELOS DESCONFIANZA INFIDELIDAD",
+          "n": 50,
+          "pct": 3.1
+        },
+        {
+          "category": "OTRAS",
+          "n": 30,
+          "pct": 1.9
+        },
+        {
+          "category": "NO_REGISTRADO",
+          "n": 25,
+          "pct": 1.5
+        },
+        {
+          "category": "ENFERMEDAD FISICA O MENTAL",
+          "n": 9,
+          "pct": 0.6
+        },
+        {
+          "category": "ABANDONO",
+          "n": 6,
+          "pct": 0.4
+        }
+      ],
+      "VALLE_DEL_CAUCA": [
+        {
+          "category": "INTOLERANCIA MACHISMO",
+          "n": 4076,
+          "pct": 68.3
+        },
+        {
+          "category": "ALCOHOL_SUSTANCIAS",
+          "n": 1413,
+          "pct": 23.7
+        },
+        {
+          "category": "NO_REGISTRADO",
+          "n": 132,
+          "pct": 2.2
+        },
+        {
+          "category": "CELOS DESCONFIANZA INFIDELIDAD",
+          "n": 97,
+          "pct": 1.6
+        },
+        {
+          "category": "OTRAS",
+          "n": 87,
+          "pct": 1.5
+        },
+        {
+          "category": "ECONOMICAS",
+          "n": 77,
+          "pct": 1.3
+        },
+        {
+          "category": "ENFERMEDAD FISICA O MENTAL",
+          "n": 46,
+          "pct": 0.8
+        },
+        {
+          "category": "ABANDONO",
+          "n": 42,
+          "pct": 0.7
+        }
+      ],
+      "regional": [
+        {
+          "category": "INTOLERANCIA MACHISMO",
+          "n": 6301,
+          "pct": 65.4
+        },
+        {
+          "category": "ALCOHOL_SUSTANCIAS",
+          "n": 2389,
+          "pct": 24.8
+        },
+        {
+          "category": "NO_REGISTRADO",
+          "n": 254,
+          "pct": 2.6
+        },
+        {
+          "category": "OTRAS",
+          "n": 222,
+          "pct": 2.3
+        },
+        {
+          "category": "CELOS DESCONFIANZA INFIDELIDAD",
+          "n": 186,
+          "pct": 1.9
+        },
+        {
+          "category": "ECONOMICAS",
+          "n": 160,
+          "pct": 1.7
+        },
+        {
+          "category": "ENFERMEDAD FISICA O MENTAL",
+          "n": 69,
+          "pct": 0.7
+        },
+        {
+          "category": "ABANDONO",
+          "n": 56,
+          "pct": 0.6
+        }
+      ]
+    },
+    "ds3_circumstance": {
+      "CAUCA": [
+        {
+          "category": "ABUSO_SEXUAL",
+          "n": 2385,
+          "pct": 79.9
+        },
+        {
+          "category": "VIOLENCIA_SEXUAL_CONTACTO",
+          "n": 304,
+          "pct": 10.2
+        },
+        {
+          "category": "CONTEXTO_PAREJA_FAMILIAR",
+          "n": 113,
+          "pct": 3.8
+        },
+        {
+          "category": "NO_REGISTRADO",
+          "n": 75,
+          "pct": 2.5
+        },
+        {
+          "category": "ACOSO_HOSTIGAMIENTO",
+          "n": 66,
+          "pct": 2.2
+        },
+        {
+          "category": "EXPLOTACION_SEXUAL",
+          "n": 27,
+          "pct": 0.9
+        },
+        {
+          "category": "CONTEXTO_SUSTANCIAS",
+          "n": 11,
+          "pct": 0.4
+        },
+        {
+          "category": "OTROS",
+          "n": 5,
+          "pct": 0.2
+        }
+      ],
+      "CHOCO": [
+        {
+          "category": "ABUSO_SEXUAL",
+          "n": 991,
+          "pct": 82.9
+        },
+        {
+          "category": "VIOLENCIA_SEXUAL_CONTACTO",
+          "n": 144,
+          "pct": 12.1
+        },
+        {
+          "category": "NO_REGISTRADO",
+          "n": 37,
+          "pct": 3.1
+        },
+        {
+          "category": "CONTEXTO_PAREJA_FAMILIAR",
+          "n": 12,
+          "pct": 1.0
+        },
+        {
+          "category": "ACOSO_HOSTIGAMIENTO",
+          "n": 6,
+          "pct": 0.5
+        },
+        {
+          "category": "EXPLOTACION_SEXUAL",
+          "n": 2,
+          "pct": 0.2
+        },
+        {
+          "category": "OTROS",
+          "n": 2,
+          "pct": 0.2
+        },
+        {
+          "category": "CONTEXTO_SUSTANCIAS",
+          "n": 1,
+          "pct": 0.1
+        }
+      ],
+      "NARIÑO": [
+        {
+          "category": "ABUSO_SEXUAL",
+          "n": 524,
+          "pct": 57.7
+        },
+        {
+          "category": "VIOLENCIA_SEXUAL_CONTACTO",
+          "n": 206,
+          "pct": 22.7
+        },
+        {
+          "category": "CONTEXTO_PAREJA_FAMILIAR",
+          "n": 129,
+          "pct": 14.2
+        },
+        {
+          "category": "NO_REGISTRADO",
+          "n": 16,
+          "pct": 1.8
+        },
+        {
+          "category": "ACOSO_HOSTIGAMIENTO",
+          "n": 14,
+          "pct": 1.5
+        },
+        {
+          "category": "CONTEXTO_SUSTANCIAS",
+          "n": 10,
+          "pct": 1.1
+        },
+        {
+          "category": "OTROS",
+          "n": 5,
+          "pct": 0.6
+        },
+        {
+          "category": "EXPLOTACION_SEXUAL",
+          "n": 4,
+          "pct": 0.4
+        }
+      ],
+      "VALLE_DEL_CAUCA": [
+        {
+          "category": "ABUSO_SEXUAL",
+          "n": 9384,
+          "pct": 82.5
+        },
+        {
+          "category": "VIOLENCIA_SEXUAL_CONTACTO",
+          "n": 955,
+          "pct": 8.4
+        },
+        {
+          "category": "CONTEXTO_PAREJA_FAMILIAR",
+          "n": 465,
+          "pct": 4.1
+        },
+        {
+          "category": "NO_REGISTRADO",
+          "n": 256,
+          "pct": 2.2
+        },
+        {
+          "category": "ACOSO_HOSTIGAMIENTO",
+          "n": 198,
+          "pct": 1.7
+        },
+        {
+          "category": "EXPLOTACION_SEXUAL",
+          "n": 74,
+          "pct": 0.7
+        },
+        {
+          "category": "OTROS",
+          "n": 33,
+          "pct": 0.3
+        },
+        {
+          "category": "CONTEXTO_SUSTANCIAS",
+          "n": 13,
+          "pct": 0.1
+        }
+      ],
+      "regional": [
+        {
+          "category": "ABUSO_SEXUAL",
+          "n": 13284,
+          "pct": 80.7
+        },
+        {
+          "category": "VIOLENCIA_SEXUAL_CONTACTO",
+          "n": 1609,
+          "pct": 9.8
+        },
+        {
+          "category": "CONTEXTO_PAREJA_FAMILIAR",
+          "n": 719,
+          "pct": 4.4
+        },
+        {
+          "category": "NO_REGISTRADO",
+          "n": 384,
+          "pct": 2.3
+        },
+        {
+          "category": "ACOSO_HOSTIGAMIENTO",
+          "n": 284,
+          "pct": 1.7
+        },
+        {
+          "category": "EXPLOTACION_SEXUAL",
+          "n": 107,
+          "pct": 0.6
+        },
+        {
+          "category": "OTROS",
+          "n": 45,
+          "pct": 0.3
+        },
+        {
+          "category": "CONTEXTO_SUSTANCIAS",
+          "n": 35,
+          "pct": 0.2
+        }
+      ]
+    }
+  },
+  "sub_acto_4_5": {
+    "title_es": "Lo que el peritaje no captura",
+    "anchor_text_es": "En una región donde Chocó es mayoritariamente afrocolombiano y Cauca alberga territorios ancestrales Nasa y Misak, Medicina Legal registra que solo el 16.2% de las mujeres peritadas por delito sexual se identifica como Afro-NARP y el 4.1% como Indígena. El resto — 75.2% — figura como 'sin pertenencia declarada'. No es que la violencia no toque a estas comunidades: es que el sistema forense no las reconoce.",
+    "anchor_disability_es": "El 0.6% de las víctimas femeninas de VIF y el 1.2% de las de delito sexual peritadas tienen condición de discapacidad registrada. Piso mínimo, no realidad.",
+    "caveat_es": "El subregistro étnico en Medicina Legal es estructural: la variable 'pertenencia étnica' depende del autorreconocimiento en el momento del peritaje, sin protocolo diferencial. Chocó tiene la cobertura forense más baja de la región (n=312 casos VIF en 7 años); no leer estos porcentajes como composición étnica real, sino como evidencia del silencio institucional.",
+    "low_n_note_es": "Categorías marcadas con * tienen menos de 30 casos femeninos; se muestran por transparencia pero no permiten inferencia.",
+    "ds3_stats": {
+      "pct_disability_f": 1.2,
+      "pct_afro_narp_f": 16.2,
+      "pct_indigena_f": 4.1,
+      "pct_sin_pertenencia_f": 75.2,
+      "pct_no_registrado_f": 4.5,
+      "pct_gitano_f": 0.0,
+      "n_base_f": 16467
+    },
+    "ds4_stats": {
+      "pct_disability_f": 0.6,
+      "pct_afro_narp_f": 13.2,
+      "pct_indigena_f": 2.9,
+      "pct_sin_pertenencia_f": 79.9,
+      "pct_no_registrado_f": 4.1,
+      "pct_gitano_f": 0.0,
+      "n_base_f": 9637
+    },
+    "ethnicity_marginals": {
+      "ds3": [
+        {
+          "dimension_etnia": "SIN_PERTENENCIA_ETNICA",
+          "n_cases_f": 12383,
+          "pct_of_female_cases": 75.2,
+          "pct_femenino_weighted": 87.8,
+          "low_n_flag": false
+        },
+        {
+          "dimension_etnia": "AFRO_NARP",
+          "n_cases_f": 2671,
+          "pct_of_female_cases": 16.2,
+          "pct_femenino_weighted": 90.4,
+          "low_n_flag": false
+        },
+        {
+          "dimension_etnia": "NO_REGISTRADO",
+          "n_cases_f": 735,
+          "pct_of_female_cases": 4.5,
+          "pct_femenino_weighted": 85.6,
+          "low_n_flag": false
+        },
+        {
+          "dimension_etnia": "INDIGENA",
+          "n_cases_f": 672,
+          "pct_of_female_cases": 4.1,
+          "pct_femenino_weighted": 91.9,
+          "low_n_flag": false
+        },
+        {
+          "dimension_etnia": "GITANO",
+          "n_cases_f": 6,
+          "pct_of_female_cases": 0.0,
+          "pct_femenino_weighted": 85.7,
+          "low_n_flag": true
+        }
+      ],
+      "ds4": [
+        {
+          "dimension_etnia": "SIN_PERTENENCIA_ETNICA",
+          "n_cases_f": 7696,
+          "pct_of_female_cases": 79.9,
+          "pct_femenino_weighted": 62.2,
+          "low_n_flag": false
+        },
+        {
+          "dimension_etnia": "AFRO_NARP",
+          "n_cases_f": 1268,
+          "pct_of_female_cases": 13.2,
+          "pct_femenino_weighted": 64.7,
+          "low_n_flag": false
+        },
+        {
+          "dimension_etnia": "NO_REGISTRADO",
+          "n_cases_f": 395,
+          "pct_of_female_cases": 4.1,
+          "pct_femenino_weighted": 60.8,
+          "low_n_flag": false
+        },
+        {
+          "dimension_etnia": "INDIGENA",
+          "n_cases_f": 278,
+          "pct_of_female_cases": 2.9,
+          "pct_femenino_weighted": 64.8,
+          "low_n_flag": false
+        },
+        {
+          "dimension_etnia": "GITANO",
+          "n_cases_f": 0,
+          "pct_of_female_cases": 0.0,
+          "pct_femenino_weighted": 0.0,
+          "low_n_flag": true
+        }
+      ]
+    }
+  }
+}

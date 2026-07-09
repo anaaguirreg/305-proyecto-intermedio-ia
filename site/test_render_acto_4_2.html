@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!-- sub_acto_4_2 — Temporalidad y escenario del hecho (DS4 VIF + DS3 Sexual forense).
+     Componente: renderHeatmapWithSelector
+     Selector de departamento (5 vistas) → actualiza 3 ECharts sin dispose/recrear.
+     Heatmap 1: VIF día×mes (7×12) desde heatmap_vif.by_department[key].matrix
+     Heatmap 2: Sexual día×mes (7×12) desde heatmap_sexual.by_department[key].matrix
+     Barra agrupada: escenario VIF% vs Sexual% por categoría
+     Caveats condicionales (solo CHOCO) por gráfico.
+     JSON:   data/dashboard/acto_4_forense.json → sub_acto_4_2
+     Config: config/forense_exporter_config.json → copy_es.sub_acto_4_2
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_4_2.html -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Temporalidad y escenario (sub_acto_4_2)</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --color-vif:    var(--color-primary);
+      --color-sexual: var(--color-primary);
+    }
+    body {
+      font-family: var(--font-sans); padding: 1rem 1.25rem;
+      background: var(--color-canvas); color: var(--color-ink);
+    }
+    h2   { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; max-width: 980px; }
+    .anchor-text {
+      font-size: 0.88rem; color: var(--color-muted); line-height: 1.55;
+      max-width: 980px; margin-bottom: 0.9rem;
+    }
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber); background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem; font-size: 0.85rem; color: var(--color-accent-amber);
+      line-height: 1.5; max-width: 980px; margin-bottom: 0.75rem;
+    }
+
+    /* Selector row */
+    .selector-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.1rem; max-width: 980px; }
+    .selector-label { font-size: 0.85rem; font-weight: 600; color: var(--color-body); white-space: nowrap; }
+    .dept-select {
+      padding: 0.3rem 0.6rem; font-size: 0.85rem; border: 1px solid var(--color-hairline);
+      border-radius: 4px; background: var(--color-canvas); cursor: pointer;
+    }
+
+    /* Chart panel */
+    .chart-panel  { max-width: 980px; margin-bottom: 1.5rem; }
+    .chart-header {
+      font-size: 0.88rem; font-weight: 700; color: var(--color-body);
+      padding: 0.3rem 0.7rem; margin-bottom: 0.35rem;
+      border-left: 3px solid var(--color-hairline); background: var(--color-canvas);
+    }
+    .chart-meta { font-size: 0.78rem; color: var(--color-muted); margin-bottom: 0.2rem; padding-left: 0.3rem; }
+    .chart-el   { width: 100%; height: 260px; }
+    .caveat-note {
+      font-size: 0.82rem; color: var(--color-muted); font-style: italic; line-height: 1.5;
+      border-left: 2px solid var(--color-accent-amber); padding-left: 0.65rem;
+      background: var(--color-accent-amber-soft); padding: 0.4rem 0.65rem;
+      margin-top: 0.4rem;
+    }
+    /* Taller escenario chart */
+    #chart-escenario { height: 320px; }
+
+    details  { max-width: 980px; margin-top: 0.8rem; font-size: 0.8rem; }
+    summary  { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul       { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.85; }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.88rem; }
+  </style>
+</head>
+<body>
+  <h2 id="title"></h2>
+  <div id="anchor-wrapper"></div>
+
+  <div class="selector-row">
+    <span class="selector-label" id="selector-label">Departamento</span>
+    <select class="dept-select" id="dept-select"></select>
+  </div>
+
+  <!-- Heatmap VIF -->
+  <div class="chart-panel">
+    <div class="chart-header" id="header-heatmap-vif"></div>
+    <div class="chart-meta" id="meta-heatmap-vif"></div>
+    <div class="chart-el" id="chart-heatmap-vif"></div>
+    <p class="caveat-note" id="caveat-heatmap-vif" hidden></p>
+  </div>
+
+  <!-- Heatmap Sexual -->
+  <div class="chart-panel">
+    <div class="chart-header" id="header-heatmap-sexual"></div>
+    <div class="chart-meta" id="meta-heatmap-sexual"></div>
+    <div class="chart-el" id="chart-heatmap-sexual"></div>
+    <p class="caveat-note" id="caveat-heatmap-sexual" hidden></p>
+  </div>
+
+  <!-- Escenario bar -->
+  <div class="chart-panel">
+    <div class="chart-header" id="header-escenario"></div>
+    <div class="chart-el" id="chart-escenario"></div>
+    <p class="caveat-note" id="caveat-escenario" hidden></p>
+  </div>
+
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script>
+    /**
+     * renderHeatmapWithSelector
+     *
+     * Three ECharts instances (heatmap VIF, heatmap Sexual, escenario grouped bar).
+     * <select> with 5 dept options drives all three charts via setOption (no dispose/recreate).
+     * Caveats: per-chart <p> elements, hidden unless the selected dept has a non-null caveat_es.
+     * Peak annotation: shown as chart-meta text (pico: day/month — N casos) below each heatmap header.
+     *
+     * Heatmap data: matrix[dayIdx][monthIdx] → ECharts data = [monthIdx, dayIdx, value]
+     * Axis: xAxis=months (0–11), yAxis=days (0–6)
+     */
+
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const FORENSE_URL = './data/acto_4_forense.json';
+    const CFG_URL     = './config/forense_exporter_config.json';
+
+    const COLOR_VIF    = getCssVar('--color-vif');
+    const COLOR_SEXUAL = getCssVar('--color-sexual');
+
+    const PROV = 'PROVISIONAL: ';
+    function stripProvisional(s) { return s && s.startsWith(PROV) ? s.slice(PROV.length) : (s || ''); }
+
+    function renderAnchor(text) {
+      const el = document.createElement(text.startsWith(PROV) ? 'div' : 'p');
+      el.className = text.startsWith(PROV) ? 'provisional-box' : 'anchor-text';
+      el.textContent = stripProvisional(text);
+      document.getElementById('anchor-wrapper').appendChild(el);
+    }
+
+    function flattenMatrix(matrix) {
+      const cells = [];
+      for (let d = 0; d < matrix.length; d++) {
+        for (let m = 0; m < matrix[d].length; m++) {
+          cells.push([m, d, matrix[d][m]]);
+        }
+      }
+      return cells;
+    }
+
+    function buildHeatmapOption(heatmapBlock, deptKey) {
+      const entry  = heatmapBlock.by_department[deptKey];
+      const cells  = flattenMatrix(entry.matrix);
+      const maxVal = Math.max(...cells.map(c => c[2]));
+      const days   = heatmapBlock.axis_days;
+      const months = heatmapBlock.axis_months;
+      return {
+        backgroundColor: CSS.canvas,
+        grid: { left: 82, right: 14, top: 54, bottom: 54 },
+        tooltip: {
+          trigger: 'item',
+          formatter: p => `${days[p.data[1]]} / ${months[p.data[0]]}<br>${p.data[2]} casos`,
+        },
+        xAxis: {
+          type: 'category', data: months,
+          axisLabel: { rotate: 30, fontSize: 9 },
+          splitArea: { show: true },
+        },
+        yAxis: {
+          type: 'category', data: days,
+          axisLabel: { fontSize: 10 },
+          splitArea: { show: true },
+        },
+        visualMap: {
+          min: 0, max: maxVal || 1,
+          calculable: true, orient: 'horizontal',
+          left: 'center', top: 0, itemHeight: 80,
+          textStyle: { fontSize: 10 },
+          inRange: { color: ['#f5ede5', '#e4c4c0', '#c4808a', '#8a3050', '#a63030'] },
+        },
+        series: [{
+          type: 'heatmap',
+          data: cells,
+          label: { show: false },
+          emphasis: { itemStyle: { shadowBlur: 8, shadowColor: 'rgba(0,0,0,0.3)' } },
+        }],
+      };
+    }
+
+    function buildEscenarioOption(escBlock, deptKey) {
+      const entry = escBlock.by_department[deptKey];
+      const cats  = entry.categories.map(c => c.replace(/_/g, ' '));
+      const vifPct   = entry.vif_pct;
+      const sexPct   = entry.sexual_pct;
+      const totalVIF = entry.total_vif;
+      const totSex   = entry.total_sexual;
+      return {
+        backgroundColor: CSS.canvas,
+        grid: { left: 215, right: 80, top: 36, bottom: 44 },
+        legend: {
+          data: [`VIF (n=${totalVIF.toLocaleString('es')})`, `Sexual (n=${totSex.toLocaleString('es')})`],
+          top: 5, textStyle: { fontSize: 10 },
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: { type: 'shadow' },
+          formatter: params => {
+            const idx = params[0].dataIndex;
+            return `<strong>${cats[idx]}</strong><br>` +
+              params.map(p => `${p.seriesName}: ${(+p.value).toFixed(1)}%`).join('<br>');
+          },
+        },
+        xAxis: {
+          type: 'value',
+          max: Math.ceil(Math.max(...vifPct, ...sexPct) / 10) * 10 + 5,
+          axisLabel: { formatter: v => v + '%', fontSize: 9 },
+          splitLine: { lineStyle: { color: CSS.hairline } },
+        },
+        yAxis: {
+          type: 'category', data: cats, inverse: true,
+          axisLabel: { width: 202, overflow: 'truncate', fontSize: 10 },
+        },
+        series: [
+          {
+            name: `VIF (n=${totalVIF.toLocaleString('es')})`,
+            type: 'bar', data: vifPct,
+            itemStyle: { color: COLOR_VIF },
+            label: {
+              show: true, position: 'right', fontSize: 9, color: CSS.body,
+              formatter: p => (+p.value).toFixed(1) + '%',
+            },
+          },
+          {
+            name: `Sexual (n=${totSex.toLocaleString('es')})`,
+            type: 'bar', data: sexPct,
+            itemStyle: { color: COLOR_SEXUAL, opacity: 0.5 },
+            label: {
+              show: true, position: 'right', fontSize: 9, color: CSS.body,
+              formatter: p => (+p.value).toFixed(1) + '%',
+            },
+          },
+        ],
+      };
+    }
+
+    function updateCaveat(elId, caveatEs) {
+      const el = document.getElementById(elId);
+      if (caveatEs) {
+        el.textContent = stripProvisional(caveatEs);
+        el.hidden = false;
+      } else {
+        el.hidden = true;
+        el.textContent = '';
+      }
+    }
+
+    function updatePeak(elId, peak, totalCases) {
+      const el = document.getElementById(elId);
+      if (!peak) { el.textContent = `n = ${totalCases.toLocaleString('es')} casos`; return; }
+      el.textContent =
+        `n = ${totalCases.toLocaleString('es')} casos — ` +
+        `pico: ${peak.day} / ${peak.month} (${peak.value} casos)`;
+    }
+
+    async function main() {
+      const [payload, fullCfg] = await Promise.all([
+        fetch(FORENSE_URL).then(r => { if (!r.ok) throw new Error(`${FORENSE_URL}: HTTP ${r.status}`); return r.json(); }),
+        fetch(CFG_URL).then(r => r.json()).catch(() => ({})),
+      ]);
+
+      const sub  = payload.sub_acto_4_2;
+      const copy = fullCfg?.copy_es?.sub_acto_4_2 ?? {};
+
+      document.getElementById('title').textContent = sub.title_es;
+      renderAnchor(sub.anchor_text_es);
+
+      // Panel headers from config (strip PROVISIONAL prefix)
+      const panelTitles = copy.panel_titles_es ?? {};
+      document.getElementById('header-heatmap-vif').textContent    = stripProvisional(panelTitles.heatmap_vif   || 'VIF — día × mes');
+      document.getElementById('header-heatmap-sexual').textContent = stripProvisional(panelTitles.heatmap_sexual || 'Sexual — día × mes');
+      document.getElementById('header-escenario').textContent      = stripProvisional(panelTitles.escenario      || 'Escenario del hecho — VIF vs Sexual');
+
+      // Selector label
+      document.getElementById('selector-label').textContent = copy.selector_labels_es?.label || 'Departamento';
+
+      // Build selector options
+      const selLabels = copy.selector_labels_es ?? {};
+      const select = document.getElementById('dept-select');
+      sub.departments_available.forEach(key => {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = selLabels[key] || (key === 'regional' ? 'Regional (agregado)' : key);
+        select.appendChild(opt);
+      });
+      select.value = sub.aggregation_default || 'regional';
+
+      // Init charts
+      const chartHeatmapVIF    = echarts.init(document.getElementById('chart-heatmap-vif'));
+      const chartHeatmapSexual = echarts.init(document.getElementById('chart-heatmap-sexual'));
+      const chartEscenario     = echarts.init(document.getElementById('chart-escenario'));
+
+      const heatmapVIF    = sub.heatmap_vif;
+      const heatmapSexual = sub.heatmap_sexual;
+      const escenario     = sub.escenario;
+
+      function updateAllCharts(deptKey) {
+        chartHeatmapVIF.setOption(buildHeatmapOption(heatmapVIF, deptKey), true);
+        chartHeatmapSexual.setOption(buildHeatmapOption(heatmapSexual, deptKey), true);
+        chartEscenario.setOption(buildEscenarioOption(escenario, deptKey), true);
+
+        const vifEntry    = heatmapVIF.by_department[deptKey];
+        const sexEntry    = heatmapSexual.by_department[deptKey];
+        const escEntry    = escenario.by_department[deptKey];
+
+        updatePeak('meta-heatmap-vif',    vifEntry.peak, vifEntry.total_cases);
+        updatePeak('meta-heatmap-sexual', sexEntry.peak, sexEntry.total_cases);
+
+        updateCaveat('caveat-heatmap-vif',    vifEntry.caveat_es);
+        updateCaveat('caveat-heatmap-sexual', sexEntry.caveat_es);
+        updateCaveat('caveat-escenario',      escEntry.caveat_es);
+      }
+
+      // Initial render
+      updateAllCharts(select.value);
+
+      // Selector change
+      select.addEventListener('change', () => updateAllCharts(select.value));
+
+      window.addEventListener('resize', () => {
+        [chartHeatmapVIF, chartHeatmapSexual, chartEscenario].forEach(c => c.resize());
+      });
+
+      /* Diagnostics */
+      const ul = document.getElementById('diag-list');
+      const reg = heatmapVIF.by_department['regional'];
+      const rows = [
+        `departments_available: ${sub.departments_available.join(', ')}`,
+        `aggregation_default: ${sub.aggregation_default} (esperado: regional)`,
+        `heatmap_vif axis_days: ${heatmapVIF.axis_days.length} días (esperado: 7)`,
+        `heatmap_vif axis_months: ${heatmapVIF.axis_months.length} meses (esperado: 12)`,
+        `heatmap_vif.regional total_cases: ${reg.total_cases} (esperado: 9637)`,
+        `heatmap_vif.regional peak: ${reg.peak.day} / ${reg.peak.month} — ${reg.peak.value} (esperado: DOMINGO/SEPTIEMBRE/216)`,
+        `heatmap_vif.regional.caveat_es: ${reg.caveat_es === null ? 'null (correcto)' : reg.caveat_es}`,
+        `heatmap_vif.CHOCO.caveat_es: ${heatmapVIF.by_department['CHOCO'].caveat_es ? 'presente (correcto)' : 'null'}`,
+        `escenario.regional.categories[0]: ${escenario.by_department['regional'].categories[0]} (esperado: HOGAR)`,
+        `escenario.regional.vif_pct[0]: ${escenario.by_department['regional'].vif_pct[0]}% (esperado: 80.7)`,
+        `Selector activo: ${select.value}`,
+      ];
+      rows.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+    }
+
+    main().catch(err => {
+      console.error(err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

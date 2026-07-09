@@ -1,0 +1,31 @@
+{
+  "temporal_split": {
+    "version": "v2_corregida",
+    "train_period": "2018-2022",
+    "test_period": "2023-2025",
+    "municipios_comunes": 177,
+    "ari_score": 0.326793145017562,
+    "stability_threshold": 0.3,
+    "status": "ESTABLE",
+    "label_matching_aplicado": true,
+    "distribucion_train": {
+      "0": 120,
+      "1": 57
+    },
+    "distribucion_test": {
+      "0": 117,
+      "1": 60
+    },
+    "matriz_confusion_matched": [
+      [
+        100,
+        20
+      ],
+      [
+        17,
+        40
+      ]
+    ],
+    "municipios_cambiaron": 37
+  }
+}

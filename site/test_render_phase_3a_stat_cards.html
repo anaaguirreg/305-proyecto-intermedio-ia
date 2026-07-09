@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<!--
+  Phase 3.A — Stat Cards render test
+  ====================================
+  Schema origin:
+    Phase 0 inspection (this session) identified 4 divergent stat-card schemas
+    across sub_acto_1_1, 2_1, 3_1, 4_1. Three remediation passes migrated all
+    four to the canonical contract: stat_cards array at sub-acto root, each card
+    carrying id / label_es / value / display_format / badge / sub_value.
+
+  Why a single renderStatCard():
+    All 16 cards (3 + 4 + 3 + 6) share identical field names after remediation.
+    A single function removes per-sub-acto branching and proves the schema
+    contract is genuinely uniform — if any card fails to render, the schema
+    diverged somewhere upstream.
+
+  Spanish strings:
+    Zero hardcoded in JS. title_es, anchor_text_es, label_es, caveat_es,
+    and sub_value.label_es all come from the JSON files loaded at runtime.
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 3.A — Stat Cards (prueba de renderizado)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--color-ink);
+      background: var(--color-canvas);
+      padding: 32px 24px 64px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1 { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+    .page-lede { color: var(--color-muted); font-size: 13px; margin-bottom: 40px; }
+
+    /* ── sub-acto section ────────────────────────────────────────────────── */
+    .sub-acto { margin-bottom: 48px; }
+
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber);
+      background: var(--color-accent-amber-soft);
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: var(--color-accent-amber);
+      font-weight: 500;
+    }
+
+    .sub-acto-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .anchor-text {
+      font-size: 14px;
+      color: var(--color-body);
+      line-height: 1.55;
+      margin-bottom: 20px;
+      max-width: 780px;
+    }
+
+    /* ── card grid ───────────────────────────────────────────────────────── */
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    /* ── single stat card ────────────────────────────────────────────────── */
+    .stat-card {
+      position: relative;
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline);
+      border-radius: 6px;
+      padding: 20px 18px 16px;
+      min-width: 170px;
+      flex: 1 1 170px;
+      max-width: 280px;
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: var(--color-hairline);
+      color: var(--color-muted);
+    }
+
+    .card-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      color: var(--color-ink);
+    }
+
+    .card-value--text {
+      font-size: 1.35rem;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+
+    .card-label {
+      font-size: 12px;
+      color: var(--color-muted);
+      line-height: 1.4;
+    }
+
+    .card-subvalue {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--color-muted);
+      line-height: 1.4;
+      border-top: 1px solid var(--color-hairline);
+      padding-top: 7px;
+    }
+
+    /* ── caveat footnote ─────────────────────────────────────────────────── */
+    .caveat {
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--color-muted);
+      line-height: 1.5;
+      max-width: 780px;
+      padding-left: 10px;
+      border-left: 2px solid var(--color-hairline);
+    }
+
+    /* ── error block ─────────────────────────────────────────────────────── */
+    .load-error {
+      border-left: 3px solid var(--color-error);
+      background: var(--color-primary-ghost);
+      padding: 10px 14px;
+      font-size: 13px;
+      color: var(--color-error);
+      margin-bottom: 32px;
+    }
+
+    /* ── diagnostic ──────────────────────────────────────────────────────── */
+    #diagnostic {
+      margin-top: 48px;
+      border-top: 1px solid var(--color-hairline);
+      padding-top: 20px;
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+    #diagnostic ul { list-style: none; padding: 0; }
+    #diagnostic li { margin: 3px 0; }
+    #diagnostic li.ok::before  { content: "✓  "; color: #16a34a; }
+    #diagnostic li.err::before { content: "✗  "; color: var(--color-error); }
+  </style>
+</head>
+<body>
+
+<h1>Phase 3.A — Prueba de renderizado: stat cards</h1>
+<p class="page-lede">
+  Validación visual de los 4 sub-actos de tarjetas de estadísticas.
+  16 cards en total (3 + 4 + 3 + 6). Un único componente
+  <code>renderStatCard()</code> para todas.
+</p>
+
+<div id="panels"></div>
+<div id="diagnostic"><ul id="diag-list"></ul></div>
+
+<script>
+// ── data sources ───────────────────────────────────────────────────────────
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+const SOURCES = [
+  { file: 'data/acto_1_panorama.json',  key: 'sub_acto_1_1' },
+  { file: 'data/acto_2_brechas.json',   key: 'sub_acto_2_1' },
+  { file: 'data/acto_3_tipologia.json', key: 'sub_acto_3_1' },
+  { file: 'data/acto_4_forense.json',   key: 'sub_acto_4_1' },
+];
+
+// ── value formatter ────────────────────────────────────────────────────────
+function formatValue(value, format) {
+  if (format === 'text')  return String(value);
+
+  const num = Number(value);
+  const ES = 'es';   // Spanish locale: period thousands, comma decimal
+
+  switch (format) {
+    case 'integer':
+      return num.toLocaleString(ES, { useGrouping: false, maximumFractionDigits: 0 });
+
+    case 'integer_thousands':
+      return num.toLocaleString(ES, { useGrouping: true, maximumFractionDigits: 0 });
+
+    case 'percent_1d':
+      return num.toLocaleString(ES, {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }) + ' %';  // narrow no-break space before %
+
+    case 'decimal_2d':
+      return num.toLocaleString(ES, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+
+    case 'ratio_x_to_1':
+      return num.toLocaleString(ES, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }) + '×';  // × multiplication sign
+
+    default:
+      return String(value);
+  }
+}
+
+// ── single card component ──────────────────────────────────────────────────
+function renderStatCard(card) {
+  const el = document.createElement('div');
+  el.className = 'stat-card';
+
+  // badge
+  if (card.badge) {
+    const badge = document.createElement('span');
+    badge.className = 'card-badge';
+    badge.textContent = card.badge;
+    el.appendChild(badge);
+  }
+
+  // main value
+  const valEl = document.createElement('div');
+  valEl.className = 'card-value' + (card.display_format === 'text' ? ' card-value--text' : '');
+  valEl.textContent = formatValue(card.value, card.display_format);
+  el.appendChild(valEl);
+
+  // label
+  const labelEl = document.createElement('div');
+  labelEl.className = 'card-label';
+  labelEl.textContent = card.label_es;
+  el.appendChild(labelEl);
+
+  // sub_value
+  if (card.sub_value !== null) {
+    const sv = card.sub_value;
+    const svEl = document.createElement('div');
+    svEl.className = 'card-subvalue';
+    if (sv.value !== null) {
+      // TODO: sub_value format inference — see backlog (currently defaults to percent_1d)
+      svEl.textContent = formatValue(sv.value, 'percent_1d') + ' — ' + sv.label_es;
+    } else {
+      svEl.textContent = sv.label_es;
+    }
+    el.appendChild(svEl);
+  }
+
+  return el;
+}
+
+// ── sub-acto section renderer ──────────────────────────────────────────────
+function renderSubActo(key, sub) {
+  const section = document.createElement('section');
+  section.className = 'sub-acto';
+
+  const rawTitle = sub.title_es || '';
+  const isProvisional = rawTitle.startsWith('PROVISIONAL: ');
+  const displayTitle = isProvisional ? rawTitle.slice('PROVISIONAL: '.length) : rawTitle;
+
+  if (isProvisional) {
+    const prov = document.createElement('div');
+    prov.className = 'provisional-box';
+    prov.textContent = 'PROVISIONAL — título pendiente de aprobación';
+    section.appendChild(prov);
+  }
+
+  if (displayTitle) {
+    const titleEl = document.createElement('h2');
+    titleEl.className = 'sub-acto-title';
+    titleEl.textContent = displayTitle;
+    section.appendChild(titleEl);
+  }
+
+  const anchorEl = document.createElement('p');
+  anchorEl.className = 'anchor-text';
+  anchorEl.textContent = sub.anchor_text_es || '';
+  section.appendChild(anchorEl);
+
+  const grid = document.createElement('div');
+  grid.className = 'card-grid';
+  (sub.stat_cards || []).forEach(card => grid.appendChild(renderStatCard(card)));
+  section.appendChild(grid);
+
+  if (sub.caveat_es) {
+    const caveat = document.createElement('p');
+    caveat.className = 'caveat';
+    caveat.textContent = sub.caveat_es;
+    section.appendChild(caveat);
+  }
+
+  return section;
+}
+
+// ── diagnostics helper ─────────────────────────────────────────────────────
+const diagList = document.getElementById('diag-list');
+function addDiag(ok, msg) {
+  const li = document.createElement('li');
+  li.className = ok ? 'ok' : 'err';
+  li.textContent = msg;
+  diagList.appendChild(li);
+}
+
+// ── main: fetch all 4 in parallel, render independently ───────────────────
+(async () => {
+  const panels = document.getElementById('panels');
+  let totalCards = 0;
+
+  const results = await Promise.allSettled(
+    SOURCES.map(({ file, key }) =>
+      fetch(file)
+        .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+        .then(data => ({ key, sub: data[key] }))
+    )
+  );
+
+  results.forEach((result, i) => {
+    const { file, key } = SOURCES[i];
+
+    if (result.status === 'rejected') {
+      const errDiv = document.createElement('div');
+      errDiv.className = 'load-error';
+      errDiv.textContent = `Error cargando ${file}: ${result.reason}`;
+      panels.appendChild(errDiv);
+      addDiag(false, `${key}: FAILED — ${result.reason}`);
+      return;
+    }
+
+    const { sub } = result.value;
+    if (!sub || !Array.isArray(sub.stat_cards)) {
+      const errDiv = document.createElement('div');
+      errDiv.className = 'load-error';
+      errDiv.textContent = `${key}: stat_cards not found or not an array`;
+      panels.appendChild(errDiv);
+      addDiag(false, `${key}: schema violation — stat_cards missing`);
+      return;
+    }
+
+    panels.appendChild(renderSubActo(key, sub));
+    totalCards += sub.stat_cards.length;
+    addDiag(true, `${key}: ${sub.stat_cards.length} cards rendered — ${sub.title_es}`);
+  });
+
+  addDiag(totalCards === 16, `Total cards rendered: ${totalCards} (expected 16)`);
+})();
+</script>
+</body>
+</html>

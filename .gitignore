@@ -1,0 +1,27 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# Editores / IDEs
+.idea/
+.vscode/
+.claude/
+
+# Archivo de referencia de trabajo (no es entregable)
+Cicatrices\ Invisibles2.html
+
+# Datos crudos (527MB) — fuentes públicas documentadas en docs/fuentes_datos.md
+data/raw/
+
+# Documentación interna de desarrollo (no destinada al jurado)
+docs/_internal/
+CLAUDE.md

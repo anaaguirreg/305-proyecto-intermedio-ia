@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!-- sub_acto_3_2 — Scatter de cuadrantes: VIF vs Violencia Sexual por municipio.
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_3_2.html
+     fetch() bloqueado bajo file:// por restricción CORS de mismo origen. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Scatter VIF vs Sexual (sub_acto_3_2)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body    { font-family: var(--font-sans); padding: 1rem 1.25rem; background: var(--color-canvas); color: var(--color-ink); }
+    h2      { font-size: 1.15rem; margin-bottom: 0.5rem; max-width: 960px; }
+    #chart  { width: 100%; height: 600px; background: var(--color-canvas); border: 1px solid var(--color-hairline);
+              margin-bottom: 0.75rem; }
+    details { max-width: 960px; margin-top: 0.75rem; font-size: 0.8rem; }
+    summary { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul      { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.7; }
+    .warn   { color: var(--color-accent-amber); }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.9rem; }
+
+    /* Amber box for PROVISIONAL anchor text */
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber);
+      background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      color: var(--color-accent-amber);
+      line-height: 1.5;
+      max-width: 960px;
+      margin-bottom: 0.75rem;
+    }
+    /* Normal anchor text (non-PROVISIONAL) */
+    .anchor-text {
+      font-size: 0.88rem;
+      color: var(--color-muted);
+      line-height: 1.5;
+      max-width: 960px;
+      margin-bottom: 0.75rem;
+    }
+
+    /* HTML legend below chart — 4 quadrant entries */
+    #legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 2rem;
+      max-width: 960px;
+      margin-bottom: 0.75rem;
+      font-size: 0.8rem;
+    }
+    .legend-entry      { display: flex; flex-direction: column; gap: 0.08rem;
+                         max-width: 260px; }
+    .legend-row        { display: flex; align-items: center; gap: 0.4rem;
+                         cursor: default; }
+    .legend-swatch     { width: 12px; height: 12px; flex-shrink: 0;
+                         border: 1px solid rgba(0,0,0,0.15); }
+    .legend-label      { color: var(--color-ink); }
+    .legend-count      { color: var(--color-muted); }
+    .legend-disclaimer { font-size: 0.73rem; font-style: italic; color: var(--color-muted);
+                         line-height: 1.35; padding-left: 1.05rem;
+                         margin-top: 0.1rem; }
+  </style>
+</head>
+<body>
+  <h2 id="title"></h2>
+  <div id="anchor-wrapper"></div>
+  <div id="chart"></div>
+  <div id="legend"></div>
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <script>
+    /**
+     * sub_acto_3_2 — Scatter VIF vs Sexual con cuadrantes y arquetipos.
+     *
+     * Patrones compartidos con sub_acto_1_2 (coroplético):
+     *   - CLUSTER_LABELS: mismo mapa cluster_id → etiqueta sin emoji que usa el
+     *     toggle de tipología del coroplético. cluster_name en el JSON lleva prefijos
+     *     emoji (🔴, 🟠) pendientes de limpieza backend; usamos cluster_id aquí también.
+     *   - Detección del prefijo "PROVISIONAL:" en anchor_text_es y renderizado como
+     *     caja ámbar con borde izquierdo, eliminando el prefijo del texto visible.
+     *   - buildDiagnostico() con addLi() y clase .warn para alertas de carga.
+     *
+     * Sin parámetros de negocio hardcodeados en este archivo:
+     *   colores, radios, opacidades y etiquetas de ejes se leen de
+     *   sub_acto_3_2.data (acto_3_visualization del exporter backend).
+     */
+
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const TIPOLOGIA_URL = './data/acto_3_tipologia.json';
+
+    // Same emoji-stripping decision as sub_acto_1_2 choropleth:
+    // cluster_name in JSON contains emoji prefixes (🔴, 🟠) pending backend cleanup;
+    // we use cluster_id as the canonical source.
+    const CLUSTER_LABELS = { 0: 'Moderada / Baja', 1: 'Alta severidad', null: 'Sin modelo' };
+
+    // Display order for the HTML legend — matches quadrant severity framing
+    const QUADRANT_ORDER = [
+      'coexistencia_alta',
+      'predomina_vif',
+      'predomina_sexual',
+      'bajo_perfil',
+    ];
+
+    /* ── Helpers ───────────────────────────────────────────────────────── */
+
+    function addLi(parent, text, warn = false) {
+      const li = document.createElement('li');
+      li.textContent = text;
+      if (warn) li.className = 'warn';
+      parent.appendChild(li);
+      return li;
+    }
+
+    function renderAnchor(text) {
+      const wrapper = document.getElementById('anchor-wrapper');
+      const PROV_PREFIX = 'PROVISIONAL: ';
+      if (text.startsWith(PROV_PREFIX)) {
+        const box = document.createElement('div');
+        box.className = 'provisional-box';
+        box.textContent = text.slice(PROV_PREFIX.length);
+        wrapper.appendChild(box);
+      } else {
+        const p = document.createElement('p');
+        p.className = 'anchor-text';
+        p.textContent = text;
+        wrapper.appendChild(p);
+      }
+    }
+
+    /* ── HTML legend ───────────────────────────────────────────────────── */
+    function buildLegend(data) {
+      const legendEl = document.getElementById('legend');
+      for (const key of QUADRANT_ORDER) {
+        const q     = data.quadrants[key];
+        const color = data.quadrant_colors[key];
+
+        const entry = document.createElement('div');
+        entry.className = 'legend-entry';
+
+        const row = document.createElement('div');
+        row.className = 'legend-row';
+        row.title = q.tooltip; // browser native tooltip on hover
+
+        const swatch = document.createElement('span');
+        swatch.className = 'legend-swatch';
+        swatch.style.background = color;
+
+        const label = document.createElement('span');
+        label.className = 'legend-label';
+        label.textContent = q.label;
+
+        const count = document.createElement('span');
+        count.className = 'legend-count';
+        count.textContent = `(n = ${q.n})`;
+
+        row.append(swatch, label, count);
+        entry.appendChild(row);
+
+        // bajo_perfil: show disclaimer as subscript; fall back to tooltip if absent
+        if (key === 'bajo_perfil') {
+          const disc = document.createElement('div');
+          disc.className = 'legend-disclaimer';
+          disc.textContent = q.disclaimer ?? q.tooltip;
+          entry.appendChild(disc);
+        }
+
+        legendEl.appendChild(entry);
+      }
+    }
+
+    /* ── Diagnóstico ───────────────────────────────────────────────────── */
+    function buildDiagnostico(data, archetypes, outliers) {
+      const ul = document.getElementById('diag-list');
+
+      // 1. Point count
+      addLi(ul, `Puntos renderizados: ${data.n_points} (esperado: 177)`);
+
+      // 2. Archetypes with sub-list
+      const arcLi = addLi(ul, `Arquetipos detectados y etiquetados: ${archetypes.length} (esperado: 3)`);
+      const arcUl = document.createElement('ul');
+      for (const a of archetypes) {
+        const li = document.createElement('li');
+        li.textContent = `${a.cod_municipio} – ${a.municipality} (${data.quadrants[a.quadrant].label})`;
+        arcUl.appendChild(li);
+      }
+      arcLi.appendChild(arcUl);
+
+      // 3. Quadrant distribution with sub-list
+      const distLi = addLi(ul, 'Distribución por cuadrante:');
+      const distUl = document.createElement('ul');
+      for (const key of QUADRANT_ORDER) {
+        const q = data.quadrants[key];
+        const li = document.createElement('li');
+        li.textContent = `${key}: ${q.n} municipios`;
+        distUl.appendChild(li);
+      }
+      distLi.appendChild(distUl);
+
+      // 4. X-axis outliers (z > 3)
+      const names = outliers.map(p => `${p.municipality} (${p.cod_municipio})`).join(', ');
+      addLi(ul,
+        `Outliers en eje X (z > 3): ${outliers.length} — ${names}. ` +
+        'Renderizados con escala log10 en X para mitigar compresión.'
+      );
+
+      // 5. PROVISIONAL copy flag
+      addLi(ul, 'Copy review pendiente: anchor_text_es marcado PROVISIONAL.', true);
+
+      // 6. Emoji in cluster_name
+      const emojiCount = data.points.filter(
+        p => p.cluster_name && p.cluster_name.codePointAt(0) > 0x2500
+      ).length;
+      addLi(ul, `cluster_name con emoji: ${emojiCount} — pendiente limpieza backend.`, true);
+    }
+
+    /* ── Main ──────────────────────────────────────────────────────────── */
+    async function main() {
+      const tipologia = await fetch(TIPOLOGIA_URL).then(r => {
+        if (!r.ok) throw new Error(`${TIPOLOGIA_URL}: HTTP ${r.status}`);
+        return r.json();
+      });
+
+      const sub  = tipologia.sub_acto_3_2;
+      const data = sub.data;
+
+      // Page header and anchor text
+      document.getElementById('title').textContent = sub.title_es;
+      renderAnchor(sub.anchor_text_es);
+
+      const style    = data.scatter_style;
+      const colors   = data.quadrant_colors;
+      const arcCodes = new Set(data.archetypes.map(a => a.cod_municipio));
+
+      // Outlier detection on X axis (z > 3) — used in diagnostic panel
+      const xs   = data.points.map(p => p.vif_f_total_rate);
+      const mean = xs.reduce((a, b) => a + b, 0) / xs.length;
+      const std  = Math.sqrt(
+        xs.map(x => (x - mean) ** 2).reduce((a, b) => a + b, 0) / xs.length
+      );
+      const outliers = data.points.filter(
+        p => (p.vif_f_total_rate - mean) / std > 3
+      );
+
+      // Build per-point series data with individual itemStyle and archetype labels
+      const seriesData = data.points.map(p => {
+        const isArc = arcCodes.has(p.cod_municipio);
+        const item = {
+          name:       p.municipality,
+          value:      [p.vif_f_total_rate, p.sexual_f_total_rate],
+          symbolSize: isArc ? style.point_radius_archetype : style.point_radius_default,
+          itemStyle: {
+            color:       colors[p.quadrant],
+            opacity:     isArc ? style.opacity_archetype : style.opacity_default,
+            borderColor: isArc ? style.border_color_archetype : 'transparent',
+            borderWidth: isArc ? style.border_width_archetype : 0,
+          },
+          _meta: p,
+        };
+        if (isArc) {
+          item.label = {
+            show:       true,
+            formatter:  params => params.data._meta.municipality,
+            position:   'right',
+            distance:   8,
+            fontSize:   11,
+            fontWeight: 600,
+            color:      CSS.ink,
+          };
+        }
+        return item;
+      });
+
+      // ECharts chart
+      const chart = echarts.init(document.getElementById('chart'));
+      chart.setOption({
+        grid: {
+          left:         '12%',
+          right:        '4%',
+          top:          '5%',
+          bottom:       '14%',
+          containLabel: true,
+        },
+        tooltip: {
+          trigger: 'item',
+          confine: true,
+          formatter: params => {
+            if (!params.data || !params.data._meta) return '';
+            const p    = params.data._meta;
+            const quad = data.quadrants[p.quadrant];
+            const clusterLabel = CLUSTER_LABELS[p.cluster_id] ?? 'Sin modelo';
+            let html =
+              `<strong>${p.municipality}</strong> — ${p.department}<br>` +
+              `Código DANE: ${p.cod_municipio}<br>` +
+              `Cuadrante: <strong>${quad.label}</strong><br>` +
+              `<span style="font-size:0.87em;color:#6c6a64;font-style:italic">${quad.tooltip}</span><br>` +
+              `Tasa VIF: ${p.vif_f_total_rate.toFixed(1)} por 100k<br>` +
+              `Tasa Sexual: ${p.sexual_f_total_rate.toFixed(1)} por 100k<br>` +
+              `Tipología: ${clusterLabel}`;
+            if (p.is_archetype) {
+              html += `<br><em>Municipio arquetipo de este cuadrante.</em>`;
+            }
+            return html;
+          },
+        },
+        xAxis: {
+          type:         'log',
+          logBase:      10,
+          name:         data.axis_labels_es.x_label,
+          nameLocation: 'middle',
+          nameGap:      35,
+          nameTextStyle: { fontSize: 12, color: CSS.muted },
+          min:          10,
+          axisLabel:    { formatter: v => v.toLocaleString('es') },
+        },
+        yAxis: {
+          type:         'value',
+          name:         data.axis_labels_es.y_label,
+          nameLocation: 'middle',
+          nameGap:      55,
+          nameTextStyle: { fontSize: 12, color: CSS.muted },
+        },
+        series: [{
+          type:      'scatter',
+          animation: false,
+          data:      seriesData,
+          markLine: {
+            silent: true,
+            symbol: ['none', 'none'],
+            lineStyle: { type: 'dashed', color: CSS.muted, width: 1.5 },
+            label:     { show: false },
+            data: [
+              { yAxis: data.reference_lines.y_median },
+              { xAxis: data.reference_lines.x_median },
+            ],
+          },
+        }],
+      });
+
+      window.addEventListener('resize', () => chart.resize());
+
+      // HTML legend and diagnostic panel
+      buildLegend(data);
+      buildDiagnostico(data, data.archetypes, outliers);
+    }
+
+    main().catch(err => {
+      console.error('Error en renderizado:', err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

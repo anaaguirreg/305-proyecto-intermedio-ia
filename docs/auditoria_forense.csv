@@ -1,0 +1,12 @@
+section,metric,value
+nulls,total_columns_with_nulls,0
+nulls,all_null_issues,{}
+nulls,priority_alert_issues,{}
+duplicates,exact_mirror_duplicates,0
+duplicates,duplicate_sample,[]
+schema,missing_from_type_rules,"['TOTAL Hombres', 'TOTAL Mujeres', 'TOTAL Total', 'area_geo', 'armas_medios', 'cantidad', 'dimension_circunstancia', 'grupo_etario', 'pob_f_0_17', 'pob_f_18_mas', 'pob_f_total', 'pob_h_0_17', 'pob_h_18_mas', 'pob_h_total', 'tipo_delito', 'total_h', 'total_m']"
+schema,extra_columns_not_in_rules,"['Actividad Durante el Hecho', 'Contexto del Hecho', 'Código Dane Departamento', 'Diagnostico Topográfico de la Lesión no Fatal', 'Escolaridad', 'Estado Civil', 'Grupo de Edad judicial', 'Grupo de edad quinquenal', 'ID', 'Identidad de Género', 'Localidad del Hecho', 'Mecanismo Causal de la Lesión no Fatal', 'Orientación Sexual', 'País de Nacimiento', 'Pertenencia Grupal', 'Pueblo Indígena', 'Transgénero', 'Zona del Hecho']"
+schema,type_mismatches,[]
+domain,domain_violations,{}
+temporal,temporal_issues,{}
+numeric,numeric_sanity_issues,{}

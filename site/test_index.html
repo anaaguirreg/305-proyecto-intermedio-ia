@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cicatrices Invisibles — Pruebas de renderizado</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px;
+           margin: 40px auto; padding: 0 20px; color: #1a1a1a; }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    .lede { color: #525252; font-size: 14px; margin-bottom: 32px; }
+    h2 { font-size: 16px; margin-top: 32px; color: #525252;
+         border-bottom: 1px solid #e5e5e5; padding-bottom: 4px; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 8px 0; padding: 8px 12px; border: 1px solid #e5e5e5;
+         border-radius: 4px; }
+    li.done    { border-left: 3px solid #16a34a; }
+    li.pending { border-left: 3px solid #a3a3a3; opacity: 0.5; }
+    a { color: #1a1a1a; text-decoration: none; font-weight: 500; }
+    a:hover { text-decoration: underline; }
+    .meta { color: #525252; font-size: 12px; margin-left: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Cicatrices Invisibles — Pruebas de renderizado</h1>
+  <p class="lede">Validación técnica de los 20 sub-actos del dashboard.
+     Cada enlace abre una página de prueba aislada.</p>
+
+  <h2>Acto 1 — Panorama territorial</h2>
+  <ul>
+    <li class="pending">sub_acto_1_1 — Stat cards regionales <span class="meta">HTML</span></li>
+    <li class="done">
+      <a href="test_render_acto_1_2.html">sub_acto_1_2 — ICV-GEN-F Coroplético</a>
+      <span class="meta">Leaflet · toggle ICV / Tipología</span>
+    </li>
+    <li class="pending">sub_acto_1_3 — Top 10 ranking ICV <span class="meta">ECharts bar</span></li>
+    <li class="pending">sub_acto_1_4 — Serie temporal regional <span class="meta">ECharts line</span></li>
+  </ul>
+
+  <h2>Acto 2 — Brechas de género</h2>
+  <ul>
+    <li class="pending">sub_acto_2_1 — Big numbers ratios <span class="meta">HTML</span></li>
+    <li class="pending">sub_acto_2_2 — Butterfly chart <span class="meta">ECharts bar divergente</span></li>
+    <li class="done">
+      <a href="test_render_acto_2_3.html">sub_acto_2_3 — Top 10 brechas</a>
+      <span class="meta">ECharts bar</span>
+    </li>
+    <li class="pending">sub_acto_2_4 — Mapa brechas departamental <span class="meta">Leaflet</span></li>
+    <li class="pending">sub_acto_2_5 — Scatter ICV × brecha <span class="meta">ECharts scatter</span></li>
+    <li class="pending">sub_acto_2_6 — Diagnóstico artefacto temporal <span class="meta">ECharts multi-line</span></li>
+  </ul>
+
+  <h2>Acto 3 — Tipología del delito</h2>
+  <ul>
+    <li class="pending">sub_acto_3_1 — KPIs tipológicos <span class="meta">HTML</span></li>
+    <li class="done">
+      <a href="test_render_acto_3_2.html">sub_acto_3_2 — Scatter de cuadrantes</a>
+      <span class="meta">ECharts scatter log10</span>
+    </li>
+    <li class="pending">sub_acto_3_3 — Dumbbell NNA vs Adultas <span class="meta">ECharts</span></li>
+    <li class="pending">sub_acto_3_4 — Bar dimension_delito <span class="meta">ECharts bar</span></li>
+    <li class="pending">sub_acto_3_5 — Líneas temporales departamentales <span class="meta">ECharts multi-line</span></li>
+  </ul>
+
+  <h2>Acto 4 — Anatomía forense</h2>
+  <ul>
+    <li class="pending">sub_acto_4_1 — Big numbers forenses <span class="meta">HTML</span></li>
+    <li class="pending">sub_acto_4_2 — Treemap escenarios + heatmap día×hora <span class="meta">ECharts</span></li>
+    <li class="done">
+      <a href="test_render_acto_4_3.html">sub_acto_4_3 — Sankey del agresor</a>
+      <span class="meta">ECharts Sankey (dos lado a lado)</span>
+    </li>
+    <li class="pending">sub_acto_4_4 — Treemap factor / circunstancia <span class="meta">ECharts treemap</span></li>
+    <li class="pending">sub_acto_4_5 — Sunburst interseccional <span class="meta">ECharts sunburst</span></li>
+  </ul>
+
+  <h2>Phase 3.A — Validación cruzada</h2>
+  <ul>
+    <li class="done">
+      <a href="test_render_phase_3a_stat_cards.html">Phase 3.A — Stat cards (1_1 · 2_1 · 3_1 · 4_1)</a>
+      <span class="meta">HTML · 16 cards · schema canónico</span>
+    </li>
+  </ul>
+
+  <h2>Acto 5 — Tu municipio</h2>
+  <ul>
+    <li class="pending">Ficha municipal + clasificador IA <span class="meta">HTML + ECharts</span></li>
+  </ul>
+
+  <p style="margin-top: 48px; color: #a3a3a3; font-size: 12px;">
+    Estado al cierre del Paso 2: 4 de 20 sub-actos cerrados.
+  </p>
+</body>
+</html>

@@ -1,0 +1,325 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "acto_4_forense",
+  "type": "object",
+  "required": ["metadata", "sub_acto_4_1", "sub_acto_4_2", "sub_acto_4_3", "sub_acto_4_4", "sub_acto_4_5"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["version", "generated_at", "year_range", "n_total", "n_ds3", "n_ds4", "act_disclaimer_es"],
+      "properties": {
+        "version":          {"type": "string"},
+        "generated_at":     {"type": "string", "format": "date-time"},
+        "year_range":       {"type": "array", "items": {"type": "integer"}, "minItems": 2, "maxItems": 2},
+        "n_total":          {"type": "integer", "const": 34079},
+        "n_ds3":            {"type": "integer", "const": 18661},
+        "n_ds4":            {"type": "integer", "const": 15418},
+        "act_disclaimer_es":{"type": "string"}
+      }
+    },
+
+    "sub_acto_4_1": {
+      "$comment": "Canonical stat_cards at root. sub_value null on all 6 cards (no secondary values). caveat_es absent — act-level disclaimer in metadata.act_disclaimer_es is sufficient.",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "stat_cards"],
+      "properties": {
+        "title_es":       {"type": "string"},
+        "anchor_text_es": {"type": "string"},
+        "stat_cards": {
+          "type": "array", "minItems": 6, "maxItems": 6,
+          "items": {
+            "type": "object",
+            "required": ["id", "label_es", "value", "display_format", "badge", "sub_value"],
+            "properties": {
+              "id":             {"type": "string"},
+              "label_es":       {"type": "string"},
+              "value":          {"type": ["number", "string"]},
+              "display_format": {"enum": ["integer_thousands", "percent_1d", "text"]},
+              "badge":          {"enum": ["DS3", "DS4", "BOTH"]},
+              "sub_value": {
+                "oneOf": [
+                  {"type": "null"},
+                  {
+                    "type": "object",
+                    "required": ["value", "label_es"],
+                    "properties": {
+                      "value":    {"type": ["number", "null"]},
+                      "label_es": {"type": "string"}
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_4_2": {
+      "type": "object",
+      "required": [
+        "aggregation_default", "departments_available",
+        "heatmap_vif", "heatmap_sexual", "escenario"
+      ],
+      "properties": {
+        "title_es":              {"type": "string"},
+        "anchor_text_es":        {"type": "string"},
+        "aggregation_default":   {"type": "string", "enum": ["regional"]},
+        "departments_available": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 5,
+          "maxItems": 5
+        },
+
+        "heatmap_vif":    {"$ref": "#/definitions/heatmap_v2_block"},
+        "heatmap_sexual": {"$ref": "#/definitions/heatmap_v2_block"},
+
+        "escenario": {
+          "type": "object",
+          "required": ["chart_type", "dataset_labels", "by_department"],
+          "properties": {
+            "chart_type":     {"type": "string", "const": "stacked_bar_horizontal"},
+            "dataset_labels": {
+              "type": "object",
+              "required": ["vif", "sexual"],
+              "properties": {
+                "vif":    {"type": "string"},
+                "sexual": {"type": "string"}
+              }
+            },
+            "by_department": {
+              "type": "object",
+              "required": ["regional", "CAUCA", "CHOCO"],
+              "additionalProperties": {"$ref": "#/definitions/escenario_dept_entry"}
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_4_3": {
+      "type": "object",
+      "required": ["ds3", "ds4", "thresholds", "anchor_text_es"],
+      "properties": {
+        "title_es":       {"type": "string"},
+        "anchor_text_es": {"type": "string"},
+        "thresholds": {
+          "type": "object",
+          "properties": {
+            "flow_top_pct":          {"type": "number", "const": 80},
+            "min_aggressor_cases":   {"type": "integer", "const": 80},
+            "sankey_min_dept_cases": {"type": "integer", "const": 500}
+          }
+        },
+        "ds3": {"$ref": "#/definitions/sankey_by_dept"},
+        "ds4": {"$ref": "#/definitions/sankey_by_dept"}
+      }
+    },
+
+    "sub_acto_4_4": {
+      "type": "object",
+      "required": ["ds4_factor", "ds3_circumstance", "titles_es"],
+      "properties": {
+        "anchor_text_es": {"type": "string"},
+        "titles_es": {
+          "type": "object",
+          "required": ["ds4", "ds3"],
+          "properties": {
+            "ds4": {"type": "string"},
+            "ds3": {"type": "string"}
+          }
+        },
+        "ds4_factor":       {"$ref": "#/definitions/categorical_by_dept"},
+        "ds3_circumstance": {"$ref": "#/definitions/categorical_by_dept"}
+      }
+    },
+
+    "sub_acto_4_5": {
+      "type": "object",
+      "required": [
+        "title_es",
+        "anchor_text_es",
+        "anchor_disability_es",
+        "caveat_es",
+        "low_n_note_es",
+        "ds3_stats",
+        "ds4_stats",
+        "ethnicity_marginals"
+      ],
+      "properties": {
+        "title_es":              {"type": "string"},
+        "anchor_text_es":        {"type": "string"},
+        "anchor_disability_es":  {"type": "string"},
+        "caveat_es":             {"type": "string"},
+        "low_n_note_es":         {"type": "string"},
+        "ds3_stats":             {"$ref": "#/definitions/intersectionality_stats"},
+        "ds4_stats":             {"$ref": "#/definitions/intersectionality_stats"},
+        "ethnicity_marginals": {
+          "type": "object",
+          "required": ["ds3", "ds4"],
+          "properties": {
+            "ds3": {"type": "array", "minItems": 5, "maxItems": 5,
+                    "items": {"$ref": "#/definitions/ethnicity_marginal_row"}},
+            "ds4": {"type": "array", "minItems": 5, "maxItems": 5,
+                    "items": {"$ref": "#/definitions/ethnicity_marginal_row"}}
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+    "heatmap_v2_block": {
+      "type": "object",
+      "required": ["dataset_id", "axis_days", "axis_months", "by_department"],
+      "properties": {
+        "dataset_id":  {"type": "string"},
+        "axis_days":   {"type": "array", "items": {"type": "string"}, "minItems": 7,  "maxItems": 7},
+        "axis_months": {"type": "array", "items": {"type": "string"}, "minItems": 12, "maxItems": 12},
+        "by_department": {
+          "type": "object",
+          "required": ["regional", "CAUCA", "CHOCO"],
+          "additionalProperties": {"$ref": "#/definitions/heatmap_v2_dept_entry"}
+        }
+      }
+    },
+
+    "heatmap_v2_dept_entry": {
+      "type": "object",
+      "required": ["matrix", "total_cases", "peak", "caveat_es"],
+      "properties": {
+        "matrix": {
+          "type": "array",
+          "items": {"type": "array", "items": {"type": "integer"}},
+          "minItems": 7,
+          "maxItems": 7
+        },
+        "total_cases": {"type": "integer"},
+        "peak": {
+          "type": "object",
+          "required": ["day", "month", "value"],
+          "properties": {
+            "day":   {"type": ["string", "null"]},
+            "month": {"type": ["string", "null"]},
+            "value": {"type": "integer"}
+          }
+        },
+        "caveat_es": {"type": ["string", "null"]}
+      }
+    },
+
+    "escenario_dept_entry": {
+      "type": "object",
+      "required": [
+        "categories", "vif_pct", "sexual_pct",
+        "vif_n", "sexual_n", "total_vif", "total_sexual", "caveat_es"
+      ],
+      "properties": {
+        "categories":   {"type": "array", "items": {"type": "string"}},
+        "vif_pct":      {"type": "array", "items": {"type": "number"}},
+        "sexual_pct":   {"type": "array", "items": {"type": "number"}},
+        "vif_n":        {"type": "array", "items": {"type": "integer"}},
+        "sexual_n":     {"type": "array", "items": {"type": "integer"}},
+        "total_vif":    {"type": "integer"},
+        "total_sexual": {"type": "integer"},
+        "caveat_es":    {"type": ["string", "null"]}
+      }
+    },
+
+    "sankey_by_dept": {
+      "type": "object",
+      "patternProperties": {
+        "^(regional|[A-Z_]+)$": {
+          "type": "object",
+          "required": ["nodes", "links", "n_total"],
+          "properties": {
+            "n_total": {"type": "integer"},
+            "caveat":  {"type": ["string", "null"]},
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "label", "column", "n_cases"],
+                "properties": {
+                  "id":      {"type": "string"},
+                  "label":   {"type": "string"},
+                  "column":  {"type": "integer", "enum": [1, 2, 3]},
+                  "n_cases": {"type": "integer"}
+                }
+              }
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["source", "target", "value", "pct_within_ciclo"],
+                "properties": {
+                  "source":            {"type": "string"},
+                  "target":            {"type": "string"},
+                  "value":             {"type": "integer"},
+                  "pct_within_ciclo":  {"type": "number"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "categorical_by_dept": {
+      "type": "object",
+      "patternProperties": {
+        "^(regional|[A-Z_]+)$": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["category", "n", "pct"],
+            "properties": {
+              "category": {"type": "string"},
+              "n":        {"type": "integer"},
+              "pct":      {"type": "number"}
+            }
+          }
+        }
+      }
+    },
+
+    "intersectionality_stats": {
+      "type": "object",
+      "required": [
+        "pct_disability_f",
+        "pct_afro_narp_f",
+        "pct_indigena_f",
+        "pct_sin_pertenencia_f",
+        "pct_no_registrado_f",
+        "pct_gitano_f",
+        "n_base_f"
+      ],
+      "properties": {
+        "pct_disability_f":       {"type": "number"},
+        "pct_afro_narp_f":        {"type": "number"},
+        "pct_indigena_f":         {"type": "number"},
+        "pct_sin_pertenencia_f":  {"type": "number"},
+        "pct_no_registrado_f":    {"type": "number"},
+        "pct_gitano_f":           {"type": "number"},
+        "n_base_f":               {"type": "integer"}
+      }
+    },
+
+    "ethnicity_marginal_row": {
+      "type": "object",
+      "required": ["dimension_etnia", "n_cases_f", "pct_of_female_cases", "pct_femenino_weighted", "low_n_flag"],
+      "properties": {
+        "dimension_etnia": {
+          "type": "string",
+          "enum": ["SIN_PERTENENCIA_ETNICA", "AFRO_NARP", "NO_REGISTRADO", "INDIGENA", "GITANO"]
+        },
+        "n_cases_f":              {"type": "integer", "minimum": 0},
+        "pct_of_female_cases":    {"type": "number",  "minimum": 0, "maximum": 100},
+        "pct_femenino_weighted":  {"type": "number",  "minimum": 0, "maximum": 100},
+        "low_n_flag":             {"type": "boolean"}
+      }
+    }
+  }
+}

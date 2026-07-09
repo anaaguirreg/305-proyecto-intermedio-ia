@@ -1,0 +1,712 @@
+{
+  "19001": {
+    "cluster_color_token": "cluster_alta",
+    "cluster_emoji": "🔴",
+    "cluster_id": 1,
+    "cluster_label_es": "Alta severidad",
+    "cod_municipio": "19001",
+    "codigo_dane_dept": "19",
+    "coefficient_contributions": [
+      {
+        "coefficient": 2.0043323996042193,
+        "contribution": 2.060498478176997,
+        "feature_id": "tasa_vif_nna_f",
+        "feature_label_es": "Tasa VIF NNA",
+        "standardized_value": 1.0280223373048645
+      },
+      {
+        "coefficient": 2.264000770588692,
+        "contribution": 1.6771771571290595,
+        "feature_id": "tasa_sexual_nna_f",
+        "feature_label_es": "Tasa Sexual NNA",
+        "standardized_value": 0.7408023790967858
+      },
+      {
+        "coefficient": 1.9930240422653434,
+        "contribution": 2.9590835872800008,
+        "feature_id": "tasa_vif_adultas_f",
+        "feature_label_es": "Tasa VIF Adultas",
+        "standardized_value": 1.4847204672536711
+      },
+      {
+        "coefficient": 2.232207096306445,
+        "contribution": 2.1011051126233893,
+        "feature_id": "tasa_sexual_adultas_f",
+        "feature_label_es": "Tasa Sexual Adultas",
+        "standardized_value": 0.941268001566707
+      }
+    ],
+    "departamento_es": "CAUCA",
+    "dominant_violence_rate": 878.23,
+    "dominant_violence_type_es": "Violencia Intrafamiliar",
+    "excluido_del_modelo": false,
+    "icv_ranking": 2,
+    "narrative_values_es": {
+      "cluster_placeholder": "Alta severidad",
+      "icv_placeholder": "45.85",
+      "municipio_placeholder": "POPAYAN",
+      "ranking_placeholder": "2",
+      "tasa_placeholder": "878.23",
+      "tipo_placeholder": "Violencia Intrafamiliar"
+    },
+    "nombre_es": "POPAYAN",
+    "sparkline_icv": {
+      "axis_labels_es": {
+        "x": "Año",
+        "y": "ICV-GEN-F"
+      },
+      "values": [
+        56.36,
+        65.54,
+        48.85,
+        41.11,
+        42.07,
+        39.88,
+        37.67,
+        35.29
+      ],
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    "stat_cards": [
+      {
+        "badge": null,
+        "display_format": "decimal_2",
+        "id": "icv_gen_f",
+        "label_es": "ICV-GEN-F",
+        "sub_value": null,
+        "value": 45.85
+      },
+      {
+        "badge": null,
+        "display_format": "text",
+        "id": "cluster",
+        "label_es": "Cluster",
+        "sub_value": null,
+        "value": "Alta severidad"
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_nna",
+        "label_es": "Tasa VIF NNA",
+        "sub_value": null,
+        "value": 142.38
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_nna",
+        "label_es": "Tasa Sexual NNA",
+        "sub_value": null,
+        "value": 184.27
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_adultas",
+        "label_es": "Tasa VIF Adultas",
+        "sub_value": null,
+        "value": 735.85
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_adultas",
+        "label_es": "Tasa Sexual Adultas",
+        "sub_value": null,
+        "value": 122.61
+      }
+    ]
+  },
+  "19022": {
+    "cluster_color_token": "cluster_moderada",
+    "cluster_emoji": "🟠",
+    "cluster_id": 0,
+    "cluster_label_es": "Moderada-Baja severidad",
+    "cod_municipio": "19022",
+    "codigo_dane_dept": "19",
+    "coefficient_contributions": [
+      {
+        "coefficient": 2.0043323996042193,
+        "contribution": 0.8642742621361543,
+        "feature_id": "tasa_vif_nna_f",
+        "feature_label_es": "Tasa VIF NNA",
+        "standardized_value": 0.4312030590868142
+      },
+      {
+        "coefficient": 2.264000770588692,
+        "contribution": -1.8859654291881367,
+        "feature_id": "tasa_sexual_nna_f",
+        "feature_label_es": "Tasa Sexual NNA",
+        "standardized_value": -0.8330233159318856
+      },
+      {
+        "coefficient": 1.9930240422653434,
+        "contribution": -0.5305685616487884,
+        "feature_id": "tasa_vif_adultas_f",
+        "feature_label_es": "Tasa VIF Adultas",
+        "standardized_value": -0.2662128255340688
+      },
+      {
+        "coefficient": 2.232207096306445,
+        "contribution": -1.982283491328826,
+        "feature_id": "tasa_sexual_adultas_f",
+        "feature_label_es": "Tasa Sexual Adultas",
+        "standardized_value": -0.8880374471566018
+      }
+    ],
+    "departamento_es": "CAUCA",
+    "dominant_violence_rate": 174.94,
+    "dominant_violence_type_es": "Violencia Intrafamiliar",
+    "excluido_del_modelo": false,
+    "icv_ranking": 112,
+    "narrative_values_es": {
+      "cluster_placeholder": "Moderada-Baja severidad",
+      "icv_placeholder": "10.28",
+      "municipio_placeholder": "ALMAGUER",
+      "ranking_placeholder": "112",
+      "tasa_placeholder": "174.94",
+      "tipo_placeholder": "Violencia Intrafamiliar"
+    },
+    "nombre_es": "ALMAGUER",
+    "sparkline_icv": {
+      "axis_labels_es": {
+        "x": "Año",
+        "y": "ICV-GEN-F"
+      },
+      "values": [
+        8.79,
+        12.98,
+        23.19,
+        15.98,
+        6.59,
+        5.89,
+        5.19,
+        3.66
+      ],
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    "stat_cards": [
+      {
+        "badge": null,
+        "display_format": "decimal_2",
+        "id": "icv_gen_f",
+        "label_es": "ICV-GEN-F",
+        "sub_value": null,
+        "value": 10.28
+      },
+      {
+        "badge": null,
+        "display_format": "text",
+        "id": "cluster",
+        "label_es": "Cluster",
+        "sub_value": null,
+        "value": "Moderada-Baja severidad"
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_nna",
+        "label_es": "Tasa VIF NNA",
+        "sub_value": null,
+        "value": 40.09
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_nna",
+        "label_es": "Tasa Sexual NNA",
+        "sub_value": null,
+        "value": 31.64
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_adultas",
+        "label_es": "Tasa VIF Adultas",
+        "sub_value": null,
+        "value": 134.86
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_adultas",
+        "label_es": "Tasa Sexual Adultas",
+        "sub_value": null,
+        "value": 40.19
+      }
+    ]
+  },
+  "27001": {
+    "cluster_color_token": "cluster_alta",
+    "cluster_emoji": "🔴",
+    "cluster_id": 1,
+    "cluster_label_es": "Alta severidad",
+    "cod_municipio": "27001",
+    "codigo_dane_dept": "27",
+    "coefficient_contributions": [
+      {
+        "coefficient": 2.0043323996042193,
+        "contribution": 0.3478710374109433,
+        "feature_id": "tasa_vif_nna_f",
+        "feature_label_es": "Tasa VIF NNA",
+        "standardized_value": 0.17355955403386925
+      },
+      {
+        "coefficient": 2.264000770588692,
+        "contribution": 0.11550141571527119,
+        "feature_id": "tasa_sexual_nna_f",
+        "feature_label_es": "Tasa Sexual NNA",
+        "standardized_value": 0.05101650901171653
+      },
+      {
+        "coefficient": 1.9930240422653434,
+        "contribution": 0.6788895862713732,
+        "feature_id": "tasa_vif_adultas_f",
+        "feature_label_es": "Tasa VIF Adultas",
+        "standardized_value": 0.3406329135396293
+      },
+      {
+        "coefficient": 2.232207096306445,
+        "contribution": 1.448651994726843,
+        "feature_id": "tasa_sexual_adultas_f",
+        "feature_label_es": "Tasa Sexual Adultas",
+        "standardized_value": 0.6489774166222645
+      }
+    ],
+    "departamento_es": "CHOCO",
+    "dominant_violence_rate": 266.06,
+    "dominant_violence_type_es": "Violencia Intrafamiliar",
+    "excluido_del_modelo": false,
+    "icv_ranking": 67,
+    "narrative_values_es": {
+      "cluster_placeholder": "Alta severidad",
+      "icv_placeholder": "16.3",
+      "municipio_placeholder": "QUIBDO",
+      "ranking_placeholder": "67",
+      "tasa_placeholder": "266.06",
+      "tipo_placeholder": "Violencia Intrafamiliar"
+    },
+    "nombre_es": "QUIBDO",
+    "sparkline_icv": {
+      "axis_labels_es": {
+        "x": "Año",
+        "y": "ICV-GEN-F"
+      },
+      "values": [
+        16.56,
+        20.01,
+        18.2,
+        15.73,
+        15.37,
+        14.64,
+        14.12,
+        15.74
+      ],
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    "stat_cards": [
+      {
+        "badge": null,
+        "display_format": "decimal_2",
+        "id": "icv_gen_f",
+        "label_es": "ICV-GEN-F",
+        "sub_value": null,
+        "value": 16.3
+      },
+      {
+        "badge": null,
+        "display_format": "text",
+        "id": "cluster",
+        "label_es": "Cluster",
+        "sub_value": null,
+        "value": "Alta severidad"
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_nna",
+        "label_es": "Tasa VIF NNA",
+        "sub_value": null,
+        "value": 22.95
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_nna",
+        "label_es": "Tasa Sexual NNA",
+        "sub_value": null,
+        "value": 85.55
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_adultas",
+        "label_es": "Tasa VIF Adultas",
+        "sub_value": null,
+        "value": 243.11
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_adultas",
+        "label_es": "Tasa Sexual Adultas",
+        "sub_value": null,
+        "value": 102.7
+      }
+    ]
+  },
+  "27150": {
+    "cluster_color_token": null,
+    "cluster_emoji": null,
+    "cluster_id": null,
+    "cluster_label_es": null,
+    "cod_municipio": "27150",
+    "codigo_dane_dept": "27",
+    "coefficient_contributions": null,
+    "departamento_es": "CHOCO",
+    "dominant_violence_rate": null,
+    "dominant_violence_type_es": null,
+    "excluido_del_modelo": true,
+    "icv_ranking": null,
+    "narrative_values_es": {
+      "cluster_placeholder": "Este municipio fue excluido de",
+      "icv_placeholder": "N/D",
+      "municipio_placeholder": "CARMEN DEL DARIEN",
+      "ranking_placeholder": "N/D",
+      "tasa_placeholder": "N/D",
+      "tipo_placeholder": "N/D"
+    },
+    "nombre_es": "CARMEN DEL DARIEN",
+    "sparkline_icv": {
+      "axis_labels_es": {
+        "x": "Año",
+        "y": "ICV-GEN-F"
+      },
+      "values": [
+        1.95,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    "stat_cards": [
+      {
+        "badge": null,
+        "display_format": "decimal_2",
+        "id": "icv_gen_f",
+        "label_es": "ICV-GEN-F",
+        "sub_value": null,
+        "value": null
+      },
+      {
+        "badge": null,
+        "display_format": "text",
+        "id": "cluster",
+        "label_es": "Cluster",
+        "sub_value": null,
+        "value": null
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_nna",
+        "label_es": "Tasa VIF NNA",
+        "sub_value": null,
+        "value": null
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_nna",
+        "label_es": "Tasa Sexual NNA",
+        "sub_value": null,
+        "value": null
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_adultas",
+        "label_es": "Tasa VIF Adultas",
+        "sub_value": null,
+        "value": null
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_adultas",
+        "label_es": "Tasa Sexual Adultas",
+        "sub_value": null,
+        "value": null
+      }
+    ]
+  },
+  "27493": {
+    "cluster_color_token": null,
+    "cluster_emoji": null,
+    "cluster_id": null,
+    "cluster_label_es": null,
+    "cod_municipio": "27493",
+    "codigo_dane_dept": "27",
+    "coefficient_contributions": null,
+    "departamento_es": "CHOCO",
+    "dominant_violence_rate": null,
+    "dominant_violence_type_es": null,
+    "excluido_del_modelo": true,
+    "icv_ranking": null,
+    "narrative_values_es": {
+      "cluster_placeholder": "Este municipio fue excluido de",
+      "icv_placeholder": "N/D",
+      "municipio_placeholder": "NUEVO BELEN DE BAJIRA",
+      "ranking_placeholder": "N/D",
+      "tasa_placeholder": "N/D",
+      "tipo_placeholder": "N/D"
+    },
+    "nombre_es": "NUEVO BELEN DE BAJIRA",
+    "sparkline_icv": {
+      "axis_labels_es": {
+        "x": "Año",
+        "y": "ICV-GEN-F"
+      },
+      "values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    "stat_cards": [
+      {
+        "badge": null,
+        "display_format": "decimal_2",
+        "id": "icv_gen_f",
+        "label_es": "ICV-GEN-F",
+        "sub_value": null,
+        "value": null
+      },
+      {
+        "badge": null,
+        "display_format": "text",
+        "id": "cluster",
+        "label_es": "Cluster",
+        "sub_value": null,
+        "value": null
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_nna",
+        "label_es": "Tasa VIF NNA",
+        "sub_value": null,
+        "value": null
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_nna",
+        "label_es": "Tasa Sexual NNA",
+        "sub_value": null,
+        "value": null
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_adultas",
+        "label_es": "Tasa VIF Adultas",
+        "sub_value": null,
+        "value": null
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_adultas",
+        "label_es": "Tasa Sexual Adultas",
+        "sub_value": null,
+        "value": null
+      }
+    ]
+  },
+  "76001": {
+    "cluster_color_token": "cluster_alta",
+    "cluster_emoji": "🔴",
+    "cluster_id": 1,
+    "cluster_label_es": "Alta severidad",
+    "cod_municipio": "76001",
+    "codigo_dane_dept": "76",
+    "coefficient_contributions": [
+      {
+        "coefficient": 2.0043323996042193,
+        "contribution": 1.7221932552960268,
+        "feature_id": "tasa_vif_nna_f",
+        "feature_label_es": "Tasa VIF NNA",
+        "standardized_value": 0.8592353521981163
+      },
+      {
+        "coefficient": 2.264000770588692,
+        "contribution": 1.2747838157428533,
+        "feature_id": "tasa_sexual_nna_f",
+        "feature_label_es": "Tasa Sexual NNA",
+        "standardized_value": 0.5630668647746883
+      },
+      {
+        "coefficient": 1.9930240422653434,
+        "contribution": 1.8301782910675493,
+        "feature_id": "tasa_vif_adultas_f",
+        "feature_label_es": "Tasa VIF Adultas",
+        "standardized_value": 0.9182921290740187
+      },
+      {
+        "coefficient": 2.232207096306445,
+        "contribution": -0.13743043336738114,
+        "feature_id": "tasa_sexual_adultas_f",
+        "feature_label_es": "Tasa Sexual Adultas",
+        "standardized_value": -0.06156706230115587
+      }
+    ],
+    "departamento_es": "VALLE DEL CAUCA",
+    "dominant_violence_rate": 525.11,
+    "dominant_violence_type_es": "Violencia Intrafamiliar",
+    "excluido_del_modelo": false,
+    "icv_ranking": 6,
+    "narrative_values_es": {
+      "cluster_placeholder": "Alta severidad",
+      "icv_placeholder": "30.27",
+      "municipio_placeholder": "CALI",
+      "ranking_placeholder": "6",
+      "tasa_placeholder": "525.11",
+      "tipo_placeholder": "Violencia Intrafamiliar"
+    },
+    "nombre_es": "CALI",
+    "sparkline_icv": {
+      "axis_labels_es": {
+        "x": "Año",
+        "y": "ICV-GEN-F"
+      },
+      "values": [
+        31.54,
+        40.95,
+        31.51,
+        31.12,
+        23.12,
+        24.86,
+        30.01,
+        29.08
+      ],
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ]
+    },
+    "stat_cards": [
+      {
+        "badge": null,
+        "display_format": "decimal_2",
+        "id": "icv_gen_f",
+        "label_es": "ICV-GEN-F",
+        "sub_value": null,
+        "value": 30.27
+      },
+      {
+        "badge": null,
+        "display_format": "text",
+        "id": "cluster",
+        "label_es": "Cluster",
+        "sub_value": null,
+        "value": "Alta severidad"
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_nna",
+        "label_es": "Tasa VIF NNA",
+        "sub_value": null,
+        "value": 99.69
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_nna",
+        "label_es": "Tasa Sexual NNA",
+        "sub_value": null,
+        "value": 151.28
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_vif_adultas",
+        "label_es": "Tasa VIF Adultas",
+        "sub_value": null,
+        "value": 425.41
+      },
+      {
+        "badge": null,
+        "display_format": "rate_100k",
+        "id": "tasa_sexual_adultas",
+        "label_es": "Tasa Sexual Adultas",
+        "sub_value": null,
+        "value": 66.68
+      }
+    ]
+  }
+}

@@ -1,0 +1,215 @@
+@import url('./variables.css');
+
+/* ── Reset ───────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* ── Containers ──────────────────────────────────────────────────────── */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.container--wide {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.container--narrow {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ── Sections ────────────────────────────────────────────────────────── */
+.section {
+  padding: var(--space-xl) 0;
+}
+
+.section--lg {
+  padding: var(--space-2xl) 0;
+}
+
+/* ── Grid helpers ────────────────────────────────────────────────────── */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+/* ── Flex helpers ────────────────────────────────────────────────────── */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-md);
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Dividers ────────────────────────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--color-hairline);
+  margin: var(--space-lg) 0;
+}
+
+/* ── Chart containers ────────────────────────────────────────────────── */
+.chart-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+.chart-wrapper--tall  { min-height: 400px; }
+.chart-wrapper--short { min-height: 200px; }
+
+/* ── Selector row ────────────────────────────────────────────────────── */
+.selector-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-md);
+}
+
+/* ── Tab bar ─────────────────────────────────────────────────────────── */
+.tab-bar {
+  display: flex;
+  gap: var(--space-xs);
+  border-bottom: 1px solid var(--color-hairline);
+  margin-bottom: var(--space-md);
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+   VOCABULARY — page-shell layout (index.html)
+   Added for the Phase 1 layout pass. New class selectors only; nothing
+   above this line is modified, so existing test_render_*.html pages
+   (which share this file) are unaffected.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── Bands (full-bleed section backgrounds) ─────────────────────────── */
+.band {
+  padding: var(--space-band) 0;
+}
+
+.band--canvas { background: var(--color-canvas); }
+.band--soft   { background: var(--color-surface-soft); }
+
+.band--dark {
+  background: var(--color-surface-dark-elevated);
+  color: var(--color-on-dark);
+}
+
+.band--hero {
+  background: linear-gradient(176deg,
+    var(--hero-grad-1) 0%,
+    var(--hero-grad-2) 26%,
+    var(--hero-grad-3) 46%,
+    var(--hero-grad-4) 63%,
+    var(--hero-grad-5) 78%,
+    var(--hero-grad-6) 90%,
+    var(--hero-grad-7) 100%);
+  color: var(--color-on-primary);
+  text-align: center;
+  min-height: calc(100vh - 56px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 120px;
+}
+
+/* ── Wrap (inner max-width container) ───────────────────────────────── */
+.wrap {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 721px) {
+  .wrap { padding: 0 40px; }
+}
+
+/* ── Act head (eyebrow + title + dek) ───────────────────────────────── */
+.act-head {
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+
+.dek {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--color-primary-soft);
+  font-style: italic;
+  max-width: 640px;
+  margin: 0 0 40px;
+}
+
+.band--dark .dek { color: var(--color-on-dark-soft); }
+
+/* ── Two-column narrative layouts ───────────────────────────────────── */
+.two-read,
+.context-grid,
+.evo-grid,
+.viz-aside {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: start;
+  margin-bottom: var(--space-xl);
+}
+
+.two-read    { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; gap: var(--space-xl); }
+.two-read--58-42 { grid-template-columns: minmax(0, 58fr) minmax(0, 42fr); align-items: center; column-gap: var(--space-xl); }
+.context-grid { grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); align-items: center; gap: var(--space-xxl); }
+.evo-grid    { grid-template-columns: minmax(0, 40fr) minmax(0, 60fr); align-items: center; }
+.viz-aside   { grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); align-items: start; }
+.viz-aside--stack { grid-template-columns: 1fr; }
+
+.viz-aside > div:last-child { padding-top: 8px; }
+/* .viz-aside--stack's own top gap is now handled by .stacked-readtext--first
+   (components.css) so the gap is consistent with the Sankey text block,
+   which isn't wrapped in a .viz-aside at all. */
+
+/* Vertically-stacked full-width children (e.g. acto-3-barras-linea) */
+.stack-full > * + * { margin-top: var(--space-xl); }
+.stack-full > .viz { margin-left: auto; margin-right: auto; }
+
+@media (max-width: 720px) {
+  .two-read, .context-grid, .evo-grid, .viz-aside, .footer-cols, .stat-row--2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Insight grid (card wrapper) ─────────────────────────────────────── */
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-md);
+}

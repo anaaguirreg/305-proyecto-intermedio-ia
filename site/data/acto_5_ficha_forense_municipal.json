@@ -1,0 +1,5608 @@
+{
+  "metadata": {
+    "generated_at": "2026-07-08T20:19:02.370286+00:00",
+    "source_tables": [
+      "data/agregados_seforense/ds3_municipio_resumen.parquet",
+      "data/agregados_forense/ds4_municipio_resumen.parquet"
+    ],
+    "min_total_casos": 30,
+    "municipios_con_vs": 65,
+    "municipios_con_vif": 38,
+    "municipios_sin_cobertura": [
+      "19022",
+      "19290",
+      "19355",
+      "19364",
+      "19392",
+      "19397",
+      "19418",
+      "19450",
+      "19473",
+      "19513",
+      "19533",
+      "19585",
+      "19622",
+      "19693",
+      "19701",
+      "19760",
+      "19785",
+      "19809",
+      "19821",
+      "27006",
+      "27025",
+      "27073",
+      "27075",
+      "27077",
+      "27099",
+      "27135",
+      "27150",
+      "27160",
+      "27245",
+      "27250",
+      "27372",
+      "27413",
+      "27425",
+      "27430",
+      "27450",
+      "27491",
+      "27493",
+      "27495",
+      "27580",
+      "27600",
+      "27615",
+      "27660",
+      "27745",
+      "27800",
+      "52019",
+      "52022",
+      "52036",
+      "52051",
+      "52079",
+      "52083",
+      "52110",
+      "52203",
+      "52207",
+      "52210",
+      "52215",
+      "52224",
+      "52227",
+      "52233",
+      "52250",
+      "52254",
+      "52256",
+      "52258",
+      "52260",
+      "52287",
+      "52317",
+      "52320",
+      "52323",
+      "52352",
+      "52354",
+      "52378",
+      "52381",
+      "52385",
+      "52390",
+      "52399",
+      "52405",
+      "52411",
+      "52418",
+      "52427",
+      "52435",
+      "52473",
+      "52480",
+      "52490",
+      "52506",
+      "52520",
+      "52540",
+      "52560",
+      "52565",
+      "52573",
+      "52585",
+      "52612",
+      "52621",
+      "52678",
+      "52683",
+      "52685",
+      "52687",
+      "52693",
+      "52696",
+      "52699",
+      "52720",
+      "52786",
+      "52788",
+      "52885",
+      "76041",
+      "76054",
+      "76243",
+      "76246",
+      "76403",
+      "76497",
+      "76823",
+      "76845",
+      "76863"
+    ],
+    "data_source_disclaimer_es": "Basado en casos peritados por Medicina Legal (2018–2024)."
+  },
+  "municipios": {
+    "19001": {
+      "cod_municipio": "19001",
+      "nombre_es": "POPAYAN",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 1342,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 65.6,
+              "adultas_pct": 23.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 1768,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 9.4,
+              "adultas_pct": 55.4
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "19050": {
+      "cod_municipio": "19050",
+      "nombre_es": "ARGELIA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 52,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 73.1,
+              "adultas_pct": 21.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19075": {
+      "cod_municipio": "19075",
+      "nombre_es": "BALBOA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 38,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 73.7,
+              "adultas_pct": 15.8
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19100": {
+      "cod_municipio": "19100",
+      "nombre_es": "BOLIVAR",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 33,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "NO_REGISTRADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "EX NOVIO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 63.6,
+              "adultas_pct": 27.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19110": {
+      "cod_municipio": "19110",
+      "nombre_es": "BUENOS AIRES",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 35,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 65.7,
+              "adultas_pct": 22.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19130": {
+      "cod_municipio": "19130",
+      "nombre_es": "CAJIBIO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 70,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "NO_REGISTRADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "EX COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 77.1,
+              "adultas_pct": 17.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19137": {
+      "cod_municipio": "19137",
+      "nombre_es": "CALDONO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 59,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 71.2,
+              "adultas_pct": 16.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19142": {
+      "cod_municipio": "19142",
+      "nombre_es": "CALOTO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 56,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 82.1,
+              "adultas_pct": 12.5
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 67,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 10.4,
+              "adultas_pct": 58.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "19212": {
+      "cod_municipio": "19212",
+      "nombre_es": "CORINTO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 38,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "TIO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 81.6,
+              "adultas_pct": 15.8
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19256": {
+      "cod_municipio": "19256",
+      "nombre_es": "EL TAMBO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 117,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 78.6,
+              "adultas_pct": 18.8
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 45,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 15.6,
+              "adultas_pct": 40.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "19300": {
+      "cod_municipio": "19300",
+      "nombre_es": "GUACHENE",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 35,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 62.9,
+              "adultas_pct": 28.6
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19318": {
+      "cod_municipio": "19318",
+      "nombre_es": "GUAPI",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 35,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "NO_REGISTRADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 91.4,
+              "adultas_pct": 2.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19455": {
+      "cod_municipio": "19455",
+      "nombre_es": "MIRANDA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 65,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 72.3,
+              "adultas_pct": 18.5
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 34,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 14.7,
+              "adultas_pct": 50.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "19517": {
+      "cod_municipio": "19517",
+      "nombre_es": "PAEZ",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 78,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "TIO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "NO_REGISTRADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 82.1,
+              "adultas_pct": 7.7
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19532": {
+      "cod_municipio": "19532",
+      "nombre_es": "PATIA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 114,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 69.3,
+              "adultas_pct": 22.8
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 61,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "CONSUMO DE ALCOHOL YO SUSTANCIAS PSICOACTIVAS",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 11.5,
+              "adultas_pct": 55.7
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "19548": {
+      "cod_municipio": "19548",
+      "nombre_es": "PIENDAMO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 45,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "ABUELO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "EX COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 68.9,
+              "adultas_pct": 22.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19573": {
+      "cod_municipio": "19573",
+      "nombre_es": "PUERTO TEJADA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 130,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 63.8,
+              "adultas_pct": 29.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 79,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 12.7,
+              "adultas_pct": 44.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "19698": {
+      "cod_municipio": "19698",
+      "nombre_es": "SANTANDER DE QUILICHAO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 305,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 66.2,
+              "adultas_pct": 25.6
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 273,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 10.3,
+              "adultas_pct": 53.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "19743": {
+      "cod_municipio": "19743",
+      "nombre_es": "SILVIA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 113,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "TIO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 70.8,
+              "adultas_pct": 17.7
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 77,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 22.1,
+              "adultas_pct": 37.7
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "19780": {
+      "cod_municipio": "19780",
+      "nombre_es": "SUAREZ",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 40,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 80.0,
+              "adultas_pct": 20.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "19807": {
+      "cod_municipio": "19807",
+      "nombre_es": "TIMBIO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 78,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "EX COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 57.7,
+              "adultas_pct": 25.6
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 70,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 10.0,
+              "adultas_pct": 45.7
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "19824": {
+      "cod_municipio": "19824",
+      "nombre_es": "TOTORO",
+      "has_violencia_sexual_profile": false,
+      "has_vif_profile": true,
+      "violencia_sexual": null,
+      "violencia_intrafamiliar": {
+        "total_casos": 35,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "CUNADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 5.7,
+              "adultas_pct": 51.4
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "19845": {
+      "cod_municipio": "19845",
+      "nombre_es": "VILLA RICA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 43,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 67.4,
+              "adultas_pct": 27.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 40,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 7.5,
+              "adultas_pct": 57.5
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "27001": {
+      "cod_municipio": "27001",
+      "nombre_es": "QUIBDO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 688,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "NO_REGISTRADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 70.3,
+              "adultas_pct": 19.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 224,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 22.3,
+              "adultas_pct": 47.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "27050": {
+      "cod_municipio": "27050",
+      "nombre_es": "ATRATO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 31,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "VECINO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 74.2,
+              "adultas_pct": 9.7
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "27205": {
+      "cod_municipio": "27205",
+      "nombre_es": "CONDOTO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 46,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "VECINO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 91.3,
+              "adultas_pct": 2.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "27361": {
+      "cod_municipio": "27361",
+      "nombre_es": "ISTMINA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 84,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 79.8,
+              "adultas_pct": 14.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "27787": {
+      "cod_municipio": "27787",
+      "nombre_es": "TADO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 86,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 81.4,
+              "adultas_pct": 15.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "27810": {
+      "cod_municipio": "27810",
+      "nombre_es": "UNION PANAMERICANA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 32,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "VECINO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 65.6,
+              "adultas_pct": 21.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "52001": {
+      "cod_municipio": "52001",
+      "nombre_es": "PASTO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 518,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 36.1,
+              "adultas_pct": 56.4
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 1434,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 8.4,
+              "adultas_pct": 55.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "52240": {
+      "cod_municipio": "52240",
+      "nombre_es": "CHACHAGUI",
+      "has_violencia_sexual_profile": false,
+      "has_vif_profile": true,
+      "violencia_sexual": null,
+      "violencia_intrafamiliar": {
+        "total_casos": 36,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "SIN_DATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "OTROS_FAMILIARES",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 0.0,
+              "adultas_pct": 58.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "52356": {
+      "cod_municipio": "52356",
+      "nombre_es": "IPIALES",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 53,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 56.6,
+              "adultas_pct": 37.7
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 352,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 8.5,
+              "adultas_pct": 48.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "52835": {
+      "cod_municipio": "52835",
+      "nombre_es": "SAN ANDRES DE TUMACO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 126,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "EX COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 39.7,
+              "adultas_pct": 53.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 330,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 15.5,
+              "adultas_pct": 48.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "52838": {
+      "cod_municipio": "52838",
+      "nombre_es": "TUQUERRES",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 37,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PRIMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 32.4,
+              "adultas_pct": 45.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 110,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 6.4,
+              "adultas_pct": 57.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76001": {
+      "cod_municipio": "76001",
+      "nombre_es": "CALI",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 6644,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 69.8,
+              "adultas_pct": 18.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 5353,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 10.9,
+              "adultas_pct": 52.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76020": {
+      "cod_municipio": "76020",
+      "nombre_es": "ALCALA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 44,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "NOVIO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 75.0,
+              "adultas_pct": 15.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76036": {
+      "cod_municipio": "76036",
+      "nombre_es": "ANDALUCIA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 53,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 60.4,
+              "adultas_pct": 17.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76100": {
+      "cod_municipio": "76100",
+      "nombre_es": "BOLIVAR",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 55,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 67.3,
+              "adultas_pct": 9.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76109": {
+      "cod_municipio": "76109",
+      "nombre_es": "BUENAVENTURA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 623,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "VECINO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "EX COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 66.3,
+              "adultas_pct": 19.6
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 260,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 13.8,
+              "adultas_pct": 47.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76111": {
+      "cod_municipio": "76111",
+      "nombre_es": "GUADALAJARA DE BUGA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 517,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 70.0,
+              "adultas_pct": 16.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 557,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 18.1,
+              "adultas_pct": 38.6
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76113": {
+      "cod_municipio": "76113",
+      "nombre_es": "BUGALAGRANDE",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 50,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "ABUELO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 78.0,
+              "adultas_pct": 8.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76122": {
+      "cod_municipio": "76122",
+      "nombre_es": "CAICEDONIA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 140,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 72.9,
+              "adultas_pct": 5.7
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 134,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 31.3,
+              "adultas_pct": 35.8
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76126": {
+      "cod_municipio": "76126",
+      "nombre_es": "CALIMA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 94,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 61.7,
+              "adultas_pct": 17.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76130": {
+      "cod_municipio": "76130",
+      "nombre_es": "CANDELARIA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 233,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 72.5,
+              "adultas_pct": 17.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 206,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 11.2,
+              "adultas_pct": 51.5
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76147": {
+      "cod_municipio": "76147",
+      "nombre_es": "CARTAGO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 361,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "EX COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 68.1,
+              "adultas_pct": 19.7
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 382,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 15.2,
+              "adultas_pct": 50.5
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76233": {
+      "cod_municipio": "76233",
+      "nombre_es": "DAGUA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 149,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 65.1,
+              "adultas_pct": 21.5
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 105,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 16.2,
+              "adultas_pct": 37.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76248": {
+      "cod_municipio": "76248",
+      "nombre_es": "EL CERRITO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 139,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 79.9,
+              "adultas_pct": 12.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 93,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 5.4,
+              "adultas_pct": 48.4
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76250": {
+      "cod_municipio": "76250",
+      "nombre_es": "EL DOVIO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 42,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "EX COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 61.9,
+              "adultas_pct": 23.8
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76275": {
+      "cod_municipio": "76275",
+      "nombre_es": "FLORIDA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 95,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 69.5,
+              "adultas_pct": 18.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 58,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "OTROS_FAMILIARES",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 15.5,
+              "adultas_pct": 43.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76306": {
+      "cod_municipio": "76306",
+      "nombre_es": "GINEBRA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 82,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "TIO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 69.5,
+              "adultas_pct": 15.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 40,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CUNADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 7.5,
+              "adultas_pct": 55.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76318": {
+      "cod_municipio": "76318",
+      "nombre_es": "GUACARI",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 113,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "OTROS_FAMILIARES",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 70.8,
+              "adultas_pct": 13.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 104,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "ENCARGADO_CUIDADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 11.5,
+              "adultas_pct": 60.6
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76364": {
+      "cod_municipio": "76364",
+      "nombre_es": "JAMUNDI",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 469,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 67.8,
+              "adultas_pct": 17.5
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 198,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 13.1,
+              "adultas_pct": 47.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76377": {
+      "cod_municipio": "76377",
+      "nombre_es": "LA CUMBRE",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 61,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 73.8,
+              "adultas_pct": 18.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76400": {
+      "cod_municipio": "76400",
+      "nombre_es": "LA UNION",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 107,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 73.8,
+              "adultas_pct": 7.5
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 41,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 14.6,
+              "adultas_pct": 36.6
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76520": {
+      "cod_municipio": "76520",
+      "nombre_es": "PALMIRA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 896,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 70.1,
+              "adultas_pct": 17.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 917,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 13.1,
+              "adultas_pct": 46.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76563": {
+      "cod_municipio": "76563",
+      "nombre_es": "PRADERA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 89,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 70.8,
+              "adultas_pct": 19.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 59,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 5.1,
+              "adultas_pct": 45.8
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76606": {
+      "cod_municipio": "76606",
+      "nombre_es": "RESTREPO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 83,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 84.3,
+              "adultas_pct": 6.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76616": {
+      "cod_municipio": "76616",
+      "nombre_es": "RIOFRIO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 61,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "COMPANERO DE TRABAJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 67.2,
+              "adultas_pct": 23.0
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76622": {
+      "cod_municipio": "76622",
+      "nombre_es": "ROLDANILLO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 140,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 77.9,
+              "adultas_pct": 11.4
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 87,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 5.7,
+              "adultas_pct": 52.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76670": {
+      "cod_municipio": "76670",
+      "nombre_es": "SAN PEDRO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 55,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 74.5,
+              "adultas_pct": 10.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76736": {
+      "cod_municipio": "76736",
+      "nombre_es": "SEVILLA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 171,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "CONOCIDO SIN NINGUN TRATO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "EX COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 73.7,
+              "adultas_pct": 11.7
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 129,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 20.9,
+              "adultas_pct": 40.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76828": {
+      "cod_municipio": "76828",
+      "nombre_es": "TRUJILLO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 43,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 67.4,
+              "adultas_pct": 20.9
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76834": {
+      "cod_municipio": "76834",
+      "nombre_es": "TULUA",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 524,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "AGRESOR DESCONOCIDO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 67.4,
+              "adultas_pct": 19.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 265,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 9.1,
+              "adultas_pct": 49.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76869": {
+      "cod_municipio": "76869",
+      "nombre_es": "VIJES",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": false,
+      "violencia_sexual": {
+        "total_casos": 68,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "TIO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "NO_REGISTRADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 69.1,
+              "adultas_pct": 13.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": null
+    },
+    "76890": {
+      "cod_municipio": "76890",
+      "nombre_es": "YOTOCO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 92,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "VECINO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 68.5,
+              "adultas_pct": 16.3
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 45,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "CUNADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 15.6,
+              "adultas_pct": 51.1
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76892": {
+      "cod_municipio": "76892",
+      "nombre_es": "YUMBO",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 473,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRASTRO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "NO_REGISTRADO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 73.6,
+              "adultas_pct": 14.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 252,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "PADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HIJO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 15.1,
+              "adultas_pct": 47.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    },
+    "76895": {
+      "cod_municipio": "76895",
+      "nombre_es": "ZARZAL",
+      "has_violencia_sexual_profile": true,
+      "has_vif_profile": true,
+      "violencia_sexual": {
+        "total_casos": 113,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "AMIGO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "COMPANERO PERMANENTE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "circunstancia_frecuente",
+            "label_es": "Circunstancia más frecuente",
+            "value": "ABUSO SEXUAL",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 53.1,
+              "adultas_pct": 27.4
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      },
+      "violencia_intrafamiliar": {
+        "total_casos": 95,
+        "stat_cards": [
+          {
+            "id": "agresor_frecuente_nna",
+            "label_es": "Agresor frecuente NNA",
+            "value": "MADRE",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "agresor_frecuente_adultas",
+            "label_es": "Agresor frecuente adultas",
+            "value": "HERMANO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "escenario_frecuente",
+            "label_es": "Escenario más frecuente",
+            "value": "VIVIENDA",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "factor_mas_frecuente",
+            "label_es": "Factor más frecuente",
+            "value": "INTOLERANCIA MACHISMO",
+            "display_format": "text",
+            "badge": null,
+            "sub_value": null
+          },
+          {
+            "id": "distribucion_por_ciclo",
+            "label_es": "% casos femeninos por ciclo vital",
+            "value": {
+              "nna_pct": 5.3,
+              "adultas_pct": 63.2
+            },
+            "display_format": "pct_split",
+            "badge": null,
+            "sub_value": null
+          }
+        ],
+        "caveat_es": null
+      }
+    }
+  }
+}

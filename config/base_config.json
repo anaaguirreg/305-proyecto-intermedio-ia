@@ -1,0 +1,28 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "Configuración base compartida por todos los módulos"
+  },
+  "target_departments": ["CAUCA", "CHOCO", "NARIÑO", "VALLE DEL CAUCA"],
+  "year_range": [2018, 2025],
+  "month_mapping": {
+    "enero": 1, "febrero": 2, "marzo": 3, "abril": 4, "mayo": 5, "junio": 6,
+    "julio": 7, "agosto": 8, "septiembre": 9, "octubre": 10, "noviembre": 11, "diciembre": 12
+  },
+  "paths": {
+    "base_data_dir": "data", "raw_dir": "raw", "processed_dir": "processed",
+    "segmented_dir": "data/segmented", "cleaned_dir": "data/cleaned",
+    "aggregated_dir": "data/aggregated", "master_dir": "data/master", "docs_dir": "docs",
+    "dashboard_dir": "data/dashboard"
+  },
+  "standards": {
+    "default_encoding": "utf-8",
+    "rate_multiplier": 100000,
+    "cod_municipio_digits": 5
+  },
+  "display_config": {
+    "separator_char": "=", "separator_length": 70, "indent": "   ",
+    "prefix_dataset": "📦 ", "prefix_metric": "   ",
+    "section_title": "✅ CELDA {n} - {module} EJECUTADO"
+  }
+}

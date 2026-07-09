@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- Paso 1 smoke test: fetch + parse the 4 dashboard JSONs.
+     MUST be served from repo root via a local HTTP server.
+     fetch() is blocked under file:// (CORS same-origin restriction).
+     Command: python -m http.server 8000   →   http://localhost:8000/site/test_load.html -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Smoke Test — Dashboard JSONs</title>
+  <style>
+    body { font-family: monospace; padding: 2rem; background: #111; color: #eee; }
+    h1   { font-size: 1rem; color: #aaa; margin-bottom: 1rem; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { padding: 0.4rem 0.8rem; border: 1px solid #333; text-align: left; }
+    th   { background: #222; color: #aaa; }
+    .ok  { color: #4caf50; }
+    .err { color: #f44336; }
+  </style>
+</head>
+<body>
+  <h1>Cicatrices Invisibles — Smoke Test: JSON load (Paso 1)</h1>
+  <table id="results">
+    <thead>
+      <tr>
+        <th>File</th>
+        <th>HTTP</th>
+        <th>metadata.n_total</th>
+        <th>sub_acto keys</th>
+        <th>Expected</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    const MANIFEST = [
+      { file: 'acto_1_panorama.json',  expectedSubActo: 4 },
+      { file: 'acto_2_brechas.json',   expectedSubActo: 6 },
+      { file: 'acto_3_tipologia.json', expectedSubActo: 5 },
+      { file: 'acto_4_forense.json',   expectedSubActo: 5 },
+    ];
+
+    const BASE = './data/';
+
+    async function loadOne({ file, expectedSubActo }) {
+      const url = BASE + file;
+      let status = null, data = null, error = null;
+
+      try {
+        const res = await fetch(url);
+        status = res.status;
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        data = await res.json();
+      } catch (e) {
+        error = e;
+        console.error(`[FAIL] ${file}:`, error);
+        return { file, status, data: null, error, expectedSubActo };
+      }
+
+      const subKeys   = Object.keys(data).filter(k => /^sub_acto_/.test(k));
+      const nTotal    = data?.metadata?.n_total ?? 'absent';
+      const pass      = subKeys.length === expectedSubActo;
+
+      console.info(`[${file}]`);
+      console.info(`  HTTP status  :`, status);
+      console.info(`  n_total      :`, nTotal);
+      console.info(`  sub_acto keys:`, subKeys);
+      console.info(`  count        : ${subKeys.length} (expected ${expectedSubActo})`);
+
+      console.assert(
+        pass,
+        `${file}: expected ${expectedSubActo} sub_acto keys, got ${subKeys.length}`,
+      );
+
+      return { file, status, data, subKeys, nTotal, pass, expectedSubActo, error: null };
+    }
+
+    async function run() {
+      const results = await Promise.all(MANIFEST.map(loadOne));
+      const tbody   = document.querySelector('#results tbody');
+
+      for (const r of results) {
+        const tr = document.createElement('tr');
+
+        if (r.error) {
+          tr.innerHTML = `
+            <td>${r.file}</td>
+            <td>${r.status ?? '—'}</td>
+            <td>—</td>
+            <td>—</td>
+            <td>${r.expectedSubActo}</td>
+            <td class="err">❌ ${r.error.message}</td>`;
+        } else {
+          const cls = r.pass ? 'ok' : 'err';
+          tr.innerHTML = `
+            <td>${r.file}</td>
+            <td class="ok">${r.status}</td>
+            <td>${r.nTotal}</td>
+            <td>${r.subKeys.join(', ')}</td>
+            <td>${r.expectedSubActo}</td>
+            <td class="${cls}">${r.pass ? '✅ PASS' : `❌ got ${r.subKeys.length}`}</td>`;
+        }
+
+        tbody.appendChild(tr);
+      }
+    }
+
+    run();
+  </script>
+</body>
+</html>

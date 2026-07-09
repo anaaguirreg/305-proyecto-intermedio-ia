@@ -1,0 +1,305 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "acto_3_tipologia",
+  "type": "object",
+  "required": [
+    "metadata",
+    "sub_acto_3_1", "sub_acto_3_2", "sub_acto_3_3", "sub_acto_3_4", "sub_acto_3_5"
+  ],
+  "properties": {
+
+    "metadata": {
+      "type": "object",
+      "required": ["version", "generated_at", "year_range", "n_total", "n_clustered", "act_disclaimer_es", "source_files"],
+      "properties": {
+        "version":           { "type": "string" },
+        "generated_at":      { "type": "string", "format": "date-time" },
+        "year_range":        { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 },
+        "n_total":           { "type": "integer", "const": 179 },
+        "n_clustered":       { "type": "integer", "const": 177 },
+        "act_disclaimer_es": { "type": "string" },
+        "source_files":      { "type": "object" }
+      }
+    },
+
+    "sub_acto_3_1": {
+      "$comment": "Typology KPI — canonical stat_cards array at root (no data wrapper). Migrated from bare scalars to match sub_acto_4_1 schema convention.",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "stat_cards"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "stat_cards": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "required": ["id", "label_es", "value", "display_format", "badge", "sub_value"],
+            "properties": {
+              "id":             { "type": "string" },
+              "label_es":       { "type": "string" },
+              "value":          { "type": ["number", "integer"] },
+              "display_format": { "type": "string" },
+              "badge":          { "type": ["string", "null"] },
+              "sub_value": {
+                "oneOf": [
+                  { "type": "null" },
+                  {
+                    "type": "object",
+                    "required": ["value", "label_es"],
+                    "properties": {
+                      "value":    { "type": ["number", "null"] },
+                      "label_es": { "type": "string" }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_3_2": {
+      "$comment": "Layer 3a scatter — 177-municipality quadrant plot (VIF vs Sexual composite rates). capa3a_scatter->layer_3a_scatter",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["n_points", "aggregation_method", "axes", "reference_lines", "quadrants", "archetypes", "points"],
+          "properties": {
+            "n_points":           { "type": "integer", "const": 177 },
+            "aggregation_method": { "type": "string" },
+            "axes": {
+              "type": "object",
+              "required": ["x", "y"],
+              "properties": {
+                "x": { "type": "string" },
+                "y": { "type": "string" }
+              }
+            },
+            "reference_lines": {
+              "type": "object",
+              "required": ["x_median", "y_median"],
+              "properties": {
+                "x_median": { "type": "number" },
+                "y_median": { "type": "number" }
+              }
+            },
+            "quadrants": {
+              "$comment": "Quadrant identifier keys (coexistencia_alta, predomina_vif, etc.) are domain identifiers — kept in Spanish per categorical value convention",
+              "type": "object",
+              "required": ["coexistencia_alta", "predomina_vif", "predomina_sexual", "bajo_perfil"],
+              "properties": {
+                "coexistencia_alta": { "$ref": "#/definitions/quadrant_meta" },
+                "predomina_vif":     { "$ref": "#/definitions/quadrant_meta" },
+                "predomina_sexual":  { "$ref": "#/definitions/quadrant_meta" },
+                "bajo_perfil":       { "$ref": "#/definitions/quadrant_meta" }
+              }
+            },
+            "archetypes": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": { "$ref": "#/definitions/scatter_point" }
+            },
+            "points": {
+              "type": "array",
+              "minItems": 177,
+              "maxItems": 177,
+              "items": { "$ref": "#/definitions/scatter_point" }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_3_3": {
+      "$comment": "Layer 3a dumbbell — NNA vs Adultas sum/sum rates for VIF and Sexual. capa3a_dumbbell->layer_3a_dumbbell; pob->pop; mas->plus; grupo->group; casos->cases",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "subtitle_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "subtitle_es":    { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["aggregation_method", "denominators", "lines"],
+          "properties": {
+            "aggregation_method": { "type": "string" },
+            "note":               { "type": "string" },
+            "denominators": {
+              "type": "object",
+              "required": ["pop_f_0_17_sum", "pop_f_18_plus_sum"],
+              "properties": {
+                "pop_f_0_17_sum":    { "type": "integer" },
+                "pop_f_18_plus_sum": { "type": "integer" }
+              }
+            },
+            "lines": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "object",
+                "required": ["id", "label", "color", "endpoints"],
+                "properties": {
+                  "id":    { "type": "string", "enum": ["vif", "sexual"] },
+                  "label": { "type": "string" },
+                  "color": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+                  "endpoints": {
+                    "type": "array",
+                    "minItems": 2,
+                    "maxItems": 2,
+                    "items": { "$ref": "#/definitions/dumbbell_endpoint" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_3_4": {
+      "$comment": "Crime typology — dimension_delito breakdown global + by_department. tipologia_delito->crime_typology; por_departamento->by_department; dimension_delito->crime_dimension; cantidad->count. pct_under_14 duplication removed: lives only in sub_acto_3_1.",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["total_cases", "global", "by_department"],
+          "properties": {
+            "total_cases": { "type": "integer" },
+            "global": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/definitions/crime_row" }
+            },
+            "by_department": {
+              "type": "object",
+              "required": ["VALLE DEL CAUCA", "CAUCA", "NARIÑO", "CHOCO"],
+              "properties": {
+                "VALLE DEL CAUCA": { "type": "array", "items": { "$ref": "#/definitions/crime_row" } },
+                "CAUCA":           { "type": "array", "items": { "$ref": "#/definitions/crime_row" } },
+                "NARIÑO":          { "type": "array", "items": { "$ref": "#/definitions/crime_row" } },
+                "CHOCO":           { "type": "array", "items": { "$ref": "#/definitions/crime_row" } }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "sub_acto_3_5": {
+      "$comment": "Sexual NNA timeline — tasa_sexual_nna_f per department × year. timeline_sexual_nna->sexual_nna_timeline; departamento->department",
+      "type": "object",
+      "required": ["title_es", "anchor_text_es", "data"],
+      "properties": {
+        "title_es":       { "type": "string" },
+        "anchor_text_es": { "type": "string" },
+        "data": {
+          "type": "object",
+          "required": ["chart_type", "metric", "metric_label", "x_axis", "series"],
+          "properties": {
+            "chart_type":   { "type": "string", "const": "line" },
+            "metric":       { "type": "string" },
+            "metric_label": { "type": "string" },
+            "x_axis": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": { "type": "integer" }
+            },
+            "series": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "object",
+                "required": ["department", "data"],
+                "properties": {
+                  "department": { "type": "string" },
+                  "data": {
+                    "type": "array",
+                    "minItems": 8,
+                    "maxItems": 8,
+                    "items": { "type": ["number", "null"] }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "definitions": {
+
+    "quadrant_meta": {
+      "type": "object",
+      "required": ["label", "n", "tooltip"],
+      "properties": {
+        "label":      { "type": "string" },
+        "n":          { "type": "integer" },
+        "tooltip":    { "type": "string" },
+        "disclaimer": { "$comment": "Carries caveat text for the quadrant — null when no caveat applies", "type": ["string", "null"] }
+      }
+    },
+
+    "scatter_point": {
+      "type": "object",
+      "required": [
+        "cod_municipio", "municipality", "department",
+        "vif_f_total_rate", "sexual_f_total_rate",
+        "quadrant", "is_archetype", "rank_vif", "rank_sexual",
+        "cluster_id", "cluster_name"
+      ],
+      "properties": {
+        "cod_municipio":      { "type": "string", "pattern": "^\\d{5}$" },
+        "municipality":       { "type": "string" },
+        "department":         { "type": "string" },
+        "vif_f_total_rate":   { "type": "number" },
+        "sexual_f_total_rate":{ "type": "number" },
+        "quadrant":           { "type": "string", "enum": ["coexistencia_alta", "predomina_vif", "predomina_sexual", "bajo_perfil"] },
+        "is_archetype":       { "type": "boolean" },
+        "rank_vif":           { "type": "integer" },
+        "rank_sexual":        { "type": "integer" },
+        "cluster_id":         { "type": ["integer", "null"] },
+        "cluster_name":       { "type": ["string", "null"] }
+      }
+    },
+
+    "dumbbell_endpoint": {
+      "$comment": "grupo->group; casos->cases; label_display kept (mixed, already widely used in codebase)",
+      "type": "object",
+      "required": ["group", "label_display", "cases", "rate"],
+      "properties": {
+        "group":         { "type": "string", "enum": ["nna", "adultas"] },
+        "label_display": { "type": "string" },
+        "cases":         { "type": "integer" },
+        "rate":          { "type": "number" }
+      }
+    },
+
+    "crime_row": {
+      "type": "object",
+      "required": ["crime_dimension", "label", "count", "pct", "is_minor"],
+      "properties": {
+        "crime_dimension": { "type": "string" },
+        "label":           { "type": "string" },
+        "count":           { "type": "integer" },
+        "pct":             { "type": "number" },
+        "is_minor":        { "type": "boolean" }
+      }
+    }
+
+  }
+}

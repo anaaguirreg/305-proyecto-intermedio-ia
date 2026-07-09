@@ -1,0 +1,64 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "Configuración para agregación, validación y tabla maestra (Carril A)",
+    "owner": "Carril_A"
+  },
+  "aggregation_config": {
+    "groupby_columns": ["cod_municipio", "anio_hecho"],
+    "sum_column": "cantidad",
+    "layers": {
+      "casos_vif_nna_f": { "source": "violencia", "genero_filter": "FEMENINO", "etario_filter": ["MENORES", "ADOLESCENTES"] },
+      "casos_vif_adultas_f": { "source": "violencia", "genero_filter": "FEMENINO", "etario_filter": ["ADULTOS", "ADULTOS MAYORES"] },
+      "casos_sexual_nna_f": { "source": "sexuales", "genero_filter": "FEMENINO", "etario_filter": ["MENORES", "ADOLESCENTES"] },
+      "casos_sexual_adultas_f": { "source": "sexuales", "genero_filter": "FEMENINO", "etario_filter": ["ADULTOS", "ADULTOS MAYORES"] },
+      "casos_vif_nna_m": { "source": "violencia", "genero_filter": "MASCULINO", "etario_filter": ["MENORES", "ADOLESCENTES"] },
+      "casos_vif_adultos_m": { "source": "violencia", "genero_filter": "MASCULINO", "etario_filter": ["ADULTOS", "ADULTOS MAYORES"] },
+      "casos_sexual_nna_m": { "source": "sexuales", "genero_filter": "MASCULINO", "etario_filter": ["MENORES", "ADOLESCENTES"] },
+      "casos_sexual_adultos_m": { "source": "sexuales", "genero_filter": "MASCULINO", "etario_filter": ["ADULTOS", "ADULTOS MAYORES"] }
+    }
+  },
+  "validation_rules": {
+    "tolerance_pct": 0.0,
+    "exclude_gender_values": ["NO_REGISTRADO", "NO_APLICA"],
+    "expected_years": [2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+    "layer_groups": {
+      "violencia_total": ["casos_vif_nna_f", "casos_vif_adultas_f", "casos_vif_nna_m", "casos_vif_adultos_m"],
+      "sexuales_total": ["casos_sexual_nna_f", "casos_sexual_adultas_f", "casos_sexual_nna_m", "casos_sexual_adultos_m"]
+    },
+    "clean_sources": { "violencia_total": "violencia", "sexuales_total": "sexuales" }
+  },
+  "master_table_config": {
+    "rate_multiplier": 100000,
+    "zero_handling": "fillna_zero",
+    "population_mapping": {
+      "tasa_vif_nna_f": { "cases": "casos_vif_nna_f", "denominator": "pob_f_0_17" },
+      "tasa_vif_adultas_f": { "cases": "casos_vif_adultas_f", "denominator": "pob_f_18_mas" },
+      "tasa_sexual_nna_f": { "cases": "casos_sexual_nna_f", "denominator": "pob_f_0_17" },
+      "tasa_sexual_adultas_f": { "cases": "casos_sexual_adultas_f", "denominator": "pob_f_18_mas" },
+      "tasa_vif_nna_m": { "cases": "casos_vif_nna_m", "denominator": "pob_h_0_17" },
+      "tasa_vif_adultos_m": { "cases": "casos_vif_adultos_m", "denominator": "pob_h_18_mas" },
+      "tasa_sexual_nna_m": { "cases": "casos_sexual_nna_m", "denominator": "pob_h_0_17" },
+      "tasa_sexual_adultos_m": { "cases": "casos_sexual_adultos_m", "denominator": "pob_h_18_mas" }
+    },
+    "icv_gen_f_weights": {
+      "tasa_vif_nna_f": 0.30,
+      "tasa_sexual_nna_f": 0.30,
+      "tasa_vif_adultas_f": 0.25,
+      "tasa_sexual_adultas_f": 0.15
+    },
+    "gap_pairs": {
+      "brecha_vif_nna": { "f": "tasa_vif_nna_f", "m": "tasa_vif_nna_m" },
+      "brecha_vif_adultas": { "f": "tasa_vif_adultas_f", "m": "tasa_vif_adultos_m" },
+      "brecha_sexual_nna": { "f": "tasa_sexual_nna_f", "m": "tasa_sexual_nna_m" },
+      "brecha_sexual_adultas": { "f": "tasa_sexual_adultas_f", "m": "tasa_sexual_adultos_m" }
+    }
+  },
+  "output_config": {
+    "aggregated_dir_key": "aggregated_dir",
+    "validation_report_filename": "validacion_capas_pre_join.csv",
+    "master_dir_key": "master_dir",
+    "master_filename": "master_table.parquet",
+    "clustering_filename": "tabla_clustering.parquet"
+  }
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!-- sub_acto_2_4 — Coroplético departamental: brecha de género F/M.
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_2_4.html
+     fetch() bloqueado bajo file:// por restricción CORS de mismo origen. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Coroplético departamental (sub_acto_2_4)</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body    { font-family: var(--font-sans); padding: 1rem 1.25rem; background: var(--color-canvas); color: var(--color-ink); }
+    h2      { font-size: 1.15rem; margin-bottom: 0.5rem; max-width: 960px; }
+    .provisional-box {
+      border-left: 3px solid var(--color-accent-amber);
+      background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.85rem;
+      color: var(--color-accent-amber);
+      line-height: 1.5;
+      max-width: 960px;
+      margin-bottom: 0.75rem;
+    }
+    .anchor-text {
+      font-size: 0.88rem;
+      color: var(--color-muted);
+      line-height: 1.5;
+      max-width: 960px;
+      margin-bottom: 0.75rem;
+    }
+    #map    { width: 100%; height: 520px; border: 1px solid var(--color-hairline); background: var(--color-hairline);
+              margin-bottom: 0.6rem; }
+    .caveat-note {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      font-style: italic;
+      line-height: 1.5;
+      max-width: 960px;
+      border-top: 1px solid var(--color-hairline);
+      padding-top: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    details { max-width: 960px; margin-top: 0.75rem; font-size: 0.8rem; }
+    summary { cursor: pointer; font-weight: bold; padding: 0.25rem 0; }
+    ul      { padding-left: 1.2rem; margin-top: 0.3rem; line-height: 1.7; }
+    .warn   { color: var(--color-accent-amber); }
+    #error-msg { color: var(--color-error); margin-top: 1rem; font-size: 0.9rem; }
+
+    /* Leaflet map legend */
+    .dept-legend {
+      background: var(--color-canvas);
+      padding: 0.5rem 0.75rem;
+      border-radius: 4px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.25);
+      font-size: 0.76rem;
+      line-height: 1.9;
+      min-width: 180px;
+    }
+    .dept-legend strong { display: block; margin-bottom: 0.25rem; }
+    .swatch {
+      display: inline-block;
+      width: 14px; height: 14px;
+      vertical-align: middle;
+      margin-right: 5px;
+      border: 1px solid var(--color-hairline);
+    }
+    .swatch-highlight { border: 2px solid var(--color-ink); }
+  </style>
+</head>
+<body>
+  <h2 id="title"></h2>
+  <div id="anchor-wrapper"></div>
+  <div id="map"></div>
+  <p id="caveat" class="caveat-note" hidden></p>
+  <details id="diagnostico">
+    <summary>Diagnóstico de carga</summary>
+    <ul id="diag-list"></ul>
+  </details>
+  <p id="error-msg" hidden></p>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+    const BRECHAS_URL = './data/acto_2_brechas.json';
+
+    /* ── Color scale — light (#f3ecef) → dark (#7a2d52) matching brecha theme ── */
+    const COLOR_LO = [252, 236, 245];
+    const COLOR_HI = [123,  31,  75];
+
+    function gapColor(gap, min, max) {
+      const t = max > min ? Math.max(0, Math.min(1, (gap - min) / (max - min))) : 0.5;
+      const r = Math.round(COLOR_LO[0] + t * (COLOR_HI[0] - COLOR_LO[0]));
+      const g = Math.round(COLOR_LO[1] + t * (COLOR_HI[1] - COLOR_LO[1]));
+      const b = Math.round(COLOR_LO[2] + t * (COLOR_HI[2] - COLOR_LO[2]));
+      return `rgb(${r},${g},${b})`;
+    }
+
+    /* ── Shared anchor-text renderer (PROVISIONAL prefix → amber box) ─────── */
+    function renderAnchor(text) {
+      if (!text) return;
+      const wrapper = document.getElementById('anchor-wrapper');
+      const PROV = 'PROVISIONAL: ';
+      const isProv = text.startsWith(PROV);
+      const el = document.createElement(isProv ? 'div' : 'p');
+      el.className = isProv ? 'provisional-box' : 'anchor-text';
+      el.textContent = isProv ? text.slice(PROV.length) : text;
+      wrapper.appendChild(el);
+    }
+
+    /* ── Diagnostic panel ──────────────────────────────────────────────────── */
+    function buildDiagnostico(data, featCount) {
+      const ul = document.getElementById('diag-list');
+      const rows = [
+        `Departamentos en geojson: ${featCount} (esperado: 4)`,
+        `Departamentos con datos: ${data.departments.length} (esperado: 4)`,
+        `Departamento destacado: ${data.highlighted_department}`,
+        `Rango brecha regional: ${data.gap_range.min}× – ${data.gap_range.max}× (F/M)`,
+        ...data.departments.map(d =>
+          `${d.department}: brecha=${d.gap_average}× · municipios=${d.n_municipalities} · top10=${d.n_in_top10}`
+        ),
+      ];
+      for (const text of rows) {
+        const li = document.createElement('li');
+        li.textContent = text;
+        ul.appendChild(li);
+      }
+    }
+
+    /* ── Main ──────────────────────────────────────────────────────────────── */
+    async function main() {
+      const payload = await fetch(BRECHAS_URL).then(r => {
+        if (!r.ok) throw new Error(`${BRECHAS_URL}: HTTP ${r.status}`);
+        return r.json();
+      });
+
+      const sub  = payload.sub_acto_2_4;
+      const data = sub.data;
+
+      document.getElementById('title').textContent = sub.title_es;
+      renderAnchor(sub.anchor_text_es);
+
+      const caveatEl = document.getElementById('caveat');
+      if (sub.caveat_es) {
+        caveatEl.textContent = sub.caveat_es;
+        caveatEl.hidden = false;
+      }
+
+      // Lookup: department name → full row data
+      const deptMap = new Map(data.departments.map(d => [d.department, d]));
+      const { min, max } = data.gap_range;
+
+      // Leaflet map — same tile and initial view as sub_acto_1_2
+      const leafletMap = L.map('map').setView([3.8, -76.8], 6);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution:
+          '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 18,
+      }).addTo(leafletMap);
+
+      L.geoJSON(data.geojson, {
+        style: feature => {
+          const deptName    = feature.properties.department;
+          const row         = deptMap.get(deptName);
+          const isHighlight = deptName === data.highlighted_department;
+          return {
+            fillColor:   row ? gapColor(row.gap_average, min, max) : CSS.scaleNull,
+            fillOpacity: 0.82,
+            color:       CSS.ink,
+            weight:      isHighlight ? 3 : 0.8,
+            opacity:     isHighlight ? 1 : 0.35,
+          };
+        },
+        onEachFeature: (feature, layer) => {
+          const deptName = feature.properties.department;
+          const row      = deptMap.get(deptName);
+          if (row) {
+            layer.bindPopup(
+              `<strong>${deptName}</strong><br>` +
+              `Brecha promedio: <strong>${row.gap_average.toFixed(2)}×</strong> (F/M)<br>` +
+              `Rango regional: ${min.toFixed(2)}× – ${max.toFixed(2)}×<br>` +
+              `Municipios: ${row.n_municipalities} · En Top 10: ${row.n_in_top10}` +
+              (row.is_highlighted ? '<br><em>Departamento destacado</em>' : '')
+            );
+          }
+          layer.on('mouseover', () => layer.setStyle({ fillOpacity: 0.95 }));
+          layer.on('mouseout',  () => layer.setStyle({ fillOpacity: 0.82 }));
+        },
+      }).addTo(leafletMap);
+
+      // Legend control (bottom-right) — departments sorted highest gap first
+      const legendCtrl = L.control({ position: 'bottomright' });
+      legendCtrl.onAdd = () => {
+        const div    = L.DomUtil.create('div', 'dept-legend');
+        const sorted = [...data.departments].sort((a, b) => b.gap_average - a.gap_average);
+        let html = '<strong>Brecha F/M promedio</strong>';
+        for (const d of sorted) {
+          const color       = gapColor(d.gap_average, min, max);
+          const swatchClass = d.department === data.highlighted_department
+            ? 'swatch swatch-highlight' : 'swatch';
+          html +=
+            `<br><span class="${swatchClass}" style="background:${color}"></span>` +
+            `${d.department}: ${d.gap_average.toFixed(2)}×`;
+        }
+        div.innerHTML = html;
+        return div;
+      };
+      legendCtrl.addTo(leafletMap);
+
+      buildDiagnostico(data, data.geojson.features.length);
+    }
+
+    main().catch(err => {
+      console.error('Error en renderizado:', err);
+      const p = document.getElementById('error-msg');
+      p.textContent = `Error: ${err.message}`;
+      p.hidden = false;
+    });
+  </script>
+</body>
+</html>

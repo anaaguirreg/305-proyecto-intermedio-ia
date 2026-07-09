@@ -1,0 +1,320 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "acto_5_municipios.schema.json",
+  "type": "object",
+  "required": [
+    "metadata",
+    "departamentos_disponibles",
+    "municipios"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": [
+        "generated_at",
+        "source_tables",
+        "total_municipios",
+        "municipios_excluidos_del_modelo",
+        "narrative_template_es",
+        "narrative_template_cierre_es"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "generated_at": {
+          "type": "string"
+        },
+        "source_tables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "total_municipios": {
+          "type": "integer"
+        },
+        "municipios_excluidos_del_modelo": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "narrative_template_es": {
+          "type": "string"
+        },
+        "narrative_template_cierre_es": {
+          "type": "string"
+        }
+      }
+    },
+    "departamentos_disponibles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "codigo_dane_dept",
+          "nombre_es",
+          "municipios_codigos"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "codigo_dane_dept": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 2
+          },
+          "nombre_es": {
+            "type": "string"
+          },
+          "municipios_codigos": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "municipios": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/municipio"
+      }
+    }
+  },
+  "$defs": {
+    "stat_card": {
+      "type": "object",
+      "required": [
+        "id",
+        "label_es",
+        "value",
+        "display_format",
+        "badge",
+        "sub_value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "label_es": {
+          "type": "string"
+        },
+        "value": true,
+        "display_format": {
+          "type": "string"
+        },
+        "badge": true,
+        "sub_value": true
+      }
+    },
+    "contribution_item": {
+      "type": "object",
+      "required": [
+        "feature_id",
+        "feature_label_es",
+        "coefficient",
+        "standardized_value",
+        "contribution"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "feature_id": {
+          "type": "string"
+        },
+        "feature_label_es": {
+          "type": "string"
+        },
+        "coefficient": {
+          "type": "number"
+        },
+        "standardized_value": {
+          "type": "number"
+        },
+        "contribution": {
+          "type": "number"
+        }
+      }
+    },
+    "municipio": {
+      "type": "object",
+      "required": [
+        "cod_municipio",
+        "nombre_es",
+        "departamento_es",
+        "codigo_dane_dept",
+        "excluido_del_modelo",
+        "stat_cards",
+        "sparkline_icv",
+        "cluster_id",
+        "cluster_label_es",
+        "cluster_emoji",
+        "cluster_color_token",
+        "icv_ranking",
+        "dominant_violence_type_es",
+        "dominant_violence_rate",
+        "coefficient_contributions",
+        "narrative_values_es"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "cod_municipio": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 5
+        },
+        "nombre_es": {
+          "type": "string"
+        },
+        "departamento_es": {
+          "type": "string"
+        },
+        "codigo_dane_dept": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 2
+        },
+        "excluido_del_modelo": {
+          "type": "boolean"
+        },
+        "stat_cards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stat_card"
+          },
+          "minItems": 6,
+          "maxItems": 6
+        },
+        "sparkline_icv": {
+          "type": "object",
+          "required": [
+            "years",
+            "values",
+            "axis_labels_es"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "years": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "values": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            "axis_labels_es": {
+              "type": "object",
+              "required": [
+                "x",
+                "y"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "x": {
+                  "type": "string"
+                },
+                "y": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "cluster_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "cluster_label_es": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cluster_emoji": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cluster_color_token": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "icv_ranking": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "dominant_violence_type_es": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dominant_violence_rate": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "coefficient_contributions": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/contribution_item"
+              },
+              "minItems": 4,
+              "maxItems": 4
+            }
+          ]
+        },
+        "narrative_values_es": {
+          "type": "object",
+          "required": [
+            "municipio_placeholder",
+            "cluster_placeholder",
+            "icv_placeholder",
+            "ranking_placeholder",
+            "tipo_placeholder",
+            "tasa_placeholder"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "municipio_placeholder": {
+              "type": "string"
+            },
+            "cluster_placeholder": {
+              "type": "string"
+            },
+            "icv_placeholder": {
+              "type": "string"
+            },
+            "ranking_placeholder": {
+              "type": "string"
+            },
+            "tipo_placeholder": {
+              "type": "string"
+            },
+            "tasa_placeholder": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

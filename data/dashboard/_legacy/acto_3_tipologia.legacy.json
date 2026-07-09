@@ -1,0 +1,1221 @@
+{
+  "kpi_tipologia": {
+    "pct_menor_14": 50.61,
+    "pct_all_minors": 54.29,
+    "total_casos": 29594
+  },
+  "capa3a_scatter": {
+    "points": [
+      {
+        "cod_municipio": "52001",
+        "vif_f_total_rate": 1031.63,
+        "sexual_f_total_rate": 321.2
+      },
+      {
+        "cod_municipio": "19001",
+        "vif_f_total_rate": 878.23,
+        "sexual_f_total_rate": 306.88
+      },
+      {
+        "cod_municipio": "76892",
+        "vif_f_total_rate": 611.66,
+        "sexual_f_total_rate": 298.72
+      },
+      {
+        "cod_municipio": "76130",
+        "vif_f_total_rate": 576.66,
+        "sexual_f_total_rate": 239.31
+      },
+      {
+        "cod_municipio": "19573",
+        "vif_f_total_rate": 563.56,
+        "sexual_f_total_rate": 212.39
+      },
+      {
+        "cod_municipio": "76895",
+        "vif_f_total_rate": 548.95,
+        "sexual_f_total_rate": 169.32
+      },
+      {
+        "cod_municipio": "76001",
+        "vif_f_total_rate": 525.11,
+        "sexual_f_total_rate": 217.96
+      },
+      {
+        "cod_municipio": "19548",
+        "vif_f_total_rate": 517.37,
+        "sexual_f_total_rate": 276.38
+      },
+      {
+        "cod_municipio": "76670",
+        "vif_f_total_rate": 499.69,
+        "sexual_f_total_rate": 217.48
+      },
+      {
+        "cod_municipio": "76111",
+        "vif_f_total_rate": 495.35,
+        "sexual_f_total_rate": 222.29
+      },
+      {
+        "cod_municipio": "76318",
+        "vif_f_total_rate": 478.92,
+        "sexual_f_total_rate": 232.73
+      },
+      {
+        "cod_municipio": "76606",
+        "vif_f_total_rate": 475.36,
+        "sexual_f_total_rate": 339.37
+      },
+      {
+        "cod_municipio": "76890",
+        "vif_f_total_rate": 465.96,
+        "sexual_f_total_rate": 226.57
+      },
+      {
+        "cod_municipio": "19807",
+        "vif_f_total_rate": 461.91,
+        "sexual_f_total_rate": 191.46
+      },
+      {
+        "cod_municipio": "19142",
+        "vif_f_total_rate": 453.43,
+        "sexual_f_total_rate": 143.22
+      },
+      {
+        "cod_municipio": "19698",
+        "vif_f_total_rate": 450.42,
+        "sexual_f_total_rate": 247.9
+      },
+      {
+        "cod_municipio": "19300",
+        "vif_f_total_rate": 447.28,
+        "sexual_f_total_rate": 130.22
+      },
+      {
+        "cod_municipio": "76403",
+        "vif_f_total_rate": 445.72,
+        "sexual_f_total_rate": 190.75
+      },
+      {
+        "cod_municipio": "52240",
+        "vif_f_total_rate": 437.86,
+        "sexual_f_total_rate": 256.16
+      },
+      {
+        "cod_municipio": "19845",
+        "vif_f_total_rate": 435.57,
+        "sexual_f_total_rate": 189.48
+      },
+      {
+        "cod_municipio": "76036",
+        "vif_f_total_rate": 432.03,
+        "sexual_f_total_rate": 207.43
+      },
+      {
+        "cod_municipio": "52356",
+        "vif_f_total_rate": 418.15,
+        "sexual_f_total_rate": 282.8
+      },
+      {
+        "cod_municipio": "76250",
+        "vif_f_total_rate": 414.63,
+        "sexual_f_total_rate": 213.86
+      },
+      {
+        "cod_municipio": "76622",
+        "vif_f_total_rate": 393.87,
+        "sexual_f_total_rate": 311.23
+      },
+      {
+        "cod_municipio": "76616",
+        "vif_f_total_rate": 382.08,
+        "sexual_f_total_rate": 368.0
+      },
+      {
+        "cod_municipio": "76126",
+        "vif_f_total_rate": 380.01,
+        "sexual_f_total_rate": 249.47
+      },
+      {
+        "cod_municipio": "52560",
+        "vif_f_total_rate": 376.86,
+        "sexual_f_total_rate": 208.45
+      },
+      {
+        "cod_municipio": "76377",
+        "vif_f_total_rate": 375.85,
+        "sexual_f_total_rate": 304.98
+      },
+      {
+        "cod_municipio": "76828",
+        "vif_f_total_rate": 365.05,
+        "sexual_f_total_rate": 242.65
+      },
+      {
+        "cod_municipio": "76563",
+        "vif_f_total_rate": 364.85,
+        "sexual_f_total_rate": 201.57
+      },
+      {
+        "cod_municipio": "76054",
+        "vif_f_total_rate": 361.42,
+        "sexual_f_total_rate": 164.76
+      },
+      {
+        "cod_municipio": "76100",
+        "vif_f_total_rate": 360.59,
+        "sexual_f_total_rate": 176.23
+      },
+      {
+        "cod_municipio": "76863",
+        "vif_f_total_rate": 359.57,
+        "sexual_f_total_rate": 233.18
+      },
+      {
+        "cod_municipio": "76246",
+        "vif_f_total_rate": 357.86,
+        "sexual_f_total_rate": 294.62
+      },
+      {
+        "cod_municipio": "76520",
+        "vif_f_total_rate": 353.31,
+        "sexual_f_total_rate": 167.06
+      },
+      {
+        "cod_municipio": "76147",
+        "vif_f_total_rate": 351.46,
+        "sexual_f_total_rate": 219.87
+      },
+      {
+        "cod_municipio": "76736",
+        "vif_f_total_rate": 347.19,
+        "sexual_f_total_rate": 219.59
+      },
+      {
+        "cod_municipio": "76113",
+        "vif_f_total_rate": 344.22,
+        "sexual_f_total_rate": 197.38
+      },
+      {
+        "cod_municipio": "76020",
+        "vif_f_total_rate": 344.18,
+        "sexual_f_total_rate": 313.25
+      },
+      {
+        "cod_municipio": "76306",
+        "vif_f_total_rate": 334.87,
+        "sexual_f_total_rate": 162.24
+      },
+      {
+        "cod_municipio": "52540",
+        "vif_f_total_rate": 331.44,
+        "sexual_f_total_rate": 370.18
+      },
+      {
+        "cod_municipio": "76869",
+        "vif_f_total_rate": 328.14,
+        "sexual_f_total_rate": 323.03
+      },
+      {
+        "cod_municipio": "52399",
+        "vif_f_total_rate": 326.84,
+        "sexual_f_total_rate": 274.89
+      },
+      {
+        "cod_municipio": "27075",
+        "vif_f_total_rate": 324.98,
+        "sexual_f_total_rate": 309.78
+      },
+      {
+        "cod_municipio": "27245",
+        "vif_f_total_rate": 321.09,
+        "sexual_f_total_rate": 253.07
+      },
+      {
+        "cod_municipio": "76834",
+        "vif_f_total_rate": 318.17,
+        "sexual_f_total_rate": 223.66
+      },
+      {
+        "cod_municipio": "19130",
+        "vif_f_total_rate": 317.5,
+        "sexual_f_total_rate": 235.45
+      },
+      {
+        "cod_municipio": "19392",
+        "vif_f_total_rate": 313.47,
+        "sexual_f_total_rate": 223.22
+      },
+      {
+        "cod_municipio": "19622",
+        "vif_f_total_rate": 313.01,
+        "sexual_f_total_rate": 190.18
+      },
+      {
+        "cod_municipio": "76233",
+        "vif_f_total_rate": 312.64,
+        "sexual_f_total_rate": 169.52
+      },
+      {
+        "cod_municipio": "27361",
+        "vif_f_total_rate": 308.81,
+        "sexual_f_total_rate": 159.29
+      },
+      {
+        "cod_municipio": "76122",
+        "vif_f_total_rate": 302.95,
+        "sexual_f_total_rate": 219.51
+      },
+      {
+        "cod_municipio": "19532",
+        "vif_f_total_rate": 298.4,
+        "sexual_f_total_rate": 180.09
+      },
+      {
+        "cod_municipio": "76364",
+        "vif_f_total_rate": 293.78,
+        "sexual_f_total_rate": 177.34
+      },
+      {
+        "cod_municipio": "76497",
+        "vif_f_total_rate": 293.21,
+        "sexual_f_total_rate": 205.07
+      },
+      {
+        "cod_municipio": "76248",
+        "vif_f_total_rate": 289.06,
+        "sexual_f_total_rate": 162.09
+      },
+      {
+        "cod_municipio": "19455",
+        "vif_f_total_rate": 287.02,
+        "sexual_f_total_rate": 179.46
+      },
+      {
+        "cod_municipio": "19355",
+        "vif_f_total_rate": 283.82,
+        "sexual_f_total_rate": 201.85
+      },
+      {
+        "cod_municipio": "52683",
+        "vif_f_total_rate": 282.16,
+        "sexual_f_total_rate": 183.73
+      },
+      {
+        "cod_municipio": "76400",
+        "vif_f_total_rate": 281.58,
+        "sexual_f_total_rate": 204.13
+      },
+      {
+        "cod_municipio": "76845",
+        "vif_f_total_rate": 277.84,
+        "sexual_f_total_rate": 170.14
+      },
+      {
+        "cod_municipio": "19397",
+        "vif_f_total_rate": 274.59,
+        "sexual_f_total_rate": 87.49
+      },
+      {
+        "cod_municipio": "19256",
+        "vif_f_total_rate": 266.59,
+        "sexual_f_total_rate": 211.61
+      },
+      {
+        "cod_municipio": "27001",
+        "vif_f_total_rate": 266.06,
+        "sexual_f_total_rate": 188.26
+      },
+      {
+        "cod_municipio": "52788",
+        "vif_f_total_rate": 264.3,
+        "sexual_f_total_rate": 72.02
+      },
+      {
+        "cod_municipio": "52260",
+        "vif_f_total_rate": 260.58,
+        "sexual_f_total_rate": 204.95
+      },
+      {
+        "cod_municipio": "52385",
+        "vif_f_total_rate": 252.53,
+        "sexual_f_total_rate": 84.6
+      },
+      {
+        "cod_municipio": "52694",
+        "vif_f_total_rate": 251.84,
+        "sexual_f_total_rate": 206.59
+      },
+      {
+        "cod_municipio": "52838",
+        "vif_f_total_rate": 247.46,
+        "sexual_f_total_rate": 112.58
+      },
+      {
+        "cod_municipio": "27050",
+        "vif_f_total_rate": 241.91,
+        "sexual_f_total_rate": 279.64
+      },
+      {
+        "cod_municipio": "19760",
+        "vif_f_total_rate": 241.47,
+        "sexual_f_total_rate": 147.92
+      },
+      {
+        "cod_municipio": "52110",
+        "vif_f_total_rate": 238.97,
+        "sexual_f_total_rate": 152.62
+      },
+      {
+        "cod_municipio": "52224",
+        "vif_f_total_rate": 236.58,
+        "sexual_f_total_rate": 123.06
+      },
+      {
+        "cod_municipio": "19212",
+        "vif_f_total_rate": 235.66,
+        "sexual_f_total_rate": 150.76
+      },
+      {
+        "cod_municipio": "52418",
+        "vif_f_total_rate": 234.08,
+        "sexual_f_total_rate": 76.08
+      },
+      {
+        "cod_municipio": "52233",
+        "vif_f_total_rate": 229.3,
+        "sexual_f_total_rate": 187.81
+      },
+      {
+        "cod_municipio": "52051",
+        "vif_f_total_rate": 226.28,
+        "sexual_f_total_rate": 213.47
+      },
+      {
+        "cod_municipio": "52405",
+        "vif_f_total_rate": 225.21,
+        "sexual_f_total_rate": 220.31
+      },
+      {
+        "cod_municipio": "19318",
+        "vif_f_total_rate": 223.69,
+        "sexual_f_total_rate": 143.23
+      },
+      {
+        "cod_municipio": "52036",
+        "vif_f_total_rate": 214.5,
+        "sexual_f_total_rate": 164.29
+      },
+      {
+        "cod_municipio": "76109",
+        "vif_f_total_rate": 210.04,
+        "sexual_f_total_rate": 98.12
+      },
+      {
+        "cod_municipio": "76041",
+        "vif_f_total_rate": 202.85,
+        "sexual_f_total_rate": 192.29
+      },
+      {
+        "cod_municipio": "76275",
+        "vif_f_total_rate": 200.66,
+        "sexual_f_total_rate": 161.6
+      },
+      {
+        "cod_municipio": "52480",
+        "vif_f_total_rate": 199.81,
+        "sexual_f_total_rate": 174.11
+      },
+      {
+        "cod_municipio": "52835",
+        "vif_f_total_rate": 197.31,
+        "sexual_f_total_rate": 80.62
+      },
+      {
+        "cod_municipio": "27006",
+        "vif_f_total_rate": 193.53,
+        "sexual_f_total_rate": 112.65
+      },
+      {
+        "cod_municipio": "19821",
+        "vif_f_total_rate": 193.18,
+        "sexual_f_total_rate": 148.89
+      },
+      {
+        "cod_municipio": "52585",
+        "vif_f_total_rate": 193.02,
+        "sexual_f_total_rate": 126.61
+      },
+      {
+        "cod_municipio": "52320",
+        "vif_f_total_rate": 191.66,
+        "sexual_f_total_rate": 129.38
+      },
+      {
+        "cod_municipio": "27205",
+        "vif_f_total_rate": 191.42,
+        "sexual_f_total_rate": 173.58
+      },
+      {
+        "cod_municipio": "19137",
+        "vif_f_total_rate": 189.98,
+        "sexual_f_total_rate": 148.54
+      },
+      {
+        "cod_municipio": "52573",
+        "vif_f_total_rate": 189.84,
+        "sexual_f_total_rate": 143.04
+      },
+      {
+        "cod_municipio": "27810",
+        "vif_f_total_rate": 188.39,
+        "sexual_f_total_rate": 116.51
+      },
+      {
+        "cod_municipio": "52207",
+        "vif_f_total_rate": 186.6,
+        "sexual_f_total_rate": 158.44
+      },
+      {
+        "cod_municipio": "19450",
+        "vif_f_total_rate": 183.6,
+        "sexual_f_total_rate": 107.4
+      },
+      {
+        "cod_municipio": "52381",
+        "vif_f_total_rate": 181.91,
+        "sexual_f_total_rate": 113.04
+      },
+      {
+        "cod_municipio": "19824",
+        "vif_f_total_rate": 177.14,
+        "sexual_f_total_rate": 135.72
+      },
+      {
+        "cod_municipio": "27413",
+        "vif_f_total_rate": 176.86,
+        "sexual_f_total_rate": 130.82
+      },
+      {
+        "cod_municipio": "19022",
+        "vif_f_total_rate": 174.94,
+        "sexual_f_total_rate": 71.83
+      },
+      {
+        "cod_municipio": "52210",
+        "vif_f_total_rate": 171.0,
+        "sexual_f_total_rate": 48.13
+      },
+      {
+        "cod_municipio": "52699",
+        "vif_f_total_rate": 169.64,
+        "sexual_f_total_rate": 80.79
+      },
+      {
+        "cod_municipio": "19743",
+        "vif_f_total_rate": 169.32,
+        "sexual_f_total_rate": 85.01
+      },
+      {
+        "cod_municipio": "52612",
+        "vif_f_total_rate": 169.0,
+        "sexual_f_total_rate": 98.43
+      },
+      {
+        "cod_municipio": "27660",
+        "vif_f_total_rate": 168.99,
+        "sexual_f_total_rate": 156.15
+      },
+      {
+        "cod_municipio": "52885",
+        "vif_f_total_rate": 165.82,
+        "sexual_f_total_rate": 140.74
+      },
+      {
+        "cod_municipio": "52352",
+        "vif_f_total_rate": 163.79,
+        "sexual_f_total_rate": 113.83
+      },
+      {
+        "cod_municipio": "19075",
+        "vif_f_total_rate": 162.25,
+        "sexual_f_total_rate": 167.26
+      },
+      {
+        "cod_municipio": "19513",
+        "vif_f_total_rate": 161.06,
+        "sexual_f_total_rate": 113.71
+      },
+      {
+        "cod_municipio": "27787",
+        "vif_f_total_rate": 159.64,
+        "sexual_f_total_rate": 193.13
+      },
+      {
+        "cod_municipio": "52354",
+        "vif_f_total_rate": 157.41,
+        "sexual_f_total_rate": 94.19
+      },
+      {
+        "cod_municipio": "19473",
+        "vif_f_total_rate": 156.02,
+        "sexual_f_total_rate": 156.23
+      },
+      {
+        "cod_municipio": "52022",
+        "vif_f_total_rate": 153.69,
+        "sexual_f_total_rate": 115.6
+      },
+      {
+        "cod_municipio": "19693",
+        "vif_f_total_rate": 151.88,
+        "sexual_f_total_rate": 54.88
+      },
+      {
+        "cod_municipio": "27800",
+        "vif_f_total_rate": 151.29,
+        "sexual_f_total_rate": 66.71
+      },
+      {
+        "cod_municipio": "19100",
+        "vif_f_total_rate": 150.78,
+        "sexual_f_total_rate": 152.12
+      },
+      {
+        "cod_municipio": "19533",
+        "vif_f_total_rate": 150.55,
+        "sexual_f_total_rate": 199.75
+      },
+      {
+        "cod_municipio": "52435",
+        "vif_f_total_rate": 150.4,
+        "sexual_f_total_rate": 84.88
+      },
+      {
+        "cod_municipio": "19701",
+        "vif_f_total_rate": 150.0,
+        "sexual_f_total_rate": 218.74
+      },
+      {
+        "cod_municipio": "52258",
+        "vif_f_total_rate": 144.58,
+        "sexual_f_total_rate": 95.0
+      },
+      {
+        "cod_municipio": "27491",
+        "vif_f_total_rate": 139.64,
+        "sexual_f_total_rate": 110.47
+      },
+      {
+        "cod_municipio": "52687",
+        "vif_f_total_rate": 138.61,
+        "sexual_f_total_rate": 216.47
+      },
+      {
+        "cod_municipio": "27495",
+        "vif_f_total_rate": 138.35,
+        "sexual_f_total_rate": 87.6
+      },
+      {
+        "cod_municipio": "19290",
+        "vif_f_total_rate": 136.35,
+        "sexual_f_total_rate": 218.16
+      },
+      {
+        "cod_municipio": "52083",
+        "vif_f_total_rate": 134.29,
+        "sexual_f_total_rate": 79.99
+      },
+      {
+        "cod_municipio": "52250",
+        "vif_f_total_rate": 129.68,
+        "sexual_f_total_rate": 108.14
+      },
+      {
+        "cod_municipio": "19780",
+        "vif_f_total_rate": 129.17,
+        "sexual_f_total_rate": 121.31
+      },
+      {
+        "cod_municipio": "19050",
+        "vif_f_total_rate": 128.53,
+        "sexual_f_total_rate": 227.56
+      },
+      {
+        "cod_municipio": "52079",
+        "vif_f_total_rate": 128.46,
+        "sexual_f_total_rate": 74.55
+      },
+      {
+        "cod_municipio": "52786",
+        "vif_f_total_rate": 126.03,
+        "sexual_f_total_rate": 202.46
+      },
+      {
+        "cod_municipio": "19110",
+        "vif_f_total_rate": 125.68,
+        "sexual_f_total_rate": 100.44
+      },
+      {
+        "cod_municipio": "76823",
+        "vif_f_total_rate": 124.02,
+        "sexual_f_total_rate": 155.36
+      },
+      {
+        "cod_municipio": "52215",
+        "vif_f_total_rate": 121.18,
+        "sexual_f_total_rate": 165.59
+      },
+      {
+        "cod_municipio": "52678",
+        "vif_f_total_rate": 119.28,
+        "sexual_f_total_rate": 72.25
+      },
+      {
+        "cod_municipio": "19517",
+        "vif_f_total_rate": 119.1,
+        "sexual_f_total_rate": 152.17
+      },
+      {
+        "cod_municipio": "27580",
+        "vif_f_total_rate": 117.92,
+        "sexual_f_total_rate": 106.64
+      },
+      {
+        "cod_municipio": "19785",
+        "vif_f_total_rate": 116.86,
+        "sexual_f_total_rate": 86.09
+      },
+      {
+        "cod_municipio": "52378",
+        "vif_f_total_rate": 111.44,
+        "sexual_f_total_rate": 169.83
+      },
+      {
+        "cod_municipio": "52019",
+        "vif_f_total_rate": 110.53,
+        "sexual_f_total_rate": 201.51
+      },
+      {
+        "cod_municipio": "52254",
+        "vif_f_total_rate": 108.81,
+        "sexual_f_total_rate": 155.42
+      },
+      {
+        "cod_municipio": "19585",
+        "vif_f_total_rate": 108.38,
+        "sexual_f_total_rate": 80.98
+      },
+      {
+        "cod_municipio": "76243",
+        "vif_f_total_rate": 107.93,
+        "sexual_f_total_rate": 198.54
+      },
+      {
+        "cod_municipio": "27615",
+        "vif_f_total_rate": 105.43,
+        "sexual_f_total_rate": 118.36
+      },
+      {
+        "cod_municipio": "52720",
+        "vif_f_total_rate": 98.25,
+        "sexual_f_total_rate": 76.27
+      },
+      {
+        "cod_municipio": "52287",
+        "vif_f_total_rate": 94.96,
+        "sexual_f_total_rate": 112.52
+      },
+      {
+        "cod_municipio": "52506",
+        "vif_f_total_rate": 90.64,
+        "sexual_f_total_rate": 51.07
+      },
+      {
+        "cod_municipio": "52317",
+        "vif_f_total_rate": 85.83,
+        "sexual_f_total_rate": 87.19
+      },
+      {
+        "cod_municipio": "19364",
+        "vif_f_total_rate": 83.59,
+        "sexual_f_total_rate": 87.16
+      },
+      {
+        "cod_municipio": "52693",
+        "vif_f_total_rate": 80.47,
+        "sexual_f_total_rate": 108.64
+      },
+      {
+        "cod_municipio": "52227",
+        "vif_f_total_rate": 73.12,
+        "sexual_f_total_rate": 77.45
+      },
+      {
+        "cod_municipio": "52411",
+        "vif_f_total_rate": 71.22,
+        "sexual_f_total_rate": 136.37
+      },
+      {
+        "cod_municipio": "19809",
+        "vif_f_total_rate": 69.79,
+        "sexual_f_total_rate": 71.88
+      },
+      {
+        "cod_municipio": "27073",
+        "vif_f_total_rate": 64.84,
+        "sexual_f_total_rate": 108.49
+      },
+      {
+        "cod_municipio": "52323",
+        "vif_f_total_rate": 64.55,
+        "sexual_f_total_rate": 120.47
+      },
+      {
+        "cod_municipio": "27135",
+        "vif_f_total_rate": 63.22,
+        "sexual_f_total_rate": 79.18
+      },
+      {
+        "cod_municipio": "52256",
+        "vif_f_total_rate": 60.65,
+        "sexual_f_total_rate": 86.03
+      },
+      {
+        "cod_municipio": "52565",
+        "vif_f_total_rate": 59.45,
+        "sexual_f_total_rate": 82.8
+      },
+      {
+        "cod_municipio": "52203",
+        "vif_f_total_rate": 59.37,
+        "sexual_f_total_rate": 127.03
+      },
+      {
+        "cod_municipio": "27450",
+        "vif_f_total_rate": 59.06,
+        "sexual_f_total_rate": 67.26
+      },
+      {
+        "cod_municipio": "27745",
+        "vif_f_total_rate": 55.58,
+        "sexual_f_total_rate": 145.55
+      },
+      {
+        "cod_municipio": "27372",
+        "vif_f_total_rate": 52.64,
+        "sexual_f_total_rate": 68.53
+      },
+      {
+        "cod_municipio": "27160",
+        "vif_f_total_rate": 49.97,
+        "sexual_f_total_rate": 62.73
+      },
+      {
+        "cod_municipio": "27430",
+        "vif_f_total_rate": 46.79,
+        "sexual_f_total_rate": 52.16
+      },
+      {
+        "cod_municipio": "52520",
+        "vif_f_total_rate": 45.12,
+        "sexual_f_total_rate": 33.48
+      },
+      {
+        "cod_municipio": "52685",
+        "vif_f_total_rate": 44.42,
+        "sexual_f_total_rate": 93.58
+      },
+      {
+        "cod_municipio": "27077",
+        "vif_f_total_rate": 43.66,
+        "sexual_f_total_rate": 28.36
+      },
+      {
+        "cod_municipio": "27600",
+        "vif_f_total_rate": 37.18,
+        "sexual_f_total_rate": 50.89
+      },
+      {
+        "cod_municipio": "52390",
+        "vif_f_total_rate": 36.05,
+        "sexual_f_total_rate": 32.38
+      },
+      {
+        "cod_municipio": "52696",
+        "vif_f_total_rate": 35.42,
+        "sexual_f_total_rate": 63.86
+      },
+      {
+        "cod_municipio": "52427",
+        "vif_f_total_rate": 34.63,
+        "sexual_f_total_rate": 62.89
+      },
+      {
+        "cod_municipio": "27250",
+        "vif_f_total_rate": 32.14,
+        "sexual_f_total_rate": 32.06
+      },
+      {
+        "cod_municipio": "19418",
+        "vif_f_total_rate": 30.28,
+        "sexual_f_total_rate": 55.06
+      },
+      {
+        "cod_municipio": "52621",
+        "vif_f_total_rate": 25.35,
+        "sexual_f_total_rate": 53.73
+      },
+      {
+        "cod_municipio": "27099",
+        "vif_f_total_rate": 23.95,
+        "sexual_f_total_rate": 94.11
+      },
+      {
+        "cod_municipio": "27425",
+        "vif_f_total_rate": 22.55,
+        "sexual_f_total_rate": 53.59
+      },
+      {
+        "cod_municipio": "52490",
+        "vif_f_total_rate": 18.27,
+        "sexual_f_total_rate": 68.48
+      },
+      {
+        "cod_municipio": "52473",
+        "vif_f_total_rate": 15.88,
+        "sexual_f_total_rate": 45.87
+      },
+      {
+        "cod_municipio": "27025",
+        "vif_f_total_rate": 13.0,
+        "sexual_f_total_rate": 26.61
+      }
+    ],
+    "n_points": 177,
+    "quadrants": {
+      "coexistencia_alta": {
+        "n": 71
+      },
+      "predomina_vif": {
+        "n": 17
+      },
+      "predomina_sexual": {
+        "n": 17
+      },
+      "bajo_perfil": {
+        "n": 72
+      }
+    },
+    "archetypes": [
+      {
+        "cod_municipio": "19142"
+      },
+      {
+        "cod_municipio": "52540"
+      },
+      {
+        "cod_municipio": "19050"
+      }
+    ]
+  },
+  "capa3a_dumbbell": {
+    "denominators": {
+      "pob_f_0_17_sum": 9337308,
+      "pob_f_18_mas_sum": 25376524
+    },
+    "lines": [
+      {
+        "id": "vif",
+        "endpoints": [
+          {
+            "grupo": "nna",
+            "cases": 4945,
+            "rate": 52.96
+          },
+          {
+            "grupo": "adultas",
+            "cases": 90323,
+            "rate": 355.93
+          }
+        ]
+      },
+      {
+        "id": "sexual",
+        "endpoints": [
+          {
+            "grupo": "nna",
+            "cases": 9902,
+            "rate": 106.05
+          },
+          {
+            "grupo": "adultas",
+            "cases": 19690,
+            "rate": 77.59
+          }
+        ]
+      }
+    ]
+  },
+  "tipologia_delito": {
+    "total_casos": 29594,
+    "global": [
+      {
+        "dimension_delito": "ABUSO_SEXUAL_MENOR_14",
+        "cantidad": 14979,
+        "pct": 50.61
+      },
+      {
+        "dimension_delito": "VIOLENCIA_SEXUAL_DIRECTA",
+        "cantidad": 9280,
+        "pct": 31.36
+      },
+      {
+        "dimension_delito": "ACOSO_SEXUAL",
+        "cantidad": 2605,
+        "pct": 8.8
+      },
+      {
+        "dimension_delito": "ABUSO_INCAPAZ_RESISTIR",
+        "cantidad": 1500,
+        "pct": 5.07
+      },
+      {
+        "dimension_delito": "EXPLOTACION_SEXUAL_DIGITAL_MENORES",
+        "cantidad": 934,
+        "pct": 3.16
+      },
+      {
+        "dimension_delito": "EXPLOTACION_SEXUAL_COMERCIAL_MENOR",
+        "cantidad": 154,
+        "pct": 0.52
+      },
+      {
+        "dimension_delito": "EXPLOTACION_SEXUAL_COMERCIAL",
+        "cantidad": 142,
+        "pct": 0.48
+      }
+    ],
+    "por_departamento": {
+      "CAUCA": [
+        {
+          "dimension_delito": "ABUSO_SEXUAL_MENOR_14",
+          "cantidad": 2767,
+          "pct": 48.94
+        },
+        {
+          "dimension_delito": "VIOLENCIA_SEXUAL_DIRECTA",
+          "cantidad": 1894,
+          "pct": 33.5
+        },
+        {
+          "dimension_delito": "ACOSO_SEXUAL",
+          "cantidad": 467,
+          "pct": 8.26
+        },
+        {
+          "dimension_delito": "ABUSO_INCAPAZ_RESISTIR",
+          "cantidad": 346,
+          "pct": 6.12
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_DIGITAL_MENORES",
+          "cantidad": 126,
+          "pct": 2.23
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_COMERCIAL",
+          "cantidad": 33,
+          "pct": 0.58
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_COMERCIAL_MENOR",
+          "cantidad": 21,
+          "pct": 0.37
+        }
+      ],
+      "CHOCO": [
+        {
+          "dimension_delito": "ABUSO_SEXUAL_MENOR_14",
+          "cantidad": 757,
+          "pct": 53.05
+        },
+        {
+          "dimension_delito": "VIOLENCIA_SEXUAL_DIRECTA",
+          "cantidad": 457,
+          "pct": 32.03
+        },
+        {
+          "dimension_delito": "ABUSO_INCAPAZ_RESISTIR",
+          "cantidad": 87,
+          "pct": 6.1
+        },
+        {
+          "dimension_delito": "ACOSO_SEXUAL",
+          "cantidad": 86,
+          "pct": 6.03
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_DIGITAL_MENORES",
+          "cantidad": 30,
+          "pct": 2.1
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_COMERCIAL",
+          "cantidad": 5,
+          "pct": 0.35
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_COMERCIAL_MENOR",
+          "cantidad": 5,
+          "pct": 0.35
+        }
+      ],
+      "NARIÑO": [
+        {
+          "dimension_delito": "ABUSO_SEXUAL_MENOR_14",
+          "cantidad": 2566,
+          "pct": 42.87
+        },
+        {
+          "dimension_delito": "VIOLENCIA_SEXUAL_DIRECTA",
+          "cantidad": 2455,
+          "pct": 41.02
+        },
+        {
+          "dimension_delito": "ACOSO_SEXUAL",
+          "cantidad": 540,
+          "pct": 9.02
+        },
+        {
+          "dimension_delito": "ABUSO_INCAPAZ_RESISTIR",
+          "cantidad": 262,
+          "pct": 4.38
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_DIGITAL_MENORES",
+          "cantidad": 127,
+          "pct": 2.12
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_COMERCIAL",
+          "cantidad": 22,
+          "pct": 0.37
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_COMERCIAL_MENOR",
+          "cantidad": 12,
+          "pct": 0.2
+        },
+        {
+          "dimension_delito": "OTROS",
+          "cantidad": 1,
+          "pct": 0.02
+        }
+      ],
+      "VALLE DEL CAUCA": [
+        {
+          "dimension_delito": "ABUSO_SEXUAL_MENOR_14",
+          "cantidad": 8889,
+          "pct": 53.78
+        },
+        {
+          "dimension_delito": "VIOLENCIA_SEXUAL_DIRECTA",
+          "cantidad": 4474,
+          "pct": 27.07
+        },
+        {
+          "dimension_delito": "ACOSO_SEXUAL",
+          "cantidad": 1512,
+          "pct": 9.15
+        },
+        {
+          "dimension_delito": "ABUSO_INCAPAZ_RESISTIR",
+          "cantidad": 805,
+          "pct": 4.87
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_DIGITAL_MENORES",
+          "cantidad": 651,
+          "pct": 3.94
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_COMERCIAL_MENOR",
+          "cantidad": 116,
+          "pct": 0.7
+        },
+        {
+          "dimension_delito": "EXPLOTACION_SEXUAL_COMERCIAL",
+          "cantidad": 82,
+          "pct": 0.5
+        }
+      ]
+    }
+  },
+  "timeline_sexual_nna": {
+    "x_axis": [
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "series": [
+      {
+        "departamento": "CAUCA",
+        "data": [
+          105.41,
+          96.16,
+          96.68,
+          94.36,
+          71.72,
+          86.55,
+          87.11,
+          51.25
+        ]
+      },
+      {
+        "departamento": "CHOCO",
+        "data": [
+          43.56,
+          43.8,
+          42.44,
+          53.58,
+          27.29,
+          40.11,
+          40.21,
+          43.05
+        ]
+      },
+      {
+        "departamento": "NARIÑO",
+        "data": [
+          70.09,
+          67.78,
+          73.02,
+          61.52,
+          52.32,
+          71.28,
+          54.45,
+          77.91
+        ]
+      },
+      {
+        "departamento": "VALLE DEL CAUCA",
+        "data": [
+          180.34,
+          166.93,
+          142.99,
+          144.08,
+          117.87,
+          105.44,
+          97.66,
+          109.81
+        ]
+      }
+    ]
+  }
+}

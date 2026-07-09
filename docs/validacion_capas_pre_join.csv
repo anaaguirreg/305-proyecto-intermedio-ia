@@ -1,0 +1,19 @@
+check,group,expected,actual,diff_pct,status,msg,layer
+SUMA_TOTALES,violencia_total,122825.0,122825.0,0.0,PASS,Suma violencia_total: 122825 vs 122825 (diff: 0.00%),
+SUMA_TOTALES,sexuales_total,34446.0,34446.0,0.0,PASS,Suma sexuales_total: 34446 vs 34446 (diff: 0.00%),
+UNICIDAD,,,,,PASS,casos_vif_nna_f: Unicidad garantizada,casos_vif_nna_f
+COBERTURA_TEMPORAL,,,,,PASS,casos_vif_nna_f: Cobertura completa (2018-2025),casos_vif_nna_f
+UNICIDAD,,,,,PASS,casos_vif_adultas_f: Unicidad garantizada,casos_vif_adultas_f
+COBERTURA_TEMPORAL,,,,,PASS,casos_vif_adultas_f: Cobertura completa (2018-2025),casos_vif_adultas_f
+UNICIDAD,,,,,PASS,casos_sexual_nna_f: Unicidad garantizada,casos_sexual_nna_f
+COBERTURA_TEMPORAL,,,,,PASS,casos_sexual_nna_f: Cobertura completa (2018-2025),casos_sexual_nna_f
+UNICIDAD,,,,,PASS,casos_sexual_adultas_f: Unicidad garantizada,casos_sexual_adultas_f
+COBERTURA_TEMPORAL,,,,,PASS,casos_sexual_adultas_f: Cobertura completa (2018-2025),casos_sexual_adultas_f
+UNICIDAD,,,,,PASS,casos_vif_nna_m: Unicidad garantizada,casos_vif_nna_m
+COBERTURA_TEMPORAL,,,,,PASS,casos_vif_nna_m: Cobertura completa (2018-2025),casos_vif_nna_m
+UNICIDAD,,,,,PASS,casos_vif_adultos_m: Unicidad garantizada,casos_vif_adultos_m
+COBERTURA_TEMPORAL,,,,,PASS,casos_vif_adultos_m: Cobertura completa (2018-2025),casos_vif_adultos_m
+UNICIDAD,,,,,PASS,casos_sexual_nna_m: Unicidad garantizada,casos_sexual_nna_m
+COBERTURA_TEMPORAL,,,,,PASS,casos_sexual_nna_m: Cobertura completa (2018-2025),casos_sexual_nna_m
+UNICIDAD,,,,,PASS,casos_sexual_adultos_m: Unicidad garantizada,casos_sexual_adultos_m
+COBERTURA_TEMPORAL,,,,,PASS,casos_sexual_adultos_m: Cobertura completa (2018-2025),casos_sexual_adultos_m

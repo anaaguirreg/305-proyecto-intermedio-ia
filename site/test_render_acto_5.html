@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<!-- sub_acto_5 — Ficha Municipal + Clasificador IA.
+     Pass 2.A scope: data load (3 JSONs), dual selector, narrative banner, 6 stat cards.
+     Pass 2.B adds: sparkline ICV (ECharts 6.0.0), coefficient contributions bar, forensic profile.
+     Pass 2.C adds: classifier sliders, closing narrative.
+     Servir desde raíz del repositorio: python -m http.server 8000
+     Abrir: http://localhost:8000/site/test_render_acto_5.html
+     fetch() bloqueado bajo file:// por restricción CORS de mismo origen.
+     URL auto-select: ?dep=CAUCA&mun=19001 -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Render test — Acto 5: Ficha Municipal (Pass 2.C)</title>
+  <!-- ECharts 6.0.0 via jsDelivr — same CDN and version as the majority of test_render_acto_*.html -->
+  <script src="https://cdn.jsdelivr.net/npm/echarts@6.0.0/dist/echarts.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/variables.css">
+  <link rel="stylesheet" href="./css/typography.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/components.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      color: var(--color-ink);
+      background: var(--color-canvas);
+    }
+
+    /* ── page heading ──────────────────────────────────────────────────── */
+    .page-heading {
+      padding: 1.25rem 1.5rem 0.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .page-heading h1 { font-size: 1.15rem; font-weight: 700; color: var(--color-ink); }
+    .page-heading .page-lede {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      margin-top: 2px;
+    }
+
+    /* ── load / error states ───────────────────────────────────────────── */
+    .load-msg {
+      padding: 2rem 1.5rem;
+      color: var(--color-muted);
+      font-size: 0.9rem;
+    }
+    .load-error {
+      border-left: 3px solid var(--color-error);
+      background: var(--color-primary-ghost);
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      color: var(--color-error);
+      margin: 1rem 1.5rem;
+    }
+
+    /* ── sticky selector bar ───────────────────────────────────────────── */
+    .selector-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--color-canvas);
+      border-bottom: 1px solid var(--color-hairline);
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .selector-bar label {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .selector-bar select {
+      font-size: 0.88rem;
+      padding: 0.35rem 0.6rem;
+      border: 1px solid var(--color-hairline);
+      border-radius: 4px;
+      background: var(--color-canvas);
+      color: var(--color-ink);
+      cursor: pointer;
+      min-width: 180px;
+    }
+    .selector-bar select:focus {
+      outline: 2px solid var(--color-accent-teal);
+      outline-offset: 1px;
+    }
+
+    /* ── main content ──────────────────────────────────────────────────── */
+    .main-content {
+      padding: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── empty state ───────────────────────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      color: var(--color-muted);
+      font-size: 0.95rem;
+      padding: 4rem 1rem;
+    }
+
+    /* ── municipality header ───────────────────────────────────────────── */
+    .mun-header { margin-bottom: 1rem; }
+    .mun-header h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--color-ink);
+    }
+    .mun-header .mun-dept {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      margin-top: 2px;
+    }
+
+    /* ── excluded-from-model notice ────────────────────────────────────── */
+    .excluded-banner {
+      border-left: 3px solid var(--color-accent-amber);
+      background: var(--color-accent-amber-soft);
+      padding: 0.5rem 0.75rem;
+      font-size: 0.82rem;
+      color: var(--color-accent-amber);
+      margin-bottom: 1rem;
+      border-radius: 2px;
+    }
+
+    /* ── narrative banner ──────────────────────────────────────────────── */
+    .narrative-banner {
+      border: 1px solid var(--color-hairline);
+      border-left: 4px solid var(--color-primary-mid);
+      background: var(--color-primary-ghost);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 4px;
+      line-height: 1.65;
+    }
+    .narrative-provisional {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--color-accent-amber);
+      background: var(--color-accent-amber-soft);
+      border: 1px solid var(--color-accent-amber-soft);
+      border-radius: 3px;
+      padding: 2px 8px;
+      display: inline-block;
+      margin-bottom: 0.55rem;
+      letter-spacing: 0.04em;
+    }
+    .narrative-text {
+      display: block;
+      font-size: 1rem;
+      color: var(--color-ink);
+    }
+
+    /* ── stat cards grid — 3×2 desktop, 2×3 medium, 1×6 narrow ───────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 700px) {
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 420px) {
+      .card-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── single stat card (adapted from test_render_phase_3a_stat_cards) ─ */
+    .stat-card {
+      position: relative;
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline);
+      border-radius: 6px;
+      padding: 20px 18px 16px;
+    }
+    .card-badge {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 2px 7px;
+      border-radius: 10px;
+      background: var(--color-hairline);
+      color: var(--color-muted);
+    }
+    .card-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      color: var(--color-ink);
+    }
+    .card-value--text {
+      font-size: 1.35rem;
+      line-height: 1.3;
+      font-weight: 600;
+    }
+    .card-label {
+      font-size: 12px;
+      color: var(--color-muted);
+      line-height: 1.4;
+    }
+    .card-subvalue {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--color-muted);
+      line-height: 1.4;
+      border-top: 1px solid var(--color-hairline);
+      padding-top: 7px;
+    }
+
+    /* ── Pass 2.B: charts grid (sparkline left, contributions right) ──── */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 640px) {
+      .charts-grid { grid-template-columns: 1fr; }
+    }
+
+    .chart-panel {
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline);
+      border-radius: 6px;
+      padding: 14px 16px 12px;
+    }
+    .chart-panel-title {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+    .chart-container { width: 100%; height: 200px; }
+    .contributions-na {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      text-align: center;
+      padding: 1rem;
+    }
+
+    /* ── Pass 2.B: forensic profile section ───────────────────────────── */
+    .forensic-section {
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline);
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin-bottom: 1.5rem;
+    }
+    .forensic-section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-hairline);
+    }
+    .forensic-no-coverage {
+      text-align: center;
+      color: var(--color-muted);
+      font-size: 0.88rem;
+      padding: 1.5rem 1rem;
+    }
+    .forensic-dim {
+      margin-top: 16px;
+    }
+    .forensic-dim:first-child { margin-top: 0; }
+    .forensic-dim-header {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .forensic-total-badge {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--color-muted);
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline);
+      border-radius: 10px;
+      padding: 1px 8px;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .forensic-dim-divider {
+      border: none;
+      border-top: 1px solid var(--color-hairline);
+      margin: 16px 0 0;
+    }
+    .forensic-no-dim {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      font-style: italic;
+      padding: 6px 0;
+    }
+    .forensic-card-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 800px) {
+      .forensic-card-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 500px) {
+      .forensic-card-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── Pass 2.C: classifier widget ──────────────────────────────────── */
+    .widget-section {
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline);
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin-bottom: 1.5rem;
+    }
+    .widget-section-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-hairline);
+    }
+    .slider-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 600px) {
+      .slider-grid { grid-template-columns: 1fr; }
+    }
+    .slider-row { display: flex; flex-direction: column; gap: 3px; }
+    .slider-row-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .slider-label { font-size: 0.82rem; font-weight: 600; color: var(--color-body); }
+    .slider-range-label { font-size: 0.72rem; color: var(--color-muted); }
+    .slider-row input[type="range"] {
+      width: 100%;
+      accent-color: var(--color-primary-mid);
+      cursor: pointer;
+    }
+    .slider-value-display {
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      text-align: right;
+    }
+    .widget-prediction {
+      background: var(--color-primary-ghost);
+      border: 1px solid var(--color-primary-wash);
+      border-left: 4px solid var(--color-primary-mid);
+      border-radius: 4px;
+      padding: 10px 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .widget-pred-label { font-size: 0.82rem; color: var(--color-muted); font-weight: 500; }
+    .widget-pred-result { font-size: 1rem; font-weight: 700; color: var(--color-primary-mid); }
+    .widget-pred-prob   { font-size: 0.78rem; color: var(--color-muted); }
+    .widget-caveat { font-size: 0.75rem; color: var(--color-muted); line-height: 1.4; }
+
+    /* ── Pass 2.C: closing narrative ───────────────────────────────────── */
+    .closing-section {
+      background: var(--color-canvas);
+      border: 1px solid var(--color-hairline);
+      border-left: 4px solid var(--color-primary-deep);
+      border-radius: 4px;
+      padding: 16px 18px;
+      margin-bottom: 1.5rem;
+    }
+    .closing-teaser {
+      font-size: 0.95rem;
+      color: var(--color-ink);
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .closing-toggle {
+      font-size: 0.82rem;
+      color: var(--color-primary-deep);
+      background: none;
+      border: 1px solid var(--color-primary-deep);
+      border-radius: 4px;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .closing-toggle:hover { background: var(--color-canvas); }
+    .closing-model-content {
+      margin-top: 16px;
+      border-top: 1px solid var(--color-hairline);
+      padding-top: 16px;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--color-ink);
+    }
+    .closing-model-content h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--color-primary-deep);
+    }
+    .closing-model-content h5 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--color-body);
+      margin: 14px 0 6px;
+    }
+    .closing-model-content p { margin-bottom: 10px; }
+    .closing-model-content ul { margin: 4px 0 8px 20px; }
+    .closing-model-content li { margin-bottom: 5px; }
+    .closing-not-available {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      font-style: italic;
+      padding: 4px 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-heading">
+  <h1>Acto 5 — Ficha Municipal</h1>
+  <p class="page-lede">Pass 2.C: sparkline ICV · contribuciones al clasificador · perfil forense · widget clasificador · narrativa de cierre</p>
+</div>
+
+<div id="loading" class="load-msg">Cargando datos…</div>
+<div id="error-block" class="load-error" hidden></div>
+
+<div id="app" hidden>
+  <div class="selector-bar">
+    <label for="sel-dept">Departamento</label>
+    <select id="sel-dept"></select>
+    <label for="sel-mun">Municipio</label>
+    <select id="sel-mun"></select>
+  </div>
+
+  <div class="main-content">
+    <div id="empty-state" class="empty-state">
+      Selecciona un municipio para ver su ficha.
+    </div>
+
+    <div id="mun-panel" hidden>
+      <!-- Pass 2.A: header, excluded banner, narrative banner, 6 stat cards -->
+      <div id="mun-header" class="mun-header"></div>
+      <div id="excluded-banner" class="excluded-banner" hidden></div>
+      <div id="narrative-banner" class="narrative-banner" hidden></div>
+      <div id="stat-cards-grid" class="card-grid"></div>
+
+      <!-- Pass 2.B: sparkline + coefficients bar (2-column grid) -->
+      <div class="charts-grid">
+        <div class="chart-panel">
+          <div class="chart-panel-title">ICV-GEN-F histórico</div>
+          <div id="sparkline-container" class="chart-container"></div>
+        </div>
+        <div class="chart-panel">
+          <div class="chart-panel-title">Contribución al clasificador</div>
+          <div id="contributions-container" class="chart-container"></div>
+          <div id="contributions-na" class="contributions-na" style="display:none">
+            Este municipio no ingresa al modelo de clasificación por subregistro estructural en los datos policiales.
+          </div>
+          <small id="contributions-caption" style="display:none; font-size:0.85em; color:#6c6a64; margin-top:8px;">
+            Este gráfico revela qué indicadores pesaron más en la clasificación del municipio. Los valores positivos empujan hacia alta severidad; los negativos hacia moderada-baja.
+          </small>
+        </div>
+      </div>
+
+      <!-- Pass 2.B: forensic profile card -->
+      <div id="forensic-section" class="forensic-section">
+        <div class="forensic-section-title">Perfil forense local</div>
+        <p id="forensic-disclaimer" style="font-size:0.85em;color:#6c6a64;margin:4px 0 16px 0;font-style:italic;display:none"></p>
+        <div id="forensic-content"></div>
+      </div>
+
+      <!-- Pass 2.C: classifier widget -->
+      <div id="widget-section" class="widget-section">
+        <div class="widget-section-title">Clasificador IA — Simula tu municipio</div>
+        <div id="slider-grid" class="slider-grid"></div>
+        <div class="widget-prediction">
+          <span class="widget-pred-label">Clasificación inferida:</span>
+          <span id="widget-pred-result" class="widget-pred-result">—</span>
+          <span id="widget-pred-prob" class="widget-pred-prob"></span>
+        </div>
+        <p class="widget-caveat">
+          Ajusta los deslizadores para simular escenarios. El modelo usa
+          log1p + RobustScaler + regresión logística (F1-Macro CV&nbsp;=&nbsp;0.9769).
+        </p>
+      </div>
+
+      <!-- Pass 2.C: closing narrative + collapsible prevention model -->
+      <div id="closing-section" class="closing-section">
+        <div id="closing-teaser" class="closing-teaser"></div>
+        <p id="closing-not-available" class="closing-not-available" hidden>
+          Narrativa de cierre no disponible para municipios excluidos del modelo.
+        </p>
+        <button id="closing-toggle" class="closing-toggle" hidden>
+          Ver modelo de prevención
+        </button>
+        <div id="closing-model-content" class="closing-model-content" hidden></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── data URLs (same base path as all test_render_acto_*.html) ──────────────
+    const getCssVar = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    const CSS = {
+      canvas:       getCssVar('--color-canvas'),       // #faf9f5
+      ink:          getCssVar('--color-ink'),          // #1a1a18
+      body:         getCssVar('--color-body'),         // #3d3d3a
+      muted:        getCssVar('--color-muted'),        // #6c6a64
+      mutedSoft:    getCssVar('--color-muted-soft'),   // #8e8b82
+      hairline:     getCssVar('--color-hairline'),     // #e2dbd0
+      primaryMid:   getCssVar('--color-primary-mid'),  // #7a2d52
+      primaryDeep:  getCssVar('--color-primary-deep'), // #3d0f27
+      primaryGhost: getCssVar('--color-primary-ghost'),// #f3ecef
+      scale2:       getCssVar('--scale-2'),            // #e4c4c0
+      scale3:       getCssVar('--scale-3'),            // #c4808a
+      scale4:       getCssVar('--scale-4'),            // #8a3050
+      scaleNull:    getCssVar('--scale-null'),         // #c8c4bc
+    };
+
+const MUNICIPIOS_URL = './data/acto_5_municipios.json';
+const FICHA_URL      = './data/acto_5_ficha_forense_municipal.json';
+const MODELO_URL     = './data/modelo_clasificador.json';
+const CONFIG_URL     = './config/master_exporter_config.json';
+
+// ── module-scope state ─────────────────────────────────────────────────────
+window.ACTO5_STATE = {
+  municipios:  null,   // full acto_5_municipios.json
+  ficha:       null,   // acto_5_ficha_forense_municipal.json
+  modelo:      null,   // modelo_clasificador.json
+  config:      null,   // master_exporter_config.json (for closing copy)
+  selectedMun: null,   // cod_municipio string or null
+};
+
+// ── ECharts instances (lazy-initialized on first municipality render) ───────
+let SPARKLINE_CHART     = null;
+let CONTRIBUTIONS_CHART = null;
+
+// ── value formatter (adapted from test_render_phase_3a_stat_cards.html) ────
+// Pass 2.A formats: 'text', 'decimal_2', 'rate_100k', 'integer', etc.
+// Pass 2.B addition: 'pct_split' for forensic distribucion_por_ciclo cards
+//   (value is {nna_pct, adultas_pct}, not a scalar).
+// Null guard added: excluded-municipality stat cards carry value: null.
+function formatValue(value, format) {
+  if (value === null || value === undefined) return '—';
+
+  if (format === 'pct_split') {
+    if (typeof value === 'object') {
+      const nna = Number(value.nna_pct).toLocaleString('es', {
+        minimumFractionDigits: 1, maximumFractionDigits: 1,
+      });
+      const adu = Number(value.adultas_pct).toLocaleString('es', {
+        minimumFractionDigits: 1, maximumFractionDigits: 1,
+      });
+      return `NNA ${nna} % · Adultas ${adu} %`;
+    }
+    return String(value);
+  }
+
+  if (format === 'text') return String(value);
+
+  const num = Number(value);
+  const ES  = 'es';
+
+  switch (format) {
+    case 'decimal_2':
+    case 'rate_100k':
+      return num.toLocaleString(ES, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    case 'integer':
+      return num.toLocaleString(ES, { useGrouping: false, maximumFractionDigits: 0 });
+    case 'integer_thousands':
+      return num.toLocaleString(ES, { useGrouping: true, maximumFractionDigits: 0 });
+    case 'percent_1d':
+      return num.toLocaleString(ES, {
+        minimumFractionDigits: 1,
+        maximumFractionDigits: 1,
+      }) + ' %';
+    case 'decimal_2d':
+      return num.toLocaleString(ES, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    case 'ratio_x_to_1':
+      return num.toLocaleString(ES, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }) + '×';
+    default:
+      return String(value);
+  }
+}
+
+// ── single stat card (adapted from test_render_phase_3a_stat_cards.html) ───
+// Pass 2.B: 'pct_split' added to text-sized formats (value is a multi-line string).
+function renderStatCard(card) {
+  const el = document.createElement('div');
+  el.className = 'stat-card';
+
+  if (card.badge) {
+    const badge = document.createElement('span');
+    badge.className = 'card-badge';
+    badge.textContent = card.badge;
+    el.appendChild(badge);
+  }
+
+  const isTextSized = card.display_format === 'text' || card.display_format === 'pct_split';
+  const valEl = document.createElement('div');
+  valEl.className = 'card-value' + (isTextSized ? ' card-value--text' : '');
+  valEl.textContent = formatValue(card.value, card.display_format);
+  el.appendChild(valEl);
+
+  const labelEl = document.createElement('div');
+  labelEl.className = 'card-label';
+  labelEl.textContent = card.label_es;
+  el.appendChild(labelEl);
+
+  if (card.sub_value !== null) {
+    const sv   = card.sub_value;
+    const svEl = document.createElement('div');
+    svEl.className = 'card-subvalue';
+    svEl.textContent = sv.value !== null
+      ? formatValue(sv.value, 'percent_1d') + ' — ' + sv.label_es
+      : sv.label_es;
+    el.appendChild(svEl);
+  }
+
+  return el;
+}
+
+// ── narrative resolver ─────────────────────────────────────────────────────
+// Template placeholder: {key} → narrative_values_es[key + '_placeholder']
+function resolveNarrative(template, narrativeValues) {
+  return template.replace(/\{(\w+)\}/g, (match, key) => {
+    const val = narrativeValues[key + '_placeholder'];
+    return val !== undefined ? val : match;
+  });
+}
+
+// ── URL helpers ────────────────────────────────────────────────────────────
+function getUrlParams() {
+  const sp = new URLSearchParams(window.location.search);
+  return { dep: sp.get('dep') || '', mun: sp.get('mun') || '' };
+}
+
+function setUrlParams(dep, mun) {
+  const sp = new URLSearchParams();
+  if (dep) sp.set('dep', dep);
+  if (mun) sp.set('mun', mun);
+  history.replaceState(null, '', '?' + sp.toString());
+}
+
+// ── dept key: nombre_es uppercased for URL param ("Cauca" → "CAUCA") ───────
+function deptKey(dept) {
+  return dept.nombre_es.toUpperCase();
+}
+
+// ── department selector ────────────────────────────────────────────────────
+function buildDeptSelector(departamentos, defaultDep) {
+  const sel = document.getElementById('sel-dept');
+  sel.innerHTML = '';
+
+  const placeholder = document.createElement('option');
+  placeholder.value = '';
+  placeholder.textContent = '— Selecciona departamento —';
+  placeholder.disabled = true;
+  sel.appendChild(placeholder);
+
+  departamentos.forEach(dept => {
+    const opt = document.createElement('option');
+    opt.value = dept.nombre_es.toUpperCase();
+    opt.textContent = dept.nombre_es;
+    sel.appendChild(opt);
+  });
+
+  sel.value = defaultDep || '';
+}
+
+// ── municipality selector ──────────────────────────────────────────────────
+function buildMunSelector(deptValue, defaultMun) {
+  const state  = window.ACTO5_STATE.municipios;
+  const munMap = state.municipios;
+  const sel    = document.getElementById('sel-mun');
+
+  sel.innerHTML = '';
+  const placeholder = document.createElement('option');
+  placeholder.value = '';
+  placeholder.textContent = '— Selecciona tu municipio —';
+  sel.appendChild(placeholder);
+
+  if (!deptValue) return;
+
+  const dept = state.departamentos_disponibles
+    .find(d => deptKey(d) === deptValue);
+
+  if (!dept) return;
+
+  const entries = dept.municipios_codigos
+    .filter(cod => munMap[cod])
+    .map(cod => ({ cod, nombre: munMap[cod].nombre_es }))
+    .sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+
+  entries.forEach(({ cod, nombre }) => {
+    const opt = document.createElement('option');
+    opt.value = cod;
+    opt.textContent = nombre;
+    sel.appendChild(opt);
+  });
+
+  if (defaultMun && dept.municipios_codigos.includes(defaultMun)) {
+    sel.value = defaultMun;
+  }
+}
+
+// ── Pass 2.B: lazy ECharts initialization ─────────────────────────────────
+function ensureCharts() {
+  if (!SPARKLINE_CHART) {
+    SPARKLINE_CHART = echarts.init(document.getElementById('sparkline-container'));
+    window.addEventListener('resize', () => SPARKLINE_CHART.resize());
+  }
+  if (!CONTRIBUTIONS_CHART) {
+    CONTRIBUTIONS_CHART = echarts.init(
+      document.getElementById('contributions-container'),
+    );
+    window.addEventListener('resize', () => CONTRIBUTIONS_CHART.resize());
+  }
+}
+
+// ── Pass 2.B: sparkline ICV (minimalist line + area fill) ─────────────────
+function updateSparkline(mun) {
+  const spark = mun.sparkline_icv;
+  if (!spark) return;
+
+  SPARKLINE_CHART.setOption({
+    backgroundColor: CSS.canvas,
+    grid: { left: 10, right: 10, top: 16, bottom: 30, containLabel: true },
+    tooltip: {
+      trigger: 'axis',
+      formatter: params => {
+        const p = params[0];
+        return `<strong>${p.axisValue}</strong><br>ICV-GEN-F: ${Number(p.value).toFixed(2)}`;
+      },
+    },
+    xAxis: {
+      type: 'category',
+      data: spark.years,
+      axisLabel: { fontSize: 10, color: CSS.muted },
+      axisLine:  { lineStyle: { color: CSS.hairline } },
+      splitLine: { show: false },
+    },
+    yAxis: {
+      type: 'value',
+      axisLabel: { fontSize: 10, color: CSS.muted, formatter: v => v.toFixed(0) },
+      splitLine: { lineStyle: { color: CSS.canvas } },
+    },
+    series: [{
+      type:      'line',
+      data:      spark.values,
+      smooth:    true,
+      symbol:    'circle',
+      symbolSize: 4,
+      lineStyle:  { width: 2, color: CSS.primaryMid },
+      itemStyle:  { color: CSS.primaryMid },
+      areaStyle:  { color: 'rgba(123, 31, 75, 0.08)' },
+    }],
+  });
+}
+
+// ── Pass 2.B: coefficient contributions horizontal bar ─────────────────────
+// Labels come from feature_label_es inline in coefficient_contributions array.
+// Colors: positive contribution → #7a2d52, negative → #8e8b82.
+function updateContributions(mun) {
+  const contribsRaw = mun.coefficient_contributions;
+  const naEl        = document.getElementById('contributions-na');
+  const chartEl     = document.getElementById('contributions-container');
+  const captionEl   = document.getElementById('contributions-caption');
+
+  if (!contribsRaw) {
+    // Excluded municipalities (27150, 27493) — hide chart, show exclusion notice
+    chartEl.style.display    = 'none';
+    naEl.style.display       = 'flex';
+    captionEl.style.display  = 'none';
+    CONTRIBUTIONS_CHART.clear();
+    return;
+  }
+
+  // Non-excluded municipalities — show chart + pedagogical caption
+  chartEl.style.display    = '';
+  naEl.style.display       = 'none';
+  captionEl.style.display  = '';
+
+  // Sort by absolute contribution descending (most impactful first)
+  const contribs = [...contribsRaw].sort(
+    (a, b) => Math.abs(b.contribution) - Math.abs(a.contribution),
+  );
+
+  const labels  = contribs.map(c => c.feature_label_es);
+  const values  = contribs.map(c => c.contribution);
+  const colors  = values.map(v => (v >= 0 ? CSS.primaryMid : CSS.mutedSoft));
+  const fmtN    = v => v.toFixed(3);
+
+  CONTRIBUTIONS_CHART.setOption({
+    backgroundColor: CSS.canvas,
+    grid: { left: 10, right: 55, top: 8, bottom: 8, containLabel: true },
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { type: 'shadow' },
+      formatter: params => {
+        const i   = params[0].dataIndex;
+        const c   = contribs[i];
+        return [
+          `<strong>${c.feature_label_es}</strong>`,
+          `Coeficiente: ${fmtN(c.coefficient)}`,
+          `Valor estandarizado: ${fmtN(c.standardized_value)}`,
+          `Contribución: ${fmtN(c.contribution)}`,
+        ].join('<br>');
+      },
+    },
+    xAxis: {
+      type: 'value',
+      axisLabel: { fontSize: 10, color: CSS.muted, formatter: v => v.toFixed(1) },
+      splitLine: { lineStyle: { color: CSS.canvas } },
+    },
+    yAxis: {
+      type: 'category',
+      data: labels,
+      inverse: true,
+      axisLabel: { fontSize: 11, color: CSS.body, width: 120, overflow: 'truncate' },
+    },
+    series: [{
+      type: 'bar',
+      data: values.map((v, i) => ({
+        value: v,
+        itemStyle: { color: colors[i] },
+      })),
+      label: {
+        show:      true,
+        position:  'right',
+        formatter: p => fmtN(p.value),
+        fontSize:  10,
+        color:     CSS.muted,
+      },
+    }],
+  });
+}
+
+// ── Pass 2.B: forensic profile section ────────────────────────────────────
+// Three states:
+//   1. ficha entry exists with both VS + VIF → two subsections of 5 cards each
+//   2. ficha entry exists with only one dimension → one subsection + note
+//   3. no ficha entry (municipality in sin_cobertura or not present) → message
+function renderForensicProfile(cod) {
+  const contentEl     = document.getElementById('forensic-content');
+  const disclaimerEl  = document.getElementById('forensic-disclaimer');
+  contentEl.innerHTML = '';
+  disclaimerEl.style.display = 'none';
+
+  const fichaEntry = window.ACTO5_STATE.ficha.municipios[cod];
+
+  // State 3: not in ficha.municipios dict → sin_cobertura
+  if (!fichaEntry) {
+    const msg = document.createElement('p');
+    msg.className = 'forensic-no-coverage';
+    msg.textContent =
+      'Cobertura forense insuficiente para perfilamiento local (< 30 casos peritados)';
+    contentEl.appendChild(msg);
+    return;
+  }
+
+  const hasVS  = fichaEntry.has_violencia_sexual_profile;
+  const hasVIF = fichaEntry.has_vif_profile;
+
+  if (hasVS || hasVIF) {
+    const text = window.ACTO5_STATE.ficha.metadata.data_source_disclaimer_es;
+    if (text) {
+      disclaimerEl.textContent   = text;
+      disclaimerEl.style.display = '';
+    }
+  }
+
+  function renderDim(label, perfil) {
+    const block = document.createElement('div');
+    block.className = 'forensic-dim';
+
+    const header = document.createElement('div');
+    header.className = 'forensic-dim-header';
+
+    const labelSpan = document.createElement('span');
+    labelSpan.textContent = label;
+    header.appendChild(labelSpan);
+
+    if (perfil && perfil.total_casos != null) {
+      const badge = document.createElement('span');
+      badge.className = 'forensic-total-badge';
+      badge.textContent = `${perfil.total_casos.toLocaleString('es')} casos`;
+      header.appendChild(badge);
+    }
+    block.appendChild(header);
+
+    if (!perfil) {
+      const note = document.createElement('p');
+      note.className = 'forensic-no-dim';
+      note.textContent = 'Sin cobertura suficiente en esta dimensión (< 30 casos peritados).';
+      block.appendChild(note);
+      return block;
+    }
+
+    const grid = document.createElement('div');
+    grid.className = 'forensic-card-grid';
+    (perfil.stat_cards || []).forEach(card => grid.appendChild(renderStatCard(card)));
+    block.appendChild(grid);
+
+    return block;
+  }
+
+  // Render available dimensions
+  contentEl.appendChild(
+    renderDim('Violencia sexual', hasVS ? fichaEntry.violencia_sexual : null),
+  );
+
+  const divider = document.createElement('hr');
+  divider.className = 'forensic-dim-divider';
+  contentEl.appendChild(divider);
+
+  contentEl.appendChild(
+    renderDim('Violencia intrafamiliar', hasVIF ? fichaEntry.violencia_intrafamiliar : null),
+  );
+}
+
+// ── Pass 2.C: classifier widget ────────────────────────────────────────────
+
+// p1/p99 for one feature across all municipality stat_cards (nulls excluded)
+function getFeatureRange(featureId) {
+  const munMap = window.ACTO5_STATE.municipios.municipios;
+  const cardId = featureId.replace(/_f$/, ''); // 'tasa_vif_nna_f' → 'tasa_vif_nna'
+  const vals = Object.values(munMap)
+    .map(m => {
+      const card = m.stat_cards && m.stat_cards.find(c => c.id === cardId);
+      return (card && card.value !== null) ? Number(card.value) : null;
+    })
+    .filter(v => v !== null && !isNaN(v))
+    .sort((a, b) => a - b);
+  if (!vals.length) return { min: 0, max: 1000 };
+  const n   = vals.length;
+  const p1  = vals[Math.max(0, Math.floor(n * 0.01))];
+  const p99 = vals[Math.min(n - 1, Math.floor(n * 0.99))];
+  return { min: Math.max(0, Math.floor(p1)), max: Math.ceil(p99) };
+}
+
+// JS inference — mirrors Python: log1p → RobustScaler → LogisticRegression
+function runClassifier(featureValues) {
+  const m      = window.ACTO5_STATE.modelo;
+  const center = m.preprocessing.robust_scaler.center;
+  const scale  = m.preprocessing.robust_scaler.scale;
+  const coef   = m.coefficients;
+  let z = m.intercept;
+  for (let i = 0; i < 4; i++) {
+    const xl = Math.log(1 + featureValues[i]);
+    z += coef[i] * (xl - center[i]) / scale[i];
+  }
+  const p   = 1 / (1 + Math.exp(-z));
+  const cls = p >= m.decision_threshold ? 1 : 0;
+  return { p, cls, label: m.classes[String(cls)] };
+}
+
+// Read current slider values and update prediction display
+function updatePrediction() {
+  const sliders = document.querySelectorAll('#slider-grid input[type="range"]');
+  if (!sliders.length) return;
+  const vals    = Array.from(sliders).map(s => Number(s.value));
+  const { p, label } = runClassifier(vals);
+  document.getElementById('widget-pred-result').textContent = label;
+  document.getElementById('widget-pred-prob').textContent   = `(p = ${(p * 100).toFixed(1)} %)`;
+}
+
+// Build 4 feature sliders seeded with the current municipality's values
+function renderWidget(mun) {
+  const modelo = window.ACTO5_STATE.modelo;
+  const gridEl = document.getElementById('slider-grid');
+  gridEl.innerHTML = '';
+
+  const features = modelo.features;          // ['tasa_vif_nna_f', ...]
+  const labels   = modelo.features_labels_es; // {id → label_es}
+
+  features.forEach((fid, i) => {
+    const range   = getFeatureRange(fid);
+    const cardId  = fid.replace(/_f$/, '');
+    const card    = mun.stat_cards && mun.stat_cards.find(c => c.id === cardId);
+    const rawVal  = (card && card.value !== null) ? Number(card.value) : null;
+    const initVal = rawVal !== null
+      ? Math.max(range.min, Math.min(range.max, Math.round(rawVal)))
+      : Math.round((range.min + range.max) / 2);
+
+    const row = document.createElement('div');
+    row.className = 'slider-row';
+
+    const header = document.createElement('div');
+    header.className = 'slider-row-header';
+    const lbl = document.createElement('span');
+    lbl.className   = 'slider-label';
+    lbl.textContent = labels[fid] || fid;
+    const rangeLbl  = document.createElement('span');
+    rangeLbl.className   = 'slider-range-label';
+    rangeLbl.textContent = `p1: ${range.min} — p99: ${range.max}`;
+    header.appendChild(lbl);
+    header.appendChild(rangeLbl);
+    row.appendChild(header);
+
+    const input = document.createElement('input');
+    input.type  = 'range';
+    input.min   = range.min;
+    input.max   = range.max;
+    input.step  = 1;
+    input.value = initVal;
+    row.appendChild(input);
+
+    const display = document.createElement('div');
+    display.className   = 'slider-value-display';
+    display.textContent = initVal.toLocaleString('es', { maximumFractionDigits: 0 });
+    row.appendChild(display);
+
+    input.addEventListener('input', () => {
+      display.textContent = Number(input.value).toLocaleString('es', { maximumFractionDigits: 0 });
+      updatePrediction();
+    });
+
+    gridEl.appendChild(row);
+  });
+
+  updatePrediction();
+}
+
+// ── Pass 2.C: closing narrative ────────────────────────────────────────────
+
+function renderClosingNarrative(mun) {
+  const teaserEl     = document.getElementById('closing-teaser');
+  const toggleBtn    = document.getElementById('closing-toggle');
+  const modelContent = document.getElementById('closing-model-content');
+  const naEl         = document.getElementById('closing-not-available');
+
+  teaserEl.textContent  = '';
+  modelContent.innerHTML = '';
+  modelContent.hidden    = true;
+  toggleBtn.hidden       = true;
+  toggleBtn.textContent  = 'Ver modelo de prevención';
+  naEl.hidden            = true;
+
+  const a5cfg = window.ACTO5_STATE.config
+    ? window.ACTO5_STATE.config.acto_5_municipios
+    : null;
+
+  if (!a5cfg || mun.excluido_del_modelo || mun.cluster_id === null) {
+    naEl.hidden = false;
+    return;
+  }
+
+  const clusterStr = String(mun.cluster_id);
+
+  // Two-level resolution: hallazgo template → resolve {dominant_violence_type}
+  const hallazgoTmpl = (a5cfg.closing_hallazgo_by_cluster_es || {})[clusterStr] || '';
+  const hallazgo     = hallazgoTmpl.replace(
+    /\{dominant_violence_type\}/g,
+    mun.dominant_violence_type_es || 'N/D',
+  );
+
+  const modeloPrevencion =
+    ((a5cfg.closing_modelo_prevencion_by_cluster_es || {})[clusterStr]) || '';
+
+  const teaserText = (a5cfg.closing_teaser_template_es || '')
+    .replace(/\{municipio\}/g,         mun.nombre_es)
+    .replace(/\{hallazgo\}/g,          hallazgo)
+    .replace(/\{modelo_prevencion\}/g, modeloPrevencion);
+
+  teaserEl.textContent = teaserText;
+
+  const modelHtml = mun.cluster_id === 1
+    ? a5cfg.prevention_model_alta_html_es
+    : a5cfg.prevention_model_moderada_html_es;
+
+  if (modelHtml) {
+    modelContent.innerHTML = modelHtml;
+    toggleBtn.hidden = false;
+    toggleBtn.onclick = () => {
+      const isOpen          = !modelContent.hidden;
+      modelContent.hidden   = isOpen;
+      toggleBtn.textContent = isOpen ? 'Ver modelo de prevención' : 'Ocultar modelo de prevención';
+    };
+  }
+}
+
+// ── render selected municipality ───────────────────────────────────────────
+function renderMunicipality(cod) {
+  const state = window.ACTO5_STATE.municipios;
+  const mun   = state.municipios[cod];
+
+  if (!mun) {
+    showEmptyState();
+    return;
+  }
+
+  window.ACTO5_STATE.selectedMun = cod;
+
+  // Municipality header
+  const headerEl = document.getElementById('mun-header');
+  headerEl.innerHTML = '';
+  const h2 = document.createElement('h2');
+  h2.textContent = (mun.cluster_emoji ? mun.cluster_emoji + ' ' : '') + mun.nombre_es;
+  headerEl.appendChild(h2);
+  const deptEl = document.createElement('div');
+  deptEl.className = 'mun-dept';
+  deptEl.textContent = mun.departamento_es;
+  headerEl.appendChild(deptEl);
+
+  // Excluded-from-model notice
+  const excludedEl = document.getElementById('excluded-banner');
+  if (mun.excluido_del_modelo) {
+    excludedEl.textContent =
+      state.metadata.excluido_del_modelo_banner_es ||
+      'Este municipio no se incluye en el modelo de clasificación por subregistro estructural.';
+    excludedEl.hidden = false;
+  } else {
+    excludedEl.hidden = true;
+  }
+
+  // Narrative banner — template in metadata, per-municipality placeholders in narrative_values_es
+  const bannerEl      = document.getElementById('narrative-banner');
+  const template      = state.metadata.narrative_template_es || '';
+  const isProvisional = template.startsWith('PROVISIONAL: ');
+  const rawTemplate   = isProvisional ? template.slice('PROVISIONAL: '.length) : template;
+  const resolved      = resolveNarrative(rawTemplate, mun.narrative_values_es || {});
+
+  bannerEl.innerHTML = '';
+  if (isProvisional) {
+    const tag = document.createElement('span');
+    tag.className = 'narrative-provisional';
+    tag.textContent = 'PROVISIONAL';
+    bannerEl.appendChild(tag);
+  }
+  const textEl = document.createElement('span');
+  textEl.className = 'narrative-text';
+  textEl.textContent = resolved;
+  bannerEl.appendChild(textEl);
+  bannerEl.hidden = false;
+
+  // 6 stat cards
+  const gridEl = document.getElementById('stat-cards-grid');
+  gridEl.innerHTML = '';
+  (mun.stat_cards || []).forEach(card => gridEl.appendChild(renderStatCard(card)));
+
+  // Show panel, hide empty state
+  document.getElementById('empty-state').hidden = true;
+  document.getElementById('mun-panel').hidden   = false;
+
+  // Pass 2.B: charts + forensic profile (lazy-init ECharts)
+  ensureCharts();
+  updateSparkline(mun);
+  updateContributions(mun);
+  renderForensicProfile(cod);
+
+  // Pass 2.C: classifier widget + closing narrative
+  renderWidget(mun);
+  renderClosingNarrative(mun);
+}
+
+// ── empty state ────────────────────────────────────────────────────────────
+function showEmptyState() {
+  window.ACTO5_STATE.selectedMun = null;
+  document.getElementById('empty-state').hidden = false;
+  document.getElementById('mun-panel').hidden   = true;
+}
+
+// ── selector event handlers ────────────────────────────────────────────────
+function onDeptChange() {
+  const deptVal = document.getElementById('sel-dept').value;
+  buildMunSelector(deptVal, '');
+  showEmptyState();
+  setUrlParams(deptVal, '');
+}
+
+function onMunChange() {
+  const deptVal = document.getElementById('sel-dept').value;
+  const munVal  = document.getElementById('sel-mun').value;
+  setUrlParams(deptVal, munVal);
+  if (munVal) {
+    renderMunicipality(munVal);
+  } else {
+    showEmptyState();
+  }
+}
+
+// ── main ───────────────────────────────────────────────────────────────────
+async function main() {
+  let results;
+  try {
+    results = await Promise.all([
+      fetch(MUNICIPIOS_URL).then(r => {
+        if (!r.ok) throw new Error(`${MUNICIPIOS_URL}: HTTP ${r.status}`);
+        return r.json();
+      }),
+      fetch(FICHA_URL).then(r => {
+        if (!r.ok) throw new Error(`${FICHA_URL}: HTTP ${r.status}`);
+        return r.json();
+      }),
+      fetch(MODELO_URL).then(r => {
+        if (!r.ok) throw new Error(`${MODELO_URL}: HTTP ${r.status}`);
+        return r.json();
+      }),
+      // Config fetch — non-fatal: closing narrative degrades gracefully on failure
+      fetch(CONFIG_URL).then(r => r.ok ? r.json() : null).catch(() => null),
+    ]);
+  } catch (err) {
+    document.getElementById('loading').hidden = true;
+    const errEl = document.getElementById('error-block');
+    errEl.textContent = 'Error al cargar datos: ' + err.message;
+    errEl.hidden = false;
+    console.error('Acto 5 load error:', err);
+    return;
+  }
+
+  const [municipiosData, fichaData, modeloData, configData] = results;
+  window.ACTO5_STATE.municipios = municipiosData;
+  window.ACTO5_STATE.ficha      = fichaData;
+  window.ACTO5_STATE.modelo     = modeloData;
+  window.ACTO5_STATE.config     = configData;
+
+  // Build selectors from URL params (or empty)
+  const { dep, mun } = getUrlParams();
+  buildDeptSelector(municipiosData.departamentos_disponibles, dep);
+  buildMunSelector(dep, mun);
+
+  // Wire events
+  document.getElementById('sel-dept').addEventListener('change', onDeptChange);
+  document.getElementById('sel-mun').addEventListener('change',  onMunChange);
+
+  // Show app
+  document.getElementById('loading').hidden = true;
+  document.getElementById('app').hidden     = false;
+
+  // Auto-select municipality from URL if valid
+  const munSelEl = document.getElementById('sel-mun');
+  if (mun && munSelEl.value === mun) {
+    renderMunicipality(mun);
+  } else {
+    showEmptyState();
+  }
+}
+
+main();
+</script>
+</body>
+</html>

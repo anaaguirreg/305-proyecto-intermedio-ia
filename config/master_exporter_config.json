@@ -1,0 +1,472 @@
+{
+  "_comment": "MasterExporter config — all business rules and Spanish copy here; nothing in .py. Phase 3 will make src/master_exporter.py read exclusively from this file.",
+  "paths": {
+    "master_table": "data/master/master_table.parquet",
+    "tabla_clustering": "data/master/tabla_clustering_final.parquet",
+    "sexuales_limpio": "data/cleaned/sexuales_limpio.parquet",
+    "municipios_coords": "config/municipios_pacifico.json",
+    "analisis_brechas": "docs/analisis_brechas.json",
+    "geojson_departments": "data/geo/departamentos_pacifico.geojson",
+    "schema_dir": "schema/",
+    "output_dir": "data/dashboard/"
+  },
+  "output_filenames": {
+    "acto_1": "acto_1_panorama.json",
+    "acto_2": "acto_2_brechas.json",
+    "acto_3": "acto_3_tipologia.json"
+  },
+  "business_rules": {
+    "excluded_codes": [
+      "27150",
+      "27493"
+    ],
+    "highlighted_municipalities_codes": [
+      "52001",
+      "19001"
+    ],
+    "highlight_dept_act2": "CAUCA",
+    "n_total_features": 179,
+    "n_clustered": 177,
+    "year_range": [
+      2018,
+      2025
+    ],
+    "department_order": [
+      "VALLE DEL CAUCA",
+      "CAUCA",
+      "NARIÑO",
+      "CHOCO"
+    ],
+    "archetype_codes": {
+      "52540": "coexistencia_alta",
+      "19142": "predomina_vif",
+      "19050": "predomina_sexual"
+    }
+  },
+  "cluster_legend": {
+    "alta_severidad": {
+      "cluster_id": 1,
+      "color": "#d73027",
+      "label": "Alta severidad"
+    },
+    "moderada_baja": {
+      "cluster_id": 0,
+      "color": "#fc8d59",
+      "label": "Moderada / Baja"
+    },
+    "excluded": {
+      "cluster_id": null,
+      "color": "#bdbdbd",
+      "label": "Sin modelo (subregistro estructural)"
+    }
+  },
+  "display_labels": {
+    "ABUSO_SEXUAL_MENOR_14": "Abuso sexual a menor de 14 años",
+    "VIOLENCIA_SEXUAL_DIRECTA": "Violencia sexual directa",
+    "ACOSO_SEXUAL": "Acoso sexual",
+    "ABUSO_INCAPAZ_RESISTIR": "Abuso a persona incapaz de resistir",
+    "EXPLOTACION_SEXUAL_DIGITAL_MENORES": "Explotación sexual digital a menores",
+    "EXPLOTACION_SEXUAL_COMERCIAL_MENOR": "Explotación sexual comercial a menores",
+    "EXPLOTACION_SEXUAL_COMERCIAL": "Explotación sexual comercial"
+  },
+  "minor_categories": [
+    "ABUSO_SEXUAL_MENOR_14",
+    "EXPLOTACION_SEXUAL_DIGITAL_MENORES",
+    "EXPLOTACION_SEXUAL_COMERCIAL_MENOR"
+  ],
+  "stat_constants": {
+    "_comment": "These values are computed offline and loaded at export time. The actual numeric values live in the .json referenced; this config only declares the contract.",
+    "load_from": "docs/analisis_brechas.json",
+    "spearman_correlations": [
+      "gap_vif_nna",
+      "gap_vif_adults",
+      "gap_sexual_nna",
+      "gap_sexual_adults"
+    ],
+    "p_values": [
+      "gap_vif_nna",
+      "gap_vif_adults",
+      "gap_sexual_nna",
+      "gap_sexual_adults"
+    ],
+    "significance_flags": [
+      "gap_vif_nna",
+      "gap_vif_adults",
+      "gap_sexual_nna",
+      "gap_sexual_adults"
+    ]
+  },
+  "copy_es": {
+    "act_disclaimers": {
+      "acto_1": "Los valores bajos de Chocó conviven con subregistro estructural documentado. Dos municipios fueron excluidos del modelo (códigos 27150 y 27493) por conteos casi nulos durante 8 años. La ausencia de casos en los datos no es ausencia de violencia.",
+      "acto_2": "PROVISIONAL: Brechas calculadas como razón f/m; ver methodology block para fórmula exacta.",
+      "acto_3": "PROVISIONAL: Tipología basada en dimension_delito (DS2 estandarizado por taxonomía dinámica)."
+    },
+    "acto_1": {
+      "sub_acto_1_1": {
+        "title_es": "",
+        "anchor_text_es": ""
+      },
+      "sub_acto_1_2": {
+        "title_es": "PROVISIONAL: Título del mapa coroplético ICV-GEN-F",
+        "anchor_text_es": "El ICV-GEN-F combina cuatro tasas de violencia (VIF + sexual × niñas + adultas) en un solo score 0–100. Más alto = más severo.",
+        "caveat_es": "Los valores bajos de Chocó conviven con subregistro estructural documentado. Dos municipios fueron excluidos del modelo (códigos 27150 y 27493) por conteos casi nulos durante 8 años. La ausencia de casos en los datos no es ausencia de violencia."
+      },
+      "sub_acto_1_3": {
+        "title_es": "Top 10 de municipios por ICV-GEN-F",
+        "anchor_text_es": "Cali, municipio de alta densidad de población, no es el de riesgo más severo; lo son Pasto y Popayán."
+      },
+      "sub_acto_1_4": {
+        "title_es": "Evolución Regional del Índice ICV-GEN-F (2018–2025)",
+        "anchor_text_es": "Evolución en el tiempo del índice femenino de violencia"
+      }
+    },
+    "acto_2": {
+      "sub_acto_2_1": {
+        "title_es": "",
+        "anchor_text_es": "Por cada hombre adulto reportado como víctima de violencia sexual en el Pacífico colombiano, seis mujeres lo son. Por cada hombre adulto reportado como víctima de violencia intrafamiliar, casi cuatro mujeres lo son."
+      },
+      "sub_acto_2_2": {
+        "title_es": "Anatomía de la brecha",
+        "anchor_text_es": "Las tasas femeninas multiplican a las masculinas entre 1.8 y 6.2 veces según el tipo de violencia. La brecha más pequeña aparece en la niñez intrafamiliar y la mayor en la violencia sexual adulta."
+      },
+      "sub_acto_2_3": {
+        "title_es": "",
+        "anchor_text_es": "Ocho de los diez municipios con mayor brecha de género están en Cauca. El Tambo encabeza la lista con una brecha mediana de 10.4× — diez veces más mujeres víctimas que hombres."
+      },
+      "sub_acto_2_4": {
+        "title_es": "Mapa Departamental de brecha de género",
+        "anchor_text_es": "",
+        "caveat_es": "Quibdó aparece a pesar del subregistro general en Chocó — su brecha real probablemente es mayor."
+      },
+      "sub_acto_2_5": {
+        "title_es": "Correlación entre ICV-GEN-F y brecha de género",
+        "anchor_text_es": "Severidad e inequidad son ejes distintos (correlación moderada, ρ≈0.4–0.5). Un municipio puede ser severo sin ser desigual, y desigual sin ser severo. El scatter muestra 177 de los 179 municipios del universo. Carmen del Darién (27150) y Nuevo Belén de Bajirá (27493) están excluidos por carecer de brecha de género calculable.",
+        "caveat_es": ""
+      },
+      "sub_acto_2_6": {
+        "title_es": "El giro analítico",
+        "anchor_text_es": "Entre 2018 y 2025 la brecha cayó en violencia sexual adulta. Podría leerse como progreso. No lo es. En el mismo período, las tasas masculinas de VIF adulta crecieron significativamente (+4.2 puntos por año). La brecha no cae porque haya menos violencia contra mujeres: cae porque los hombres están siendo reportados con mayor frecuencia."
+      }
+    },
+    "acto_3": {
+      "sub_acto_3_1": {
+        "title_es": "",
+        "anchor_text_es": "La violencia intrafamiliar es de mujeres adultas. La violencia sexual es de niñas — y la mitad es abuso a menores de 14 años. La infancia es el escenario más frecuente."
+      },
+      "sub_acto_3_2": {
+        "title_es": "El contraste de tasas de violencia intrafamiliar y violencia sexual",
+        "anchor_text_es": "El gráfico contrasta los dos tipos de violencia por municipio en el periodo 2018–2025"
+      },
+      "sub_acto_3_3": {
+        "title_es": "Niñas y adolescentes vs Mujeres Adultas",
+        "anchor_text_es": "Tasas regionales de niñas y adolescentes (NNA) vs mujeres adultas",
+        "subtitle_es": "Cada violencia tiene su edad: VIF golpea a las adultas; la violencia sexual, a las niñas.",
+        "caveat_es": "PROVISIONAL: Esto no implica que las mujeres adultas no sufran violencia sexual — es posible que no la reporten a la policía. Estos datos reflejan solo casos que llegaron a denuncia formal."
+      },
+      "sub_acto_3_4": {
+        "title_es": "La taxonomía del delito sexual",
+        "anchor_text_es": ""
+      },
+      "sub_acto_3_5": {
+        "title_es": "Evolución temporal de la violencia sexual de NNA en la región del Pacífico por departamento (2018–2025)",
+        "anchor_text_es": "La violencia sexual pesa más en la infancia; la intrafamiliar, en la adultez"
+      }
+    }
+  },
+  "acto_1_kpis": {
+    "sub_acto_1_1": {
+      "caveat_es": "Los 177 municipios incluyen todos los del universo excepto Carmen del Darién (27150) y Nuevo Belén de Bajirá (27493), excluidos del modelo por subregistro estructural sostenido (VIF=0 en todos los años analizados).",
+      "stat_cards": [
+        {
+          "id": "n_municipios",
+          "label_es": "municipios con modelo ICV",
+          "display_format": "integer_thousands",
+          "badge": null,
+          "sub_value": null
+        },
+        {
+          "id": "n_alta_severidad",
+          "label_es": "en alta severidad",
+          "display_format": "integer_thousands",
+          "badge": null,
+          "sub_value": {
+            "value": null,
+            "label_es": "% de los 177 municipios con modelo"
+          }
+        },
+        {
+          "id": "icv_promedio_regional",
+          "label_es": "ICV-GEN-F promedio regional",
+          "display_format": "decimal_2d",
+          "badge": null,
+          "sub_value": null
+        }
+      ]
+    }
+  },
+  "acto_2_kpis": {
+    "sub_acto_2_1": {
+      "stat_cards": [
+        {
+          "id": "sexual_adults",
+          "label_es": "Violencia sexual contra mujeres adultas",
+          "display_format": "ratio_x_to_1",
+          "badge": null,
+          "sub_value": null
+        },
+        {
+          "id": "vif_adults",
+          "label_es": "Violencia intrafamiliar contra mujeres adultas",
+          "display_format": "ratio_x_to_1",
+          "badge": null,
+          "sub_value": null
+        },
+        {
+          "id": "sexual_nna",
+          "label_es": "Violencia sexual contra niñas y adolescentes",
+          "display_format": "ratio_x_to_1",
+          "badge": null,
+          "sub_value": null
+        },
+        {
+          "id": "vif_nna",
+          "label_es": "Violencia intrafamiliar contra niñas y adolescentes",
+          "display_format": "ratio_x_to_1",
+          "badge": null,
+          "sub_value": null
+        }
+      ]
+    }
+  },
+  "acto_3_kpis": {
+    "sub_acto_3_1": {
+      "stat_cards": [
+        {
+          "id": "pct_under_14",
+          "label_es": "Víctimas menores de 14 años",
+          "display_format": "percent_1d",
+          "badge": null,
+          "sub_value": null
+        },
+        {
+          "id": "pct_all_minors",
+          "label_es": "Víctimas menores de 18 años",
+          "display_format": "percent_1d",
+          "badge": null,
+          "sub_value": null
+        },
+        {
+          "id": "total_cases",
+          "label_es": "Total casos peritados",
+          "display_format": "integer_thousands",
+          "badge": null,
+          "sub_value": {
+            "value": null,
+            "label_es": "Registros policiales DS2 — universo distinto al forense (Acto 4)"
+          }
+        }
+      ]
+    }
+  },
+  "acto_3_visualization": {
+    "sub_acto_3_2": {
+      "quadrant_colors": {
+        "coexistencia_alta": "#7B1F4B",
+        "predomina_vif": "#C77DFF",
+        "predomina_sexual": "#FF8C42",
+        "bajo_perfil": "#A3A3A3"
+      },
+      "scatter_style": {
+        "point_radius_default": 5,
+        "point_radius_archetype": 9,
+        "opacity_default": 0.25,
+        "opacity_archetype": 0.95,
+        "border_color_archetype": "#1A1A1A",
+        "border_width_archetype": 2
+      },
+      "axis_labels_es": {
+        "x_label": "Tasa VIF total femenina (por 100k mujeres)",
+        "y_label": "Tasa violencia sexual total femenina (por 100k mujeres)"
+      }
+    }
+  },
+  "acto_2_visualization": {
+    "sub_acto_2_2": {
+      "tab_labels": {
+        "nna": "NNA (0–17)",
+        "adults": "Mujeres adultas (18+)"
+      },
+      "chart_titles": {
+        "vif": "Violencia intrafamiliar (VIF)",
+        "sexual": "Violencia sexual"
+      },
+      "axis_labels_es": {
+        "x": "Tasa por 100.000 habitantes",
+        "y": "Año"
+      },
+      "legend_labels_es": {
+        "female": "Femenino",
+        "male": "Masculino"
+      }
+    },
+    "sub_acto_2_5": {
+      "axes": {
+        "x": "icv_average = promedio temporal del ICV-GEN-F por municipio",
+        "y": "gap_average = promedio temporal de la brecha de género por municipio"
+      },
+      "axis_labels_es": {
+        "x_label": "PROVISIONAL: ICV-GEN-F promedio municipal",
+        "y_label": "PROVISIONAL: Brecha de género promedio (F/M)"
+      }
+    },
+    "sub_acto_2_6": {
+      "panel_labels_es": {
+        "focal_gap_visual": "Violencia sexual adultas — brecha y tasas",
+        "focal_artifact": "VIF adultas — brecha y tasas (artefacto masculino)"
+      },
+      "legend_labels_es": {
+        "gap": "Razón F/M",
+        "rate_f": "Tasa femenina",
+        "rate_m": "Tasa masculina"
+      },
+      "axis_labels_es": {
+        "x": "Año",
+        "y_gap": "Razón F/M",
+        "y_rate": "Tasa por 100.000 hab."
+      }
+    }
+  },
+  "_copy_audit": {
+    "live_json": [
+      "copy_es.act_disclaimers.acto_1",
+      "copy_es.acto_1.sub_acto_1_1.anchor_text_es",
+      "copy_es.acto_1.sub_acto_1_2.caveat_es",
+      "copy_es.acto_2.sub_acto_2_1.anchor_text_es",
+      "copy_es.acto_2.sub_acto_2_2.anchor_text_es",
+      "copy_es.acto_2.sub_acto_2_3.anchor_text_es",
+      "copy_es.acto_2.sub_acto_2_4.caveat_es",
+      "copy_es.acto_2.sub_acto_2_5.anchor_text_es",
+      "copy_es.acto_2.sub_acto_2_6.anchor_text_es",
+      "copy_es.acto_3.sub_acto_3_1.anchor_text_es",
+      "copy_es.acto_3.sub_acto_3_3.subtitle_es"
+    ],
+    "guion_match": [
+      "copy_es.acto_1.sub_acto_1_2.anchor_text_es",
+      "copy_es.acto_2.sub_acto_2_2.title_es",
+      "copy_es.acto_2.sub_acto_2_3.title_es",
+      "copy_es.acto_2.sub_acto_2_6.title_es",
+      "copy_es.acto_3.sub_acto_3_2.title_es",
+      "copy_es.acto_3.sub_acto_3_4.title_es",
+      "copy_es.acto_3.sub_acto_3_5.title_es"
+    ],
+    "todo_review": [
+      "copy_es.act_disclaimers.acto_2",
+      "copy_es.act_disclaimers.acto_3",
+      "copy_es.acto_1.sub_acto_1_1.title_es",
+      "copy_es.acto_1.sub_acto_1_2.title_es",
+      "copy_es.acto_1.sub_acto_1_3.title_es",
+      "copy_es.acto_1.sub_acto_1_3.anchor_text_es",
+      "copy_es.acto_1.sub_acto_1_4.title_es",
+      "copy_es.acto_1.sub_acto_1_4.anchor_text_es",
+      "copy_es.acto_2.sub_acto_2_1.title_es",
+      "copy_es.acto_2.sub_acto_2_4.title_es",
+      "copy_es.acto_2.sub_acto_2_4.anchor_text_es",
+      "copy_es.acto_2.sub_acto_2_5.title_es",
+      "copy_es.acto_3.sub_acto_3_1.title_es",
+      "copy_es.acto_3.sub_acto_3_2.anchor_text_es",
+      "copy_es.acto_3.sub_acto_3_3.title_es",
+      "copy_es.acto_3.sub_acto_3_3.anchor_text_es",
+      "copy_es.acto_3.sub_acto_3_4.anchor_text_es",
+      "copy_es.acto_3.sub_acto_3_5.anchor_text_es"
+    ]
+  },
+  "acto_5_municipios": {
+    "output_filename": "acto_5_municipios.json",
+    "narrative_template_es": "{municipio} pertenece al cluster de {cluster}. Su ICV-GEN-F promedio es {icv}, lo que lo ubica en la posición {ranking} de 177 municipios. La tasa más alta es la de {tipo}, con {tasa} casos por cada 100.000 mujeres.",
+    "narrative_template_cierre_es": "PROVISIONAL: En {municipio}, {hallazgo_principal}. La intervención que necesita es {tipo_de_politica}.",
+    "cluster_label_normalization": {
+      "🔴 Alta severidad": {
+        "label_es": "Alta severidad",
+        "emoji": "🔴",
+        "color_token": "cluster_alta"
+      },
+      "🟠 Moderada/Baja": {
+        "label_es": "Moderada-Baja severidad",
+        "emoji": "🟠",
+        "color_token": "cluster_moderada"
+      }
+    },
+    "excluido_del_modelo_banner_es": "Este municipio fue excluido del modelo de clustering por subreporte estructural sostenido durante 2018–2025. Los indicadores mostrados provienen de datos policiales y no deben interpretarse como ausencia de violencia.",
+    "stat_cards": [
+      {
+        "id": "icv_gen_f",
+        "label_es": "ICV-GEN-F",
+        "source_field": "icv_gen_f_score",
+        "display_format": "decimal_2"
+      },
+      {
+        "id": "cluster",
+        "label_es": "Cluster",
+        "source_field": "cluster_label_es",
+        "display_format": "text"
+      },
+      {
+        "id": "tasa_vif_nna",
+        "label_es": "Tasa VIF NNA",
+        "source_field": "tasa_vif_nna_f",
+        "display_format": "rate_100k"
+      },
+      {
+        "id": "tasa_sexual_nna",
+        "label_es": "Tasa Sexual NNA",
+        "source_field": "tasa_sexual_nna_f",
+        "display_format": "rate_100k"
+      },
+      {
+        "id": "tasa_vif_adultas",
+        "label_es": "Tasa VIF Adultas",
+        "source_field": "tasa_vif_adultas_f",
+        "display_format": "rate_100k"
+      },
+      {
+        "id": "tasa_sexual_adultas",
+        "label_es": "Tasa Sexual Adultas",
+        "source_field": "tasa_sexual_adultas_f",
+        "display_format": "rate_100k"
+      }
+    ],
+    "sparkline_axis_labels_es": {
+      "x": "Año",
+      "y": "ICV-GEN-F"
+    },
+    "dominant_violence_type_labels_es": {
+      "vif": "Violencia Intrafamiliar",
+      "sexual": "Violencia Sexual",
+      "ambas": "Ambas Violencias"
+    },
+    "coefficient_features_labels_es": {
+      "tasa_vif_nna_f": "Tasa VIF NNA",
+      "tasa_sexual_nna_f": "Tasa Sexual NNA",
+      "tasa_vif_adultas_f": "Tasa VIF Adultas",
+      "tasa_sexual_adultas_f": "Tasa Sexual Adultas"
+    },
+    "departamentos_pacifico": {
+      "76": "Valle del Cauca",
+      "19": "Cauca",
+      "52": "Nariño",
+      "27": "Chocó"
+    },
+    "closing_teaser_template_es": "En {municipio}, {hallazgo}. La intervención que necesita es el {modelo_prevencion}.",
+    "closing_hallazgo_by_cluster_es": {
+      "1": "la severidad es alta y la violencia dominante es {dominant_violence_type}",
+      "0": "la severidad es moderada-baja, pero existe alta sospecha de subregistro estructural"
+    },
+    "closing_modelo_prevencion_by_cluster_es": {
+      "1": "Modelo de Prevención Integrada e Institucional",
+      "0": "Modelo de Prevención Étnico-Comunitaria y Etnofluvial"
+    },
+    "prevention_model_alta_html_es": "<h4>MODELO 1: Modelo de Prevención Integrada e Institucional</h4><p><strong>Ámbito de Aplicación:</strong> Clúster de Alta Severidad (107 municipios con alta densidad demográfica, nodos urbanos, cabeceras regionales y alta coexistencia registrada de VIF y Violencia Sexual).</p><p><strong>Estrategia Central:</strong> Maximizar la infraestructura institucional existente para detectar el riesgo y frenar el continuo multigeneracional en entornos familiares densos.</p><h5>1. Prevención Primaria (Universal y Estructural)</h5><ul><li><strong>Estrategia:</strong> <em>Entornos Escolares y Barriales Libres de Intolerancia Machista.</em></li><li><strong>Enfoque de Salud Pública y Trabajo Social:</strong> Intervención sobre las normas sociales que normalizan la agresión como mecanismo de resolución de conflictos en áreas urbanas marginadas (frecuentemente asociadas a dinámicas de microtráfico y exclusión).</li><li><strong>Acciones Concretas:</strong><ul><li><strong>Cátedra Territorial del Buen Trato:</strong> Implementación obligatoria en las Instituciones Educativas Municipales (IEM) de módulos de desnaturalización del machismo y educación integral en sexualidad (EIS).</li><li><strong>Escuelas Urbanas de Cuidado Masculino:</strong> Talleres barriales de pautas de crianza no violentas dirigidos a padres, padrastros y hermanos mayores en comunas priorizadas por el ICV-GEN-F, gestionados por trabajadores sociales mediante metodologías participativas.</li></ul></li></ul><h5>2. Prevención Secundaria (Detección Temprana y Mitigación de Riesgos)</h5><ul><li><strong>Estrategia:</strong> <em>Red de Vigilancia Epidemiológica y Tamizaje Intramural.</em></li><li><strong>Enfoque de Salud Pública y Trabajo Social:</strong> Romper el aislamiento del hogar utilizando los puntos de contacto institucional obligatorio (Hospitales de primer y segundo nivel, Comisarías de Familia y Colegios).</li><li><strong>Acciones Concretas:</strong><ul><li><strong>Protocolo de Código Rosa Clínico:</strong> Activación de un tamizaje obligatorio en los servicios de urgencias pediátricas y ginecológicas. Ante cualquier ingreso de una menor de edad por traumas físicos leves, el personal de salud debe aplicar una entrevista de riesgo predictivo para detectar violencia sexual endogámica.</li><li><strong>Comités Interinstitucionales de Alerta Escolar:</strong> Creación de mesas técnicas mensuales entre los orientadores escolares y los Defensores de Familia del ICBF para el cruce de alertas por ausentismo escolar, desnutrición súbita o cambios de comportamiento en niñas y adolescentes. Los comités escolares cruzarán alertas directamente con los <strong>Centros Zonales del ICBF</strong> a través de una ruta de priorización inmediata (Fast-Track), garantizando que las Defensorías de Familia emitan medidas de protección intramural y separación del <strong>padrastro/padre</strong> agresor en menos de 24 horas.</li></ul></li></ul><h5>3. Prevención Terciaria (Atención, Sanción y No Repetición)</h5><ul><li><strong>Estrategia:</strong> <em>Unidades de Monitoreo de Medidas de Aseguramiento de Género (UMAG).</em></li><li><strong>Enfoque de Salud Pública y Trabajo Social:</strong> Garantizar la seguridad física y psicológica de las víctimas sobrevivientes mediante el control estricto del agresor para evitar la reincidencia o el escalamiento al feminicidio.</li><li><strong>Acciones Concretas:</strong><ul><li><strong>Ruta Segura de Desalojo de Agresores:</strong> Coordinación entre la Secretaría de Gobierno y las Comisarías de Familia para la aplicación inmediata (en menos de 24 horas) de la medida de desalojo del agresor del hogar, independientemente de la titularidad de la vivienda.</li><li><strong>Seguimiento Psicosocial Post-Denuncia:</strong> Visitas domiciliarias aleatorias y acompañamiento terapéutico continuo (mínimo por 6 meses) a la víctima y su núcleo por parte de duplas transversales (psicólogo y trabajador social), asegurando que el proceso judicial no incremente el riesgo de violencia de represalia.</li></ul></li></ul><p><strong>Lente Forense Regional Aplicado al Clúster de Alta Severidad:</strong> Al desplegar este modelo en zonas urbanas, los equipos operativos deben sensibilizar a la comunidad bajo la alerta macro del Pacífico: la agresión física es predominantemente endogámica (núcleo familiar directo), mientras que el abuso sexual infantil se camufla en las figuras masculinas protectoras del entorno extendido o ensamblado.</p><p>Los modelos están diseñados para ser directamente operados por Alcaldías Municipales (Secretarías de Salud, ICBF, Gobierno y Mujer) en articulación con las fuerzas vivas del territorio.</p>",
+    "prevention_model_moderada_html_es": "<h4>MODELO 2: Modelo de Prevención Étnico-Comunitaria y Etnofluvial</h4><p><strong>Ámbito de Aplicación:</strong> Clúster de Moderada/Baja Severidad (70 municipios de la ruralidad dispersa, zonas costeras y Chocó profundo, con alta sospecha de subregistro estructural).</p><p><strong>Estrategia Central:</strong> Descentralizar la protección hacia las autoridades étnico-territoriales para superar el vacío institucional y las barreras de acceso geográfico.</p><h5>1. Prevención Primaria (Universal y Estructural)</h5><ul><li><strong>Estrategia:</strong> <em>Tejido de Cuidado Comunitario y Gobernanza Ancestral.</em></li><li><strong>Enfoque de Salud Pública y Trabajo Social:</strong> Fortalecimiento de la cohesión social comunitaria y de las estructuras tradicionales Afro e Indígenas como primera línea de defensa cultural contra la violencia de género en contextos de conflicto armado.</li><li><strong>Acciones Concretas:</strong><ul><li><strong>Escuelas de Liderazgo Étnico para Mujeres y Jóvenes:</strong> Financiación y fortalecimiento técnico de los comités de género de los Consejos Comunitarios (Ley 70 de 1993) y las consejerías de mujer de los Cabildos Indígenas para la reconstrucción de la memoria histórica y la sanación colectiva del tejido comunitario.</li><li><strong>Pactos Territoriales por la Vida de las Mujeres:</strong> Incorporación de cláusulas explícitas de cero tolerancia a las Violencias Basadas en Género (VBG) en los Planes de Etnodesarrollo y Planes de Vida de las comunidades, validando el derecho de las mujeres a habitar el territorio de forma segura.</li></ul></li></ul><h5>2. Prevención Secundaria (Detección Temprana y Mitigación de Riesgos)</h5><ul><li><strong>Estrategia:</strong> <em>Bitácoras Fluviales de Alerta Comunitaria y Guardianas Ancestrales.</em></li><li><strong>Enfoque de Salud Pública y Trabajo Social:</strong> Crear mecanismos alternativos de registro y alerta temprana que funcionen de forma autónoma sin depender de conectividad a internet ni de la presencia física de la fuerza pública o la fiscalía ordinaria.</li><li><strong>Acciones Concretas:</strong><ul><li><strong>Red S.O.S. de Parteras y Médicos Tradicionales:</strong> Capacitación a los sabedores de la medicina ancestral como primeros respondientes. Al ser quienes atienden partos, dolencias íntimas o crisis emocionales en las veredas más alejadas, se les dota de herramientas metodológicas no revictimizantes para identificar signos de abuso sexual infantil o VIF, reportando directamente de forma verbal o en bitácoras físicas al Consejo Mayor.</li><li><strong>Monitoreo de Caminos y Cuencas por la Guardia Étnica:</strong> Entrenamiento a la Guardia Indígena y la Guardia Cimarrona para realizar patrullajes de protección en los trayectos fluviales y caminos de herradura que utilizan diariamente las niñas y adolescentes para ir a las escuelas rurales o realizar labores de pancoger y pianguado. Ante la ausencia de Defensorías de Familia fijas, se establecerá un protocolo de co-gestión intercultural donde el <strong>ICBF convalida legalmente las medidas de aislamiento territorial</strong> aplicadas por las Guardias Étnicas contra los agresores (perfil de <strong>vecinos/conocidos</strong>), evitando la revictimización del traslado fluvial de la menor.</li></ul></li></ul><h5>3. Prevención Terciaria (Atención, Sanción y No Repetición)</h5><ul><li><strong>Estrategia:</strong> <em>Casas del Buen Vivir y Jurisdicción Especial Étnica.</em></li><li><strong>Enfoque de Salud Pública y Trabajo Social:</strong> Proveer entornos de protección física inmediata dentro del propio territorio y aplicar mecanismos de sanción propios que garanticen el aislamiento efectivo del agresor.</li><li><strong>Acciones Concretas:</strong><ul><li><strong>Casas del Buen Vivir Descentralizadas:</strong> Habilitación de infraestructuras comunitarias tradicionales (casas comunales o palenques) administradas por colectivos de mujeres locales como refugios temporales de emergencia. Cuentan con provisión autónoma de alimentos y seguridad física comunitaria, permitiendo resguardar a una madre y sus hijos sin necesidad de salir de su entorno cultural.</li><li><strong>Protocolos Estatutarios de Destierro y Sanción Étnica:</strong> Activación de la Justicia Propia ante casos detectados. Las Asambleas Comunitarias y los jueces tradicionales aplican castigos colectivos y el \"destierro o expulsión del territorio\" para los agresores recurrentes. Esto garantiza que la impunidad provocada por la falta de fiscales en la región no perpetúe el ciclo de la violencia de género.</li></ul></li></ul><p><strong>Lente Forense Regional Aplicado al Clúster Moderada/Baja:</strong> Al operar en la ruralidad dispersa, las autoridades étnicas y los equipos interdisciplinarios deben estructurar sus cercos comunitarios bajo la cruda alerta macro del Pacífico: en las veredas y cuencas, los conocidos, amigos de la familia y vecinos del caserío constituyen un vector de altísimo riesgo sexual para las adolescentes. La prevención comunitaria debe enfocarse en regular y vigilar estrechamente la seguridad en los entornos relacionales del poblado.</p><p>Los modelos están diseñados para ser directamente operados por Alcaldías Municipales (Secretarías de Salud, ICBF, Gobierno y Mujer) en articulación con las fuerzas vivas del territorio.</p>"
+  }
+}
