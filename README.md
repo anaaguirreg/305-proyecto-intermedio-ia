@@ -158,6 +158,13 @@ Un análisis descriptivo tradicional muestra cuántos casos hay. *Cicatrices Inv
 **¿Por qué es relevante para la Región Pacífico específicamente?**
 La Región Pacífico concentra algunas de las brechas de seguridad más profundas de Colombia: Chocó y Cauca tienen presencia limitada de instituciones de protección, alta proporción de comunidades étnicas con vulnerabilidad interseccional, y contextos de conflicto armado que amplifican la violencia doméstica. Ningún análisis territorial con enfoque de género existe hoy para esta región como conjunto.
 
+**¿Cuál es el impacto ambiental?**
+El proyecto no se diseñó con un objetivo ambiental explícito, pero varias decisiones de arquitectura reducen su huella computacional de forma medible:
+- **Despliegue sin servidor:** el sitio es 100% estático (HTML/CSS/JS + Leaflet + Apache ECharts) en GitHub Pages — sin servidor activo, sin base de datos en producción, sin cómputo en tiempo real. El backend pre-agrega todo a JSON una sola vez; el frontend solo lee y renderiza desde CDN.
+- **Modelo de IA:** ante un empate técnico entre Regresión Logística y SVM con kernel RBF, se eligió el modelo lineal — de menor costo computacional en entrenamiento e inferencia — por ser suficiente para la separabilidad observada, sin sacrificar desempeño.
+- **Arquitectura config-driven:** cero parámetros de negocio hardcodeados; los cambios metodológicos se hacen editando JSON, no reescribiendo ni re-desplegando el pipeline completo.
+- **Digitalización del proceso:** el dashboard reemplaza cruces manuales de información hoy dispersos entre Comisarías de Familia, ICBF, Fiscalía y Medicina Legal — un paso hacia procesos cero papel en la gestión de este tipo de datos.
+
 ## Solución en producción (demo en vivo)
 
 Para ver y probar la solución funcionando en tiempo real:
