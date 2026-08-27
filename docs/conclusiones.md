@@ -21,6 +21,26 @@
 - **Los pesos del ICV-GEN-F son una decisión metodológica, no un óptimo estadístico:** el 60% de peso combinado en violencia contra niñas responde a una priorización explícita (detección temprana), no a una calibración empírica. El análisis de sensibilidad confirmó que el ranking de municipios es robusto a reponderaciones razonables, pero la estructura de 4 dimensiones es esencial — colapsarla sí distorsiona los resultados.
 - **Deduplicación exacta, no difusa:** el DataCleaner remueve duplicados exactos (`keep='first'`) sobre todas las columnas originales. Posibles duplicados "casi idénticos" con variaciones menores de captura no se abordan en esta versión.
 
+## Impacto social, económico y ambiental
+
+**Impacto social**
+El detalle completo de beneficiarios, problema visibilizado y orientación a política pública está en la sección "Impacto potencial" del [`README.md`](../README.md). En síntesis: el proyecto beneficia directamente a Comisarías de Familia, ICBF Regional Pacífico, Gobernaciones y equipos de política pública de género municipales, y permite diseñar intervenciones diferenciadas por perfil de municipio en lugar de intervenciones uniformes y facilitar procesos de prevención.
+
+**Impacto económico**
+- **Costo de datos: cero.** Los 5 datasets fuente (DS1–DS4 + DANE) son de acceso abierto en datos.gov.co y dane.gov.co — no hay licenciamiento ni suscripción que replicar.
+- **Costo de despliegue: cero.** El sitio estático se sirve gratis desde GitHub Pages, sin servidor, base de datos ni infraestructura cloud que mantener o escalar.
+- **Eficiencia en la asignación de recursos públicos:** focalizar la intervención según el perfil de riesgo de cada municipio (cluster + ICV-GEN-F) reduce el costo de intervenciones uniformes mal dirigidas.
+- **Replicabilidad sin costo marginal significativo:** el pipeline es 100% config-driven — extenderlo a otro departamento o a nivel nacional no requiere reescribir código, solo ajustar configuración (ver "Ideas de escalabilidad" más abajo).
+
+**Impacto ambiental**
+El proyecto no se planteó inicialmente con un objetivo ambiental explícito, pero varias decisiones de arquitectura, ya documentadas en otras secciones de este proyecto, reducen su huella computacional de forma medible:
+- **Sin servidor ni cómputo en tiempo real:** el despliegue es 100% estático en GitHub Pages (ver [`architecture.md`](architecture.md)); todo el cálculo pesado ocurre una sola vez en el pipeline de exportación (.parquet → .json), no en cada visita al dashboard.
+- **Selección de modelo por parsimonia:** ante un empate técnico entre Regresión Logística y SVM_rbf, se eligió el modelo lineal — de menor costo computacional en entrenamiento e inferencia — por ser suficiente para la separabilidad observada en los datos.
+- **Configuración externa:** los cambios metodológicos se hacen editando archivos JSON, no reescribiendo ni re-ejecutando el pipeline completo.
+- **Sustitución de procesos en papel:** el dashboard centraliza información que hoy se cruza manualmente entre Comisarías de Familia, ICBF, Fiscalía y Medicina Legal.
+
+La misma arquitectura sin servidor y config-driven es la base común de la sostenibilidad y la escalabilidad.
+
 ## Próximos pasos
 
 ### Fase 6 CRISP-ML — Monitoreo y mantenimiento
