@@ -158,6 +158,9 @@ Un análisis descriptivo tradicional muestra cuántos casos hay. *Cicatrices Inv
 **¿Por qué es relevante para la Región Pacífico específicamente?**
 La Región Pacífico concentra algunas de las brechas de seguridad más profundas de Colombia: Chocó y Cauca tienen presencia limitada de instituciones de protección, alta proporción de comunidades étnicas con vulnerabilidad interseccional, y contextos de conflicto armado que amplifican la violencia doméstica. Ningún análisis territorial con enfoque de género existe hoy para esta región como conjunto.
 
+**¿Cuál es el impacto económico?**
+Los cinco datasets fuente son de acceso abierto y sin costo (datos.gov.co, DANE), y el sitio se despliega 100% gratis en GitHub Pages, sin servidor ni base de datos que mantener — el costo marginal de sostener el proyecto en producción es prácticamente cero. Focalizar la intervención pública según el perfil de riesgo de cada municipio (cluster + ICV-GEN-F) también reduce el costo de programas de prevención diseñados de forma uniforme cuando el problema no lo es. La arquitectura config-driven permite replicar el proyecto en otro departamento o a nivel nacional ajustando configuración, no reescribiendo código, lo que mantiene bajo el costo de escalar.
+
 **¿Cuál es el impacto ambiental?**
 El proyecto no se diseñó con un objetivo ambiental explícito, pero varias decisiones de arquitectura reducen su huella computacional de forma medible:
 - **Despliegue sin servidor:** el sitio es 100% estático (HTML/CSS/JS + Leaflet + Apache ECharts) en GitHub Pages — sin servidor activo, sin base de datos en producción, sin cómputo en tiempo real. El backend pre-agrega todo a JSON una sola vez; el frontend solo lee y renderiza desde CDN.
