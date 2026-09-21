@@ -181,8 +181,7 @@ El sitio es 100% estático (HTML/CSS/JS + Leaflet + Apache ECharts), sin backend
 ```
 305-proyecto-intermedio-ia/
 │
-├── RECURSOS/                                    # Material de presentación (pendiente — se agrega cuando esté lista)
-│   ├── Presentacion.pptx
+├── RECURSOS/                                    # Material de presentación
 │   ├── presentacion.pdf
 │   └── portada.png
 │
@@ -318,5 +317,5 @@ Enlaces de acceso para GitHub:
 
 * **Repositorio:** [github.com/anaaguirreg/305-proyecto-intermedio-ia](https://github.com/anaaguirreg/305-proyecto-intermedio-ia)
 * **Sitio en vivo:** [anaaguirreg.github.io/305-proyecto-intermedio-ia](https://anaaguirreg.github.io/305-proyecto-intermedio-ia/)
-* **Presentación (PPTX/PDF):** se agrega en `RECURSOS/`
+* **Presentación (PDF):** [RECURSOS/presentacion.pdf](RECURSOS/presentacion.pdf)
 * **Video demo:** [Ver en Drive (2:36)](https://drive.google.com/file/d/1KyvMhdsJ8b1LYacpCjRa3JgW2Bu1ulUg/view?usp=sharing)
